@@ -1,0 +1,4888 @@
+openapi: 3.0.0
+info:
+  title: Product Information Management
+  description: 'As brands and retailers grow, they often expand their product catalogs, resulting in the need to enrich and manage more product data. fabric product information management (PIM) solution alleviates the burden of managing large amounts of product data by means of a central storage repository. fabric PIM helps you with improved data quality, consistent customer experience, reduced time to market, easy integration with external systems, reduced management costs and risks, faster and easier updates, and easy scaling. You can create, import, enrich, validate, distribute, and manage complex product information, centrally. As a result, you deliver product experiences that drive sales through every channel. <br> <br> During onboarding, you are given the necessary credentials to access PIM - Copilot UI, APIs, or both. As a prerequisite, you create a list of products to be sold, identify their unique as well as common properties, and envision their organization into categories and sub categories. A basic workflow is: <br> 1) **Create product attributes** using POST /v1/product/attribute/bulk. <br> 2) Map your product attributes to attributes available in PIM, via Copilot UI. <br> 3) **Create Primary category** using the POST /v1/category to create the original organizational structure. <br> 4) **Assign product attributes** to Primary category using POST /v1/category/item-attribute. <br> 5) **Create products** using POST /v1/product/bulk/insert. <br> 6) **Create Alternate category**, for distribution management and fulfilling various merchandising objectives.'
+  version: 2.0.0
+  contact:
+    email: support@fabric.inc
+  license:
+    name: fabric Privacy Policy
+    url: https://fabric.inc/privacy-policy
+tags:
+  - name: Category
+    description: Categories (also called hierarchies or nodes) are hierarchical structures to organize products and services into intuitive groups. Organizing products in this way simplifies product discovery and lifecycle management. There are two types of categories - **Primary** and **Alternate**. They enable you to create, organize, and distribute product data. <br> <br> - Primary category is the original catalog tree with nested levels of categories that place each product where it belongs, within a category. For example, `Computers` is a parent category with `Laptops` and `Desktops` as child categories, and `MacBbook Pro` is a product within `Laptops`. This organization can be represented as Computers > Laptops > MacBook Pro. <br> <br> - Alternate categories serve as alternate organizations of the Primary category. Their main purpose is distribution management by displaying products on your website based on separate browsing structure configurations you set to help you achieve various merchandizing objectives, such as organizational requirements, multi-regional assortments, multi-channel assortments, and collections. For example, a company that sells, repairs, and supports computers and related products and services will have a Primary category containing a full list of their SKUs. However, this Primary category is not granular enough to use on their storefront. Hence, multiple Alternate hierarchies are created to target specific shopper segment experiences. For laptop consumers they'll have one Alternate category, which lists all the laptops and PCs. For large businesses they'll have  another Alternate category, which lists all commercial laptops, PCs, printers, and servers. Both of the Alternate categories act as filters of the Primary category, tailored to the purpose of that merchandising strategy. <br> <br> **Category**, a subset of PIM endpoints, aims to simplify catalog management by letting you create, update, and get one or more categories, category attributes, and product attributes. In addition, you can add and update category sources, source exclusions, and product attribute conditions.
+  - name: Product
+    description: '**Product**, a subset of PIM endpoints, aims at making product management more efficient. They create, update, and get products, which may be individual products or collection of products (called bundles). Each product has title, product ID, description, category, and assigned attributes. Multiple options of a given product become variants of that product. For example, a t-shirt with three sizes may have small, medium, and large variants. Each variant has its own product ID, attributes, and other data points. Each variant is nested under its parent product, allowing the different options to appear on the same product page. You can also create or update one or more product attributes and attribute groups.'
+  - name: Attributes
+    description: Product attributes are the objective and factual descriptions of products that shoppers see when they browse through your site. Attributes may be technical specifications like size, weight, etc., design specifications like color, material, etc., or basic specifications like name, description, and ID. Product attributes are crucial as they directly influence purchasing decisions. Complete and correct product information help shoppers narrow down their search and filter products with minimal cognitive load.
+externalDocs:
+  description: Find out more about PIM
+  url: https://knowledgebase.fabric.inc/knowledgebase/pim
+servers:
+  - url: https://{customerDomain}/api-category
+    description: Capio category server
+    variables:
+      customerDomain:
+        default: democommerce.com/api
+        description: Domain name hosting the single-tenant fabric commerce APIs
+  - url: https://{customerDomain}/api-product
+    description: Capio product server
+    variables:
+      customerDomain:
+        default: demo
+        description: Domain name hosting the single-tenant fabric commerce APIs
+paths:
+  /v1/category:
+    post:
+      security:
+        - api_key: []
+      tags:
+        - Category
+      summary: Create category
+      description: 'Creates Primary or Alternate category to organize products into logical groups. <br> **Note**: <br> 1) To add **Primary**  category, only `name` is required in the request. <br> 2) To add a **child** category, both `name` and `parentNodeId` are required. For **child** category, you can additionally specify `order` of display. <br> 3) To add an **Alternate** category, both `name` and `type` are required. <br> **Note**: Category details including category ID received in the response are required for subsequent calls. For example, it''s required to *Create product* (POST /v1/product/bulk/insert).'
+      operationId: categoryCreate
+      parameters:
+        - $ref: '#/components/parameters/XApiKey'
+        - $ref: '#/components/parameters/XSiteContext'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCategoryRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModifyCategory'
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+    get:
+      tags:
+        - Category
+      summary: Get categories
+      description: 'Lists categories and their details including attributes, breadcrumbs, and details of child categories. <br> **Note**: <br> 1) Specify `ids` or `nodeIds` to get specific categories. <br> 2) Use `type` to get a specific category type. <br> 3) When query parameters are omitted, this endpoint returns a paginated response listing all Alternate categories in Active status. As a result, `size` and `page` becomes mandatory to support large data.'
+      operationId: getCategoriesById
+      parameters:
+        - $ref: '#/components/parameters/XSiteContext'
+        - in: query
+          name: ids
+          description: List of 24-character system-generated category IDs. If `ids` and `nodeIds` are omitted, this endpoint returns all Alternate categories in Active status. As a result, `size` and `page` becomes mandatory to accommodate large data.
+          example:
+            - 6196b45b5cb04b7ce167cb46
+            - 7196b45b5cb04b7ce167cb45
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: nodeIds
+          description: List of human-readable numeric category IDs. When `ids` and `nodeIds` are omitted, `size` and `page` becomes applicable to support pagination.
+          example:
+            - 123
+            - 234
+          explode: false
+          schema:
+            type: array
+            items:
+              type: number
+        - in: query
+          name: keyword
+          description: Keywords to search for categories. Returns a pagination response. As a result, `size` and `page` becomes applicable to support large data.
+          example: computers
+          schema:
+            type: string
+        - in: query
+          name: type
+          description: 'Category type. <br> **Note**: If omitted, returns `ALTERNATE` categories by default.'
+          schema:
+            type: string
+            enum:
+              - PRIMARY
+              - ALTERNATE
+              - ALL
+            example: ALL
+        - in: query
+          name: status
+          description: 'Category status. <br> **Note**: If omitted, returns Alternate categories in Active status by default. <br> **Note**: When `type` is Primary, `status` must be Active. Inactive status is not applicable for Primary category.'
+          schema:
+            type: string
+            enum:
+              - ACTIVE
+              - INACTIVE
+              - ALL
+            example: ALL
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Size'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryPage'
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /v1/category/{nodeId}:
+    put:
+      security:
+        - api_key: []
+      tags:
+        - Category
+      summary: Modify category
+      description: Updates category details such as name, parent, and its order of appearance amongst sibling categories.
+      operationId: categoryModify
+      parameters:
+        - $ref: '#/components/parameters/XApiKey'
+        - $ref: '#/components/parameters/XSiteContext'
+        - in: path
+          name: nodeId
+          required: true
+          description: Human-readable numeric category ID
+          example: 1204
+          schema:
+            type: number
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyCategoryRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModifyCategory'
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /v1/category/search:
+    get:
+      tags:
+        - Category
+      summary: Find categories
+      description: 'Finds categories, by keywords, category identifiers, type, or status. <br> **Note**: <br> 1) Categories and child categories must already exist in the system. <br> 2) When query parameters are omitted, this endpoint returns a paginated response with all the categories. As a result, `page` and `size` become mandatory to accommodate large data. <br> 3) GET /v1/category (Store admin context) or Algolia search (Shopper context) is strongly recommended over this endpoint.'
+      operationId: searchCategories
+      parameters:
+        - $ref: '#/components/parameters/XSiteContext'
+        - in: query
+          name: keyword
+          description: Keywords to search for categories. The response is paginated. As a result, `page` and `size` becomes mandatory to accommodate large data.
+          example: computers
+          schema:
+            type: string
+        - in: query
+          name: ids
+          description: List of 24-characters system-generated category IDs. If `ids` and `nodeIds` are omitted, this endpoint returns a paginated response. As a result, `page` and `size` becomes mandatory to accommodate large data.
+          example:
+            - 6196b45b5cb04b7ce167cb46
+            - 7196b45b5cb04b7ce167cb47
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: nodeIds
+          description: List of human-readable numeric category ID. If `ids` and `nodeIds` are omitted, this endpoint returns a paginated response. As a result, `page` and `size` becomes mandatory to accommodate large data.
+          example:
+            - 15
+            - 16
+          explode: false
+          schema:
+            type: array
+            items:
+              type: number
+        - in: query
+          name: type
+          description: 'Category type. <br> **Note**: If omitted, returns a paginated response with `ALL` categories. As a result, `page` and `size` becomes mandatory to support large data.'
+          schema:
+            type: string
+            enum:
+              - PRIMARY
+              - ALTERNATE
+              - ALL
+            example: ALL
+        - in: query
+          name: status
+          description: 'Category status. If omitted, returns a paginated response of categories in `ACTIVE` status. As a result, `page` and `size` becomes mandatory to support large data. <br> **Note**: When `type` is Primary, `status` must be Active. Inactive status is not applicable for Primary category.'
+          schema:
+            type: string
+            enum:
+              - ACTIVE
+              - INACTIVE
+              - ALL
+            example: ALL
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Size'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryPage'
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /v1/category/tree:
+    get:
+      tags:
+        - Category
+      summary: Get category tree
+      description: 'Hierarchy of parent and children categories form a tree structure. This endpoint returns a tree of categories rooted in the category identified by `id` or `nodeId`.<br> **Note**: <br> 1) If parent category does not exist in the system, you''ll get a `404 - Not found` error <br> 2) If a child category does not exist for the given parent, you''ll get a success response but `children` property will show a blank array.'
+      operationId: getCategoryTree
+      parameters:
+        - $ref: '#/components/parameters/XSiteContext'
+        - in: query
+          name: id
+          description: 24-character system-generated ID of root category. Either `id` or `nodeId` must be specified.
+          example: 6196b44a5cb04b7ce167cb34
+          schema:
+            type: string
+        - in: query
+          name: nodeId
+          description: Human-readable numeric category ID. Either `id` or `nodeId` must be specified.
+          example: 12
+          schema:
+            type: integer
+        - in: query
+          name: depth
+          description: Limits the size of the hierarchical category tree returned in the response. Depth of 0 means no child categories, attributes, or breadcrumbs, are included in the response. Unless depth is specified, entire category is returned up to the last set of child categories (that have no more child categories).
+          example: 1
+          schema:
+            type: number
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryTree'
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /v1/category/sku:
+    get:
+      tags:
+        - Category
+      summary: Get SKUs in a category
+      description: 'Gets SKUs of all products belonging to a category. <br> **Note**: <br> 1) To get SKUs, Algolia search is recommended over this endpoint. <br> 2) Categories must exist in the system to get SKUs in that category. If SKUs are not created in the given category ID, this endpoint returns an empty list.'
+      operationId: getCategorySKUs
+      parameters:
+        - $ref: '#/components/parameters/XSiteContext'
+        - in: query
+          name: id
+          description: 24-character system-generated category ID. Either `id` or `nodeId` must be specified.
+          example: 6196b45b5cb04b7ce167cb46
+          schema:
+            type: string
+        - in: query
+          name: nodeId
+          description: Human-readable numeric category ID. Either `id` or `nodeId` must be specified.
+          example: 2
+          schema:
+            type: integer
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Size'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SKUPage'
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /v1/category/attribute:
+    post:
+      security:
+        - api_key: []
+      tags:
+        - Category
+      summary: Create, update, and delete attributes of a category
+      description: Category attributes let you define characteristics of categories and child categories. <br> This endpoint creates, updates, or removes attributes of a single category. The primary purpose is to assign attributes.
+      operationId: postCategoryAttributeByID
+      parameters:
+        - $ref: '#/components/parameters/XApiKey'
+        - $ref: '#/components/parameters/XSiteContext'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyCategoryAttributesRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryAttributes'
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+    get:
+      tags:
+        - Category
+      summary: Get category attributes
+      description: 'Gets all attributes of a category. <br> **Note**: <br> *Get category* endpoint (GET /v1/category) returns categories, their attributes, child categories, and breadcrumb details. So, this endpoint is recommended if you have a category ID and only require its attributes.'
+      operationId: getCategoryAttributesByID
+      parameters:
+        - $ref: '#/components/parameters/XSiteContext'
+        - in: query
+          name: id
+          description: 24-character system-generated category ID. Either `id` or `nodeId` must be specified.
+          example: 619a8ba6f1875f6dbcaf0521
+          schema:
+            type: string
+        - in: query
+          name: nodeId
+          description: Human-readable numeric category ID. Either `nodeId` or `id` must be specified.
+          example: 2
+          schema:
+            type: integer
+        - in: query
+          name: status
+          description: Attribute status. When `id` or `nodeId` is specified along with `status` = `Assigned`, the response is faster because the data is fetched from cache. When the `status` is `Unassigned`, the data is fetched from the DB and the response could take longer.
+          schema:
+            type: string
+            enum:
+              - ASSIGNED
+              - UNASSIGNED
+            example: ASSIGNED
+        - $ref: '#/components/parameters/MandatoryPage'
+        - $ref: '#/components/parameters/MandatorySize'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttributePage'
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /v1/category/attribute/bulk:
+    post:
+      security:
+        - api_key: []
+      tags:
+        - Category
+      summary: Create, update, or delete category attributes
+      description: 'Creates, updates, and deletes category attributes. The primary purpose is to create and edit the attributes to be assigned to categories. <br> **Note**: They are generic category attributes and not specific to a category.'
+      operationId: postCategoryAttributeBulk
+      parameters:
+        - $ref: '#/components/parameters/XApiKey'
+        - $ref: '#/components/parameters/XSiteContext'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkAttributeRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkAttributeResponse'
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /v1/category/item-attribute:
+    post:
+      security:
+        - api_key: []
+      tags:
+        - Category
+      summary: Create, update, and remove product attributes for a category
+      description: Categories lets merchants segregate and group items. They also allow specifying 'mandatory' and 'optional' attributes that all products (aka items) within that category must have. They are used to store structured information about products. <br> This endpoint creates and updates (also deletes) product attributes for the specified category.
+      operationId: postCategoryItemibuteByID
+      parameters:
+        - $ref: '#/components/parameters/XApiKey'
+        - $ref: '#/components/parameters/XSiteContext'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyCategoryItemAttributesRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryItemAttributes'
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+    get:
+      tags:
+        - Category
+      summary: Get available product attributes
+      description: 'Gets all the product (aka item) attributes for the specified category. <br> **Note**: Products may also inherit product attributes from parent categories.'
+      operationId: getCategoryItemAttributes
+      parameters:
+        - $ref: '#/components/parameters/XSiteContext'
+        - in: query
+          name: id
+          description: '24-character system-generated category ID. `id` and `nodeId` are the two identifiers of a category. <br> **Note**: If `id` is specified, `status` must be specified as well.'
+          example: 6196b45b5cb04b7ce167cb46
+          schema:
+            type: string
+        - in: query
+          name: nodeId
+          description: 'Human-readable category ID. `id` and `nodeId` are the two identifiers of a category. <br> **Note**: If `nodeId` is specified, `status` must be specified as well.'
+          example: 25
+          schema:
+            type: number
+        - in: query
+          name: status
+          description: Status of product attributes. `Assigned` indicates the product attributes are already assigned to categories and `unassigned` indicates otherwise. Applicable only when `id` or `nodeId` is specified.
+          schema:
+            type: string
+            enum:
+              - ASSIGNED
+              - UNASSIGNED
+        - $ref: '#/components/parameters/MandatoryPage'
+        - $ref: '#/components/parameters/MandatorySize'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCategoryItemAttributes'
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /v1/category/source:
+    post:
+      security:
+        - api_key: []
+      tags:
+        - Category
+      summary: Create and update category sources
+      description: Creates and updates category sources. <br> Primary category is the original catalog tree consisting of nested levels of child categories and is used to place products where they belong. Alternate categories are dynamic and populated from the Primary category, which is the original source of items. Source for an Alternate category points to a Primary category, and makes all products in the Primary category appear within the Alternate category; it behaves like a symlink.
+      operationId: modifyCategoriesNodeSources
+      parameters:
+        - $ref: '#/components/parameters/XApiKey'
+        - $ref: '#/components/parameters/XSiteContext'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyNodeSourcesRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodeSourcesAndExclusions'
+        '400':
+          description: client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+    get:
+      tags:
+        - Category
+      summary: Get available category sources
+      description: Gets all the available category sources. <br> Products are created under the Primary category, and Alternate categories are created to export alternate organizations of the Primary category. So, the Primary category is the source of products that appear in Alternate categories. The category sources are Primary categories that can be used as product sources in Alternate categories. Sources behave similar to symlinks.
+      operationId: getCategoriesNodeSources
+      parameters:
+        - $ref: '#/components/parameters/XSiteContext'
+        - in: query
+          name: id
+          description: 24-character system-generated category ID. `id` and `nodeId` are the two identifiers of a category and one of them must be specified.
+          schema:
+            type: string
+          example: 6170135a49b4af38190970fe
+        - in: query
+          name: nodeId
+          description: Human-readable numeric category ID. `id` and `nodeId` are the two identifiers of a category and one of them must be specified.
+          schema:
+            type: number
+          example: 12
+        - in: query
+          name: status
+          description: Status of Category source. If omitted, 'ASSIGNED' status is used as default.
+          schema:
+            type: string
+            enum:
+              - ASSIGNED
+              - UNASSIGNED
+            example: ASSIGNED
+        - $ref: '#/components/parameters/MandatoryPage'
+        - $ref: '#/components/parameters/MandatorySize'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodeSources'
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /v1/category/source/exclusion:
+    post:
+      security:
+        - api_key: []
+      tags:
+        - Category
+      summary: Create and update category source exclusions
+      description: Creates and updates exclusions for category source, by ID. For example, a category source 'Electronics' has Laptop, Mobile, and Tablet as child categories. It's possible to exclude Tablet using this endpoint, so that it does not appear for shoppers.
+      operationId: modifyCategoriesNodeSourceExclusions
+      parameters:
+        - $ref: '#/components/parameters/XApiKey'
+        - $ref: '#/components/parameters/XSiteContext'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NodeSourcesAndExclusionsRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodeSourcesAndExclusions'
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+    get:
+      tags:
+        - Category
+      summary: Get available category source exclusions
+      description: Gets available exclusions applied to a category source.
+      operationId: getCategoriesNodeSourceExclusions
+      parameters:
+        - $ref: '#/components/parameters/XSiteContext'
+        - in: query
+          name: id
+          description: 24-character system-generated category ID. `id` and `nodeId` are the two identifiers of a category and one of them must be specified.
+          schema:
+            type: string
+        - in: query
+          name: nodeId
+          description: Human-readable numeric category ID. `id` and `nodeId` are the two identifiers of a category and one of them must be specified.
+          schema:
+            type: number
+        - in: query
+          name: status
+          description: 'Status of category source. <br> **Note**: If omitted, ''ASSIGNED'' status is used by default.'
+          schema:
+            type: string
+            enum:
+              - ASSIGNED
+              - UNASSIGNED
+            example: ASSIGNED
+        - $ref: '#/components/parameters/MandatoryPage'
+        - $ref: '#/components/parameters/MandatorySize'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodeSourceExclusions'
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /v1/category/item-attribute/condition:
+    post:
+      tags:
+        - Category
+      summary: Create or update product attribute conditions
+      description: 'Creates or updates conditions for product attributes so that products can be filtered based on these conditions, from an Alternate category. <br> For example, a Primary category called **Chairs** has three chairs of different materials. An Alternate category called **Wooden Chairs** with Primary category **Chairs** as source will list all the three chairs. Through this endpoint you can add a ''product attribute condition'' to filter chairs made of wood from **Wooden Chairs**. Another example: Using this endpoint, you can combine categories and list items on sale (where sale attribute is true).'
+      operationId: postCategoryItemAttributeByID
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+        - $ref: '#/components/parameters/XApiKey'
+        - $ref: '#/components/parameters/XSiteContext'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategoryItemAttributeConditionsRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryItemAttributeConditions'
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+    get:
+      security:
+        - api_key: []
+      tags:
+        - Category
+      summary: Get available conditions for product attribute
+      description: 'You can filter products from Alternate categories based on the conditions set using the POST /v1/category/item-attribute/condition endpoint. <br> **Note**: Products may inherit conditions from parent category as well.'
+      operationId: getCategoryItemAttributesCondition
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+        - $ref: '#/components/parameters/XApiKey'
+        - $ref: '#/components/parameters/XSiteContext'
+        - in: query
+          name: id
+          description: 24-character system-generated category ID. `id` and `nodeId` are the two identifiers of a category, and one of them must be specified.
+          example: 6196b45b5cb04b7ce167cb46
+          schema:
+            type: string
+        - in: query
+          name: nodeId
+          description: Human-readable numeric category ID. `id` and `nodeId` are the two identifiers of a category, and one of them must be specified.
+          example: 25
+          schema:
+            type: number
+        - in: query
+          name: status
+          description: Status of product attribute
+          schema:
+            type: string
+            enum:
+              - ASSIGNED
+              - UNASSIGNED
+            example: ASSIGNED
+        - $ref: '#/components/parameters/MandatoryPage'
+        - $ref: '#/components/parameters/MandatorySize'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCategoryItemAttributeConditions'
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /v1/product/bulk/insert:
+    post:
+      tags:
+        - Product
+      summary: Create products and bundles
+      description: 'Creates multiple products or bundles along with their attributes. In addition, this endpoint supports data validation to ensure accuracy and consistency. <br> **Note**: <br> 1) As a prerequisite category and attributes must be created beforehand. <br> 2) To add a product variant, parentSku must be additionally specified. <br> 3) A product is assigned to only one category but it can be fetched from alternate categories. <br> 4) Up to 50 products or bundles can be added.'
+      operationId: createProducts
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductCreate'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponse'
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '422':
+          description: Failing items
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductModifyError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /v1/product/bulk/update:
+    post:
+      tags:
+        - Product
+      summary: Update products and bundles
+      description: 'Updates multiple products or bundles, along with their attributes. <br> **Note**: Up to 50 products or bundles can be updated.'
+      operationId: updateProducts
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductUpdate'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponse'
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '422':
+          description: Failing items
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductModifyError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /v1/product/bulk/upsert:
+    post:
+      tags:
+        - Product
+      summary: Upsert products or bundles
+      description: 'Creates or updates products or bundles along with their attributes. <br> **Note**: <br> 1) If the SKU already exists, this endpoint updates a product. Otherwise, creates a new product with that SKU. <br> 2) Up to 50 products or bundles can be added or updated.'
+      operationId: upsertProducts
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductCreate'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponse'
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '422':
+          description: Failing items
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductModifyError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /v1/product/bundle/update:
+    post:
+      tags:
+        - Product
+      summary: Update bundles
+      description: Adds and removes items, and also changes quantities within a bundle.
+      operationId: updateBundles
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BundleUpdateRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BundleUpdateResponse'
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /v1/product/attribute/bulk:
+    post:
+      tags:
+        - Product
+      summary: Create and update attributes for multiple products
+      description: 'Product attributes allow you to define specific characteristics for your items. Common examples of attributes include size, color, and material. Well-defined attributes are important because they enable product discovery and make catalog management easier. <br> This endpoint creates and updates product attributes to be assigned later. <br> **Note**: <br> 1) You can add and manage unlimited attributes for your products. Once they are created, they appear as a selectable option on product pages. <br> 2) In addition, you can assign attributes to products on an individual level or in bulk.'
+      operationId: postProductAttributeBulk
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkProductAttributeRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkAttributeResponse'
+        '400':
+          description: Client error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /v1/product/attribute-group:
+    post:
+      tags:
+        - Product
+      summary: Create, update, or delete attribute groups
+      description: 'Attribute groups enables merchants to collect various attributes together to make it easier to manage large volume of product information. <br> This endpoint creates, updates, or deletes attribute groups. <br> **Note**: Attribute group is optional. If created, must have at least one attribute.'
+      operationId: modifyAttributeGroups
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AttributeGroupRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttributeGroupResponse'
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /v1/product/attribute-group/search:
+    post:
+      tags:
+        - Product
+      summary: Find attribute groups
+      description: Finds attribute groups
+      operationId: searchAttributeGroups
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AttributeGroupSearchRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttributeGroupSearchResponse'
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /v1/product:
+    get:
+      tags:
+        - Product
+      summary: Get products
+      description: 'Products can be individual products or a bundle of products. This endpoints allows you to get a list of products - individual products and product bundles, along with their attributes, child products and their details. <br> **Note**: Optional filter parameters can be passed in as query to narrow down the search results.'
+      operationId: getProducts
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
+        - in: query
+          name: skus
+          description: 'List of Stock Keeping Units (SKUs). <br> **Note**: Either `skus` or `itemIds` can be used to get specific products. If they are omitted, all products are returned in a paginated response. As a result, `page` and `size` become mandatory to accommodate large data.'
+          schema:
+            type: array
+            items:
+              type: string
+          example:
+            - BUNDLE-01
+            - BUNDLE-02
+          explode: false
+        - in: query
+          name: itemIds
+          description: 'List of item IDs. Applicable only when `skus` are omitted. <br> **Note**: Either `skus` or `itemIds` can be used to get specific products. If they are omitted, all products are returned in a paginated response. As a result, `page` and `size` become mandatory to accommodate large data.'
+          schema:
+            type: array
+            items:
+              type: number
+          example:
+            - 4
+            - 5
+          explode: false
+        - in: query
+          name: page
+          description: Page number to be retrieved. Applicable only in a paginated response and always paired with `size`.
+          schema:
+            type: number
+            example: 1
+        - in: query
+          name: size
+          description: Number of records per page. Applicable only in a paginated response and always paired with `page`.
+          schema:
+            type: number
+            example: 10
+        - in: query
+          name: status
+          description: 'Product status. <br> **Note**: <br> 1) Returns a paginated response. <br> 2) When used as the only criteria, must be paired with `size` and `page` to accommodate large data.'
+          schema:
+            type: string
+            enum:
+              - ACTIVE
+              - INACTIVE
+            example: ACTIVE
+        - in: query
+          name: createdAfter
+          description: 'Lists items created after a specific date. Valid date formats are ''YYYY/MM/DD'', ''YYYY-MM-DDTHH:mm:ss.SSSZ''. <br> **Note**: <br> 1) Applicable only when `skus` and `itemIds` are omitted <br> 2) Returns paginated response <br> 3) Must be paired with `size` and `page` to accommodate large data'
+          schema:
+            type: string
+            example: '2021-05-28T16:36:50.055Z'
+        - in: query
+          name: createdBefore
+          description: 'Lists items created before a specific date. Valid date formats are ''YYYY/MM/DD'', ''YYYY-MM-DDTHH:mm:ss.SSSZ''. <br> **Note**: <br> 1) Applicable only when `skus` and `itemIds` are omitted <br> 2) Returns paginated response <br> 3) Must be paired with `size` and `page` to accommodate large data'
+          schema:
+            type: string
+            example: '2021-05-28T16:36:50.055Z'
+        - in: query
+          name: modifiedAfter
+          description: 'Lists items modified after a specific date. Valid date formats are ''YYYY/MM/DD'', ''YYYY-MM-DDTHH:mm:ss.SSSZ''. <br> **Note**: <br> 1) Applicable only when `skus` or `itemIds` are omitted <br> 2) Returns paginated response <br> 3) Must be paired with `size` and `page` to accommodate large data'
+          schema:
+            type: string
+            example: '2021-05-28T16:36:50.055Z'
+        - in: query
+          name: modifiedBefore
+          description: 'Gets items modified before a specific date. Valid date formats are ''YYYY/MM/DD'', ''YYYY-MM-DDTHH:mm:ss.SSSZ''. <br> **Note**: <br> 1) Applicable only when `skus` and `itemIds` are omitted <br> 2) Returns paginated response <br> 3) Must be paired with `size` and `page` to accommodate large data'
+          schema:
+            type: string
+            example: '2021-05-28T16:36:50.055Z'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ItemProductsResponse'
+                  - $ref: '#/components/schemas/BundleProductsResponse'
+                  - $ref: '#/components/schemas/NoProductsResponse'
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /v2/product:
+    get:
+      tags:
+        - Product
+      summary: Get products by SKU, itemId or parentSku
+      description: 'Gets products (individual product or bundle of products) by SKUs, itemIds or parentSkus. Optionally, `page` and `size` can be used query parameters. **Note**: `status` and `date` query parameters works only with pagination when parentSku is omitted. Separate responses are added for bundle and product, use the dropdown to view the corresponding response.'
+      operationId: getProductsV2
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
+        - in: query
+          name: skus
+          description: 'List of Stock Keeping Units (SKUs). <br> **Note**: Either `skus` or `itemIds` can be used to get specific products. If they are omitted, all products are returned in a paginated response. As a result, `page` and `size` become mandatory to accommodate large data.'
+          schema:
+            type: array
+            items:
+              type: string
+          example:
+            - BUNDLE-01
+            - BUNDLE-02
+          explode: false
+        - in: query
+          name: itemIds
+          description: 'List of item IDs. Applicable only when `skus` are omitted. <br> **Note**: Either `skus` or `itemIds` can be used to get specific products. If they are omitted, all products are returned in a paginated response. As a result, `page` and `size` become mandatory to accommodate large data.'
+          schema:
+            type: array
+            items:
+              type: number
+          example:
+            - 4
+            - 5
+          explode: false
+        - in: query
+          name: page
+          description: Page number to be retrieved. Applicable only in a paginated response and always paired with `size`.
+          schema:
+            type: number
+            example: 1
+        - in: query
+          name: size
+          description: Number of records per page. Applicable only in a paginated response and always paired with `page`.
+          schema:
+            type: number
+            example: 10
+        - in: query
+          name: status
+          description: 'Product status. <br> **Note**: <br> 1) Returns a paginated response. <br> 2) When used as the only criteria, must be paired with `size` and `page` to accommodate large data.'
+          schema:
+            type: string
+            enum:
+              - ACTIVE
+              - INACTIVE
+            example: ACTIVE
+        - in: query
+          name: type
+          description: 'Item type. **Note**: Set page and size to use this filter.'
+          schema:
+            type: string
+            enum:
+              - ITEM
+              - BUNDLE
+        - in: query
+          name: createdAfter
+          description: 'List of products created after a specific date. Valid date formats are ''YYYY/MM/DD'', ''YYYY-MM-DDTHH:mm:ss.SSSZ''. <br> **Note**: <br> 1) Applicable only when `skus` and `itemIds` are omitted <br> 2) Returns paginated response <br> 3) Must be paired with `size` and `page` to accommodate large data'
+          schema:
+            type: string
+            example: '2021-05-28T16:36:50.055Z'
+        - in: query
+          name: createdBefore
+          description: 'List of products created before a specific date. Valid date formats are ''YYYY/MM/DD'', ''YYYY-MM-DDTHH:mm:ss.SSSZ''. <br> **Note**: <br> 1) Applicable only when `skus` and `itemIds` are omitted <br> 2) Returns paginated response <br> 3) Must be paired with `size` and `page` to accommodate large data'
+          schema:
+            type: string
+            example: '2021-05-28T16:36:50.055Z'
+        - in: query
+          name: modifiedAfter
+          description: 'List of products modified after a specific date. Valid date formats are ''YYYY/MM/DD'', ''YYYY-MM-DDTHH:mm:ss.SSSZ''. <br> **Note**: <br> 1) Applicable only when `skus` or `itemIds` are omitted <br> 2) Returns paginated response <br> 3) Must be paired with `size` and `page` to accommodate large data'
+          schema:
+            type: string
+            example: '2021-05-28T16:36:50.055Z'
+        - in: query
+          name: modifiedBefore
+          description: 'List of products modified before a specific date. Valid date formats are ''YYYY/MM/DD'', ''YYYY-MM-DDTHH:mm:ss.SSSZ''. <br> **Note**: <br> 1) Applicable only when `skus` and `itemIds` are omitted <br> 2) Returns paginated response <br> 3) Must be paired with `size` and `page` to accommodate large data'
+          schema:
+            type: string
+            example: '2021-05-28T16:36:50.055Z'
+        - in: query
+          name: parentSku
+          description: Parent SKU to get its children products. <br> **Note** <br> 1) To get a p paginates response, optionally, `size` and `page` can be used as query parameters. When they are omitted, this endpoint returns all children. <br> 2) Only `page` and `size` are supported with this query parameter.
+          schema:
+            type: string
+            example: parent123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ItemProductsV2Response'
+                  - $ref: '#/components/schemas/BundleProductsResponse'
+                  - $ref: '#/components/schemas/NoProductsResponse'
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /v1/product/search:
+    get:
+      tags:
+        - Product
+      summary: Find products
+      description: Finds products - both individually and in bundles. Optional filter parameters help narrow down the search results. When the response is large, `page` and `size` becomes mandatory to support pagination.
+      operationId: productSearch
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
+        - in: query
+          name: keyword
+          description: Keywords related to SKU or title
+          schema:
+            type: string
+            example: MOBO-1024
+        - in: query
+          name: skus
+          description: 'Searches for items based on SKU. <br> **Note**: If omitted, all products are retrieved. <br> Applicable only when `keyword` is omitted.'
+          schema:
+            type: array
+            items:
+              type: string
+          example:
+            - MOBO-1024
+            - MOBO-1025
+          explode: false
+        - in: query
+          name: itemIds
+          description: 'Item IDs. <br> **Note**: If omitted, all products are retrieved <br> Applicable only when `keyword` and `skus` are omitted.'
+          schema:
+            type: array
+            items:
+              type: string
+          example:
+            - 4
+            - 5
+          explode: false
+        - in: query
+          name: page
+          description: Page number to be retrieved.
+          schema:
+            type: number
+          example: 10
+        - in: query
+          name: size
+          description: 'Number of records per page. <br>**Note**: 1) Always paired with `page`. <br>2) Applicable only in a paginated response.'
+          schema:
+            type: integer
+          example: 10
+        - in: query
+          name: type
+          description: Product type
+          schema:
+            type: string
+            enum:
+              - ITEM
+              - BUNDLE
+              - ALL
+            example: ITEM
+        - in: query
+          name: allAttributes
+          description: 'true: Returns all attributes. false: Returns only the mapped attributes. <br> **Note**: Always clubbed with `page` and `size`. If values are not specified, the default values are page = 1 and size = 10. As a result, endpoint returns the first 10 items with all their attributes.'
+          schema:
+            type: boolean
+            example: true
+        - in: query
+          name: excludeChildren
+          description: 'true: Excludes child products <br> false: Includes child products'
+          schema:
+            type: boolean
+            example: false
+        - in: query
+          name: onlyChildren
+          description: 'true: Excludes parent products <br> false: Includes parent products'
+          schema:
+            type: boolean
+            example: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ItemProductSearchResponse'
+                  - $ref: '#/components/schemas/BundleProductSearchResponse'
+                  - $ref: '#/components/schemas/NoProductsResponse'
+        '400':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /v1/product/attribute:
+    get:
+      tags:
+        - Product
+      summary: Get product attributes
+      description: 'Product attributes define characteristics of a product. For example, product name, its identifiers, and description are the common attributes of any product. Attributes are key-value pairs (color: red) that hold information for each property of a product. <br> This endpoint gets all attributes of a product, by SKU or itemId. <br> **Note**: The *Get product* (GET /v1/product) gets product details and their attribute. So, this endpoint is recommended when you have the product SKU or item ID, and only require its attributes.'
+      operationId: getProductAttribute
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
+        - in: query
+          name: sku
+          description: 'Stock Keeping Unit (SKU) of product. <br> **Note**: If omitted `itemId` becomes mandatory.'
+          schema:
+            type: string
+            example: MOBO-1024
+        - in: query
+          name: itemId
+          description: 'Item ID. <br> **Note**: If omitted `sku` becomes mandatory.'
+          schema:
+            type: number
+            example: 3
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductAttributePage'
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /v1/product/bulk/template/{accountId}/{nodeId}:
+    get:
+      tags:
+        - Product
+      summary: Generate CSV template file for products
+      description: Generates CSV template to upload products for a specific category.
+      operationId: generateCSVfile
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
+        - in: path
+          name: accountId
+          description: Account ID
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: nodeId
+          description: 24-character system-generated category ID
+          schema:
+            type: string
+          required: true
+          example: 6131f771d4a7fa4314e45ebd
+      responses:
+        '200':
+          description: OK
+          content:
+            application/csv:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /v1/product/bulk/template/bundle/{accountId}/{nodeId}:
+    get:
+      tags:
+        - Product
+      summary: Generate CSV template for product bundles
+      description: Generates CSV template to upload bundles for a specific category.
+      operationId: generateItemBundleCSVfile
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
+        - in: path
+          name: accountId
+          description: Account ID
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: nodeId
+          description: 24-character system-generated category ID
+          schema:
+            type: string
+          required: true
+          example: 6131f771d4a7fa4314e45ebd
+      responses:
+        '200':
+          description: OK
+          content:
+            application/csv:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /v1/product/bulk/template/attribute:
+    get:
+      tags:
+        - Product
+      summary: Generate CSV template for product attributes
+      description: 'Generates CSV template to upload product attributes. '
+      operationId: generateItemAttributeCSVfile
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/csv:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /v1/upload-url:
+    post:
+      tags:
+        - Product
+      summary: Generate S3 bucket URL for bulk upload of products
+      description: 'Generates S3 bucket URL to upload products using CSV file. Follow these steps for bulk upload usign CSV: <br> 1) Download the template using *GET /api-product/v1/product/bulk/template/:accountid/:nodeId* <br> 2) Upload the url using *POST /api-product/v1/upload-url*<br> 3) Open the URL from the response of the above endpoint (*POST /api-product/v1/upload-url*), change the method to PUT, update **binary** in the requestBody type to view the select file option and upload a CSV from local system <br> 4) You may check the status using this endpoint *GET /api-product/v1/product/bulk/file/:fileId/status*'
+      operationId: generateS3url
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetS3URLRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetS3URLResponse'
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /v1/upload-url/bundle:
+    post:
+      tags:
+        - Product
+      summary: Generate S3 bucket URL for product bundles
+      description: Generates S3 bucket URL to upload product bundles using CSV file
+      operationId: generateItemBundleS3url
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetS3URLBundleRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetS3URLBundleResponse'
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /v1/upload-url/attribute:
+    post:
+      tags:
+        - Product
+      summary: Generate S3 bucket URL for product attributes
+      description: Generates S3 bucket URL to upload product attribute using CSV file
+      operationId: generateItemAttributeS3url
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetS3URLItemAttributeRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetS3URLItemAttributeResponse'
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /v1/product/file/search:
+    post:
+      tags:
+        - Product
+      summary: Get imported files for products
+      description: Gets a list of files used to import products, along with their current statuses
+      operationId: fileSearch
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FileSearchRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FilePaginationResponse'
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /v1/product/file/bundle/search:
+    post:
+      tags:
+        - Product
+      summary: Get imported files for product bundles
+      description: Gets a list of files used to import product bundles, along with their current statuses.
+      operationId: ItemBundleFileSearch
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FileSearchRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FilePaginationResponse'
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /v1/product/file/attribute/search:
+    post:
+      tags:
+        - Product
+      summary: Get imported files for product attributes
+      description: Gets a list of files used to import product attributes, along with their current statuses.
+      operationId: ItemAttributeFileSearch
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FileSearchRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FilePaginationResponse'
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /v1/product/bulk/file/{fileId}/status:
+    get:
+      tags:
+        - Product
+      summary: Get file upload status by ID
+      description: Gets file upload status by ID
+      operationId: getFileStatus
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
+        - in: path
+          name: fileId
+          description: 24-character system-generated file ID
+          schema:
+            type: string
+          required: true
+          example: 626c3c28e041b10009810b21
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/UploadFileStatusResponse'
+                  - $ref: '#/components/schemas/UploadFileStatusNoItemResponse'
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /v1/product/attribute/mapping/search:
+    post:
+      tags:
+        - Attributes
+      summary: Find attribute mapping
+      description: Searches for attribute mappings
+      operationId: searchAttributeMappings
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AttributeMappingSearch'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttributeMappingPaginationResponse'
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /v1/product/attribute/mapping:
+    post:
+      tags:
+        - Attributes
+      summary: Update attribute mappings
+      description: Updates attribute mappings
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
+      operationId: modifyAttributeMappings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AttributeMappingModify'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttributeMappingResponse'
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+components:
+  securitySchemes:
+    api_key:
+      type: apiKey
+      name: x-api-key
+      in: header
+  schemas:
+    BulkAttributeRequest:
+      type: array
+      items:
+        type: object
+        required:
+          - type
+          - name
+          - action
+        properties:
+          action:
+            type: string
+            enum:
+              - CREATE
+              - UPDATE
+              - DELETE
+            example: UPDATE
+            description: 'Action type. <br> **Note**: <br> 1) Attribute ID is required only for `UPDATE` and `DELETE` actions (not for CREATE). <br> 2) `CREATE` action replaces any existing category attribute with the same name.'
+          id:
+            description: 24-character system-generated attribute ID
+            example: 61ba11691a29d52cb2842541
+            type: string
+          name:
+            description: Attribute name
+            example: weight
+            type: string
+          description:
+            description: Accurate description of the attribute and what it represents
+            example: Weight of the product, in KG
+            type: string
+          type:
+            description: Supported attribute types for the attribute
+            example: INTEGER
+            type: string
+            enum:
+              - TEXT
+              - BOOLEAN
+              - SERIAL
+              - DECIMAL
+              - INTEGER
+              - DATETIME
+              - OPTIONS
+          textSubType:
+            description: Conditionally required for `TEXT` attribute type
+            example: HTML
+            type: string
+            enum:
+              - SMALL_TEXT
+              - TEXT_AREA
+              - HTML
+          serialStart:
+            description: Conditionally required to indicate the starting value of `SERIAL` attribute type. When enabled, the subsequent attribute values increment by 1.
+            example: 1000
+            type: number
+          optionsType:
+            description: Conditionally required to indicate the selectable values for `OPTIONS` attribute type
+            type: string
+            example: DATETIME
+            enum:
+              - TEXT
+              - BOOLEAN
+              - DECIMAL
+              - INTEGER
+              - DATETIME
+          format:
+            description: Attribute format. Currently used only for `DATETIME` attribute type.
+            type: string
+            example: YYYY-MM-DD
+          formula:
+            description: 'JavaScript expression to dynamically compute the attribute value. The data type returned by this expression must match the attribute''s data type. <br> **Note**: When this is provided, `validation` is ignored.'
+            type: string
+            example: '`${item.weightValue} ${item.weightUnit}`'
+          validation:
+            type: object
+            properties:
+              required:
+                description: 'true: Attribute is mandatory <br> false: Attribute is optional'
+                type: boolean
+              inheritable:
+                description: 'true: Parent attributes inherited to child products <br> false: Parent attributes not inherited to child products'
+                type: boolean
+                example: true
+              inverse:
+                description: 'true: Inverts existing validation (example - requires that the validation does not pass) <br> false: Follows existing validation'
+                type: boolean
+              unique:
+                description: 'true: Value is unique across all items or categories <br> false: Value is not unique'
+                type: boolean
+              exact:
+                description: Specified value must exactly match this value
+                oneOf:
+                  - type: string
+                  - type: number
+                  - type: boolean
+              attributeTypes:
+                description: List of supported attribute types
+                type: array
+                example:
+                  - Serial
+                  - Integer
+                items:
+                  type: string
+                  enum:
+                    - TEXT
+                    - BOOLEAN
+                    - SERIAL
+                    - DECIMAL
+                    - INTEGER
+                    - ASSET
+                    - DATETIME
+              contains:
+                description: Specified value must contain this string
+                type: string
+              range:
+                description: Specified range of values must be between this min and/or max
+                type: object
+                properties:
+                  min:
+                    description: Specified value must be greater than or equal to this value
+                    oneOf:
+                      - type: string
+                      - type: number
+                  max:
+                    description: Specified value must be less than or equal to this value
+                    oneOf:
+                      - type: string
+                      - type: number
+              formula:
+                description: JavaScript expression to determine if the value matches
+                type: string
+                example: value < 10 || value > 20
+              oneOf:
+                description: Matches the value if it is one of these
+                oneOf:
+                  - type: array
+                    items:
+                      type: string
+                  - type: array
+                    items:
+                      type: number
+                  - type: array
+                    items:
+                      type: boolean
+    BulkAttributeResponse:
+      type: object
+      properties:
+        attributes:
+          type: object
+          properties:
+            success:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: 622932439c73c975335cb654
+                    description: 24-character system-generated attribute ID
+                  name:
+                    type: string
+                    example: name
+                    description: Attribute name
+                  message:
+                    type: string
+                    description: Success message
+                    example: Attribute created successfully
+            failed:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    example: ITEM_ATTRIBUTE_VALUE_IS_INVALID
+                    description: Failure reason as stored backend
+                  errors:
+                    type: array
+                    items:
+                      type: string
+                      example:
+                        - Attribute value is invalid
+                        - Attribute value not found
+                      description: Human-readable failure reasons
+    AttributeGroupRequest:
+      type: object
+      required:
+        - transactional
+      properties:
+        transactional:
+          description: 'true: All updates succeed or fail as a unit <br> false: Some can succeed or fail'
+          type: boolean
+        attributeGroup:
+          type: array
+          items:
+            type: object
+            properties:
+              action:
+                type: string
+                enum:
+                  - CREATE
+                  - UPDATE
+                  - DELETE
+                example: UPDATE
+                description: Action type. For `CREATE`, 'priorityOrder', 'type', 'name,' and 'editableAttributes' are mandatory. For `UPDATE` and `DELETE`, only `id` is mandatory.
+              type:
+                description: Type of attribute group
+                example: COLLECTION
+                type: string
+                enum:
+                  - WORKFLOW
+                  - COLLECTION
+              description:
+                description: Accurate description of attribute and what it represents
+                example: Weight of product, in KG
+                type: string
+              name:
+                description: Name of the attribute group
+                example: weight
+                type: string
+              priorityOrder:
+                description: 'Attribute groups can be assigned a priority order. This is used for  attributes that are under multiple attribute groups. They will be returned just once in the attribute group that has the highest priority. <br> **Note**: Mandatory attribute for ''CREATE'', must be unique and start from 0 for the first group.'
+                example: 1
+                type: number
+              id:
+                description: 24-character system-generated attribute group ID. Applicable only for `UPDATE` and `DELETE` actions. To be omitted for 'CREATE'.
+                example: 6259ec8d006b0d00092b3189
+                type: string
+              editableAttributes:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AttributeGroupTypeRequest'
+    AttributeGroupResponse:
+      type: array
+      items:
+        type: object
+        properties:
+          _id:
+            description: 24-character system-generated attribute group ID
+            example: 6259ec8d006b0d00092b3189
+            type: string
+          description:
+            description: Accurate description of attribute group and what it represents
+            example: Weight of the product, in KG
+            type: string
+          type:
+            description: Type of attribute group
+            example: COLLECTION
+            type: string
+            enum:
+              - WORKFLOW
+              - COLLECTION
+          name:
+            description: Name of attribute group
+            example: weight
+            type: string
+          priorityOrder:
+            description: Order of priority of the attribute group
+            example: 1
+            type: number
+          createdOn:
+            description: Timestamp of attribute group creation (UTC format).
+            example: '2022-04-15T22:07:09.921Z'
+            type: string
+          modifiedOn:
+            description: Timestamp of when the attribute group was last modified (UTC format).
+            example: '2022-04-15T22:10:05.427Z'
+            type: string
+          attributes:
+            type: array
+            items:
+              type: object
+              properties:
+                _id:
+                  description: 24-character system-generated attribute ID
+                  example: 6259ec8defc2116dd6c0f3fc
+                  type: string
+                attributeGroupId:
+                  description: 24-character system-generated attribute group ID of items
+                  example: 6259ec8d006b0d00092b3189
+                  type: string
+                attributeId:
+                  description: 24-character system-generated attribute ID. This is same as the `_id`.
+                  example: 6245f16d11ae770009f19292
+                  type: string
+                isEditable:
+                  type: boolean
+                  description: 'true: attribute is editable <br> false: attribute is non-editable'
+                createdOn:
+                  description: Timestamp of attribute creation (UTC format)
+                  example: '2022-04-15T22:07:09.932Z'
+                  type: string
+                modifiedOn:
+                  description: Timestamp of when attribute was last modified (UTC format).
+                  example: '2022-04-15T22:10:05.444Z'
+                  type: string
+                order:
+                  description: Order of product within the attribute group
+                  example: 0
+                  type: number
+    AttributeGroupSearchRequest:
+      type: object
+      properties:
+        page:
+          description: Page number to be retrieved
+          example: 0
+          type: number
+        size:
+          description: Number of records (attribute groups) per page
+          example: 10
+          type: number
+        include:
+          type: object
+          properties:
+            attributes:
+              type: boolean
+              description: 'true: include attributes <br> false: exclude attributes'
+        match:
+          type: object
+          properties:
+            target:
+              description: Search target. Currently, supports only ITEM.
+              example: ITEM
+              type: string
+            or:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    description: Attribute group name
+                    example: weight
+                    type: string
+        sort:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                description: Field on which the results must be sorted
+                example: priorityOrder
+                type: string
+              direction:
+                description: Direction (ascending or descending) or sorting the response
+                example: DESC
+                type: string
+                enum:
+                  - ASC
+                  - DESC
+    AttributeGroupSearchResponse:
+      type: object
+      properties:
+        totalSize:
+          description: Total number of records (attribute group)
+          example: 7
+          type: number
+        pageSize:
+          description: Number of records (attribute group) per page
+          example: 10
+          type: number
+        pages:
+          description: Number of pages for the given `pageSize`
+          example: 1
+          type: number
+        attributeGroups:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                description: 24-character system-generated ID of the attribute group
+                example: 6259ec8d006b0d00092b3189
+                type: string
+              description:
+                description: Accurate description of the attribute and what it represents
+                example: Weight of the product, in KG
+                type: string
+              type:
+                description: Type of the attribute group
+                example: COLLECTION
+                type: string
+                enum:
+                  - WORKFLOW
+                  - COLLECTION
+              name:
+                description: Name of the attribute group
+                example: weight
+                type: string
+              priorityOrder:
+                description: Priority order of the attribute group
+                example: 1
+                type: number
+              createdOn:
+                description: Timestamp of attribute group creation (UTC format)
+                example: '2022-04-15T22:07:09.921Z'
+                type: string
+              modifiedOn:
+                description: Timestamp of when attribute group was last modified (UTC format)
+                example: '2022-04-15T22:10:05.427Z'
+                type: string
+              totalAttributes:
+                description: Number of attributes in the attribute group
+                example: 1
+                type: number
+              EditableAttributes:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AttributeGroupTypeResponse'
+              ReadOnlyAttributes:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AttributeGroupTypeResponse'
+              WorkflowAttributes:
+                items:
+                  description: Uses same response as AttributeGroupTypeResponse
+                  $ref: '#/components/schemas/WorkflowAttributes'
+              ImpactedAttributes:
+                items:
+                  description: Uses same response as AttributeGroupTypeResponse
+                  $ref: '#/components/schemas/ImpactedAttributes'
+    WorkflowAttributes:
+      type: object
+      properties: {}
+    ImpactedAttributes:
+      type: object
+      properties: {}
+    AttributeGroupTypeRequest:
+      type: object
+      properties:
+        action:
+          description: 'Action type. <br> **Note**: <br> 1) Attribute ID is required only for `UPDATE` and `DELETE` actions (not for CREATE). <br> 2) The Create action replaces any existing category attribute with the same name.'
+          type: string
+          enum:
+            - ADD
+            - UPDATE
+            - DELETE
+          example: UPDATE
+        id:
+          description: 24-character system-generated ID of product attribute
+          example: 6245f16d11ae770009f19292
+          type: string
+        order:
+          description: Order of product attributes within the attribute group. Relevant for sorting in the UI.
+          example: 0
+          type: number
+    AttributeGroupTypeResponse:
+      type: object
+      properties:
+        _id:
+          description: 24-character system-generated ID, for internal use
+          example: 6259ec8defc2116dd6c0f3fc
+          type: string
+        attributeGroupId:
+          description: 24-character system-generated ID of attribute group
+          example: 6259ec8d006b0d00092b3189
+          type: string
+        attributeId:
+          description: 24-character system-generated attribute ID
+          example: 6245f16d11ae770009f19292
+          type: string
+        isEditable:
+          type: boolean
+          description: 'true: attribute is editable <br> false: attribute is non-editable'
+        createdOn:
+          description: Timestamp of attribute creation (UTC format)
+          example: '2022-04-15T22:07:09.932Z'
+          type: string
+        modifiedOn:
+          description: Timestamp of when attribute was last updated (UTC format)
+          example: '2022-04-15T22:10:05.444Z'
+          type: string
+        order:
+          description: Order of product within the attribute group
+          example: 0
+          type: number
+        attribute:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                description: 24-character system-generated attribute ID
+                example: 6259ec8defc2116dd6c0f3fc
+                type: string
+              description:
+                description: Accurate description of attribute and what it represents
+                example: Weight of the product, in KG.
+                type: string
+              formulaManuallyOverWritten:
+                type: boolean
+                example: false
+                description: 'true: formula can be manually overwritten <br> false: formula cannot be manually overwritten'
+              formula:
+                description: Formula for the product attribute
+                example: null
+                type: string
+              type:
+                description: Attribute type
+                example: TEXT
+                type: string
+              name:
+                description: Attribute name
+                example: weight
+                type: string
+              textSubType:
+                description: Conditionally required sub-type for `TEXT` attribute type
+                example: SMALL_TEXT
+                type: string
+              attributeValidationId:
+                example: 624d92f8caa34e0009b5d849
+                type: string
+                description: Attribute validation ID
+              modifiedBy:
+                description: User ID that modified the product attribute
+                example: 60aad2c835c5fb000885f679
+                type: string
+              createdOn:
+                description: Timestamp of attribute creation (UTC format)
+                example: '2022-04-15T22:07:09.932Z'
+                type: string
+              modifiedOn:
+                description: Timestamp of when the attribute was last modified (UTC format)
+                example: '2022-04-15T22:10:05.444Z'
+                type: string
+    CreateCategoryRequest:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          description: Category name
+          type: string
+          example: notes
+        active:
+          description: 'true: Category is Active <br> false: Category is Inactive <br> **Note**: When `type` is Primary, `status` must be Active. Inactive status is not applicable for Primary category.'
+          type: boolean
+          example: true
+        parentNodeId:
+          description: Human-readable numeric ID of parent category. If omitted, new category is created under the root category.
+          type: number
+          example: 1
+        order:
+          description: 'The order in which this child category appears among the sibling categories (of the same parent). <br> **Note**: <br> 1) Applicable only for child categories. <br> 2) Order 0 means this child category appears at the beginning of other sibling categories. <br> 3) Unless order is specified, the child category appears at the end.'
+          type: number
+          example: 3
+        type:
+          type: string
+          enum:
+            - ALTERNATE
+            - PRIMARY
+          description: Category type. Specify this field to create a new root category. Applicable only if `parentNodeId` is omitted.
+    CategoryPage:
+      type: object
+      properties:
+        totalSize:
+          description: Total number of records (categories)
+          type: number
+          example: 100
+        pageSize:
+          description: Number of records (categories) per page
+          type: number
+          example: 10
+        pages:
+          description: Number of pages for the given `pageSize`
+          type: number
+          example: 10
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/CategorySingle'
+    CategorySingle:
+      type: object
+      properties:
+        id:
+          description: 24-character system-generated category ID
+          type: string
+          example: 6196b45b5cb04b7ce167cb46
+        nodeId:
+          description: Human-readable numeric ID of category, for external users
+          type: number
+          example: 16
+        name:
+          description: Category name
+          type: string
+          example: PCs
+        hierarchy:
+          description: Category type
+          type: string
+          enum:
+            - PRIMARY
+            - ALTERNATE
+          example: ALTERNATE
+        isActive:
+          description: 'true: Category is Active <br> false: Category is Inactive <br> **Note**: Inactive status is not applicable for Primary category.'
+          type: boolean
+          example: true
+        breadcrumbs:
+          description: Path of categories leading to root of categories
+          type: array
+          items:
+            $ref: '#/components/schemas/Breadcrumbs'
+        attributes:
+          description: Attributes belonging to this category
+          type: array
+          items:
+            $ref: '#/components/schemas/Attribute'
+        children:
+          description: Child categories of this category
+          type: array
+          items:
+            $ref: '#/components/schemas/CategoryChild'
+        createdOn:
+          type: string
+          example: '2022-03-09T23:37:54.086Z'
+          description: Timestamp of category creation (UTC format)
+        modifiedOn:
+          type: string
+          description: Timestamp of when category was last updated (UTC format)
+          example: '2022-03-09T23:37:54.086Z'
+    CategoryTree:
+      type: object
+      properties:
+        id:
+          description: 24-character system-generated category ID
+          type: string
+          example: 6196b45b5cb04b7ce167cb46
+        nodeId:
+          description: Human-readable numeric ID of category, for external users
+          type: number
+          example: 16
+        name:
+          description: Category name
+          type: string
+          example: PCs
+        hierarchy:
+          type: string
+          enum:
+            - PRIMARY
+            - ALTERNATE
+          example: ALTERNATE
+          description: Category type
+        isActive:
+          description: 'true: Category is Active <br> false: Category is Inactive <br> **Note**: Inactive status is not applicable for Primary category.'
+          type: boolean
+          example: true
+        attributes:
+          description: Details of attributes belonging to this category
+          type: array
+          items:
+            $ref: '#/components/schemas/Attribute'
+        children:
+          description: Child categories of this category
+          type: array
+          items:
+            $ref: '#/components/schemas/CategoryChild'
+        createdOn:
+          type: string
+          example: '2022-03-09T23:37:54.086Z'
+          description: Timestamp of category creation (UTC format)
+        modifiedOn:
+          type: string
+          example: '2022-03-09T23:37:54.086Z'
+          description: Timestamp of when the category was last updated (UTC format)
+    CategoryChild:
+      type: object
+      properties:
+        id:
+          description: 24-character system-generated category ID
+          type: string
+          example: 619973877a22c466eee93219
+        name:
+          description: Category name
+          type: string
+          example: Apple
+        breadcrumbs:
+          description: Path of categories leading to root of categories
+          type: array
+          items:
+            $ref: '#/components/schemas/Breadcrumbs'
+        attributes:
+          description: List of attributes and their details
+          type: array
+          items:
+            $ref: '#/components/schemas/Attribute'
+        children:
+          description: Details of child categories
+          type: array
+          items:
+            $ref: '#/components/schemas/CategoryChild'
+    SKUPage:
+      type: object
+      properties:
+        totalSize:
+          description: Total number of records
+          type: number
+          example: 3
+        pageSize:
+          description: Number of records (SKUs) per page
+          type: number
+          example: 10
+        pages:
+          description: Number of pages for the given `pageSize`
+          type: number
+          example: 1
+        id:
+          type: string
+          example: 6196b45b5cb04b7ce167cb46
+          description: 24-character system-generated category ID
+        nodeId:
+          type: number
+          example: 2
+          description: Human-readable numeric category ID, for external users
+        name:
+          type: string
+          example: electronics
+          description: Human-readable numeric category ID
+        skus:
+          description: SKUs of products belonging to this category.
+          type: array
+          example:
+            - mobo12001
+            - mobo12002
+            - mobo12003
+          items:
+            type: string
+    ModifyCategoryAttributesRequest:
+      type: object
+      required:
+        - attributes
+      properties:
+        id:
+          description: 24-character system-generated category ID. `nodeId` and `id` are the two identifier of a category, and one of them must be specified.
+          type: string
+          example: 6196b45b5cb04b7ce167cb46
+        nodeId:
+          description: Human-readable numeric ID of category. `nodeId` and `id` are the two identifier of a category, and one of them must be specified.
+          type: number
+          example: 25
+        attributes:
+          description: Details of category attributes
+          type: array
+          items:
+            type: object
+            required:
+              - action
+              - attributeId
+            properties:
+              action:
+                type: string
+                enum:
+                  - SET
+                  - UNSET
+                description: Action type
+              attributeId:
+                type: string
+                example: 609ac75051f11a0007cf38b3
+                description: 24-character system-generated attribute ID
+              value:
+                oneOf:
+                  - type: boolean
+                  - type: number
+                  - type: string
+    CategoryAttributes:
+      type: object
+      properties:
+        id:
+          description: 24-character system-generated category ID
+          type: string
+          example: 6196b45b5cb04b7ce167cb46
+        nodeId:
+          type: number
+          example: 25
+          description: Human-readable numeric category ID, for external users
+        name:
+          description: Category name
+          type: string
+          example: notes
+        attributes:
+          description: List of attributes and their details
+          type: array
+          items:
+            $ref: '#/components/schemas/CategoryAttribute'
+    CategoryItemAttributes:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 619a8ba6f1875f6dbcaf0521
+          description: 24-character system-generated category ID
+        nodeId:
+          type: number
+          example: 25
+          description: Human-readable numeric ID of category, for external users
+        name:
+          type: string
+          example: electronics
+          description: Category name
+        itemAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CategoryItemAttribute'
+    ModifyCategoryItemAttributesRequest:
+      type: object
+      required:
+        - itemAttributes
+      properties:
+        id:
+          description: 24-character system-generated category ID. `nodeId` and `id` are the two identifier of a category, and one of them must be specified.
+          type: string
+          example: 619a8ba6f1875f6dbcaf0521
+        nodeId:
+          description: Human-readable numeric ID of category. `nodeId` and `id` are the two identifier of a category, and one of them must be specified.
+          type: number
+          example: 25
+        itemAttributes:
+          description: Product attributes within a category
+          type: array
+          items:
+            type: object
+            required:
+              - action
+              - attributeId
+            properties:
+              action:
+                type: string
+                enum:
+                  - SET
+                  - UNSET
+                description: Action type
+              attributeId:
+                type: string
+                example: 609ac75051f11a0007cf38b3
+                description: 24-character system-generated attribute ID
+              mandatory:
+                type: boolean
+                example: false
+                description: 'true: Attribute is mandatory <br> false: Attribute is optional'
+    CategoryItemAttributeConditionsRequest:
+      type: object
+      required:
+        - itemAttributes
+      properties:
+        id:
+          description: 24-character system-generated category ID. `nodeId` and `id` are the two identifier of a category, and one of them must be specified.
+          type: string
+          example: 6196b45b5cb04b7ce167cb46
+        nodeId:
+          description: Human-readable numeric ID of category. `nodeId` and `id` are the two identifier of a category, and one of them must be specified.
+          type: number
+          example: 25
+        itemAttributeConditions:
+          description: Details of conditions set or unset
+          type: array
+          items:
+            type: object
+            required:
+              - action
+              - attributeId
+            properties:
+              action:
+                type: string
+                enum:
+                  - SET
+                  - UNSET
+                description: Action type
+              attributeId:
+                type: string
+                example: 609ac75051f11a0007cf38b3
+                description: 24-character system-generated attribute ID
+              condition:
+                type: object
+                required:
+                  - type
+                properties:
+                  type:
+                    description: Applicable criteria
+                    type: string
+                    enum:
+                      - 'YES'
+                      - 'NO'
+                      - CONTAINS
+                      - DOES_NOT_CONTAIN
+                      - IS_EXACT_MATCH
+                      - IS_EQUAL_TO
+                      - IS_GREATER_THAN
+                      - IS_LESS_THAN
+                      - INCLUDES
+                      - EXCLUDES
+                    example: CONTAINS
+                  value:
+                    type: string
+                    example: shoe
+                    description: Value corresponding to condition `type`
+    CategoryItemAttributeConditions:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 619a8ba6f1875f6dbcaf0521
+          description: 24-character system-generated category ID
+        nodeId:
+          type: number
+          example: 25
+          description: Human-readable numeric ID of category, for external users
+        itemAttributeConditions:
+          type: array
+          items:
+            type: object
+            properties: {}
+    AttributePage:
+      type: object
+      properties:
+        totalSize:
+          description: Total number of records (attributes)
+          type: number
+          example: 100
+        pageSize:
+          description: Number of records (attributes) in a page
+          type: number
+          example: 10
+        pages:
+          description: Number of pages for the given `pageSize`
+          type: number
+          example: 10
+        id:
+          type: string
+          example: 619a8ba6f1875f6dbcaf0521
+          description: 24-character system-generated category ID
+        nodeId:
+          type: number
+          example: 2
+          description: Human-readable numeric ID of category, for external users
+        name:
+          type: string
+          example: electronics
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attribute'
+    Attribute:
+      type: object
+      properties:
+        id:
+          description: 24-character system-generated attribute ID
+          type: string
+          example: 619a8ba6f1875f6dbcaf0521
+        name:
+          description: Attribute name
+          type: string
+          example: notes
+        description:
+          type: string
+          description: Attribute description
+          example: Notes for this particular category.
+        type:
+          type: string
+          enum:
+            - TEXT
+            - BOOLEAN
+            - SERIAL
+            - DECIMAL
+            - INTEGER
+            - DATETIME
+          example: TEXT
+        value:
+          type: string
+          example: Unable to fulfill demand.
+          description: Value corresponding to `type`
+    CategoryAttribute:
+      type: object
+      properties:
+        id:
+          description: 24-character system-generated attribute ID
+          type: string
+          example: 61ba11481a29d52cb284252f
+        name:
+          description: Attribute name
+          type: string
+          example: active
+        type:
+          description: Attribute type
+          type: string
+          example: BOOLEAN
+          enum:
+            - TEXT
+            - BOOLEAN
+            - SERIAL
+            - DECIMAL
+            - INTEGER
+            - DATETIME
+        value:
+          example: true
+          description: Value corresponding to `type`
+    CategoryItemAttribute:
+      type: object
+      properties:
+        id:
+          description: 24-character system-generated attribute ID
+          type: string
+          example: 61ba11691a29d52cb2842541
+        name:
+          description: Attribute name
+          type: string
+          example: published
+        type:
+          description: Attribute type
+          type: string
+          enum:
+            - TEXT
+            - BOOLEAN
+            - SERIAL
+            - DECIMAL
+            - INTEGER
+            - DATETIME
+          example: BOOLEAN
+        required:
+          type: boolean
+          example: false
+          description: 'true: Attribute is mandatory <br> false: Attribute is optional'
+    Breadcrumbs:
+      type: object
+      properties:
+        id:
+          description: 24-character system-generated category ID
+          type: string
+          example: 6196b44a5cb04b7ce167cb34
+        nodeId:
+          type: number
+          example: 10
+          description: Human-readable numeric ID of category, for external users
+        name:
+          description: Category name
+          type: string
+          example: Computers
+        level:
+          description: Depth below the root of the tree
+          type: number
+          example: 0
+        hierarchy:
+          description: Category type
+          type: string
+          enum:
+            - PRIMARY
+            - ALTERNATE
+          example: ALTERNATE
+        isActive:
+          description: 'true: Category is Active <br> false: Category is Inactive <br> **Note**: Inactive status is not applicable for Primary category.'
+          type: boolean
+          example: true
+        createdOn:
+          type: string
+          example: '2022-03-09T23:37:54.086Z'
+          description: Timestamp of category creation (UTC format)
+        modifiedOn:
+          type: string
+          example: '2022-03-09T23:37:54.086Z'
+          description: Timestamp of when category was last updated (UTC format)
+    GetCategoryItemAttributeConditions:
+      type: object
+      properties:
+        totalSize:
+          description: Total number of records
+          type: number
+          example: 100
+        pageSize:
+          description: Number of records in a page
+          type: number
+          example: 10
+        pages:
+          description: Number of pages for the given `pageSize`
+          type: number
+          example: 10
+        id:
+          type: string
+          example: 6196b45b5cb04b7ce167cb46
+          description: 24-character system-generated category ID
+        nodeId:
+          type: number
+          example: 25
+          description: Human-readable numeric ID of category, for external users
+        name:
+          type: string
+          example: electronics
+        itemAttributeConditions:
+          type: array
+          items:
+            type: object
+            properties: {}
+    GetCategoryItemAttributes:
+      type: object
+      properties:
+        totalSize:
+          description: Total number of records
+          type: number
+          example: 100
+        pageSize:
+          description: Number of records in a page
+          type: number
+          example: 10
+        pages:
+          description: Number of pages for the given `pageSize`
+          type: number
+          example: 10
+        itemAttributes:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                description: 24-character system-generated attribute ID
+                type: string
+                example: 61701259125b7225cbfb21b9
+              mapping:
+                description: If this attribute is mapped to one of the standard names used by PIM, this is the name the attribute is mapped to.
+                type: string
+                example: image
+              name:
+                description: Attribute name
+                type: string
+                example: picture
+              type:
+                description: Attribute type
+                type: string
+                example: TEXT
+              required:
+                description: 'true: Attribute is mandatory <br> false: Attribute is optional'
+                type: boolean
+                example: true
+    ModifyCategoryRequest:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          description: Category name
+          type: string
+          example: Furniture
+        active:
+          description: 'true: Category is Active <br> false: Category is Inactive <br> **Note**: Inactive status is not applicable for Primary category.'
+          type: boolean
+          example: true
+        parentNodeId:
+          description: Human-readable numeric ID of parent category, for external users
+          type: number
+          example: 1
+        order:
+          description: Position of this category amongst sibling categories within the same parent category
+          type: number
+          example: 3
+    ModifyCategory:
+      type: object
+      properties:
+        id:
+          description: 24-character system-generated category ID. `nodeId` and `id` are the two identifier of a category, and one of them must be specified.
+          type: string
+          example: 6170135a49b4af38190970fe
+        nodeId:
+          description: Human-readable numeric ID of category. `nodeId` and `id` are the two identifier of a category, and one of them must be specified.
+          type: number
+          example: 12
+        name:
+          description: Category name
+          type: string
+          example: Furniture
+        createdOn:
+          description: Timestamp of category creation (UTC format)
+          type: string
+          example: '2021-12-01T00:00:00.000Z'
+        modifiedOn:
+          description: Timestamp of when category was last updated (UTC format)
+          type: string
+          example: '2021-12-01T00:00:00.000Z'
+        attributes:
+          type: array
+          items:
+            type: object
+            properties: {}
+        children:
+          type: array
+          items:
+            type: object
+            properties: {}
+        breadcrumbs:
+          description: Path of categories leading to root of category
+          type: array
+          items:
+            type: object
+            properties: {}
+    NodeSources:
+      type: object
+      properties:
+        totalSize:
+          description: Total number of records (categories)
+          type: number
+          example: 100
+        pageSize:
+          description: Number of records (categories) in a page
+          type: number
+          example: 10
+        pages:
+          description: Number of pages for the given `pageSize`
+          type: number
+          example: 10
+        id:
+          type: string
+          example: 6170135a49b4af38190970fe
+          description: 24-character system-generated category ID
+        nodeId:
+          type: number
+          example: 12
+          description: Human-readable numeric ID of category, for external users
+        name:
+          type: string
+          example: Furniture
+          description: Category name
+        sources:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                example: 61701259125b7225cbfb21b9
+                description: 24-character system-generated attribute ID
+              nodeId:
+                type: number
+                example: 12
+                description: Human-readable numeric ID of category, for external users
+              name:
+                type: string
+                example: picture
+                description: Category name
+              breadcrumbString:
+                type: string
+                example: PRIMARY/Furniture/Chairs
+                description: Path of categories leading to source category
+    ModifyNodeSourcesRequest:
+      type: object
+      properties:
+        id:
+          description: 24-character system-generated category ID. `nodeId` and `id` are the two identifier of a category, and one of them must be specified.
+          type: string
+          example: 6170135a49b4af38190970fe
+        nodeId:
+          description: Human-readable numeric ID of category. `nodeId` and `id` are the two identifier of a category, and one of them must be specified.
+          type: number
+          example: 12
+        sources:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                example: 61701259125b7225cbfb21b9
+                description: 24-character system-generated category ID. `nodeId` and `id` are the two identifiers of a category and one of them must be specified.
+              nodeId:
+                type: number
+                description: Human-readable numeric ID of category. `nodeId` and `id` are the two identifiers of a category and one of them must be specified.
+                example: 24
+              action:
+                type: string
+                enum:
+                  - SET
+                  - UNSET
+                description: Action type
+    NodeSourceExclusions:
+      type: object
+      properties:
+        totalSize:
+          description: Total number of records
+          type: number
+          example: 100
+        pageSize:
+          description: Number of records (categories) in a page
+          type: number
+          example: 10
+        pages:
+          description: Number of pages for the given `pageSize`
+          type: number
+          example: 10
+        id:
+          type: string
+          example: 6170135a49b4af38190970fe
+          description: 24-character system-generated category ID.
+        nodeId:
+          type: number
+          example: 12
+          description: Human-readable numeric ID of category, for external users
+        name:
+          type: string
+          example: Furniture
+          description: Category name
+        sourceExclusions:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                example: 61701259125b7225cbfb21b9
+                description: 24-character system-generated category ID
+              nodeId:
+                type: number
+                example: 12
+                description: Human-readable numeric ID of category, for external users
+              name:
+                type: string
+                example: picture
+                description: Category name
+              breadcrumbString:
+                type: string
+                example: PRIMARY/Furniture/Chairs
+                description: Path leading to source of category
+    NodeSourcesAndExclusionsRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 6170135a49b4af38190970fe
+          description: 24-character system-generated category ID. `nodeId` and `id` are the two identifier of a category, and one of them must be specified.
+        nodeId:
+          type: number
+          example: 12
+          description: Human-readable numeric ID of category. `nodeId` and `id` are the two identifier of a category, and one of them must be specified.
+        sourceExclusions:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                example: 61701259125b7225cbfb21b9
+                description: 24-character system-generated category ID
+              nodeId:
+                type: number
+                example: 12
+                description: Human-readable numeric ID of category, for external users
+              action:
+                type: string
+                enum:
+                  - SET
+                  - UNSET
+                description: Action type
+    NodeSourcesAndExclusions:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 6170135a49b4af38190970fe
+          description: 24-character system-generated category ID
+        nodeId:
+          type: number
+          example: 12
+          description: Human-readable numeric ID of category, for external users
+        name:
+          type: string
+          example: Furniture
+          description: Category name
+        sources:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                example: 61701259125b7225cbfb21b9
+                description: 24-character system-generated category ID
+              name:
+                type: string
+                example: picture
+                description: Category name
+              breadcrumbString:
+                type: string
+                example: PRIMARY/Furniture/Chairs
+                description: Path of categories leading to source of categories
+        sourceExclusions:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                example: 61701259125b7225cbfb21b9
+                description: 24-character system-generated category ID
+              name:
+                type: string
+                example: picture
+                description: Category name
+              breadcrumbString:
+                type: string
+                example: PRIMARY/Furniture/Chairs
+                description: Path of categories leading to root of categories
+    ClientError:
+      type: object
+      properties:
+        code:
+          description: Error code for machine consumption
+          type: string
+          example: 400
+        message:
+          description: Human-readable error description
+          type: string
+          example: Client error
+    ServerError:
+      type: object
+      properties:
+        code:
+          description: Error code
+          type: string
+          example: 500
+        message:
+          description: Human-readable error description
+          type: string
+          example: An internal error occurred. If the issue persists please contact support@fabric.inc.
+    ItemProductsResponse:
+      type: object
+      properties:
+        totalSize:
+          type: number
+          example: 100
+          description: Total number of records (products)
+        pageSize:
+          type: number
+          example: 10
+          description: Number of records (products) in a page
+        pages:
+          type: number
+          example: 10
+          description: Number of pages for the given `pageSize`
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+    ItemProductsV2Response:
+      type: object
+      properties:
+        totalSize:
+          type: number
+          example: 100
+          description: Total number of records (products)
+        pageSize:
+          type: number
+          example: 10
+          description: Number of records (products) in a page
+        pages:
+          type: number
+          example: 10
+          description: Number of pages for the given `pageSize`
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductV2'
+    Product:
+      type: object
+      properties:
+        sku:
+          type: string
+          example: MOBO-X570
+          description: Stock Keeping Unit (SKU), a unique identifier of product
+        itemId:
+          type: number
+          example: 4
+          description: Item ID
+        children:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductChild'
+        type:
+          description: Product type - ITEM or BUNDLE
+          type: string
+          example: ITEM
+          default: ITEM
+        status:
+          type: boolean
+          example: true
+          description: 'true: Product is Active <br> false: Product is Inactive'
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductCategory'
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductAttribute'
+        createdOn:
+          type: string
+          example: '2022-03-07T22:50:10.668Z'
+          description: Timestamp of product creation (UTC format)
+        modifiedOn:
+          type: string
+          example: '2022-03-07T22:52:01.720Z'
+          description: Timestamp of when product was last updated (UTC format)
+    ProductV2:
+      type: object
+      properties:
+        sku:
+          type: string
+          example: MOBO-X570
+          description: Stock Keeping Unit (SKU), a unique identifier of product
+        itemId:
+          type: number
+          example: 4
+          description: Item ID
+        childrenSize:
+          description: Total number of children/variants for the product
+          type: number
+          default: 0
+        type:
+          description: Product type - ITEM or BUNDLE
+          type: string
+          example: ITEM
+          default: ITEM
+        status:
+          type: boolean
+          example: true
+          description: 'true: Product is Active <br> false: Product is Inactive'
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductCategory'
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductAttribute'
+    ProductChild:
+      type: object
+      properties:
+        sku:
+          type: string
+          description: Stock Keeping Unit (SKU), a unique identifier of product
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductAttribute'
+    ProductAttribute:
+      allOf:
+        - $ref: '#/components/schemas/Attribute'
+        - type: object
+          properties:
+            description:
+              type: string
+              description: Explains purpose of the selected attribute
+            mapping:
+              type: string
+              example: description
+              description: Attribute mapping (as received)
+    ProductAttributePage:
+      type: object
+      description: Attribute page object
+      properties:
+        totalSize:
+          type: number
+          description: Total number of records (product attributes)
+          example: 100
+        pageSize:
+          type: number
+          description: Number of records (product attributes) in a page
+          example: 10
+        pages:
+          type: number
+          description: Number of pages for the given `pageSize`
+          example: 10
+        attributes:
+          type: array
+          description: Attributes details
+          items:
+            $ref: '#/components/schemas/ProductAttribute'
+    ProductCategory:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 621c121bff2e4507c199b7cb
+          description: 24-character system-generated category ID
+        name:
+          type: string
+          example: electronics
+          description: Category name
+        nodeId:
+          description: Human-readable category ID
+          type: number
+          example: 30
+        breadcrumbs:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                example: 621c10f3ff2e4507c199b66b
+                description: 24-character system-generated breadcrumb ID
+              nodeId:
+                description: Human-readable category ID
+                type: number
+                example: 31
+              name:
+                type: string
+                example: PRIMARY
+                description: Category name
+              attributes:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductAttribute'
+    BundleProductsResponse:
+      type: object
+      properties:
+        totalSize:
+          type: number
+          example: 100
+          description: Total number of records
+        pageSize:
+          type: number
+          example: 10
+          description: Number of records in a page
+        pages:
+          type: number
+          example: 10
+          description: Number of pages for the given `pageSize`
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Bundle'
+    Bundle:
+      type: object
+      properties:
+        sku:
+          type: string
+          example: BUNDLE-01
+          description: Stock Keeping Unit (SKU), a unique identifier of bundle
+        itemId:
+          type: number
+          example: 4
+          description: Item ID
+        type:
+          description: Product type - Bundle (default) or Item
+          type: string
+          example: BUNDLE
+        status:
+          type: boolean
+          example: true
+          description: 'true: Bundle is active <br> false: Bundle is inactive'
+        bundleItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetBundleItems'
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductCategory'
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductAttribute'
+        createdOn:
+          type: string
+          example: '2022-03-07T22:50:10.668Z'
+          description: Timestamp of bundle creation (UTC format)
+        modifiedOn:
+          type: string
+          example: '2022-03-07T22:52:01.720Z'
+          description: Timestamp of when bundle was last updated (UTC format)
+    GetBundleItems:
+      type: object
+      properties:
+        sku:
+          type: string
+          example: MOBO-1023
+          description: Stock Keeping Unit (SKU), a unique identifier of product
+        itemId:
+          type: number
+          example: 1
+          description: Item ID
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductAttribute'
+        quantity:
+          description: Item quantity, which is added to the product of a bundle.
+          type: number
+          example: 6
+        children:
+          type: array
+          items:
+            $ref: '#/components/schemas/BundleChild'
+    BundleChild:
+      type: object
+      properties:
+        sku:
+          type: string
+          description: Stock Keeping Unit (SKU), a unique identifier of product
+        itemId:
+          type: number
+          description: Item ID
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductAttribute'
+    NoProductsResponse:
+      type: object
+      properties:
+        pageSize:
+          type: number
+          example: 0
+          description: Number of records in a page
+        totalSize:
+          type: number
+          example: 0
+          description: Total number of records
+        pages:
+          type: number
+          example: 0
+          description: Number of pages for the given `pageSize`
+        products:
+          description: Product details
+          type: array
+          items:
+            type: string
+          example: []
+    ItemProductSearchResponse:
+      type: object
+      properties:
+        totalSize:
+          type: number
+          example: 100
+          description: Total number of records
+        pageSize:
+          type: number
+          example: 10
+          description: Number of records per page
+        pages:
+          type: number
+          example: 10
+          description: Number of pages for the given pageSize
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductSearch'
+    SearchResponse:
+      type: object
+      properties:
+        sku:
+          type: string
+          example: MSI-Z490
+          description: Stock Keeping Unit (SKU), a unique identifier of product
+        itemId:
+          type: number
+          example: 2
+          description: Item ID
+        type:
+          description: Product type - either ITEM or BUNDLE
+          type: string
+          example: ITEM
+          default: ITEM
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductCategory'
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductAttribute'
+        dependents:
+          description: Children SKUs
+          type: array
+          items:
+            type: string
+            example:
+              - Child1
+              - Child2
+        createdOn:
+          type: string
+          example: '2021-05-28T16:36:50.055Z'
+          description: Timestamp of when the product was added to PIM (UTC format)
+        modifiedOn:
+          description: Timestamp of when the product was last updated (UTC format)
+          type: string
+          example: '2021-05-28T16:36:50.055Z'
+    ProductSearch:
+      allOf:
+        - $ref: '#/components/schemas/SearchResponse'
+        - type: object
+          properties:
+            children:
+              type: array
+              items:
+                $ref: '#/components/schemas/ProductChild'
+    BundleSearch:
+      allOf:
+        # removed for circular reference
+        # - $ref: '#/components/schemas/SearchResponse'
+        - type: object
+          properties:
+            bundleItems:
+              type: array
+              items:
+                $ref: '#/components/schemas/ProductChild'
+    BundleProductSearchResponse:
+      type: object
+      properties:
+        totalSize:
+          type: number
+          example: 100
+          description: Total number of records (bundle)
+        pageSize:
+          type: number
+          example: 10
+          description: Number of records (bundle) in a page
+        pages:
+          type: number
+          example: 10
+          description: Number of pages for the given `pageSize`
+        products:
+          type: array
+          items:
+            allOf:
+              - $ref: '#/components/schemas/SearchResponse'
+              - $ref: '#/components/schemas/BundleSearch'
+    ProductCreate:
+      type: array
+      maxItems: 50
+      items:
+        properties:
+          sku:
+            description: Stock Keeping Unit (SKU), a unique identifier of a product
+            type: string
+            example: sku_abc
+          type:
+            description: Product type
+            type: string
+            enum:
+              - ITEM
+              - BUNDLE
+            example: ITEM
+          nodeName:
+            description: Category name (along with parent category names) for which the product must be created.
+            type: string
+            example: PRIMARY>electronics
+          parentSku:
+            description: Stock Keeping Unit (SKU), a unique identifier of parent product
+            type: string
+            example: sku123
+          attributeValues:
+            description: Attribute details
+            type: array
+            items:
+              anyOf:
+                - $ref: '#/components/schemas/AttributeValue'
+                - $ref: '#/components/schemas/AttributeValueFrenchLocale'
+          inheritedAttributes:
+            description: Category product attributes to be inherited from parent product to children products
+            $ref: '#/components/schemas/InheritItemAttributesInsert'
+          bundleItems:
+            description: List of products to be added to a bundle. Includes SKU and product quantity.
+            type: array
+            items:
+              $ref: '#/components/schemas/BundleItems'
+        required:
+          - sku
+          - type
+          - nodeName
+    BundleItems:
+      type: object
+      required:
+        - sku
+        - quantity
+      properties:
+        sku:
+          description: Stock Keeping Unit (SKU) of the product that must be added to the bundle
+          type: string
+          example: sku123
+        quantity:
+          description: Product quantity, which needs to be added to the product in a bundle
+          type: number
+          example: 6
+    ProductUpdate:
+      type: object
+      properties:
+        skus:
+          description: List of Stock Keeping Units (SKUs)
+          maxItems: 50
+          type: array
+          items:
+            type: string
+          example:
+            - sku12
+            - sku13
+        type:
+          description: Product type - Bundle or Item
+          type: string
+          example: ITEM
+        action:
+          description: Action type
+          type: string
+          example: UPDATE
+        parentSku:
+          description: Stock Keeping Unit (SKU) of parent product
+          type: string
+          example: sku234
+        attributeValues:
+          type: array
+          items:
+            anyOf:
+              - $ref: '#/components/schemas/AttributeValue'
+              - $ref: '#/components/schemas/AttributeValueFrenchLocale'
+        inheritedAttributes:
+          description: Node item attributes to inherit from parent product to children products
+          $ref: '#/components/schemas/InheritItemAttributesUpdate'
+    BundleUpdateRequest:
+      type: object
+      properties:
+        action:
+          type: string
+          enum:
+            - UPDATE
+          example: UPDATE
+          description: Action type
+        bundles:
+          type: array
+          items:
+            type: object
+            required:
+              - action
+              - bundleSku
+              - itemSku
+            properties:
+              action:
+                type: string
+                enum:
+                  - SET
+                  - UNSET
+                example: SET
+                description: Action type
+              bundleSku:
+                type: string
+                example: iPhoneBundle
+                description: Stock Keeping Unit (SKU), a unique identifier of bundle
+              itemSku:
+                type: string
+                example: iPhone12
+                description: Stock Keeping Unit (SKU), a unique identifier of the product
+              quantity:
+                type: number
+                example: 1
+                description: Product quantity
+    BundleUpdateResponse:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+            example: 625367673ab7402268d8cccf
+            description: 24-character system-generated document ID (internal only)
+          itemId:
+            type: string
+            example: 624d94fb27c894222534b260
+            description: 24-character system-generated product ID
+          bundleId:
+            type: string
+            example: 624d939227c894222534b247
+            description: 24-character system-generated bundle ID
+          quantity:
+            type: number
+            example: 1
+            description: Bundle quantity
+          createdOn:
+            type: string
+            example: '2022-04-08T23:25:27.753Z'
+            description: Timestamp of bundle creation (UTC format)
+          modifiedOn:
+            type: string
+            example: '2022-04-08T23:25:27.753Z'
+            description: Timestamp of when bundle was last updated (UTC format)
+    ProductResponse:
+      type: object
+      properties:
+        success:
+          type: array
+          items:
+            type: object
+            properties:
+              sku:
+                type: string
+                example: sku1
+                description: Stock Keeping Unit (SKU), a unique identifier of product
+              itemId:
+                type: string
+                example: 611686da50fb7e0c5df78c2e
+                description: Product ID
+              itemIdSeq:
+                type: number
+                example: 12
+                description: Product ID, which increments sequentially
+              message:
+                type: string
+                example: SKU created successfully.
+                description: Success message
+              errorAttributes:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      example: Inactive
+                      description: Error reason
+                    message:
+                      type: string
+                      example: Attribute value is invalid.
+                      description: Human-readable error message
+              errorBundles:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      description: Error reason
+                    message:
+                      type: string
+                      description: Human-readable error message
+        failed:
+          type: array
+          items:
+            type: object
+            properties:
+              sku:
+                type: string
+                example: sku1
+                description: Stock Keeping Unit (SKU), a unique identifier of product
+              message:
+                type: string
+                example: Failed because of validation
+                description: Failure message
+        itemIds:
+          description: List of product IDs
+          example:
+            - 611686da50fb7e0c5df78c2e
+            - 711686da50fb7e0c5df78c22
+          type: array
+          items:
+            type: string
+    AttributeValue:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Mobile
+          description: Attribute name
+        value:
+          type: string
+          example: AMD X570 mobo
+          description: Attribute value
+    AttributeValueFrenchLocale:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Mobile-French
+          description: Attribute name in French
+        value:
+          type: string
+          example: Le téléphone portatif AMD X570
+          description: Attribute value in French
+    ProductModifyError:
+      type: object
+      properties:
+        code:
+          type: string
+          enum:
+            - STATUS_ERROR
+          description: Error code for backend mapping
+        message:
+          type: array
+          description: Error details for invalid products
+          items:
+            type: object
+            properties:
+              index:
+                type: number
+                description: Index of the product update request to which this error corresponds
+              item:
+                $ref: '#/components/schemas/ProductResponse'
+    ItemExport:
+      type: object
+      required:
+        - type
+      properties:
+        include:
+          type: object
+          required:
+            - children
+          properties:
+            children:
+              type: boolean
+              description: 'true: Include children; false: Exclude children'
+              default: false
+              example: false
+            type:
+              type: string
+              enum:
+                - ITEM
+                - BUNDLE
+              default: ITEM
+              example: ITEM
+              description: Product type
+            ids:
+              type: array
+              description: List of product IDs
+              minItems: 1
+              items:
+                type: string
+              example:
+                - 611686da50fb7e0c5df78c2e
+                - 711686da50fb7e0c5df78c22
+    ItemExportResponse:
+      type: object
+      properties:
+        code:
+          type: number
+          example: 200
+          description: API response code
+        message:
+          type: string
+          example: Your export has been queued, you will receive an email once the export is ready.
+          description: Message corresponding to `code`
+        trackingID:
+          type: string
+          example: 62daee2addfa4f000932cfc9
+          description: Tracking ID
+    BulkProductAttributeRequest:
+      type: array
+      items:
+        type: object
+        properties:
+          action:
+            type: string
+            description: 'Action to perform. `id` is required only for `UPDATE`, or `DELETE` (not for CREATE). <br> **Note**: `CREATE` action replaces any existing product attribute with the same name, if one already exists.'
+            enum:
+              - CREATE
+              - UPDATE
+              - DELETE
+            example: UPDATE
+          id:
+            description: 24-character system-generated attribute ID
+            type: string
+            example: 621c1122ff2e4507c199b75d
+          name:
+            description: Attribute name, which is visible on all relevant PIM pages.
+            type: string
+            example: Weight
+          locales:
+            type: array
+            items:
+              type: object
+              properties:
+                locale:
+                  type: string
+                  description: Language locale
+                  example:
+                    - fr-ca
+                    - es-us
+                name:
+                  type: string
+                  description: Localized value of 'name' for this attribute
+                  example: le poids
+          description:
+            description: Attribute description
+            type: string
+            example: Example description.
+          mapping:
+            description: 'Attribute mapping of product. This corresponds to the `Attribute Mapping` settings of PIM: `sku`, `title`, `image`, `active`, `isVariant`. <br> **Note**: Most attributes do not have a mapping, in which case this will be null. <br> **Warning**: Exercise caution while adding or removing mappings of attributes, as it could lead to bad data.'
+            type: string
+            example: title
+          type:
+            description: Attribute type
+            type: string
+            enum:
+              - TEXT
+              - BOOLEAN
+              - SERIAL
+              - DECIMAL
+              - INTEGER
+              - DATETIME
+              - OPTIONS
+          textSubType:
+            description: Conditionally required sub-type for `TEXT` attribute type
+            type: string
+            enum:
+              - SMALL_TEXT
+              - TEXT_AREA
+              - HTML
+          serialStart:
+            description: Conditionally required to indicate the starting value of `SERIAL` attribute type. When enabled, the subsequent attribute values increment by 1.
+            type: number
+            example: 1
+          optionsType:
+            description: Conditionally required to indicate the selectable values for the `OPTIONS` attribute type
+            type: string
+            enum:
+              - TEXT
+              - BOOLEAN
+              - DECIMAL
+              - INTEGER
+              - DATETIME
+          format:
+            description: Attribute format. Currently used only for the attribute type `DATETIME`.
+            type: string
+            example: YYYY-MM-DD
+          formula:
+            description: 'JavaScript expression to dynamically compute the attribute''s value. The type returned must match the attribute''s type. If the attribute is weight, this formula helps calculate the weight. <br> **Note**: When this is provided, `validation` is ignored.'
+            type: string
+            example: '`${item.weightValue} ${item.weightUnit}`'
+          validation:
+            type: object
+            properties:
+              required:
+                description: 'true: Attribute is mandatory <br> false: Attribute is optional'
+                type: boolean
+              inheritable:
+                description: 'true: Parent attributes inherited to child products <br> false: Parent attributes not inherited to child products'
+                type: boolean
+              inverse:
+                description: 'true: Inverts existing validation (example - requires that the validation does not pass) <br> false: Follows existing validation'
+                type: boolean
+              unique:
+                description: 'true: Specified value is unique across all items or nodes <br> false: Specified value is not unique'
+                type: boolean
+              exact:
+                description: Specified value must exactly match this value
+                oneOf:
+                  - type: string
+                  - type: number
+                  - type: boolean
+              attributeTypes:
+                description: Attribute types
+                type: array
+                example:
+                  - Serial
+                  - Integer
+                items:
+                  type: string
+                  enum:
+                    - TEXT
+                    - BOOLEAN
+                    - SERIAL
+                    - DECIMAL
+                    - INTEGER
+                    - ASSET
+                    - DATETIME
+                    - RESOURCE
+                    - DYNAMIC_LOV
+              contains:
+                description: Specified value must contain this string
+                type: string
+                example: Demo
+              startWith:
+                description: Sequence should start with this value
+                type: number
+                example: 1
+              incrementBy:
+                description: Sequence should increment by this value
+                type: number
+                example: 1
+              range:
+                description: Specified range of values must be between this min and/or max
+                type: object
+                properties:
+                  min:
+                    description: Specified value must be greater than or equal to this value
+                    oneOf:
+                      - type: string
+                      - type: number
+                  max:
+                    description: Specified value must be less than or equal to this value
+                    oneOf:
+                      - type: string
+                      - type: number
+              formula:
+                description: JavaScript expression to determine if the value matches
+                type: string
+                example: value < 10 || value > 20
+              oneOf:
+                description: Matches the value if it is one of these
+                oneOf:
+                  - type: array
+                    items:
+                      type: string
+                  - type: array
+                    items:
+                      type: number
+                  - type: array
+                    items:
+                      type: boolean
+    AttributeMappingSearch:
+      type: object
+      required:
+        - page
+        - size
+      properties:
+        include:
+          type: object
+          properties:
+            attribute:
+              type: boolean
+              description: 'true: include the `attribute` in the response; <br> false: exclude `attribute` in the response'
+        sort:
+          $ref: '#/components/schemas/AttributeMappingSort'
+        match:
+          $ref: '#/components/schemas/AttributeMappingMatch'
+        page:
+          description: 'Page number to be retrieved. <br> **Note**: <br> 1) Applicable only in a paginated response. <br> 2) Always paired with `size`'
+          type: number
+          example: 0
+        size:
+          description: 'Number of records per page <br> **Note**: <br> 1) Applicable only in a paginated response. <br> 2) Always paired with `page`'
+          type: number
+          example: 10
+    AttributeMappingSort:
+      description: Sorting preference
+      type: array
+      items:
+        type: object
+        description: Individual fields to sort
+        properties:
+          field:
+            type: string
+            enum:
+              - createdOn
+              - updatedOn
+              - mapping
+            description: The field to sort must be specified. Sorting is based on the attribute's *raw* value.
+          direction:
+            type: string
+            enum:
+              - ASC
+              - DESC
+            description: Sorting direction
+    AttributeMappingMatch:
+      description: Specification for matching attribute mapping.
+      type: object
+      properties:
+        target:
+          description: Attribute mapping for the specified target
+          type: string
+        mapping:
+          description: Attribute mapping
+          type: string
+        attributeId:
+          description: 24-character system-generated Attribute ID
+          type: string
+          example: 62e2ae29c3004a000950ad5f
+        name:
+          description: Mapping for an attribute whose name contains the specified value
+          type: string
+        description:
+          description: Mapping for an attribute whose description contains the specified value.
+          type: string
+        required:
+          description: 'true: Returns only the attribute mappings that are mandatory'
+          type: boolean
+          example: true
+    AttributeMappingPaginationResponse:
+      type: object
+      properties:
+        totalSize:
+          description: Total number of records
+          type: number
+          example: 100
+        pageSize:
+          description: Number of records in a page
+          type: number
+          example: 10
+        pages:
+          description: Total number of pages in the response
+          type: number
+          example: 10
+        mappings:
+          type: array
+          items:
+            $ref: '#/components/schemas/AttributeMappingResponse'
+    AttributeMappingResponse:
+      type: object
+      properties:
+        attributeId:
+          description: 24-character system-generated attribute ID
+          type: string
+          example: 62e2ae29c3004a000950ad5f
+        attribute:
+          $ref: '#/components/schemas/AttributeResponse'
+          description: 'Represents the mapped attributes. Only populated when `include.attribute` is true. <br> **Note**: Not applicable for an attribute mapping  modify request'
+        mapping:
+          description: Attribute mapping
+          type: string
+          example: SKU
+        target:
+          description: Returns attribute mapping for the specified target
+          type: string
+          example: ITEM
+        name:
+          description: Name of attribute mapping
+          type: string
+          example: Product SKU
+        description:
+          description: Description for attribute mapping
+          type: string
+          example: Product SKU
+        required:
+          description: 'true: Mapping is mandatory; <br> false: mapping is optional'
+          type: boolean
+        validation:
+          $ref: '#/components/schemas/AttributeValidation'
+        createdOn:
+          description: Timestamp of attribute creation (UTC format)
+          type: string
+          format: date-time
+          example: '2021-09-23T17:47:04.231Z'
+        createdBy:
+          description: User ID that created the product attribute
+          type: string
+          example: broma0
+        modifiedOn:
+          description: Timestamp of when the attribute was last modified
+          type: string
+          format: date-time
+        modifiedBy:
+          description: User ID that last modified the product attribute
+          type: string
+          example: broma0
+    AttributeMappingModifyError:
+      type: object
+      properties:
+        code:
+          description: Error code
+          type: string
+          enum:
+            - STATUS_ERROR
+        message:
+          type: array
+          description: Errors for the invalid attributes.
+          items:
+            type: object
+            properties:
+              index:
+                type: number
+                description: Index of the 'attribute mapping modify request' to which this error corresponds.
+              mapping:
+                $ref: '#/components/schemas/AttributeMappingResponse'
+    AttributeMappingModify:
+      type: object
+      properties:
+        mappings:
+          type: array
+          items:
+            type: object
+            properties:
+              attributeId:
+                description: Attribute ID
+                type: string
+                example: ATTR1234
+              mapping:
+                description: Attribute mapping
+                type: string
+                example: SKU
+              name:
+                description: Name of the attribute mapping
+                type: string
+              description:
+                description: Description of the attribute mapping
+                type: string
+                example: Product SKU
+              validation:
+                $ref: '#/components/schemas/AttributeValidation'
+              required:
+                description: 'true: mapping is mandatory <br> false: mapping is optional'
+                type: boolean
+    AttributeResponse:
+      type: object
+      properties:
+        id:
+          description: Attribute ID
+          type: string
+        statuses:
+          description: For 'attribute modify request', the `PIM` statuses (if applicable). For 'attribute search request', the statuses defined by the `include.status` request parameter.
+          type: array
+          items:
+            $ref: '#/components/schemas/StatusResponse'
+        files:
+          description: Array of file's associated with the product
+          type: array
+          items:
+            $ref: '#/components/schemas/FileResponse'
+        name:
+          description: Attribute name
+          type: string
+        description:
+          description: Attribute description
+          type: string
+        locales:
+          type: array
+          items:
+            type: object
+            properties:
+              locale:
+                description: Locale identifier
+                type: string
+                example: fr-ca
+              name:
+                description: Localized string value
+                type: string
+                example: Un Nom Français
+        localizable:
+          description: 'true: attribute can be localized <br> false: attribute cannot be localized'
+          type: boolean
+        mapping:
+          description: 'Attribute mapping. <br> **Note**: Most attributes will not have a mapping, resulting in null value.'
+          nullable: true
+          type: string
+        type:
+          description: Data type of the attribute
+          type: string
+          enum:
+            - TEXT
+            - BOOLEAN
+            - SERIAL
+            - DECIMAL
+            - INTEGER
+            - DATETIME
+        serialStart:
+          description: Conditionally required to indicate the starting value of `SERIAL` attribute type. When enabled, the subsequent attribute values increment by 1.
+          type: number
+        target:
+          description: Indicates whether the attribute is for categories or products.
+          type: string
+          enum:
+            - NODE
+            - ITEM
+        format:
+          description: Attribute format. Currently used only for the attribute type `DATETIME`.
+          type: string
+          example: YYYY-MM-DD
+        formula:
+          description: 'JavaScript expression to dynamically  compute the attribute''s value. <br> **Note**: The type returned must match the attribute''s type.'
+          type: string
+          example: value < 10 || value > 20
+        validation:
+          $ref: '#/components/schemas/AttributeValidation'
+        createdOn:
+          description: Timestamp of attribute creation
+          type: string
+          format: date-time
+        createdBy:
+          description: ID that created the attribute
+          type: string
+          example: broma0
+        modifiedOn:
+          description: Timestamp of when the attribute was last modified
+          type: string
+          format: date-time
+        modifiedBy:
+          description: User ID that last modified the attribute
+          type: string
+          example: broma0
+    AttributeValidation:
+      type: object
+      properties:
+        required:
+          description: Indicates mandatory attribute
+          type: boolean
+        inheritable:
+          description: 'true: Parent attributes are inherited to child products <br> false: Parent attributes are not inherited to child products'
+          type: boolean
+          example: true
+        inverse:
+          description: 'true: Inverts existing validation (example - requires that the validation does not pass) <br> false: Follows existing validation'
+          type: boolean
+          example: false
+        unique:
+          description: 'true: Value is unique across all items or categories <br> false: Value is not unique'
+          type: boolean
+        exact:
+          description: Specified value must exactly match this value
+          oneOf:
+            - type: string
+            - type: number
+            - type: boolean
+        attributeTypes:
+          description: List of supported attribute types
+          type: array
+          items:
+            type: string
+            enum:
+              - TEXT
+              - BOOLEAN
+              - SERIAL
+              - DECIMAL
+              - INTEGER
+              - ASSET
+              - DATETIME
+        contains:
+          description: Specified value must contain this string
+          type: string
+        range:
+          description: Specified range of values must be between this min and/or max
+          type: object
+          properties:
+            min:
+              description: Specified value must be greater than or equal to this value
+              oneOf:
+                - type: string
+                - type: number
+            max:
+              description: Specified value must be less than or equal to this value
+              oneOf:
+                - type: string
+                - type: number
+        formula:
+          description: JavaScript expression to determine if the value matches
+          type: string
+          example: value < 10 || value > 20
+        oneOf:
+          description: Match the value if it is one of these.
+          oneOf:
+            - type: array
+              items:
+                type: string
+            - type: array
+              items:
+                type: number
+            - type: array
+              items:
+                type: boolean
+    FileResponse:
+      type: object
+      properties:
+        type:
+          description: Status type
+          type: string
+          enum:
+            - IMPORT
+            - EXPORT
+        name:
+          description: File name
+          type: string
+        statuses:
+          description: Current status of the file
+          type: array
+          items:
+            $ref: '#/components/schemas/StatusResponse'
+        progress:
+          description: Import progress in percentage
+          type: number
+          example: 100
+        createdOn:
+          description: Timestamp of file creation
+          type: string
+          format: date-time
+        createdBy:
+          description: User ID that created the file
+          type: string
+          example: broma0
+        modifiedOn:
+          description: Timestamp of when the file was last modified
+          type: string
+          format: date-time
+        modifiedBy:
+          type: string
+          example: broma0
+          description: User ID that last modified the file
+        secondsTakenToImport:
+          description: Time taken to import the file (doesn't include the whole time for the full bulk import process).
+          type: number
+        secondsTakenToProcess:
+          description: Time taken to process the file after the file was read
+          type: number
+    StatusResponse:
+      type: object
+      properties:
+        code:
+          description: Status code
+          type: string
+        type:
+          description: Status type
+          type: string
+          enum:
+            - ATTRIBUTE
+            - ATTRIBUTE_VALUE
+            - ITEM
+            - BUNDLE
+            - NODE
+            - HIERARCHY
+        source:
+          description: Status source
+          type: string
+          enum:
+            - PIM
+            - WAM
+        name:
+          description: Status name
+          type: string
+        description:
+          description: Status description
+          type: string
+        createdOn:
+          description: Timestamp of file creation
+          type: string
+          format: date-time
+        createdBy:
+          description: User ID that created the file
+          type: string
+          example: broma0
+        modifiedOn:
+          type: string
+          format: date-time
+          description: Timestamp of when the file was last modified
+        modifiedBy:
+          type: string
+          example: broma0
+          description: User ID that last modified the file
+    GetS3URLRequest:
+      type: object
+      properties:
+        nodeId:
+          description: Category ID associated with the file
+          type: string
+          example: 611eef8b81f92b882d4f9741
+        fileName:
+          description: File name to be uploaded in the generated URL
+          type: string
+          example: men-shoes.csv
+    GetS3URLResponse:
+      type: object
+      properties:
+        fileId:
+          description: 24-character system-generated file ID
+          type: string
+          example: 626c3c28e041b10009810b21
+        url:
+          description: S3 bucket URL, to upload the template file.
+          type: string
+          example: https://greatwall-dev02-bulk-import-pim.s3.amazonaws.com/item/609ac75051f11a0007cf38b3/dev02/1651260453554-men-shoes.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIA26KLJWUACLU2AF6F%2F20220429%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220429T192736Z&X-Amz-Expires=300&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDsaCXVzLWVhc3QtMSJGMEQCIGW476Ala9Go95rgQ3gVPwSvCbcZPrm4WgLs186q0R6GAiBqqVo4yuAkTKZTMl2qBF8hJOySqicG42ObKpyPtBmGWir4Awj0%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAIaDDc1MjMxNDA3MDI3MiIMSeKQqQmLFWlfgsfVKswDvUDycKtqRnlcHaiuM56ZPrzPio9ylmxLaqjgUDCdF73ZqtkL41jqTf0kI%2FOnkXegoOks5dRbnprCbDwJxQFiwyOgQ9w8VC8ZCVzG6s6V7vnQDMQZ2mAVDk30KjL9BXShFNqBqY6r6COCJtyi5kMHpUjA8HM6Q7N19XOg7kH1VVnm4UZpWU%2F9blF8EMjiqIvWfjmRdv%2BnmBdx3RztZ0jEuJ9g4YeEmOZUUCaZoNLl78nE5vPoTQLNW%2F5YzKMO8ECTJ3Vr8nY%2BCVl5bTrAMK4TdCK%2BVaZjEpw7DQrSKmaR1JhQlYxD%2F%2F3WxPc%2FECeYD7eTLmWOYXh3LELhOYyy49%2Bx0MhdUaYQTlSsuU4NKnWcYcyeIh5J7%2Bef4Q9PgkBZqdE7gCN5m%2BqmfDLzu4W1SjR47MbdXYIiShDdvvM2DDrmwfMuTMS14fEWiMP4zhuehc12gA%2BGTwmuHjqYQCuRswGncP9574CXT1mzu%2BcW5bqMNKg80paslu2ipNJL4vScEjV%2FFYcYGCoXskYgBQr5IZJ4xdtv%2BYGrEMiCbob8UZ1oT5QtJSyLVqOqGt%2FvomDHdHqMved8fQbyddZo28DC%2BwB1DEI3XsLEp3rZFCeLzTCt3bCTBjqmAe%2F4uuvRSexVKYd%2F4XCVdbKrZG%2Fl7JoTsJv%2FI4k8nqezmqPAgpErsqCyvqyUXTx8jgrxi70EuiH6n1F5QEhMfge4C41jFKqYsY%2FxWEkwZw89koTrbzGs2z64i4eCzDU5u3OItYGVaEctdbHnpx%2FA3xnOgdPoGP%2FDQPVgCdsMWvjCkRDbNcBoSLXuXSRBgbOXy2RgkHY5YQ%2Fxys257mGLb3FZhjqvScs%3D&X-Amz-Signature=24c29de90587424ffdb21a7d970ef08c0a68ebaccd562f95b766dd01faad9d56&X-Amz-SignedHeaders=host%3Bx-amz-meta-account%3Bx-amz-meta-channel%3Bx-amz-meta-fileid%3Bx-amz-meta-filename%3Bx-amz-meta-nodeid%3Bx-amz-meta-prefix%3Bx-amz-meta-stage&x-amz-meta-account=609ac75051f11a0007cf38b3&x-amz-meta-channel=12&x-amz-meta-fileid=626c3c28e041b10009810b21&x-amz-meta-filename=men-shoes-bundle-local.csv&x-amz-meta-nodeid=611eef8b81f92b882d4f9741&x-amz-meta-prefix=item&x-amz-meta-stage=dev02
+        key:
+          description: S3 key of the file
+          type: string
+          example: item/609ac75051f11a0007cf38b3/dev02/1651260453554-men-shoes.csv
+    GetS3URLItemAttributeRequest:
+      type: object
+      properties:
+        fileName:
+          description: File name to be uploaded in the generated URL
+          type: string
+          example: item-attributes.csv
+    GetS3URLItemAttributeResponse:
+      type: object
+      properties:
+        fileId:
+          description: 24-character system-generated file ID
+          type: string
+          example: 626c415430548500093811f1
+        url:
+          description: S3 bucket url, to upload the template file.
+          type: string
+          example: https://greatwall-dev02-bulk-import-pim.s3.amazonaws.com/attribute/60ac19ef893ab1000864b771/dev02/1651261780352-item-attributes.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIA26KLJWUAC474VT4E%2F20220429%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220429T194940Z&X-Amz-Expires=300&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDwaCXVzLWVhc3QtMSJHMEUCIQCesp8JqH%2F%2F3QZP%2BcybG392bRrSI2d%2BHbBfYknEgqDuXAIgStf8iZndc9fOzokQimbgivAGx1hum81ZVqKbxFuigaMqsAII9f%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARACGgw3NTIzMTQwNzAyNzIiDE7VWWdAw%2BMtShgibSqEAtJrxQ%2B0h7Bu9DE3FcCGCi4fyAoLxtkAFRUWQ28ciZDvS5PC%2BU4%2FOvjuXSttg%2Bz%2F8E3Ff0QqI8%2BWOOG02O4DQSpUEc9aDBqXFVB2nezNz6CCyoIhlxRhHJXrjboktovlKAHnRpB0KRgHo7B05v2%2BM9z49w%2FzFrB%2FrW5XF0bFMyYGsm3aK0%2B4C8kS9oJ0dDxaKYxe%2BaKrn0XmcBLBduu3fL2h6WRhv29%2FDQxmwDO9O%2FNXfYAxnB2iQYAo2ZuL8ujcyDQPp2zNLFYiwQpQYE4DhVCT2CDw1SJU7xTi3ZHYDmt7xfe2vgwKxPolZumOIVIhBa7%2Fj7tma%2FbuX%2BAjKHUFnBfMnE5oMPuBsZMGOpoBWHVtEmbAx%2FsCaUu9jpSJoHgNkIDwxVGvV2XPPoNJIhLg9aCC2cMnAkRbbLOplmV4fnWmsY15Hdjd6CIhX5fCKGv2gLJCs6XpanNOm89KI8Ro9q4Gh5MvytJlSIEXuYgBI%2B2%2FWF5iNF0%2BUZX7cNtZjLK7yXHytJP94f0vF%2BqbAIpG%2FT9yyn1Z9KKWyMeIpCYsAsEY%2F1seiB6slA%3D%3D&X-Amz-Signature=b029ce0c5158f33fc4867d6a40f59d133d15d34fb300615e6c74b7414f8fe668&X-Amz-SignedHeaders=host%3Bx-amz-meta-account%3Bx-amz-meta-channel%3Bx-amz-meta-fileid%3Bx-amz-meta-filename%3Bx-amz-meta-prefix%3Bx-amz-meta-stage%3Bx-amz-meta-user&x-amz-meta-account=60ac19ef893ab1000864b771&x-amz-meta-channel=&x-amz-meta-fileid=626c415430548500093811f1&x-amz-meta-filename=item-attributes.csv&x-amz-meta-prefix=attribute&x-amz-meta-stage=dev02
+        key:
+          description: S3 key of the file
+          type: string
+          example: attribute/60ac19ef893ab1000864b771/dev02/1651261780352-item-attributes.csv
+    GetS3URLBundleRequest:
+      type: object
+      properties:
+        nodeId:
+          description: Category ID associated with the file
+          type: string
+          example: 626a31a2d877f5e49efad330
+        fileName:
+          description: File name to be uploaded in the generated URL
+          type: string
+          example: men-shoes-bundle-local.csv
+    GetS3URLBundleResponse:
+      type: object
+      properties:
+        fileId:
+          description: 24-character system-generated file ID
+          type: string
+          example: 626c3c28e041b10009810b21
+        url:
+          description: S3 bucket URL, to upload the template file
+          type: string
+          example: https://greatwall-dev02-bulk-import-pim.s3.amazonaws.com/item-bundles/609ac75051f11a0007cf38b3/dev02/1651266490891-men-shoes-bundle-local.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIA26KLJWUAMB3F4HM7%2F20220429%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220429T210813Z&X-Amz-Expires=300&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDsaCXVzLWVhc3QtMSJGMEQCIGW476Ala9Go95rgQ3gVPwSvCbcZPrm4WgLs186q0R6GAiBqqVo4yuAkTKZTMl2qBF8hJOySqicG42ObKpyPtBmGWir4Awj0%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAIaDDc1MjMxNDA3MDI3MiIMSeKQqQmLFWlfgsfVKswDvUDycKtqRnlcHaiuM56ZPrzPio9ylmxLaqjgUDCdF73ZqtkL41jqTf0kI%2FOnkXegoOks5dRbnprCbDwJxQFiwyOgQ9w8VC8ZCVzG6s6V7vnQDMQZ2mAVDk30KjL9BXShFNqBqY6r6COCJtyi5kMHpUjA8HM6Q7N19XOg7kH1VVnm4UZpWU%2F9blF8EMjiqIvWfjmRdv%2BnmBdx3RztZ0jEuJ9g4YeEmOZUUCaZoNLl78nE5vPoTQLNW%2F5YzKMO8ECTJ3Vr8nY%2BCVl5bTrAMK4TdCK%2BVaZjEpw7DQrSKmaR1JhQlYxD%2F%2F3WxPc%2FECeYD7eTLmWOYXh3LELhOYyy49%2Bx0MhdUaYQTlSsuU4NKnWcYcyeIh5J7%2Bef4Q9PgkBZqdE7gCN5m%2BqmfDLzu4W1SjR47MbdXYIiShDdvvM2DDrmwfMuTMS14fEWiMP4zhuehc12gA%2BGTwmuHjqYQCuRswGncP9574CXT1mzu%2BcW5bqMNKg80paslu2ipNJL4vScEjV%2FFYcYGCoXskYgBQr5IZJ4xdtv%2BYGrEMiCbob8UZ1oT5QtJSyLVqOqGt%2FvomDHdHqMved8fQbyddZo28DC%2BwB1DEI3XsLEp3rZFCeLzTCt3bCTBjqmAe%2F4uuvRSexVKYd%2F4XCVdbKrZG%2Fl7JoTsJv%2FI4k8nqezmqPAgpErsqCyvqyUXTx8jgrxi70EuiH6n1F5QEhMfge4C41jFKqYsY%2FxWEkwZw89koTrbzGs2z64i4eCzDU5u3OItYGVaEctdbHnpx%2FA3xnOgdPoGP%2FDQPVgCdsMWvjCkRDbNcBoSLXuXSRBgbOXy2RgkHY5YQ%2Fxys257mGLb3FZhjqvScs%3D&X-Amz-Signature=24c29de90587424ffdb21a7d970ef08c0a68ebaccd562f95b766dd01faad9d56&X-Amz-SignedHeaders=host%3Bx-amz-meta-account%3Bx-amz-meta-channel%3Bx-amz-meta-fileid%3Bx-amz-meta-filename%3Bx-amz-meta-nodeid%3Bx-amz-meta-prefix%3Bx-amz-meta-stage&x-amz-meta-account=609ac75051f11a0007cf38b3&x-amz-meta-channel=12&x-amz-meta-fileid=626c3c28e041b10009810b21&x-amz-meta-filename=men-shoes-bundle-local.csv&x-amz-meta-nodeid=626a31a2d877f5e49efad330&x-amz-meta-prefix=item&x-amz-meta-stage=dev02
+        key:
+          description: S3 key of the file
+          type: string
+          example: item-bundles/609ac75051f11a0007cf38b3/dev02/1651266490891-men-shoes-bundle-local.csv
+    FileSearchRequest:
+      type: object
+      properties:
+        page:
+          description: 'Page number to be retrieved. <br> **Note**: <br> 1) Applicable only in a paginated response. <br> 2) Always paired with `size`'
+          type: number
+          example: 1
+        size:
+          description: 'Number of records (attribute groups) per page <br> **Note**: <br> 1) Applicable only in a paginated response. <br> 2) Always paired with `page`'
+          example: 10
+    FilePaginationResponse:
+      type: object
+      properties:
+        totalSize:
+          description: Total number of records
+          type: number
+          example: 100
+        pageSize:
+          description: Number of records (bundle) in a page
+          type: number
+          example: 10
+        pages:
+          description: Number of pages for the given `pageSize`
+          type: number
+          example: 10
+        files:
+          description: List of files and their details
+          type: array
+          items:
+            $ref: '#/components/schemas/FileResponse'
+    UploadFileStatusResponse:
+      type: array
+      items:
+        type: object
+        properties:
+          createdOn:
+            type: string
+            description: Timestamp of file upload (UTC format)
+            example: '2021-09-14T22:10:30.618Z'
+          name:
+            type: string
+            description: Name of CSV file
+            example: Duplicate+New+Dup.csv
+          csvLink:
+            type: string
+            description: URL to download uploaded CSV file.
+            example: https://greatwall-dev02-bulk-import-pim.s3.amazonaws.com/item-bundles/609ac75051f11a0007cf38b3/dev02/1651266490891-men-shoes-bundle-local.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIA26KLJWUAMB3F4HM7%2F20220429%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220429T210813Z&X-Amz-Expires=300&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDsaCXVzLWVhc3QtMSJGMEQCIGW476Ala9Go95rgQ3gVPwSvCbcZPrm4WgLs186q0R6GAiBqqVo4yuAkTKZTMl2qBF8hJOySqicG42ObKpyPtBmGWir4Awj0%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAIaDDc1MjMxNDA3MDI3MiIMSeKQqQmLFWlfgsfVKswDvUDycKtqRnlcHaiuM56ZPrzPio9ylmxLaqjgUDCdF73ZqtkL41jqTf0kI%2FOnkXegoOks5dRbnprCbDwJxQFiwyOgQ9w8VC8ZCVzG6s6V7vnQDMQZ2mAVDk30KjL9BXShFNqBqY6r6COCJtyi5kMHpUjA8HM6Q7N19XOg7kH1VVnm4UZpWU%2F9blF8EMjiqIvWfjmRdv%2BnmBdx3RztZ0jEuJ9g4YeEmOZUUCaZoNLl78nE5vPoTQLNW%2F5YzKMO8ECTJ3Vr8nY%2BCVl5bTrAMK4TdCK%2BVaZjEpw7DQrSKmaR1JhQlYxD%2F%2F3WxPc%2FECeYD7eTLmWOYXh3LELhOYyy49%2Bx0MhdUaYQTlSsuU4NKnWcYcyeIh5J7%2Bef4Q9PgkBZqdE7gCN5m%2BqmfDLzu4W1SjR47MbdXYIiShDdvvM2DDrmwfMuTMS14fEWiMP4zhuehc12gA%2BGTwmuHjqYQCuRswGncP9574CXT1mzu%2BcW5bqMNKg80paslu2ipNJL4vScEjV%2FFYcYGCoXskYgBQr5IZJ4xdtv%2BYGrEMiCbob8UZ1oT5QtJSyLVqOqGt%2FvomDHdHqMved8fQbyddZo28DC%2BwB1DEI3XsLEp3rZFCeLzTCt3bCTBjqmAe%2F4uuvRSexVKYd%2F4XCVdbKrZG%2Fl7JoTsJv%2FI4k8nqezmqPAgpErsqCyvqyUXTx8jgrxi70EuiH6n1F5QEhMfge4C41jFKqYsY%2FxWEkwZw89koTrbzGs2z64i4eCzDU5u3OItYGVaEctdbHnpx%2FA3xnOgdPoGP%2FDQPVgCdsMWvjCkRDbNcBoSLXuXSRBgbOXy2RgkHY5YQ%2Fxys257mGLb3FZhjqvScs%3D&X-Amz-Signature=24c29de90587424ffdb21a7d970ef08c0a68ebaccd562f95b766dd01faad9d56&X-Amz-SignedHeaders=host%3Bx-amz-meta-account%3Bx-amz-meta-channel%3Bx-amz-meta-fileid%3Bx-amz-meta-filename%3Bx-amz-meta-nodeid%3Bx-amz-meta-prefix%3Bx-amz-meta-stage&x-amz-meta-account=609ac75051f11a0007cf38b3&x-amz-meta-channel=12&x-amz-meta-fileid=626c3c28e041b10009810b21&x-amz-meta-filename=men-shoes-bundle-local.csv&x-amz-meta-nodeid=626a31a2d877f5e49efad330&x-amz-meta-prefix=item&x-amz-meta-stage=dev02
+          errorCsv:
+            type: string
+            description: URL to download import error file.
+            example: https://greatwall-dev02-bulk-import-pim.s3.amazonaws.com/item-bundles/609ac75051f11a0007cf38b3/dev02/1651266490891-error.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIA26KLJWUAMB3F4HM7%2F20220429%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220429T210813Z&X-Amz-Expires=300&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDsaCXVzLWVhc3QtMSJGMEQCIGW476Ala9Go95rgQ3gVPwSvCbcZPrm4WgLs186q0R6GAiBqqVo4yuAkTKZTMl2qBF8hJOySqicG42ObKpyPtBmGWir4Awj0%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAIaDDc1MjMxNDA3MDI3MiIMSeKQqQmLFWlfgsfVKswDvUDycKtqRnlcHaiuM56ZPrzPio9ylmxLaqjgUDCdF73ZqtkL41jqTf0kI%2FOnkXegoOks5dRbnprCbDwJxQFiwyOgQ9w8VC8ZCVzG6s6V7vnQDMQZ2mAVDk30KjL9BXShFNqBqY6r6COCJtyi5kMHpUjA8HM6Q7N19XOg7kH1VVnm4UZpWU%2F9blF8EMjiqIvWfjmRdv%2BnmBdx3RztZ0jEuJ9g4YeEmOZUUCaZoNLl78nE5vPoTQLNW%2F5YzKMO8ECTJ3Vr8nY%2BCVl5bTrAMK4TdCK%2BVaZjEpw7DQrSKmaR1JhQlYxD%2F%2F3WxPc%2FECeYD7eTLmWOYXh3LELhOYyy49%2Bx0MhdUaYQTlSsuU4NKnWcYcyeIh5J7%2Bef4Q9PgkBZqdE7gCN5m%2BqmfDLzu4W1SjR47MbdXYIiShDdvvM2DDrmwfMuTMS14fEWiMP4zhuehc12gA%2BGTwmuHjqYQCuRswGncP9574CXT1mzu%2BcW5bqMNKg80paslu2ipNJL4vScEjV%2FFYcYGCoXskYgBQr5IZJ4xdtv%2BYGrEMiCbob8UZ1oT5QtJSyLVqOqGt%2FvomDHdHqMved8fQbyddZo28DC%2BwB1DEI3XsLEp3rZFCeLzTCt3bCTBjqmAe%2F4uuvRSexVKYd%2F4XCVdbKrZG%2Fl7JoTsJv%2FI4k8nqezmqPAgpErsqCyvqyUXTx8jgrxi70EuiH6n1F5QEhMfge4C41jFKqYsY%2FxWEkwZw89koTrbzGs2z64i4eCzDU5u3OItYGVaEctdbHnpx%2FA3xnOgdPoGP%2FDQPVgCdsMWvjCkRDbNcBoSLXuXSRBgbOXy2RgkHY5YQ%2Fxys257mGLb3FZhjqvScs%3D&X-Amz-Signature=24c29de90587424ffdb21a7d970ef08c0a68ebaccd562f95b766dd01faad9d56&X-Amz-SignedHeaders=host%3Bx-amz-meta-account%3Bx-amz-meta-channel%3Bx-amz-meta-fileid%3Bx-amz-meta-filename%3Bx-amz-meta-nodeid%3Bx-amz-meta-prefix%3Bx-amz-meta-stage&x-amz-meta-account=609ac75051f11a0007cf38b3&x-amz-meta-channel=12&x-amz-meta-fileid=626c3c28e041b10009810b21&x-amz-meta-filename=men-shoes-bundle-local.csv&x-amz-meta-nodeid=626a31a2d877f5e49efad330&x-amz-meta-prefix=item&x-amz-meta-stage=dev02
+          statuses:
+            type: array
+            description: Upload status
+            items:
+              oneOf:
+                - $ref: '#/components/schemas/objectUploadFileStatus'
+                - $ref: '#/components/schemas/objectUploadFileStatusNotFound'
+    objectUploadFileStatus:
+      type: object
+      properties:
+        code:
+          description: Progress code
+          type: string
+          example: FILE_PROGRESS_COMPLETE
+        description:
+          description: Status description
+          type: string
+          example: Import successful
+        name:
+          description: Status name
+          type: string
+          example: file progress is complete
+    objectUploadFileStatusNotFound:
+      type: object
+      properties:
+        code:
+          description: Status code
+          type: string
+          example: NOT_FOUND
+        description:
+          description: Description for status
+          type: string
+          example: status not found
+        name:
+          description: Status name
+          type: string
+          example: not found
+    UploadFileStatusNoItemResponse:
+      type: object
+      properties:
+        code:
+          description: Status code
+          type: string
+          example: ITEM_NOT_FOUND
+        description:
+          description: Status description
+          type: string
+          example: item not found
+        name:
+          description: Status name
+          type: string
+          example: item not found
+    InheritItemAttributesInsert:
+      type: array
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+            description: Name of the attribute that can be inherited
+            example: color
+          action:
+            description: Action to set the inherited attribute
+            example: SET
+            type: string
+            enum:
+              - SET
+        required:
+          - name
+          - action
+        minItems: 1
+    InheritItemAttributesUpdate:
+      type: array
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+            description: Name of the attribute that can be inherited
+            example: color
+          action:
+            type: string
+            description: Action to set or unset (remove) the inherited attribute
+            example: SET
+            enum:
+              - SET
+              - UNSET
+        required:
+          - name
+          - action
+        minItems: 1
+  parameters:
+    Authorization:
+      in: header
+      name: authorization
+      description: 'JWT Authorization token from *Login* endpoint. If omitted, `x-site-context` becomes mandatory. <br> **Note**: Some calls require `Authorization` along with `x-site-context`.'
+      example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMDk1YjE2Y2E4MDZjMDAwOGYyNjA4NSIsInJvbGVzIjpbIkFkbWluIl0sInBlcm1pc3Npb25zIjpbInJlYWQ6Y29sbGVjdGlvbiIsIndyaXRlOnVzZXIiLCJ3cml0ZTpza3VzZXQiLCJ3cml0ZTpyb2xlIiwicmVhZDpwZXJtaXNzaW9uIiwid3JpdGU6YXR0cmlidXRlLWdyb3VwIiwicmVhZDp1c2VyIiwicmVhZDpza3VzZXQiLCJ3cml0ZTphdHRyaWJ1dGUiLCJyZWFkOmF0dHJpYnV0ZSIsInJlYWQ6cm9sZSIsIndyaXRlOmNvbGxlY3Rpb24iLCJyZWFkOmF0dHJpYnV0ZS1ncm91cCJdLCJhY2NvdW50IjoiNjA5YWM3NTA1MWYxMWEwMDA3Y2YzOGIzIiwiYWNjb3VudElkIjoxNDAzNTUyMTE1LCJ1c2VyVHlwZSI6eyJraW5kIjoiUkVHSVNURVJFRCJ9LCJpYXQiOjE2Mzc1MzYzNjIsImV4cCI6MTYzNzUzODE2Mn0.aUrXJ8e5TsADHdlP61Zg21dgJFoFxe5jsASHDxTj1h-WtodEpMR150vTpIA0pfpy1-3rKXlcjoOi6xidADhqZw
+      schema:
+        type: string
+    XSiteContext:
+      in: header
+      name: x-site-context
+      description: Represents single or multi-tenancy. If omitted, `Authorization` becomes mandatory.
+      schema:
+        type: object
+        properties:
+          account:
+            type: string
+            example: 609ac75051f11a0007cf38b3
+            description: 24 character client's co-pilot account ID. Mandatary only for multi-tenant clients (not for single tenant clients).
+          stage:
+            type: string
+            example: sandbox
+            description: Environment shared with the client during onboarding. Mandatary only for multi-tenant clients (not for single tenant clients).
+          date:
+            type: string
+            example: '2021-12-28T16:36:50.055Z'
+            description: Localized date of endpoint execution. Mandatary for single and multi-tenant clients
+          channel:
+            type: number
+            example: 12
+            description: Sales channel. Mandatary for single and multi-tenant clients.
+    XSiteContextOrAuthorization:
+      in: header
+      name: x-site-context
+      description: Represents single or multi-tenancy. If omitted, `Authorization` becomes mandatory.
+      schema:
+        type: object
+        properties:
+          account:
+            type: string
+            example: 609ac75051f11a0007cf38b3
+            description: 24-character client's co-pilot account ID. Mandatary only for multi-tenant clients (not for single tenant clients).
+          stage:
+            type: string
+            example: sandbox
+            description: Environment shared with the client during onboarding. Mandatary only for multi-tenant clients (not for single tenant clients).
+          date:
+            type: string
+            example: '2021-12-28T16:36:50.055Z'
+            description: Localized timestamp of endpoint execution (UTC format). Mandatary for single and multi-tenant clients
+          channel:
+            type: number
+            example: 12
+            description: Sales channel. Mandatary for single and multi-tenant clients.
+    XApiKey:
+      in: header
+      name: x-api-key
+      description: Allows access to the endpoint without the need for `Authorization`. This key can be provided to you only by fabric Inc, upon request.
+      schema:
+        type: string
+    Page:
+      in: query
+      name: page
+      description: 'Page number to be retrieved. <br> **Note**: <br> 1) Applicable only in a paginated response.  <br> 2) Always paired with `size` <br> 3) No default value set. Unless a value is specified, endpoint returns an error.'
+      example: 1
+      schema:
+        type: number
+    MandatoryPage:
+      in: query
+      name: page
+      description: Page number to be retrieved. Applicable only in a paginated response and always paired with `size`.
+      example: 1
+      schema:
+        type: number
+      required: true
+    Size:
+      in: query
+      name: size
+      description: 'Number of records per page <br> **Note**: <br> 1) Always paired with `page` <br> 2) Applicable only in a paginated response <br> 3) No default value set. Unless a value is specified, endpoint returns an error.'
+      example: 10
+      schema:
+        type: number
+    MandatorySize:
+      in: query
+      name: size
+      description: Number of records per page. Applicable only in a paginated response and always paired with `page`.
+      example: 10
+      schema:
+        type: number
+      required: true
