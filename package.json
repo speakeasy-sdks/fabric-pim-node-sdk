@@ -1,6 +1,6 @@
 {
   "name": "@fabric/pim-sdk",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "author": "fabric",
   "scripts": {
     "prepare": "tsc --build"
