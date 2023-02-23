@@ -1,8 +1,7 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 
 
-
-export class GetS3UrlBundleRequest extends SpeakeasyBase {
+export class GetS3URLBundleRequest extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=fileName" })
   fileName?: string;
 

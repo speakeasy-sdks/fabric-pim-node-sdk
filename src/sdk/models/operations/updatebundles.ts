@@ -1,6 +1,5 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
-
 
 
 export class UpdateBundlesHeaders extends SpeakeasyBase {
@@ -11,7 +10,6 @@ export class UpdateBundlesHeaders extends SpeakeasyBase {
   xSiteContext?: shared.XSiteContextOrAuthorization;
 }
 
-
 export class UpdateBundlesRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
   headers: UpdateBundlesHeaders;
@@ -19,7 +17,6 @@ export class UpdateBundlesRequest extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: shared.BundleUpdateRequest;
 }
-
 
 export class UpdateBundlesResponse extends SpeakeasyBase {
   @SpeakeasyMetadata({ elemType: shared.BundleUpdateResponse })

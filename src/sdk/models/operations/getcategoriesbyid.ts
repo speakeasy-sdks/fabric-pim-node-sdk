@@ -1,7 +1,16 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
 
-
+export enum GetCategoriesByIdStatusEnum {
+    Active = "ACTIVE",
+    Inactive = "INACTIVE",
+    All = "ALL"
+}
+export enum GetCategoriesByIdTypeEnum {
+    Primary = "PRIMARY",
+    Alternate = "ALTERNATE",
+    All = "ALL"
+}
 
 export class GetCategoriesByIdQueryParams extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=ids" })
@@ -20,18 +29,16 @@ export class GetCategoriesByIdQueryParams extends SpeakeasyBase {
   size?: number;
 
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=status" })
-  status?: shared.XSiteContextEnum1;
+  status?: GetCategoriesByIdStatusEnum;
 
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" })
-  type?: shared.XSiteContextEnum;
+  type?: GetCategoriesByIdTypeEnum;
 }
-
 
 export class GetCategoriesByIdHeaders extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-site-context" })
   xSiteContext?: shared.XSiteContext;
 }
-
 
 export class GetCategoriesByIdRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
@@ -40,7 +47,6 @@ export class GetCategoriesByIdRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
   headers: GetCategoriesByIdHeaders;
 }
-
 
 export class GetCategoriesByIdResponse extends SpeakeasyBase {
   @SpeakeasyMetadata()

@@ -1,7 +1,16 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
 
-
+export enum SearchCategoriesStatusEnum {
+    Active = "ACTIVE",
+    Inactive = "INACTIVE",
+    All = "ALL"
+}
+export enum SearchCategoriesTypeEnum {
+    Primary = "PRIMARY",
+    Alternate = "ALTERNATE",
+    All = "ALL"
+}
 
 export class SearchCategoriesQueryParams extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=ids" })
@@ -20,18 +29,16 @@ export class SearchCategoriesQueryParams extends SpeakeasyBase {
   size?: number;
 
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=status" })
-  status?: shared.XSiteContextEnum1;
+  status?: SearchCategoriesStatusEnum;
 
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" })
-  type?: shared.XSiteContextEnum;
+  type?: SearchCategoriesTypeEnum;
 }
-
 
 export class SearchCategoriesHeaders extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-site-context" })
   xSiteContext?: shared.XSiteContext;
 }
-
 
 export class SearchCategoriesRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
@@ -40,7 +47,6 @@ export class SearchCategoriesRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
   headers: SearchCategoriesHeaders;
 }
-
 
 export class SearchCategoriesResponse extends SpeakeasyBase {
   @SpeakeasyMetadata()

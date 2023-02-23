@@ -1,6 +1,6 @@
-import { AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
-import * as operations from "./models/operations";
 import * as utils from "../internal/utils";
+import * as operations from "./models/operations";
+import { AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
 
 export class Product {
   _defaultClient: AxiosInstance;
@@ -285,16 +285,16 @@ export class Product {
 
   
   /**
-   * generateCsVfile - Generate CSV template file for products
+   * generateCSVfile - Generate CSV template file for products
    *
    * Generates CSV template to upload products for a specific category.
   **/
-  generateCsVfile(
-    req: operations.GenerateCsVfileRequest,
+  generateCSVfile(
+    req: operations.GenerateCSVfileRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.GenerateCsVfileResponse> {
+  ): Promise<operations.GenerateCSVfileResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.GenerateCsVfileRequest(req);
+      req = new operations.GenerateCSVfileRequest(req);
     }
     
     const baseURL: string = this._serverURL;
@@ -314,7 +314,7 @@ export class Product {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GenerateCsVfileResponse = {statusCode: httpRes.status, contentType: contentType};
+        const res: operations.GenerateCSVfileResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/csv`)) {
@@ -342,16 +342,16 @@ export class Product {
 
   
   /**
-   * generateItemAttributeCsVfile - Generate CSV template for product attributes
+   * generateItemAttributeCSVfile - Generate CSV template for product attributes
    *
    * Generates CSV template to upload product attributes. 
   **/
-  generateItemAttributeCsVfile(
-    req: operations.GenerateItemAttributeCsVfileRequest,
+  generateItemAttributeCSVfile(
+    req: operations.GenerateItemAttributeCSVfileRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.GenerateItemAttributeCsVfileResponse> {
+  ): Promise<operations.GenerateItemAttributeCSVfileResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.GenerateItemAttributeCsVfileRequest(req);
+      req = new operations.GenerateItemAttributeCSVfileRequest(req);
     }
     
     const baseURL: string = this._serverURL;
@@ -371,7 +371,7 @@ export class Product {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GenerateItemAttributeCsVfileResponse = {statusCode: httpRes.status, contentType: contentType};
+        const res: operations.GenerateItemAttributeCSVfileResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/csv`)) {
@@ -464,16 +464,16 @@ export class Product {
 
   
   /**
-   * generateItemBundleCsVfile - Generate CSV template for product bundles
+   * generateItemBundleCSVfile - Generate CSV template for product bundles
    *
    * Generates CSV template to upload bundles for a specific category.
   **/
-  generateItemBundleCsVfile(
-    req: operations.GenerateItemBundleCsVfileRequest,
+  generateItemBundleCSVfile(
+    req: operations.GenerateItemBundleCSVfileRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.GenerateItemBundleCsVfileResponse> {
+  ): Promise<operations.GenerateItemBundleCSVfileResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.GenerateItemBundleCsVfileRequest(req);
+      req = new operations.GenerateItemBundleCSVfileRequest(req);
     }
     
     const baseURL: string = this._serverURL;
@@ -493,7 +493,7 @@ export class Product {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GenerateItemBundleCsVfileResponse = {statusCode: httpRes.status, contentType: contentType};
+        const res: operations.GenerateItemBundleCSVfileResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/csv`)) {

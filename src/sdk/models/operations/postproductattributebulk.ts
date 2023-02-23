@@ -1,6 +1,5 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
-
 
 
 export class PostProductAttributeBulkHeaders extends SpeakeasyBase {
@@ -11,7 +10,6 @@ export class PostProductAttributeBulkHeaders extends SpeakeasyBase {
   xSiteContext?: shared.XSiteContextOrAuthorization;
 }
 
-
 export class PostProductAttributeBulkRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
   headers: PostProductAttributeBulkHeaders;
@@ -19,7 +17,6 @@ export class PostProductAttributeBulkRequest extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "request, media_type=application/json", elemType: shared.BulkProductAttributeRequest })
   request?: shared.BulkProductAttributeRequest[];
 }
-
 
 export class PostProductAttributeBulkResponse extends SpeakeasyBase {
   @SpeakeasyMetadata()

@@ -1,8 +1,7 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { AttributeValidation } from "./attributevalidation";
 import { FileResponse } from "./fileresponse";
 import { StatusResponse } from "./statusresponse";
-import { AttributeValidation } from "./attributevalidation";
-
 
 
 export class AttributeResponseLocales extends SpeakeasyBase {
@@ -12,12 +11,10 @@ export class AttributeResponseLocales extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
-
 export enum AttributeResponseTargetEnum {
     Node = "NODE",
     Item = "ITEM"
 }
-
 export enum AttributeResponseTypeEnum {
     Text = "TEXT",
     Boolean = "BOOLEAN",
@@ -26,7 +23,6 @@ export enum AttributeResponseTypeEnum {
     Integer = "INTEGER",
     Datetime = "DATETIME"
 }
-
 
 export class AttributeResponse extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=createdBy" })

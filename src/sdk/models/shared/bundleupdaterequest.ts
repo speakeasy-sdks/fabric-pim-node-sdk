@@ -1,15 +1,12 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
-
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 
 export enum BundleUpdateRequestActionEnum {
     Update = "UPDATE"
 }
-
 export enum BundleUpdateRequestBundlesActionEnum {
     Set = "SET",
     Unset = "UNSET"
 }
-
 
 export class BundleUpdateRequestBundles extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=action" })
@@ -24,7 +21,6 @@ export class BundleUpdateRequestBundles extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=quantity" })
   quantity?: number;
 }
-
 
 export class BundleUpdateRequest extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=action" })

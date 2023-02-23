@@ -1,10 +1,7 @@
-import axios, { AxiosInstance } from "axios";
-import * as utils from "../internal/utils";
-
 import { Attributes } from "./attributes";
 import { Category } from "./category";
 import { Product } from "./product";
-
+import axios, { AxiosInstance } from "axios";
 
 export const ServerList = [
 	"https://{customerDomain}/api-category",
@@ -29,8 +26,8 @@ export class SDK {
   public _securityClient: AxiosInstance;
   public _serverURL: string;
   private _language = "typescript";
-  private _sdkVersion = "2.1.1";
-  private _genVersion = "0.22.1";
+  private _sdkVersion = "3.0.0";
+  private _genVersion = "1.4.8";
 
   constructor(props: SDKProps) {
     this._serverURL = props.serverUrl ?? ServerList[0];
@@ -65,4 +62,5 @@ export class SDK {
       this._genVersion
     );
   }
+  
 }

@@ -1,11 +1,9 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
-
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 
 export enum NodeSourcesAndExclusionsRequestSourceExclusionsActionEnum {
     Set = "SET",
     Unset = "UNSET"
 }
-
 
 export class NodeSourcesAndExclusionsRequestSourceExclusions extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=action" })
@@ -17,7 +15,6 @@ export class NodeSourcesAndExclusionsRequestSourceExclusions extends SpeakeasyBa
   @SpeakeasyMetadata({ data: "json, name=nodeId" })
   nodeId?: number;
 }
-
 
 export class NodeSourcesAndExclusionsRequest extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=id" })

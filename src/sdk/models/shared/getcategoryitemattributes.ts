@@ -1,5 +1,4 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
-
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 
 
 export class GetCategoryItemAttributesItemAttributes extends SpeakeasyBase {
@@ -18,7 +17,6 @@ export class GetCategoryItemAttributesItemAttributes extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
-
 
 export class GetCategoryItemAttributes extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=itemAttributes", elemType: GetCategoryItemAttributesItemAttributes })

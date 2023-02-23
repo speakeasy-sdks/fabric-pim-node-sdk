@@ -1,11 +1,9 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
-
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 
 export enum InheritItemAttributesUpdateActionEnum {
     Set = "SET",
     Unset = "UNSET"
 }
-
 
 export class InheritItemAttributesUpdate extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=action" })

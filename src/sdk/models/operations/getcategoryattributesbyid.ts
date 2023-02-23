@@ -1,9 +1,12 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
 
+export enum GetCategoryAttributesByIDStatusEnum {
+    Assigned = "ASSIGNED",
+    Unassigned = "UNASSIGNED"
+}
 
-
-export class GetCategoryAttributesByIdQueryParams extends SpeakeasyBase {
+export class GetCategoryAttributesByIDQueryParams extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id" })
   id?: string;
 
@@ -17,26 +20,23 @@ export class GetCategoryAttributesByIdQueryParams extends SpeakeasyBase {
   size: number;
 
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=status" })
-  status?: shared.XSiteContextEnum2;
+  status?: GetCategoryAttributesByIDStatusEnum;
 }
 
-
-export class GetCategoryAttributesByIdHeaders extends SpeakeasyBase {
+export class GetCategoryAttributesByIDHeaders extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-site-context" })
   xSiteContext?: shared.XSiteContext;
 }
 
-
-export class GetCategoryAttributesByIdRequest extends SpeakeasyBase {
+export class GetCategoryAttributesByIDRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
-  queryParams: GetCategoryAttributesByIdQueryParams;
+  queryParams: GetCategoryAttributesByIDQueryParams;
 
   @SpeakeasyMetadata()
-  headers: GetCategoryAttributesByIdHeaders;
+  headers: GetCategoryAttributesByIDHeaders;
 }
 
-
-export class GetCategoryAttributesByIdResponse extends SpeakeasyBase {
+export class GetCategoryAttributesByIDResponse extends SpeakeasyBase {
   @SpeakeasyMetadata()
   attributePage?: shared.AttributePage;
 

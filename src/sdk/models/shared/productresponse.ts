@@ -1,5 +1,4 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
-
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 
 
 export class ProductResponseFailed extends SpeakeasyBase {
@@ -10,7 +9,6 @@ export class ProductResponseFailed extends SpeakeasyBase {
   sku?: string;
 }
 
-
 export class ProductResponseSuccessErrorAttributes extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
@@ -19,7 +17,6 @@ export class ProductResponseSuccessErrorAttributes extends SpeakeasyBase {
   name?: string;
 }
 
-
 export class ProductResponseSuccessErrorBundles extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
@@ -27,7 +24,6 @@ export class ProductResponseSuccessErrorBundles extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
-
 
 export class ProductResponseSuccess extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=errorAttributes", elemType: ProductResponseSuccessErrorAttributes })
@@ -48,7 +44,6 @@ export class ProductResponseSuccess extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=sku" })
   sku?: string;
 }
-
 
 export class ProductResponse extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=failed", elemType: ProductResponseFailed })

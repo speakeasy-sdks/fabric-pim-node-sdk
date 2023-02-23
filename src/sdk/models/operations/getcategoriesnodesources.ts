@@ -1,7 +1,10 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
 
-
+export enum GetCategoriesNodeSourcesStatusEnum {
+    Assigned = "ASSIGNED",
+    Unassigned = "UNASSIGNED"
+}
 
 export class GetCategoriesNodeSourcesQueryParams extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id" })
@@ -17,15 +20,13 @@ export class GetCategoriesNodeSourcesQueryParams extends SpeakeasyBase {
   size: number;
 
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=status" })
-  status?: shared.XSiteContextEnum2;
+  status?: GetCategoriesNodeSourcesStatusEnum;
 }
-
 
 export class GetCategoriesNodeSourcesHeaders extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-site-context" })
   xSiteContext?: shared.XSiteContext;
 }
-
 
 export class GetCategoriesNodeSourcesRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
@@ -34,7 +35,6 @@ export class GetCategoriesNodeSourcesRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
   headers: GetCategoriesNodeSourcesHeaders;
 }
-
 
 export class GetCategoriesNodeSourcesResponse extends SpeakeasyBase {
   @SpeakeasyMetadata()

@@ -1,6 +1,5 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
-
 
 
 export class ModifyAttributeMappingsHeaders extends SpeakeasyBase {
@@ -11,7 +10,6 @@ export class ModifyAttributeMappingsHeaders extends SpeakeasyBase {
   xSiteContext?: shared.XSiteContextOrAuthorization;
 }
 
-
 export class ModifyAttributeMappingsRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
   headers: ModifyAttributeMappingsHeaders;
@@ -19,7 +17,6 @@ export class ModifyAttributeMappingsRequest extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: shared.AttributeMappingModify;
 }
-
 
 export class ModifyAttributeMappingsResponse extends SpeakeasyBase {
   @SpeakeasyMetadata()

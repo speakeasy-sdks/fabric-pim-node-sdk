@@ -1,14 +1,12 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Attribute } from "./attribute";
 import { Breadcrumbs } from "./breadcrumbs";
 import { CategoryChild } from "./categorychild";
-
 
 export enum CategorySingleHierarchyEnum {
     Primary = "PRIMARY",
     Alternate = "ALTERNATE"
 }
-
 
 export class CategorySingle extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=attributes", elemType: Attribute })

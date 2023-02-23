@@ -1,18 +1,15 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { AttributeGroupTypeRequest } from "./attributegrouptyperequest";
-
 
 export enum AttributeGroupRequestAttributeGroupActionEnum {
     Create = "CREATE",
     Update = "UPDATE",
     Delete = "DELETE"
 }
-
 export enum AttributeGroupRequestAttributeGroupTypeEnum {
     Workflow = "WORKFLOW",
     Collection = "COLLECTION"
 }
-
 
 export class AttributeGroupRequestAttributeGroup extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=action" })
@@ -36,7 +33,6 @@ export class AttributeGroupRequestAttributeGroup extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=type" })
   type?: AttributeGroupRequestAttributeGroupTypeEnum;
 }
-
 
 export class AttributeGroupRequest extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=attributeGroup", elemType: AttributeGroupRequestAttributeGroup })

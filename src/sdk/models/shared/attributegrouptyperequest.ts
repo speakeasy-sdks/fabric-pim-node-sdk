@@ -1,12 +1,10 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
-
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 
 export enum AttributeGroupTypeRequestActionEnum {
     Add = "ADD",
     Update = "UPDATE",
     Delete = "DELETE"
 }
-
 
 export class AttributeGroupTypeRequest extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=action" })

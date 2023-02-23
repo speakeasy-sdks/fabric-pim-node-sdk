@@ -1,11 +1,9 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { ProductResponse } from "./productresponse";
-
 
 export enum ProductModifyErrorCodeEnum {
     StatusError = "STATUS_ERROR"
 }
-
 
 export class ProductModifyErrorMessage extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=index" })
@@ -14,7 +12,6 @@ export class ProductModifyErrorMessage extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=item" })
   item?: ProductResponse;
 }
-
 
 export class ProductModifyError extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=code" })

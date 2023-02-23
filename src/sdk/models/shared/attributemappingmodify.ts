@@ -1,6 +1,5 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { AttributeValidation } from "./attributevalidation";
-
 
 
 export class AttributeMappingModifyMappings extends SpeakeasyBase {
@@ -22,7 +21,6 @@ export class AttributeMappingModifyMappings extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=validation" })
   validation?: AttributeValidation;
 }
-
 
 export class AttributeMappingModify extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=mappings", elemType: AttributeMappingModifyMappings })

@@ -1,14 +1,12 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { AttributeMappingMatch } from "./attributemappingmatch";
 import { AttributeMappingSort } from "./attributemappingsort";
-
 
 
 export class AttributeMappingSearchInclude extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=attribute" })
   attribute?: boolean;
 }
-
 
 export class AttributeMappingSearch extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=include" })

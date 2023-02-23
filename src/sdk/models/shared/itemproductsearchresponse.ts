@@ -1,6 +1,5 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { ProductSearch } from "./productsearch";
-
 
 
 export class ItemProductSearchResponse extends SpeakeasyBase {

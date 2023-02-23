@@ -1,5 +1,4 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
-
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 
 
 export class NodeSourcesAndExclusionsSourceExclusions extends SpeakeasyBase {
@@ -13,7 +12,6 @@ export class NodeSourcesAndExclusionsSourceExclusions extends SpeakeasyBase {
   name?: string;
 }
 
-
 export class NodeSourcesAndExclusionsSources extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=breadcrumbString" })
   breadcrumbString?: string;
@@ -24,7 +22,6 @@ export class NodeSourcesAndExclusionsSources extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
-
 
 export class NodeSourcesAndExclusions extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=id" })

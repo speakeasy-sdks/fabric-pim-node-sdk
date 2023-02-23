@@ -1,6 +1,5 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
-
 
 
 export class ModifyCategoriesNodeSourceExclusionsHeaders extends SpeakeasyBase {
@@ -11,12 +10,10 @@ export class ModifyCategoriesNodeSourceExclusionsHeaders extends SpeakeasyBase {
   xSiteContext?: shared.XSiteContext;
 }
 
-
 export class ModifyCategoriesNodeSourceExclusionsSecurity extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
-  apiKey: shared.SchemeApiKey;
+  apiKey: shared.SchemeAPIKey;
 }
-
 
 export class ModifyCategoriesNodeSourceExclusionsRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
@@ -28,7 +25,6 @@ export class ModifyCategoriesNodeSourceExclusionsRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
   security: ModifyCategoriesNodeSourceExclusionsSecurity;
 }
-
 
 export class ModifyCategoriesNodeSourceExclusionsResponse extends SpeakeasyBase {
   @SpeakeasyMetadata()

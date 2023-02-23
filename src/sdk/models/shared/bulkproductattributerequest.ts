@@ -1,12 +1,10 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
-
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 
 export enum BulkProductAttributeRequestActionEnum {
     Create = "CREATE",
     Update = "UPDATE",
     Delete = "DELETE"
 }
-
 
 export class BulkProductAttributeRequestLocales extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=locale" })
@@ -15,7 +13,6 @@ export class BulkProductAttributeRequestLocales extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
-
 export enum BulkProductAttributeRequestOptionsTypeEnum {
     Text = "TEXT",
     Boolean = "BOOLEAN",
@@ -23,13 +20,11 @@ export enum BulkProductAttributeRequestOptionsTypeEnum {
     Integer = "INTEGER",
     Datetime = "DATETIME"
 }
-
 export enum BulkProductAttributeRequestTextSubTypeEnum {
     SmallText = "SMALL_TEXT",
     TextArea = "TEXT_AREA",
     Html = "HTML"
 }
-
 export enum BulkProductAttributeRequestTypeEnum {
     Text = "TEXT",
     Boolean = "BOOLEAN",
@@ -39,7 +34,6 @@ export enum BulkProductAttributeRequestTypeEnum {
     Datetime = "DATETIME",
     Options = "OPTIONS"
 }
-
 export enum BulkProductAttributeRequestValidationAttributeTypesEnum {
     Text = "TEXT",
     Boolean = "BOOLEAN",
@@ -52,7 +46,6 @@ export enum BulkProductAttributeRequestValidationAttributeTypesEnum {
     DynamicLov = "DYNAMIC_LOV"
 }
 
-
 // BulkProductAttributeRequestValidationRange
 /** 
  * Specified range of values must be between this min and/or max
@@ -64,7 +57,6 @@ export class BulkProductAttributeRequestValidationRange extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=min" })
   min?: any;
 }
-
 
 export class BulkProductAttributeRequestValidation extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=attributeTypes" })
@@ -103,7 +95,6 @@ export class BulkProductAttributeRequestValidation extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=unique" })
   unique?: boolean;
 }
-
 
 export class BulkProductAttributeRequest extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=action" })

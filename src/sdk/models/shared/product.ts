@@ -1,8 +1,7 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { ProductAttribute } from "./productattribute";
 import { ProductCategory } from "./productcategory";
 import { ProductChild } from "./productchild";
-
 
 
 export class Product extends SpeakeasyBase {

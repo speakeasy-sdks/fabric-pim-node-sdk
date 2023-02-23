@@ -1,6 +1,5 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
-
 
 
 export class GetProductAttributeQueryParams extends SpeakeasyBase {
@@ -11,7 +10,6 @@ export class GetProductAttributeQueryParams extends SpeakeasyBase {
   sku?: string;
 }
 
-
 export class GetProductAttributeHeaders extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=authorization" })
   authorization?: string;
@@ -20,7 +18,6 @@ export class GetProductAttributeHeaders extends SpeakeasyBase {
   xSiteContext?: shared.XSiteContextOrAuthorization;
 }
 
-
 export class GetProductAttributeRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
   queryParams: GetProductAttributeQueryParams;
@@ -28,7 +25,6 @@ export class GetProductAttributeRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
   headers: GetProductAttributeHeaders;
 }
-
 
 export class GetProductAttributeResponse extends SpeakeasyBase {
   @SpeakeasyMetadata()

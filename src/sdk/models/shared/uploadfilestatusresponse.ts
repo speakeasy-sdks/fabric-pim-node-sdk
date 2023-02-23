@@ -1,7 +1,4 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
-import { ObjectUploadFileStatus } from "./objectuploadfilestatus";
-import { ObjectUploadFileStatusNotFound } from "./objectuploadfilestatusnotfound";
-
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 
 
 export class UploadFileStatusResponse extends SpeakeasyBase {

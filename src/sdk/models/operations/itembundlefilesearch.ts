@@ -1,6 +1,5 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
-
 
 
 export class ItemBundleFileSearchHeaders extends SpeakeasyBase {
@@ -11,7 +10,6 @@ export class ItemBundleFileSearchHeaders extends SpeakeasyBase {
   xSiteContext?: shared.XSiteContextOrAuthorization;
 }
 
-
 export class ItemBundleFileSearchRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
   headers: ItemBundleFileSearchHeaders;
@@ -19,7 +17,6 @@ export class ItemBundleFileSearchRequest extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: shared.FileSearchRequest;
 }
-
 
 export class ItemBundleFileSearchResponse extends SpeakeasyBase {
   @SpeakeasyMetadata()

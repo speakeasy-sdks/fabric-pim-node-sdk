@@ -1,6 +1,5 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { ProductAttribute } from "./productattribute";
-
 
 
 export class ProductCategoryBreadcrumbs extends SpeakeasyBase {
@@ -16,7 +15,6 @@ export class ProductCategoryBreadcrumbs extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=nodeId" })
   nodeId?: number;
 }
-
 
 export class ProductCategory extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=breadcrumbs", elemType: ProductCategoryBreadcrumbs })

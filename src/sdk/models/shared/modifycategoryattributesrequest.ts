@@ -1,11 +1,9 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
-
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 
 export enum ModifyCategoryAttributesRequestAttributesActionEnum {
     Set = "SET",
     Unset = "UNSET"
 }
-
 
 export class ModifyCategoryAttributesRequestAttributes extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=action" })
@@ -17,7 +15,6 @@ export class ModifyCategoryAttributesRequestAttributes extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=value" })
   value?: any;
 }
-
 
 export class ModifyCategoryAttributesRequest extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=attributes", elemType: ModifyCategoryAttributesRequestAttributes })

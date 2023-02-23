@@ -1,5 +1,4 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
-
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 
 export enum ProductAttributeTypeEnum {
     Text = "TEXT",
@@ -9,7 +8,6 @@ export enum ProductAttributeTypeEnum {
     Integer = "INTEGER",
     Datetime = "DATETIME"
 }
-
 
 export class ProductAttribute extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=description" })

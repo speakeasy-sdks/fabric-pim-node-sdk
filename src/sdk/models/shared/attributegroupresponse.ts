@@ -1,5 +1,4 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
-
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 
 
 export class AttributeGroupResponseAttributes extends SpeakeasyBase {
@@ -24,12 +23,10 @@ export class AttributeGroupResponseAttributes extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=order" })
   order?: number;
 }
-
 export enum AttributeGroupResponseTypeEnum {
     Workflow = "WORKFLOW",
     Collection = "COLLECTION"
 }
-
 
 export class AttributeGroupResponse extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=_id" })

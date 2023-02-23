@@ -1,6 +1,5 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
-
 
 
 export class GetCategoryTreeQueryParams extends SpeakeasyBase {
@@ -14,12 +13,10 @@ export class GetCategoryTreeQueryParams extends SpeakeasyBase {
   nodeId?: number;
 }
 
-
 export class GetCategoryTreeHeaders extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-site-context" })
   xSiteContext?: shared.XSiteContext;
 }
-
 
 export class GetCategoryTreeRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
@@ -28,7 +25,6 @@ export class GetCategoryTreeRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
   headers: GetCategoryTreeHeaders;
 }
-
 
 export class GetCategoryTreeResponse extends SpeakeasyBase {
   @SpeakeasyMetadata()

@@ -1,8 +1,7 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 
 
-
-export class GetS3UrlItemAttributeResponse extends SpeakeasyBase {
+export class GetS3URLItemAttributeResponse extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=fileId" })
   fileId?: string;
 

@@ -1,5 +1,4 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
-
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 
 export enum AttributeValidationAttributeTypesEnum {
     Text = "TEXT",
@@ -10,7 +9,6 @@ export enum AttributeValidationAttributeTypesEnum {
     Asset = "ASSET",
     Datetime = "DATETIME"
 }
-
 
 // AttributeValidationRange
 /** 
@@ -23,7 +21,6 @@ export class AttributeValidationRange extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=min" })
   min?: any;
 }
-
 
 export class AttributeValidation extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=attributeTypes" })

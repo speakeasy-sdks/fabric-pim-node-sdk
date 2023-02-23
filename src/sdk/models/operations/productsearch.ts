@@ -1,7 +1,11 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
 
-
+export enum ProductSearchTypeEnum {
+    Item = "ITEM",
+    Bundle = "BUNDLE",
+    All = "ALL"
+}
 
 export class ProductSearchQueryParams extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=allAttributes" })
@@ -29,9 +33,8 @@ export class ProductSearchQueryParams extends SpeakeasyBase {
   skus?: string[];
 
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" })
-  type?: shared.XSiteContextOrAuthorizationEnum1;
+  type?: ProductSearchTypeEnum;
 }
-
 
 export class ProductSearchHeaders extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=authorization" })
@@ -41,7 +44,6 @@ export class ProductSearchHeaders extends SpeakeasyBase {
   xSiteContext?: shared.XSiteContextOrAuthorization;
 }
 
-
 export class ProductSearchRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
   queryParams: ProductSearchQueryParams;
@@ -49,7 +51,6 @@ export class ProductSearchRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
   headers: ProductSearchHeaders;
 }
-
 
 export class ProductSearchResponse extends SpeakeasyBase {
   @SpeakeasyMetadata()

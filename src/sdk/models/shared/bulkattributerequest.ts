@@ -1,12 +1,10 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
-
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 
 export enum BulkAttributeRequestActionEnum {
     Create = "CREATE",
     Update = "UPDATE",
     Delete = "DELETE"
 }
-
 export enum BulkAttributeRequestOptionsTypeEnum {
     Text = "TEXT",
     Boolean = "BOOLEAN",
@@ -14,13 +12,11 @@ export enum BulkAttributeRequestOptionsTypeEnum {
     Integer = "INTEGER",
     Datetime = "DATETIME"
 }
-
 export enum BulkAttributeRequestTextSubTypeEnum {
     SmallText = "SMALL_TEXT",
     TextArea = "TEXT_AREA",
     Html = "HTML"
 }
-
 export enum BulkAttributeRequestTypeEnum {
     Text = "TEXT",
     Boolean = "BOOLEAN",
@@ -30,7 +26,6 @@ export enum BulkAttributeRequestTypeEnum {
     Datetime = "DATETIME",
     Options = "OPTIONS"
 }
-
 export enum BulkAttributeRequestValidationAttributeTypesEnum {
     Text = "TEXT",
     Boolean = "BOOLEAN",
@@ -40,7 +35,6 @@ export enum BulkAttributeRequestValidationAttributeTypesEnum {
     Asset = "ASSET",
     Datetime = "DATETIME"
 }
-
 
 // BulkAttributeRequestValidationRange
 /** 
@@ -53,7 +47,6 @@ export class BulkAttributeRequestValidationRange extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=min" })
   min?: any;
 }
-
 
 export class BulkAttributeRequestValidation extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=attributeTypes" })
@@ -86,7 +79,6 @@ export class BulkAttributeRequestValidation extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=unique" })
   unique?: boolean;
 }
-
 
 export class BulkAttributeRequest extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=action" })

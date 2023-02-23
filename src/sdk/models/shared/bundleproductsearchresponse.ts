@@ -1,8 +1,7 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { ProductAttribute } from "./productattribute";
-import { ProductChild } from "./productchild";
 import { ProductCategory } from "./productcategory";
-
+import { ProductChild } from "./productchild";
 
 
 export class BundleProductSearchResponseProducts extends SpeakeasyBase {
@@ -33,7 +32,6 @@ export class BundleProductSearchResponseProducts extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
-
 
 export class BundleProductSearchResponse extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=pageSize" })

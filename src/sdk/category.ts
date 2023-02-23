@@ -1,6 +1,6 @@
-import { AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
-import * as operations from "./models/operations";
 import * as utils from "../internal/utils";
+import * as operations from "./models/operations";
+import { AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
 
 export class Category {
   _defaultClient: AxiosInstance;
@@ -338,16 +338,16 @@ export class Category {
 
   
   /**
-   * getCategoryAttributesById - Get category attributes
+   * getCategoryAttributesByID - Get category attributes
    *
    * Gets all attributes of a category. <br> **Note**: <br> *Get category* endpoint (GET /v1/category) returns categories, their attributes, child categories, and breadcrumb details. So, this endpoint is recommended if you have a category ID and only require its attributes.
   **/
-  getCategoryAttributesById(
-    req: operations.GetCategoryAttributesByIdRequest,
+  getCategoryAttributesByID(
+    req: operations.GetCategoryAttributesByIDRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.GetCategoryAttributesByIdResponse> {
+  ): Promise<operations.GetCategoryAttributesByIDResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.GetCategoryAttributesByIdRequest(req);
+      req = new operations.GetCategoryAttributesByIDRequest(req);
     }
     
     const baseURL: string = this._serverURL;
@@ -375,7 +375,7 @@ export class Category {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GetCategoryAttributesByIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        const res: operations.GetCategoryAttributesByIDResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
@@ -525,16 +525,16 @@ export class Category {
 
   
   /**
-   * getCategorySkUs - Get SKUs in a category
+   * getCategorySKUs - Get SKUs in a category
    *
    * Gets SKUs of all products belonging to a category. <br> **Note**: <br> 1) To get SKUs, Algolia search is recommended over this endpoint. <br> 2) Categories must exist in the system to get SKUs in that category. If SKUs are not created in the given category ID, this endpoint returns an empty list.
   **/
-  getCategorySkUs(
-    req: operations.GetCategorySkUsRequest,
+  getCategorySKUs(
+    req: operations.GetCategorySKUsRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.GetCategorySkUsResponse> {
+  ): Promise<operations.GetCategorySKUsResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.GetCategorySkUsRequest(req);
+      req = new operations.GetCategorySKUsRequest(req);
     }
     
     const baseURL: string = this._serverURL;
@@ -562,7 +562,7 @@ export class Category {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GetCategorySkUsResponse = {statusCode: httpRes.status, contentType: contentType};
+        const res: operations.GetCategorySKUsResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
@@ -847,16 +847,16 @@ export class Category {
 
   
   /**
-   * postCategoryAttributeById - Create, update, and delete attributes of a category
+   * postCategoryAttributeByID - Create, update, and delete attributes of a category
    *
    * Category attributes let you define characteristics of categories and child categories. <br> This endpoint creates, updates, or removes attributes of a single category. The primary purpose is to assign attributes.
   **/
-  postCategoryAttributeById(
-    req: operations.PostCategoryAttributeByIdRequest,
+  postCategoryAttributeByID(
+    req: operations.PostCategoryAttributeByIDRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.PostCategoryAttributeByIdResponse> {
+  ): Promise<operations.PostCategoryAttributeByIDResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.PostCategoryAttributeByIdRequest(req);
+      req = new operations.PostCategoryAttributeByIDRequest(req);
     }
     
     const baseURL: string = this._serverURL;
@@ -888,7 +888,7 @@ export class Category {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.PostCategoryAttributeByIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        const res: operations.PostCategoryAttributeByIDResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
@@ -913,16 +913,16 @@ export class Category {
 
   
   /**
-   * postCategoryItemAttributeById - Create or update product attribute conditions
+   * postCategoryItemAttributeByID - Create or update product attribute conditions
    *
    * Creates or updates conditions for product attributes so that products can be filtered based on these conditions, from an Alternate category. <br> For example, a Primary category called **Chairs** has three chairs of different materials. An Alternate category called **Wooden Chairs** with Primary category **Chairs** as source will list all the three chairs. Through this endpoint you can add a 'product attribute condition' to filter chairs made of wood from **Wooden Chairs**. Another example: Using this endpoint, you can combine categories and list items on sale (where sale attribute is true).
   **/
-  postCategoryItemAttributeById(
-    req: operations.PostCategoryItemAttributeByIdRequest,
+  postCategoryItemAttributeByID(
+    req: operations.PostCategoryItemAttributeByIDRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.PostCategoryItemAttributeByIdResponse> {
+  ): Promise<operations.PostCategoryItemAttributeByIDResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.PostCategoryItemAttributeByIdRequest(req);
+      req = new operations.PostCategoryItemAttributeByIDRequest(req);
     }
     
     const baseURL: string = this._serverURL;
@@ -953,7 +953,7 @@ export class Category {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.PostCategoryItemAttributeByIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        const res: operations.PostCategoryItemAttributeByIDResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
@@ -978,16 +978,16 @@ export class Category {
 
   
   /**
-   * postCategoryItemibuteById - Create, update, and remove product attributes for a category
+   * postCategoryItemibuteByID - Create, update, and remove product attributes for a category
    *
    * Categories lets merchants segregate and group items. They also allow specifying 'mandatory' and 'optional' attributes that all products (aka items) within that category must have. They are used to store structured information about products. <br> This endpoint creates and updates (also deletes) product attributes for the specified category.
   **/
-  postCategoryItemibuteById(
-    req: operations.PostCategoryItemibuteByIdRequest,
+  postCategoryItemibuteByID(
+    req: operations.PostCategoryItemibuteByIDRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.PostCategoryItemibuteByIdResponse> {
+  ): Promise<operations.PostCategoryItemibuteByIDResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.PostCategoryItemibuteByIdRequest(req);
+      req = new operations.PostCategoryItemibuteByIDRequest(req);
     }
     
     const baseURL: string = this._serverURL;
@@ -1019,7 +1019,7 @@ export class Category {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.PostCategoryItemibuteByIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        const res: operations.PostCategoryItemibuteByIDResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {

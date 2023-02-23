@@ -1,5 +1,4 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
-
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 
 
 export class BulkAttributeResponseAttributesFailed extends SpeakeasyBase {
@@ -9,7 +8,6 @@ export class BulkAttributeResponseAttributesFailed extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
-
 
 export class BulkAttributeResponseAttributesSuccess extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=id" })
@@ -22,7 +20,6 @@ export class BulkAttributeResponseAttributesSuccess extends SpeakeasyBase {
   name?: string;
 }
 
-
 export class BulkAttributeResponseAttributes extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=failed", elemType: BulkAttributeResponseAttributesFailed })
   failed?: BulkAttributeResponseAttributesFailed[];
@@ -30,7 +27,6 @@ export class BulkAttributeResponseAttributes extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=success", elemType: BulkAttributeResponseAttributesSuccess })
   success?: BulkAttributeResponseAttributesSuccess[];
 }
-
 
 export class BulkAttributeResponse extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=attributes" })

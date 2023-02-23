@@ -1,11 +1,9 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
-
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 
 export enum ModifyNodeSourcesRequestSourcesActionEnum {
     Set = "SET",
     Unset = "UNSET"
 }
-
 
 export class ModifyNodeSourcesRequestSources extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=action" })
@@ -17,7 +15,6 @@ export class ModifyNodeSourcesRequestSources extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=nodeId" })
   nodeId?: number;
 }
-
 
 export class ModifyNodeSourcesRequest extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=id" })

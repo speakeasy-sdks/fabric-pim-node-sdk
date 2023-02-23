@@ -1,6 +1,5 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { CategorySingle } from "./categorysingle";
-
 
 
 export class CategoryPage extends SpeakeasyBase {

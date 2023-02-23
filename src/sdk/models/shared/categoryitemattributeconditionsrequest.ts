@@ -1,11 +1,9 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
-
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 
 export enum CategoryItemAttributeConditionsRequestItemAttributeConditionsActionEnum {
     Set = "SET",
     Unset = "UNSET"
 }
-
 export enum CategoryItemAttributeConditionsRequestItemAttributeConditionsConditionTypeEnum {
     Yes = "YES",
     No = "NO",
@@ -19,7 +17,6 @@ export enum CategoryItemAttributeConditionsRequestItemAttributeConditionsConditi
     Excludes = "EXCLUDES"
 }
 
-
 export class CategoryItemAttributeConditionsRequestItemAttributeConditionsCondition extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=type" })
   type: CategoryItemAttributeConditionsRequestItemAttributeConditionsConditionTypeEnum;
@@ -27,7 +24,6 @@ export class CategoryItemAttributeConditionsRequestItemAttributeConditionsCondit
   @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }
-
 
 export class CategoryItemAttributeConditionsRequestItemAttributeConditions extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=action" })
@@ -39,7 +35,6 @@ export class CategoryItemAttributeConditionsRequestItemAttributeConditions exten
   @SpeakeasyMetadata({ data: "json, name=condition" })
   condition?: CategoryItemAttributeConditionsRequestItemAttributeConditionsCondition;
 }
-
 
 export class CategoryItemAttributeConditionsRequest extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=id" })

@@ -1,8 +1,5 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
-import { AttributeValue } from "./attributevalue";
-import { AttributeValueFrenchLocale } from "./attributevaluefrenchlocale";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { InheritItemAttributesUpdate } from "./inherititemattributesupdate";
-
 
 
 export class ProductUpdate extends SpeakeasyBase {
