@@ -1,8 +1,8 @@
 management:
     openapi-checksum: 2ec511e1ac219634fc445e8b7bec8f89
     openapi-version: 2.0.0
-    speakeasy-version: 1.5.0
+    speakeasy-version: 1.5.3
 typescript:
-    version: 3.1.0
+    version: 3.1.1
     packagename: '@fabric/pim-sdk'
     author: fabric

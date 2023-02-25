@@ -27,9 +27,13 @@ For more details on getting access to the Fabric API please see [here](https://k
 ## SDK Example Usage
 <!-- Start SDK Example Usage -->
 ```typescript
-import { SDK, withSecurity} from "@fabric/pim-sdk";
-import { ModifyAttributeMappingsRequest, ModifyAttributeMappingsResponse } from "@fabric/pim-sdk/src/sdk/models/operations";
+import {
+  ModifyAttributeMappingsRequest,
+  ModifyAttributeMappingsResponse 
+} from "@fabric/pim-sdk/dist/sdk/models/operations";
+
 import { AxiosError } from "axios";
+import { SDK } from "@fabric/pim-sdk";
 
 
 const sdk = new SDK();
