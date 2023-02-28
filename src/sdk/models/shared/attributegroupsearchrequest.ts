@@ -1,21 +1,27 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose, Type } from "class-transformer";
 
 
 export class AttributeGroupSearchRequestInclude extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=attributes" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "attributes" })
   attributes?: boolean;
 }
 
 export class AttributeGroupSearchRequestMatchOr extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "name" })
   name?: string;
 }
 
 export class AttributeGroupSearchRequestMatch extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=or", elemType: AttributeGroupSearchRequestMatchOr })
+  @SpeakeasyMetadata({ elemType: AttributeGroupSearchRequestMatchOr })
+  @Expose({ name: "or" })
+  @Type(() => AttributeGroupSearchRequestMatchOr)
   or?: AttributeGroupSearchRequestMatchOr[];
 
-  @SpeakeasyMetadata({ data: "json, name=target" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "target" })
   target?: string;
 }
 export enum AttributeGroupSearchRequestSortDirectionEnum {
@@ -24,26 +30,36 @@ export enum AttributeGroupSearchRequestSortDirectionEnum {
 }
 
 export class AttributeGroupSearchRequestSort extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=direction" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "direction" })
   direction?: AttributeGroupSearchRequestSortDirectionEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=field" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "field" })
   field?: string;
 }
 
 export class AttributeGroupSearchRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=include" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "include" })
+  @Type(() => AttributeGroupSearchRequestInclude)
   include?: AttributeGroupSearchRequestInclude;
 
-  @SpeakeasyMetadata({ data: "json, name=match" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "match" })
+  @Type(() => AttributeGroupSearchRequestMatch)
   match?: AttributeGroupSearchRequestMatch;
 
-  @SpeakeasyMetadata({ data: "json, name=page" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "page" })
   page?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=size" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "size" })
   size?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=sort", elemType: AttributeGroupSearchRequestSort })
+  @SpeakeasyMetadata({ elemType: AttributeGroupSearchRequestSort })
+  @Expose({ name: "sort" })
+  @Type(() => AttributeGroupSearchRequestSort)
   sort?: AttributeGroupSearchRequestSort[];
 }

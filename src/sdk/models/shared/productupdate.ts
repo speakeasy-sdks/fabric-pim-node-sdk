@@ -1,23 +1,31 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { InheritItemAttributesUpdate } from "./inherititemattributesupdate";
+import { Expose, Type } from "class-transformer";
 
 
 export class ProductUpdate extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=action" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "action" })
   action?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=attributeValues" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "attributeValues" })
   attributeValues?: any[];
 
-  @SpeakeasyMetadata({ data: "json, name=inheritedAttributes", elemType: InheritItemAttributesUpdate })
+  @SpeakeasyMetadata({ elemType: InheritItemAttributesUpdate })
+  @Expose({ name: "inheritedAttributes" })
+  @Type(() => InheritItemAttributesUpdate)
   inheritedAttributes?: InheritItemAttributesUpdate[];
 
-  @SpeakeasyMetadata({ data: "json, name=parentSku" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "parentSku" })
   parentSku?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=skus" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "skus" })
   skus?: string[];
 
-  @SpeakeasyMetadata({ data: "json, name=type" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "type" })
   type?: string;
 }

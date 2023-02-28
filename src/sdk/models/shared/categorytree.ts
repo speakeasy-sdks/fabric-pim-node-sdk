@@ -1,6 +1,7 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Attribute } from "./attribute";
 import { CategoryChild } from "./categorychild";
+import { Expose, Type } from "class-transformer";
 
 export enum CategoryTreeHierarchyEnum {
     Primary = "PRIMARY",
@@ -8,30 +9,41 @@ export enum CategoryTreeHierarchyEnum {
 }
 
 export class CategoryTree extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=attributes", elemType: Attribute })
+  @SpeakeasyMetadata({ elemType: Attribute })
+  @Expose({ name: "attributes" })
+  @Type(() => Attribute)
   attributes?: Attribute[];
 
-  @SpeakeasyMetadata({ data: "json, name=children", elemType: CategoryChild })
+  @SpeakeasyMetadata({ elemType: CategoryChild })
+  @Expose({ name: "children" })
+  @Type(() => CategoryChild)
   children?: CategoryChild[];
 
-  @SpeakeasyMetadata({ data: "json, name=createdOn" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "createdOn" })
   createdOn?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=hierarchy" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "hierarchy" })
   hierarchy?: CategoryTreeHierarchyEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=isActive" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "isActive" })
   isActive?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=modifiedOn" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "modifiedOn" })
   modifiedOn?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "name" })
   name?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=nodeId" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "nodeId" })
   nodeId?: number;
 }

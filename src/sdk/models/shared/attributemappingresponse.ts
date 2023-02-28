@@ -1,42 +1,59 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { AttributeResponse } from "./attributeresponse";
 import { AttributeValidation } from "./attributevalidation";
+import { Expose, Transform, Type } from "class-transformer";
 
 
 export class AttributeMappingResponse extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=attribute" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "attribute" })
+  @Type(() => AttributeResponse)
   attribute?: AttributeResponse;
 
-  @SpeakeasyMetadata({ data: "json, name=attributeId" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "attributeId" })
   attributeId?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=createdBy" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "createdBy" })
   createdBy?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=createdOn" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "createdOn" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   createdOn?: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=description" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "description" })
   description?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=mapping" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "mapping" })
   mapping?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=modifiedBy" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "modifiedBy" })
   modifiedBy?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=modifiedOn" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "modifiedOn" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   modifiedOn?: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "name" })
   name?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=required" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "required" })
   required?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=target" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "target" })
   target?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=validation" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "validation" })
+  @Type(() => AttributeValidation)
   validation?: AttributeValidation;
 }

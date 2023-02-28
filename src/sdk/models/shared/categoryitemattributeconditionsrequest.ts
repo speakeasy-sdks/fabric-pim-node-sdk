@@ -1,4 +1,5 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose, Type } from "class-transformer";
 
 export enum CategoryItemAttributeConditionsRequestItemAttributeConditionsActionEnum {
     Set = "SET",
@@ -18,31 +19,41 @@ export enum CategoryItemAttributeConditionsRequestItemAttributeConditionsConditi
 }
 
 export class CategoryItemAttributeConditionsRequestItemAttributeConditionsCondition extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=type" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "type" })
   type: CategoryItemAttributeConditionsRequestItemAttributeConditionsConditionTypeEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=value" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "value" })
   value?: string;
 }
 
 export class CategoryItemAttributeConditionsRequestItemAttributeConditions extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=action" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "action" })
   action: CategoryItemAttributeConditionsRequestItemAttributeConditionsActionEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=attributeId" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "attributeId" })
   attributeId: string;
 
-  @SpeakeasyMetadata({ data: "json, name=condition" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "condition" })
+  @Type(() => CategoryItemAttributeConditionsRequestItemAttributeConditionsCondition)
   condition?: CategoryItemAttributeConditionsRequestItemAttributeConditionsCondition;
 }
 
 export class CategoryItemAttributeConditionsRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=itemAttributeConditions", elemType: CategoryItemAttributeConditionsRequestItemAttributeConditions })
+  @SpeakeasyMetadata({ elemType: CategoryItemAttributeConditionsRequestItemAttributeConditions })
+  @Expose({ name: "itemAttributeConditions" })
+  @Type(() => CategoryItemAttributeConditionsRequestItemAttributeConditions)
   itemAttributeConditions?: CategoryItemAttributeConditionsRequestItemAttributeConditions[];
 
-  @SpeakeasyMetadata({ data: "json, name=nodeId" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "nodeId" })
   nodeId?: number;
 }

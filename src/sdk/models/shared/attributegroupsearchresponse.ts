@@ -1,5 +1,6 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { AttributeGroupTypeResponse } from "./attributegrouptyperesponse";
+import { Expose, Type } from "class-transformer";
 
 export enum AttributeGroupSearchResponseAttributeGroupsTypeEnum {
     Workflow = "WORKFLOW",
@@ -7,53 +8,72 @@ export enum AttributeGroupSearchResponseAttributeGroupsTypeEnum {
 }
 
 export class AttributeGroupSearchResponseAttributeGroups extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=EditableAttributes", elemType: AttributeGroupTypeResponse })
+  @SpeakeasyMetadata({ elemType: AttributeGroupTypeResponse })
+  @Expose({ name: "EditableAttributes" })
+  @Type(() => AttributeGroupTypeResponse)
   editableAttributes?: AttributeGroupTypeResponse[];
 
-  @SpeakeasyMetadata({ data: "json, name=ImpactedAttributes" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "ImpactedAttributes" })
   impactedAttributes?: any;
 
-  @SpeakeasyMetadata({ data: "json, name=ReadOnlyAttributes", elemType: AttributeGroupTypeResponse })
+  @SpeakeasyMetadata({ elemType: AttributeGroupTypeResponse })
+  @Expose({ name: "ReadOnlyAttributes" })
+  @Type(() => AttributeGroupTypeResponse)
   readOnlyAttributes?: AttributeGroupTypeResponse[];
 
-  @SpeakeasyMetadata({ data: "json, name=WorkflowAttributes" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "WorkflowAttributes" })
   workflowAttributes?: any;
 
-  @SpeakeasyMetadata({ data: "json, name=_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "_id" })
   id?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=createdOn" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "createdOn" })
   createdOn?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=description" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "description" })
   description?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=modifiedOn" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "modifiedOn" })
   modifiedOn?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "name" })
   name?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=priorityOrder" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "priorityOrder" })
   priorityOrder?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=totalAttributes" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "totalAttributes" })
   totalAttributes?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=type" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "type" })
   type?: AttributeGroupSearchResponseAttributeGroupsTypeEnum;
 }
 
 export class AttributeGroupSearchResponse extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=attributeGroups", elemType: AttributeGroupSearchResponseAttributeGroups })
+  @SpeakeasyMetadata({ elemType: AttributeGroupSearchResponseAttributeGroups })
+  @Expose({ name: "attributeGroups" })
+  @Type(() => AttributeGroupSearchResponseAttributeGroups)
   attributeGroups?: AttributeGroupSearchResponseAttributeGroups[];
 
-  @SpeakeasyMetadata({ data: "json, name=pageSize" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "pageSize" })
   pageSize?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=pages" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "pages" })
   pages?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=totalSize" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "totalSize" })
   totalSize?: number;
 }

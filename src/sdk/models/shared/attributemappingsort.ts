@@ -1,4 +1,5 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose } from "class-transformer";
 
 export enum AttributeMappingSortDirectionEnum {
     Asc = "ASC",
@@ -15,9 +16,11 @@ export enum AttributeMappingSortFieldEnum {
  * Individual fields to sort
 **/
 export class AttributeMappingSort extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=direction" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "direction" })
   direction?: AttributeMappingSortDirectionEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=field" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "field" })
   field?: AttributeMappingSortFieldEnum;
 }

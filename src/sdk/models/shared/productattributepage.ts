@@ -1,5 +1,6 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { ProductAttribute } from "./productattribute";
+import { Expose, Type } from "class-transformer";
 
 
 // ProductAttributePage
@@ -7,15 +8,20 @@ import { ProductAttribute } from "./productattribute";
  * Attribute page object
 **/
 export class ProductAttributePage extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=attributes", elemType: ProductAttribute })
+  @SpeakeasyMetadata({ elemType: ProductAttribute })
+  @Expose({ name: "attributes" })
+  @Type(() => ProductAttribute)
   attributes?: ProductAttribute[];
 
-  @SpeakeasyMetadata({ data: "json, name=pageSize" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "pageSize" })
   pageSize?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=pages" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "pages" })
   pages?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=totalSize" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "totalSize" })
   totalSize?: number;
 }

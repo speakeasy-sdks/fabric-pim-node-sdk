@@ -1,17 +1,23 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { FileResponse } from "./fileresponse";
+import { Expose, Type } from "class-transformer";
 
 
 export class FilePaginationResponse extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=files", elemType: FileResponse })
+  @SpeakeasyMetadata({ elemType: FileResponse })
+  @Expose({ name: "files" })
+  @Type(() => FileResponse)
   files?: FileResponse[];
 
-  @SpeakeasyMetadata({ data: "json, name=pageSize" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "pageSize" })
   pageSize?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=pages" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "pages" })
   pages?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=totalSize" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "totalSize" })
   totalSize?: number;
 }

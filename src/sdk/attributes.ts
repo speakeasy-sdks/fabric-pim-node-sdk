@@ -1,6 +1,8 @@
 import * as utils from "../internal/utils";
 import * as operations from "./models/operations";
+import * as shared from "./models/shared";
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import { plainToInstance } from "class-transformer";
 
 export class Attributes {
   _defaultClient: AxiosInstance;
@@ -46,6 +48,7 @@ export class Attributes {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...utils.getHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -64,17 +67,29 @@ export class Attributes {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.attributeMappingResponse = httpRes?.data;
+              res.attributeMappingResponse = plainToInstance(
+                shared.AttributeMappingResponse,
+                httpRes?.data as shared.AttributeMappingResponse,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -111,6 +126,7 @@ export class Attributes {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...utils.getHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -129,17 +145,29 @@ export class Attributes {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.attributeMappingPaginationResponse = httpRes?.data;
+              res.attributeMappingPaginationResponse = plainToInstance(
+                shared.AttributeMappingPaginationResponse,
+                httpRes?.data as shared.AttributeMappingPaginationResponse,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }

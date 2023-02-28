@@ -1,26 +1,34 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose, Type } from "class-transformer";
 
 
 export class AttributeGroupResponseAttributes extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "_id" })
   id?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=attributeGroupId" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "attributeGroupId" })
   attributeGroupId?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=attributeId" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "attributeId" })
   attributeId?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=createdOn" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "createdOn" })
   createdOn?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=isEditable" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "isEditable" })
   isEditable?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=modifiedOn" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "modifiedOn" })
   modifiedOn?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=order" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "order" })
   order?: number;
 }
 export enum AttributeGroupResponseTypeEnum {
@@ -29,27 +37,36 @@ export enum AttributeGroupResponseTypeEnum {
 }
 
 export class AttributeGroupResponse extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "_id" })
   id?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=attributes", elemType: AttributeGroupResponseAttributes })
+  @SpeakeasyMetadata({ elemType: AttributeGroupResponseAttributes })
+  @Expose({ name: "attributes" })
+  @Type(() => AttributeGroupResponseAttributes)
   attributes?: AttributeGroupResponseAttributes[];
 
-  @SpeakeasyMetadata({ data: "json, name=createdOn" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "createdOn" })
   createdOn?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=description" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "description" })
   description?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=modifiedOn" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "modifiedOn" })
   modifiedOn?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "name" })
   name?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=priorityOrder" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "priorityOrder" })
   priorityOrder?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=type" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "type" })
   type?: AttributeGroupResponseTypeEnum;
 }

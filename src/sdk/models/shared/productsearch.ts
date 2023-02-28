@@ -2,33 +2,46 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { ProductAttribute } from "./productattribute";
 import { ProductCategory } from "./productcategory";
 import { ProductChild } from "./productchild";
+import { Expose, Type } from "class-transformer";
 
 
 export class ProductSearch extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=attributes", elemType: ProductAttribute })
+  @SpeakeasyMetadata({ elemType: ProductAttribute })
+  @Expose({ name: "attributes" })
+  @Type(() => ProductAttribute)
   attributes?: ProductAttribute[];
 
-  @SpeakeasyMetadata({ data: "json, name=categories", elemType: ProductCategory })
+  @SpeakeasyMetadata({ elemType: ProductCategory })
+  @Expose({ name: "categories" })
+  @Type(() => ProductCategory)
   categories?: ProductCategory[];
 
-  @SpeakeasyMetadata({ data: "json, name=children", elemType: ProductChild })
+  @SpeakeasyMetadata({ elemType: ProductChild })
+  @Expose({ name: "children" })
+  @Type(() => ProductChild)
   children?: ProductChild[];
 
-  @SpeakeasyMetadata({ data: "json, name=createdOn" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "createdOn" })
   createdOn?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=dependents" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "dependents" })
   dependents?: string[];
 
-  @SpeakeasyMetadata({ data: "json, name=itemId" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "itemId" })
   itemId?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=modifiedOn" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "modifiedOn" })
   modifiedOn?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=sku" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "sku" })
   sku?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=type" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "type" })
   type?: string;
 }

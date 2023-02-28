@@ -1,10 +1,13 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose } from "class-transformer";
 
 
 export class FileSearchRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=page" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "page" })
   page?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=size" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "size" })
   size?: any;
 }

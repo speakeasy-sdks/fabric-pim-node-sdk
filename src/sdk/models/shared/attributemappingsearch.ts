@@ -1,26 +1,36 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { AttributeMappingMatch } from "./attributemappingmatch";
 import { AttributeMappingSort } from "./attributemappingsort";
+import { Expose, Type } from "class-transformer";
 
 
 export class AttributeMappingSearchInclude extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=attribute" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "attribute" })
   attribute?: boolean;
 }
 
 export class AttributeMappingSearch extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=include" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "include" })
+  @Type(() => AttributeMappingSearchInclude)
   include?: AttributeMappingSearchInclude;
 
-  @SpeakeasyMetadata({ data: "json, name=match" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "match" })
+  @Type(() => AttributeMappingMatch)
   match?: AttributeMappingMatch;
 
-  @SpeakeasyMetadata({ data: "json, name=page" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "page" })
   page: number;
 
-  @SpeakeasyMetadata({ data: "json, name=size" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "size" })
   size: number;
 
-  @SpeakeasyMetadata({ data: "json, name=sort", elemType: AttributeMappingSort })
+  @SpeakeasyMetadata({ elemType: AttributeMappingSort })
+  @Expose({ name: "sort" })
+  @Type(() => AttributeMappingSort)
   sort?: AttributeMappingSort[];
 }

@@ -1,4 +1,5 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose, Type } from "class-transformer";
 
 export enum ModifyCategoryItemAttributesRequestItemAttributesActionEnum {
     Set = "SET",
@@ -6,23 +7,30 @@ export enum ModifyCategoryItemAttributesRequestItemAttributesActionEnum {
 }
 
 export class ModifyCategoryItemAttributesRequestItemAttributes extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=action" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "action" })
   action: ModifyCategoryItemAttributesRequestItemAttributesActionEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=attributeId" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "attributeId" })
   attributeId: string;
 
-  @SpeakeasyMetadata({ data: "json, name=mandatory" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "mandatory" })
   mandatory?: boolean;
 }
 
 export class ModifyCategoryItemAttributesRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=itemAttributes", elemType: ModifyCategoryItemAttributesRequestItemAttributes })
+  @SpeakeasyMetadata({ elemType: ModifyCategoryItemAttributesRequestItemAttributes })
+  @Expose({ name: "itemAttributes" })
+  @Type(() => ModifyCategoryItemAttributesRequestItemAttributes)
   itemAttributes: ModifyCategoryItemAttributesRequestItemAttributes[];
 
-  @SpeakeasyMetadata({ data: "json, name=nodeId" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "nodeId" })
   nodeId?: number;
 }

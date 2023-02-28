@@ -1,4 +1,5 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose } from "class-transformer";
 
 export enum CreateCategoryRequestTypeEnum {
     Alternate = "ALTERNATE",
@@ -6,18 +7,23 @@ export enum CreateCategoryRequestTypeEnum {
 }
 
 export class CreateCategoryRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=active" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "active" })
   active?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "name" })
   name: string;
 
-  @SpeakeasyMetadata({ data: "json, name=order" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "order" })
   order?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=parentNodeId" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "parentNodeId" })
   parentNodeId?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=type" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "type" })
   type?: CreateCategoryRequestTypeEnum;
 }

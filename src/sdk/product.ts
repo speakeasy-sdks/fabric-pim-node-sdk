@@ -1,6 +1,8 @@
 import * as utils from "../internal/utils";
 import * as operations from "./models/operations";
-import { AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
+import * as shared from "./models/shared";
+import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import { plainToInstance } from "class-transformer";
 
 export class Product {
   _defaultClient: AxiosInstance;
@@ -46,6 +48,7 @@ export class Product {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...utils.getHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -64,17 +67,29 @@ export class Product {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.filePaginationResponse = httpRes?.data;
+              res.filePaginationResponse = plainToInstance(
+                shared.FilePaginationResponse,
+                httpRes?.data as shared.FilePaginationResponse,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -111,6 +126,7 @@ export class Product {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...utils.getHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -129,17 +145,29 @@ export class Product {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.filePaginationResponse = httpRes?.data;
+              res.filePaginationResponse = plainToInstance(
+                shared.FilePaginationResponse,
+                httpRes?.data as shared.FilePaginationResponse,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -176,6 +204,7 @@ export class Product {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...utils.getHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -194,22 +223,38 @@ export class Product {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.productResponse = httpRes?.data;
+              res.productResponse = plainToInstance(
+                shared.ProductResponse,
+                httpRes?.data as shared.ProductResponse,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 422:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.productModifyError = httpRes?.data;
+              res.productModifyError = plainToInstance(
+                shared.ProductModifyError,
+                httpRes?.data as shared.ProductModifyError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -246,6 +291,7 @@ export class Product {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...utils.getHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -264,17 +310,29 @@ export class Product {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.filePaginationResponse = httpRes?.data;
+              res.filePaginationResponse = plainToInstance(
+                shared.FilePaginationResponse,
+                httpRes?.data as shared.FilePaginationResponse,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -301,6 +359,7 @@ export class Product {
     const url: string = utils.generateURL(baseURL, "/v1/product/bulk/template/{accountId}/{nodeId}", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...utils.getHeadersFromRequest(req.headers), ...config?.headers};
     
     const r = client.request({
@@ -326,12 +385,20 @@ export class Product {
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -358,6 +425,7 @@ export class Product {
     const url: string = baseURL.replace(/\/$/, "") + "/v1/product/bulk/template/attribute";
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...utils.getHeadersFromRequest(req.headers), ...config?.headers};
     
     const r = client.request({
@@ -383,12 +451,20 @@ export class Product {
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -425,6 +501,7 @@ export class Product {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...utils.getHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -443,17 +520,29 @@ export class Product {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.getS3URLItemAttributeResponse = httpRes?.data;
+              res.getS3URLItemAttributeResponse = plainToInstance(
+                shared.GetS3URLItemAttributeResponse,
+                httpRes?.data as shared.GetS3URLItemAttributeResponse,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -480,6 +569,7 @@ export class Product {
     const url: string = utils.generateURL(baseURL, "/v1/product/bulk/template/bundle/{accountId}/{nodeId}", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...utils.getHeadersFromRequest(req.headers), ...config?.headers};
     
     const r = client.request({
@@ -505,12 +595,20 @@ export class Product {
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -547,6 +645,7 @@ export class Product {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...utils.getHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -565,17 +664,29 @@ export class Product {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.getS3URLBundleResponse = httpRes?.data;
+              res.getS3URLBundleResponse = plainToInstance(
+                shared.GetS3URLBundleResponse,
+                httpRes?.data as shared.GetS3URLBundleResponse,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -612,6 +723,7 @@ export class Product {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...utils.getHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -630,17 +742,29 @@ export class Product {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.getS3URLResponse = httpRes?.data;
+              res.getS3URLResponse = plainToInstance(
+                shared.GetS3URLResponse,
+                httpRes?.data as shared.GetS3URLResponse,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -667,6 +791,7 @@ export class Product {
     const url: string = utils.generateURL(baseURL, "/v1/product/bulk/file/{fileId}/status", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...utils.getHeadersFromRequest(req.headers), ...config?.headers};
     
     const r = client.request({
@@ -684,17 +809,29 @@ export class Product {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.getFileStatus200ApplicationJSONOneOf = httpRes?.data;
+              res.getFileStatus200ApplicationJSONOneOf = plainToInstance(
+                ,
+                httpRes?.data as ,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -721,21 +858,15 @@ export class Product {
     const url: string = baseURL.replace(/\/$/, "") + "/v1/product/attribute";
     
     const client: AxiosInstance = this._defaultClient!;
-    const headers = {...utils.getHeadersFromRequest(req.headers), ...config?.headers};
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const headers = {...utils.getHeadersFromRequest(req.headers), ...config?.headers};
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "get",
       headers: headers,
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
@@ -746,17 +877,29 @@ export class Product {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.productAttributePage = httpRes?.data;
+              res.productAttributePage = plainToInstance(
+                shared.ProductAttributePage,
+                httpRes?.data as shared.ProductAttributePage,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -783,21 +926,15 @@ export class Product {
     const url: string = baseURL.replace(/\/$/, "") + "/v1/product";
     
     const client: AxiosInstance = this._defaultClient!;
-    const headers = {...utils.getHeadersFromRequest(req.headers), ...config?.headers};
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const headers = {...utils.getHeadersFromRequest(req.headers), ...config?.headers};
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "get",
       headers: headers,
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
@@ -808,17 +945,29 @@ export class Product {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.getProducts200ApplicationJSONOneOf = httpRes?.data;
+              res.getProducts200ApplicationJSONOneOf = plainToInstance(
+                ,
+                httpRes?.data as ,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -845,21 +994,15 @@ export class Product {
     const url: string = baseURL.replace(/\/$/, "") + "/v2/product";
     
     const client: AxiosInstance = this._defaultClient!;
-    const headers = {...utils.getHeadersFromRequest(req.headers), ...config?.headers};
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const headers = {...utils.getHeadersFromRequest(req.headers), ...config?.headers};
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "get",
       headers: headers,
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
@@ -870,17 +1013,29 @@ export class Product {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.getProductsV2200ApplicationJSONOneOf = httpRes?.data;
+              res.getProductsV2200ApplicationJSONOneOf = plainToInstance(
+                ,
+                httpRes?.data as ,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -917,6 +1072,7 @@ export class Product {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...utils.getHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -935,17 +1091,29 @@ export class Product {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.attributeGroupResponse = httpRes?.data;
+              res.attributeGroupResponse = plainToInstance(
+                ,
+                httpRes?.data as ,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -982,6 +1150,7 @@ export class Product {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...utils.getHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -1000,17 +1169,29 @@ export class Product {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.bulkAttributeResponse = httpRes?.data;
+              res.bulkAttributeResponse = plainToInstance(
+                shared.BulkAttributeResponse,
+                httpRes?.data as shared.BulkAttributeResponse,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -1037,21 +1218,15 @@ export class Product {
     const url: string = baseURL.replace(/\/$/, "") + "/v1/product/search";
     
     const client: AxiosInstance = this._defaultClient!;
-    const headers = {...utils.getHeadersFromRequest(req.headers), ...config?.headers};
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const headers = {...utils.getHeadersFromRequest(req.headers), ...config?.headers};
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "get",
       headers: headers,
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
@@ -1062,17 +1237,29 @@ export class Product {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.productSearch200ApplicationJSONOneOf = httpRes?.data;
+              res.productSearch200ApplicationJSONOneOf = plainToInstance(
+                ,
+                httpRes?.data as ,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -1109,6 +1296,7 @@ export class Product {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...utils.getHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -1127,17 +1315,29 @@ export class Product {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.attributeGroupSearchResponse = httpRes?.data;
+              res.attributeGroupSearchResponse = plainToInstance(
+                shared.AttributeGroupSearchResponse,
+                httpRes?.data as shared.AttributeGroupSearchResponse,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -1174,6 +1374,7 @@ export class Product {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...utils.getHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -1192,17 +1393,29 @@ export class Product {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.bundleUpdateResponse = httpRes?.data;
+              res.bundleUpdateResponse = plainToInstance(
+                ,
+                httpRes?.data as ,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -1239,6 +1452,7 @@ export class Product {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...utils.getHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -1257,22 +1471,38 @@ export class Product {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.productResponse = httpRes?.data;
+              res.productResponse = plainToInstance(
+                shared.ProductResponse,
+                httpRes?.data as shared.ProductResponse,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 422:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.productModifyError = httpRes?.data;
+              res.productModifyError = plainToInstance(
+                shared.ProductModifyError,
+                httpRes?.data as shared.ProductModifyError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -1309,6 +1539,7 @@ export class Product {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...utils.getHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -1327,22 +1558,38 @@ export class Product {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.productResponse = httpRes?.data;
+              res.productResponse = plainToInstance(
+                shared.ProductResponse,
+                httpRes?.data as shared.ProductResponse,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 422:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.productModifyError = httpRes?.data;
+              res.productModifyError = plainToInstance(
+                shared.ProductModifyError,
+                httpRes?.data as shared.ProductModifyError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }

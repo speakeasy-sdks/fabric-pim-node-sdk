@@ -1,5 +1,6 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { AttributeGroupTypeRequest } from "./attributegrouptyperequest";
+import { Expose, Type } from "class-transformer";
 
 export enum AttributeGroupRequestAttributeGroupActionEnum {
     Create = "CREATE",
@@ -12,32 +13,43 @@ export enum AttributeGroupRequestAttributeGroupTypeEnum {
 }
 
 export class AttributeGroupRequestAttributeGroup extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=action" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "action" })
   action?: AttributeGroupRequestAttributeGroupActionEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=description" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "description" })
   description?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=editableAttributes", elemType: AttributeGroupTypeRequest })
+  @SpeakeasyMetadata({ elemType: AttributeGroupTypeRequest })
+  @Expose({ name: "editableAttributes" })
+  @Type(() => AttributeGroupTypeRequest)
   editableAttributes?: AttributeGroupTypeRequest[];
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "name" })
   name?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=priorityOrder" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "priorityOrder" })
   priorityOrder?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=type" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "type" })
   type?: AttributeGroupRequestAttributeGroupTypeEnum;
 }
 
 export class AttributeGroupRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=attributeGroup", elemType: AttributeGroupRequestAttributeGroup })
+  @SpeakeasyMetadata({ elemType: AttributeGroupRequestAttributeGroup })
+  @Expose({ name: "attributeGroup" })
+  @Type(() => AttributeGroupRequestAttributeGroup)
   attributeGroup?: AttributeGroupRequestAttributeGroup[];
 
-  @SpeakeasyMetadata({ data: "json, name=transactional" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "transactional" })
   transactional: boolean;
 }

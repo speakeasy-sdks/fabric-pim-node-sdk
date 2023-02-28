@@ -1,4 +1,5 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose, Type } from "class-transformer";
 
 export enum AttributeValidationAttributeTypesEnum {
     Text = "TEXT",
@@ -15,41 +16,54 @@ export enum AttributeValidationAttributeTypesEnum {
  * Specified range of values must be between this min and/or max
 **/
 export class AttributeValidationRange extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=max" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "max" })
   max?: any;
 
-  @SpeakeasyMetadata({ data: "json, name=min" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "min" })
   min?: any;
 }
 
 export class AttributeValidation extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=attributeTypes" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "attributeTypes" })
   attributeTypes?: AttributeValidationAttributeTypesEnum[];
 
-  @SpeakeasyMetadata({ data: "json, name=contains" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "contains" })
   contains?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=exact" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "exact" })
   exact?: any;
 
-  @SpeakeasyMetadata({ data: "json, name=formula" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "formula" })
   formula?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=inheritable" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "inheritable" })
   inheritable?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=inverse" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "inverse" })
   inverse?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=oneOf" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "oneOf" })
   oneOf?: any;
 
-  @SpeakeasyMetadata({ data: "json, name=range" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "range" })
+  @Type(() => AttributeValidationRange)
   range?: AttributeValidationRange;
 
-  @SpeakeasyMetadata({ data: "json, name=required" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "required" })
   required?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=unique" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "unique" })
   unique?: boolean;
 }

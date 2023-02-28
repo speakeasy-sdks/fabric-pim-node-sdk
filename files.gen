@@ -2,6 +2,7 @@ src/sdk/attributes.ts
 src/sdk/category.ts
 src/sdk/product.ts
 src/sdk/sdk.ts
+jest.config.js
 package-lock.json
 package.json
 src/index.ts

@@ -1,4 +1,5 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose, Type } from "class-transformer";
 
 export enum NodeSourcesAndExclusionsRequestSourceExclusionsActionEnum {
     Set = "SET",
@@ -6,23 +7,30 @@ export enum NodeSourcesAndExclusionsRequestSourceExclusionsActionEnum {
 }
 
 export class NodeSourcesAndExclusionsRequestSourceExclusions extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=action" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "action" })
   action?: NodeSourcesAndExclusionsRequestSourceExclusionsActionEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=nodeId" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "nodeId" })
   nodeId?: number;
 }
 
 export class NodeSourcesAndExclusionsRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=nodeId" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "nodeId" })
   nodeId?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=sourceExclusions", elemType: NodeSourcesAndExclusionsRequestSourceExclusions })
+  @SpeakeasyMetadata({ elemType: NodeSourcesAndExclusionsRequestSourceExclusions })
+  @Expose({ name: "sourceExclusions" })
+  @Type(() => NodeSourcesAndExclusionsRequestSourceExclusions)
   sourceExclusions?: NodeSourcesAndExclusionsRequestSourceExclusions[];
 }

@@ -1,21 +1,30 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Attribute } from "./attribute";
 import { Breadcrumbs } from "./breadcrumbs";
+import { Expose, Type } from "class-transformer";
 
 
 export class CategoryChild extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=attributes", elemType: Attribute })
+  @SpeakeasyMetadata({ elemType: Attribute })
+  @Expose({ name: "attributes" })
+  @Type(() => Attribute)
   attributes?: Attribute[];
 
-  @SpeakeasyMetadata({ data: "json, name=breadcrumbs", elemType: Breadcrumbs })
+  @SpeakeasyMetadata({ elemType: Breadcrumbs })
+  @Expose({ name: "breadcrumbs" })
+  @Type(() => Breadcrumbs)
   breadcrumbs?: Breadcrumbs[];
 
-  @SpeakeasyMetadata({ data: "json, name=children", elemType: CategoryChild })
+  @SpeakeasyMetadata({ elemType: CategoryChild })
+  @Expose({ name: "children" })
+  @Type(() => CategoryChild)
   children?: CategoryChild[];
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "name" })
   name?: string;
 }

@@ -1,4 +1,5 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose } from "class-transformer";
 
 export enum InheritItemAttributesUpdateActionEnum {
     Set = "SET",
@@ -6,9 +7,11 @@ export enum InheritItemAttributesUpdateActionEnum {
 }
 
 export class InheritItemAttributesUpdate extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=action" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "action" })
   action: InheritItemAttributesUpdateActionEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "name" })
   name: string;
 }

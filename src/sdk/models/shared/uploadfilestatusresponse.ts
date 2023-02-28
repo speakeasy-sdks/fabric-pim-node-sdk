@@ -1,19 +1,25 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose } from "class-transformer";
 
 
 export class UploadFileStatusResponse extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=createdOn" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "createdOn" })
   createdOn?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=csvLink" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "csvLink" })
   csvLink?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=errorCsv" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "errorCsv" })
   errorCsv?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "name" })
   name?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=statuses" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "statuses" })
   statuses?: any[];
 }

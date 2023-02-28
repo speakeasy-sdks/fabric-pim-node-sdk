@@ -1,31 +1,42 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { ProductAttribute } from "./productattribute";
+import { Expose, Type } from "class-transformer";
 
 
 export class ProductCategoryBreadcrumbs extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=attributes", elemType: ProductAttribute })
+  @SpeakeasyMetadata({ elemType: ProductAttribute })
+  @Expose({ name: "attributes" })
+  @Type(() => ProductAttribute)
   attributes?: ProductAttribute[];
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "name" })
   name?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=nodeId" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "nodeId" })
   nodeId?: number;
 }
 
 export class ProductCategory extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=breadcrumbs", elemType: ProductCategoryBreadcrumbs })
+  @SpeakeasyMetadata({ elemType: ProductCategoryBreadcrumbs })
+  @Expose({ name: "breadcrumbs" })
+  @Type(() => ProductCategoryBreadcrumbs)
   breadcrumbs?: ProductCategoryBreadcrumbs[];
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "name" })
   name?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=nodeId" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "nodeId" })
   nodeId?: number;
 }

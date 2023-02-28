@@ -1,17 +1,23 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { CategoryItemAttribute } from "./categoryitemattribute";
+import { Expose, Type } from "class-transformer";
 
 
 export class CategoryItemAttributes extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=itemAttributes", elemType: CategoryItemAttribute })
+  @SpeakeasyMetadata({ elemType: CategoryItemAttribute })
+  @Expose({ name: "itemAttributes" })
+  @Type(() => CategoryItemAttribute)
   itemAttributes?: CategoryItemAttribute[];
 
-  @SpeakeasyMetadata({ data: "json, name=name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "name" })
   name?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=nodeId" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "nodeId" })
   nodeId?: number;
 }

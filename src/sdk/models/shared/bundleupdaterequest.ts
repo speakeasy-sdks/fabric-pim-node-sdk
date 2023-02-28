@@ -1,4 +1,5 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose, Type } from "class-transformer";
 
 export enum BundleUpdateRequestActionEnum {
     Update = "UPDATE"
@@ -9,23 +10,30 @@ export enum BundleUpdateRequestBundlesActionEnum {
 }
 
 export class BundleUpdateRequestBundles extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=action" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "action" })
   action: BundleUpdateRequestBundlesActionEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=bundleSku" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "bundleSku" })
   bundleSku: string;
 
-  @SpeakeasyMetadata({ data: "json, name=itemSku" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "itemSku" })
   itemSku: string;
 
-  @SpeakeasyMetadata({ data: "json, name=quantity" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "quantity" })
   quantity?: number;
 }
 
 export class BundleUpdateRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=action" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "action" })
   action?: BundleUpdateRequestActionEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=bundles", elemType: BundleUpdateRequestBundles })
+  @SpeakeasyMetadata({ elemType: BundleUpdateRequestBundles })
+  @Expose({ name: "bundles" })
+  @Type(() => BundleUpdateRequestBundles)
   bundles?: BundleUpdateRequestBundles[];
 }

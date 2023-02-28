@@ -1,57 +1,77 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose, Type } from "class-transformer";
 
 
 export class ProductResponseFailed extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=message" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "message" })
   message?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=sku" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "sku" })
   sku?: string;
 }
 
 export class ProductResponseSuccessErrorAttributes extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=message" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "message" })
   message?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "name" })
   name?: string;
 }
 
 export class ProductResponseSuccessErrorBundles extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=message" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "message" })
   message?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "name" })
   name?: string;
 }
 
 export class ProductResponseSuccess extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=errorAttributes", elemType: ProductResponseSuccessErrorAttributes })
+  @SpeakeasyMetadata({ elemType: ProductResponseSuccessErrorAttributes })
+  @Expose({ name: "errorAttributes" })
+  @Type(() => ProductResponseSuccessErrorAttributes)
   errorAttributes?: ProductResponseSuccessErrorAttributes[];
 
-  @SpeakeasyMetadata({ data: "json, name=errorBundles", elemType: ProductResponseSuccessErrorBundles })
+  @SpeakeasyMetadata({ elemType: ProductResponseSuccessErrorBundles })
+  @Expose({ name: "errorBundles" })
+  @Type(() => ProductResponseSuccessErrorBundles)
   errorBundles?: ProductResponseSuccessErrorBundles[];
 
-  @SpeakeasyMetadata({ data: "json, name=itemId" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "itemId" })
   itemId?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=itemIdSeq" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "itemIdSeq" })
   itemIdSeq?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=message" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "message" })
   message?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=sku" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "sku" })
   sku?: string;
 }
 
 export class ProductResponse extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=failed", elemType: ProductResponseFailed })
+  @SpeakeasyMetadata({ elemType: ProductResponseFailed })
+  @Expose({ name: "failed" })
+  @Type(() => ProductResponseFailed)
   failed?: ProductResponseFailed[];
 
-  @SpeakeasyMetadata({ data: "json, name=itemIds" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "itemIds" })
   itemIds?: string[];
 
-  @SpeakeasyMetadata({ data: "json, name=success", elemType: ProductResponseSuccess })
+  @SpeakeasyMetadata({ elemType: ProductResponseSuccess })
+  @Expose({ name: "success" })
+  @Type(() => ProductResponseSuccess)
   success?: ProductResponseSuccess[];
 }

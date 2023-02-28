@@ -1,6 +1,8 @@
 import * as utils from "../internal/utils";
 import * as operations from "./models/operations";
-import { AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
+import * as shared from "./models/shared";
+import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import { plainToInstance } from "class-transformer";
 
 export class Category {
   _defaultClient: AxiosInstance;
@@ -65,17 +67,29 @@ export class Category {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.modifyCategory = httpRes?.data;
+              res.modifyCategory = plainToInstance(
+                shared.ModifyCategory,
+                httpRes?.data as shared.ModifyCategory,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -131,17 +145,29 @@ export class Category {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.modifyCategory = httpRes?.data;
+              res.modifyCategory = plainToInstance(
+                shared.ModifyCategory,
+                httpRes?.data as shared.ModifyCategory,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -168,21 +194,15 @@ export class Category {
     const url: string = baseURL.replace(/\/$/, "") + "/v1/category";
     
     const client: AxiosInstance = this._defaultClient!;
-    const headers = {...utils.getHeadersFromRequest(req.headers), ...config?.headers};
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const headers = {...utils.getHeadersFromRequest(req.headers), ...config?.headers};
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "get",
       headers: headers,
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
@@ -193,17 +213,29 @@ export class Category {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.categoryPage = httpRes?.data;
+              res.categoryPage = plainToInstance(
+                shared.CategoryPage,
+                httpRes?.data as shared.CategoryPage,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -230,21 +262,15 @@ export class Category {
     const url: string = baseURL.replace(/\/$/, "") + "/v1/category/source/exclusion";
     
     const client: AxiosInstance = this._defaultClient!;
-    const headers = {...utils.getHeadersFromRequest(req.headers), ...config?.headers};
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const headers = {...utils.getHeadersFromRequest(req.headers), ...config?.headers};
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "get",
       headers: headers,
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
@@ -255,17 +281,29 @@ export class Category {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.nodeSourceExclusions = httpRes?.data;
+              res.nodeSourceExclusions = plainToInstance(
+                shared.NodeSourceExclusions,
+                httpRes?.data as shared.NodeSourceExclusions,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -292,21 +330,15 @@ export class Category {
     const url: string = baseURL.replace(/\/$/, "") + "/v1/category/source";
     
     const client: AxiosInstance = this._defaultClient!;
-    const headers = {...utils.getHeadersFromRequest(req.headers), ...config?.headers};
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const headers = {...utils.getHeadersFromRequest(req.headers), ...config?.headers};
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "get",
       headers: headers,
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
@@ -317,17 +349,29 @@ export class Category {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.nodeSources = httpRes?.data;
+              res.nodeSources = plainToInstance(
+                shared.NodeSources,
+                httpRes?.data as shared.NodeSources,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -354,21 +398,15 @@ export class Category {
     const url: string = baseURL.replace(/\/$/, "") + "/v1/category/attribute";
     
     const client: AxiosInstance = this._defaultClient!;
-    const headers = {...utils.getHeadersFromRequest(req.headers), ...config?.headers};
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const headers = {...utils.getHeadersFromRequest(req.headers), ...config?.headers};
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "get",
       headers: headers,
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
@@ -379,17 +417,29 @@ export class Category {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.attributePage = httpRes?.data;
+              res.attributePage = plainToInstance(
+                shared.AttributePage,
+                httpRes?.data as shared.AttributePage,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -416,21 +466,15 @@ export class Category {
     const url: string = baseURL.replace(/\/$/, "") + "/v1/category/item-attribute";
     
     const client: AxiosInstance = this._defaultClient!;
-    const headers = {...utils.getHeadersFromRequest(req.headers), ...config?.headers};
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const headers = {...utils.getHeadersFromRequest(req.headers), ...config?.headers};
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "get",
       headers: headers,
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
@@ -441,17 +485,29 @@ export class Category {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.getCategoryItemAttributes = httpRes?.data;
+              res.getCategoryItemAttributes = plainToInstance(
+                shared.GetCategoryItemAttributes,
+                httpRes?.data as shared.GetCategoryItemAttributes,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -480,20 +536,13 @@ export class Category {
     const client: AxiosInstance = utils.createSecurityClient(this._defaultClient!, req.security)!;
     
     const headers = {...utils.getHeadersFromRequest(req.headers), ...config?.headers};
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
-    
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "get",
       headers: headers,
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
@@ -504,17 +553,29 @@ export class Category {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.getCategoryItemAttributeConditions = httpRes?.data;
+              res.getCategoryItemAttributeConditions = plainToInstance(
+                shared.GetCategoryItemAttributeConditions,
+                httpRes?.data as shared.GetCategoryItemAttributeConditions,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -541,21 +602,15 @@ export class Category {
     const url: string = baseURL.replace(/\/$/, "") + "/v1/category/sku";
     
     const client: AxiosInstance = this._defaultClient!;
-    const headers = {...utils.getHeadersFromRequest(req.headers), ...config?.headers};
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const headers = {...utils.getHeadersFromRequest(req.headers), ...config?.headers};
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "get",
       headers: headers,
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
@@ -566,17 +621,29 @@ export class Category {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.skuPage = httpRes?.data;
+              res.skuPage = plainToInstance(
+                shared.SKUPage,
+                httpRes?.data as shared.SKUPage,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -603,21 +670,15 @@ export class Category {
     const url: string = baseURL.replace(/\/$/, "") + "/v1/category/tree";
     
     const client: AxiosInstance = this._defaultClient!;
-    const headers = {...utils.getHeadersFromRequest(req.headers), ...config?.headers};
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const headers = {...utils.getHeadersFromRequest(req.headers), ...config?.headers};
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "get",
       headers: headers,
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
@@ -628,17 +689,29 @@ export class Category {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.categoryTree = httpRes?.data;
+              res.categoryTree = plainToInstance(
+                shared.CategoryTree,
+                httpRes?.data as shared.CategoryTree,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -694,17 +767,29 @@ export class Category {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.nodeSourcesAndExclusions = httpRes?.data;
+              res.nodeSourcesAndExclusions = plainToInstance(
+                shared.NodeSourcesAndExclusions,
+                httpRes?.data as shared.NodeSourcesAndExclusions,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -760,17 +845,29 @@ export class Category {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.nodeSourcesAndExclusions = httpRes?.data;
+              res.nodeSourcesAndExclusions = plainToInstance(
+                shared.NodeSourcesAndExclusions,
+                httpRes?.data as shared.NodeSourcesAndExclusions,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -826,17 +923,29 @@ export class Category {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.bulkAttributeResponse = httpRes?.data;
+              res.bulkAttributeResponse = plainToInstance(
+                shared.BulkAttributeResponse,
+                httpRes?.data as shared.BulkAttributeResponse,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -892,17 +1001,29 @@ export class Category {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.categoryAttributes = httpRes?.data;
+              res.categoryAttributes = plainToInstance(
+                shared.CategoryAttributes,
+                httpRes?.data as shared.CategoryAttributes,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -939,6 +1060,7 @@ export class Category {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...utils.getHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -957,17 +1079,29 @@ export class Category {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.categoryItemAttributeConditions = httpRes?.data;
+              res.categoryItemAttributeConditions = plainToInstance(
+                shared.CategoryItemAttributeConditions,
+                httpRes?.data as shared.CategoryItemAttributeConditions,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -1023,17 +1157,29 @@ export class Category {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.categoryItemAttributes = httpRes?.data;
+              res.categoryItemAttributes = plainToInstance(
+                shared.CategoryItemAttributes,
+                httpRes?.data as shared.CategoryItemAttributes,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -1060,21 +1206,15 @@ export class Category {
     const url: string = baseURL.replace(/\/$/, "") + "/v1/category/search";
     
     const client: AxiosInstance = this._defaultClient!;
-    const headers = {...utils.getHeadersFromRequest(req.headers), ...config?.headers};
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const headers = {...utils.getHeadersFromRequest(req.headers), ...config?.headers};
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "get",
       headers: headers,
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
@@ -1085,17 +1225,29 @@ export class Category {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.categoryPage = httpRes?.data;
+              res.categoryPage = plainToInstance(
+                shared.CategoryPage,
+                httpRes?.data as shared.CategoryPage,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }

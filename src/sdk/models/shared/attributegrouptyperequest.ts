@@ -1,4 +1,5 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose } from "class-transformer";
 
 export enum AttributeGroupTypeRequestActionEnum {
     Add = "ADD",
@@ -7,12 +8,15 @@ export enum AttributeGroupTypeRequestActionEnum {
 }
 
 export class AttributeGroupTypeRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=action" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "action" })
   action?: AttributeGroupTypeRequestActionEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=order" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "order" })
   order?: number;
 }
