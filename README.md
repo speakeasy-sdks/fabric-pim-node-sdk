@@ -10,13 +10,13 @@ More information on the [Fabric PIM API](https://knowledgebase.fabric.inc/docs/o
 ### NPM
 
 ```bash
-npm add @fabric/pim-sdk
+npm add <no value>
 ```
 
 ### Yarn
 
 ```bash
-yarn add @fabric/pim-sdk
+yarn add <no value>
 ```
 <!-- End SDK Installation -->
 
@@ -30,10 +30,10 @@ For more details on getting access to the Fabric API please see [here](https://k
 import {
   ModifyAttributeMappingsRequest,
   ModifyAttributeMappingsResponse 
-} from "@fabric/pim-sdk/dist/sdk/models/operations";
+} from "<no value>/dist/sdk/models/operations";
 
 import { AxiosError } from "axios";
-import { SDK } from "@fabric/pim-sdk";
+import { SDK } from "<no value>";
 
 
 const sdk = new SDK();
