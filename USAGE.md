@@ -3,10 +3,10 @@
 import {
   ModifyAttributeMappingsRequest,
   ModifyAttributeMappingsResponse 
-} from "<no value>/dist/sdk/models/operations";
+} from "openapi/dist/sdk/models/operations";
 
 import { AxiosError } from "axios";
-import { SDK } from "<no value>";
+import { SDK } from "openapi";
 
 
 const sdk = new SDK();

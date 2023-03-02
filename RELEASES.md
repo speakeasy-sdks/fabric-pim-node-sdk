@@ -39,3 +39,11 @@ Based on:
 - Speakeasy CLI 1.6.0 https://github.com/speakeasy-api/speakeasy
 ### Releases
 - [NPM v3.2.0] https://www.npmjs.com/package/@fabric/pim-sdk/v/3.2.0 - .
+
+## Version 3.3.0
+### Changes
+Based on:
+- OpenAPI Doc 2.0.0 ./fabric-pim.yaml
+- Speakeasy CLI 1.7.1 https://github.com/speakeasy-api/speakeasy
+### Releases
+- [NPM v3.3.0] https://www.npmjs.com/package/@fabric/pim-sdk/v/3.3.0 - .

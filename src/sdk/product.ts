@@ -809,11 +809,7 @@ export class Product {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.getFileStatus200ApplicationJSONOneOf = plainToInstance(
-                ,
-                httpRes?.data as ,
-                { excludeExtraneousValues: true }
-              );
+              res.getFileStatus200ApplicationJSONOneOf = httpRes?.data;
             }
             break;
           case httpRes?.status == 400:
@@ -945,11 +941,7 @@ export class Product {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.getProducts200ApplicationJSONOneOf = plainToInstance(
-                ,
-                httpRes?.data as ,
-                { excludeExtraneousValues: true }
-              );
+              res.getProducts200ApplicationJSONOneOf = httpRes?.data;
             }
             break;
           case httpRes?.status == 400:
@@ -1013,11 +1005,7 @@ export class Product {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.getProductsV2200ApplicationJSONOneOf = plainToInstance(
-                ,
-                httpRes?.data as ,
-                { excludeExtraneousValues: true }
-              );
+              res.getProductsV2200ApplicationJSONOneOf = httpRes?.data;
             }
             break;
           case httpRes?.status == 400:
@@ -1091,11 +1079,7 @@ export class Product {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.attributeGroupResponse = plainToInstance(
-                ,
-                httpRes?.data as ,
-                { excludeExtraneousValues: true }
-              );
+              res.attributeGroupResponse = httpRes?.data;
             }
             break;
           case httpRes?.status == 400:
@@ -1237,11 +1221,7 @@ export class Product {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.productSearch200ApplicationJSONOneOf = plainToInstance(
-                ,
-                httpRes?.data as ,
-                { excludeExtraneousValues: true }
-              );
+              res.productSearch200ApplicationJSONOneOf = httpRes?.data;
             }
             break;
           case httpRes?.status == 400:
@@ -1393,11 +1373,7 @@ export class Product {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.bundleUpdateResponse = plainToInstance(
-                ,
-                httpRes?.data as ,
-                { excludeExtraneousValues: true }
-              );
+              res.bundleUpdateResponse = httpRes?.data;
             }
             break;
           case httpRes?.status == 400:

@@ -1,6 +1,6 @@
 {
-  "name": "<no value>",
-  "version": "3.2.0",
+  "name": "openapi",
+  "version": "3.3.0",
   "author": "fabric",
   "scripts": {
     "prepare": "tsc --build"
