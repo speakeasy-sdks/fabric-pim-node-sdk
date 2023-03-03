@@ -10,4 +10,4 @@ generation:
 typescript:
   version: 3.0.0
   author: fabric
-  packageName: '@fabric/pim-sdk'
+  packageName: '@speakeasy-sdks/pim-sdk'
