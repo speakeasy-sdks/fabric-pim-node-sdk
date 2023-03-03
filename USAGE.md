@@ -1,74 +1,128 @@
 <!-- Start SDK Example Usage -->
 ```typescript
-import { SDK, withSecurity} from "@fabric/pim-sdk";
-import { ModifyAttributeMappingsRequest, ModifyAttributeMappingsResponse } from "@fabric/pim-sdk/src/sdk/models/operations";
+import {
+  ModifyAttributeMappingsRequest,
+  ModifyAttributeMappingsResponse 
+} from "@fabric/pim-sdk/dist/sdk/models/operations";
+
 import { AxiosError } from "axios";
+import { SDK } from "@fabric/pim-sdk";
 
 
 const sdk = new SDK();
     
 const req: ModifyAttributeMappingsRequest = {
   headers: {
-    authorization: "sit",
+    authorization: "unde",
     xSiteContext: {
-      account: "voluptas",
-      channel: 53.099998,
-      date: "consequuntur",
-      stage: "dolor",
+      account: "deserunt",
+      channel: 7151.9,
+      date: "nulla",
+      stage: "id",
     },
   },
   request: {
     mappings: [
       {
-        attributeId: "voluptas",
-        description: "fugit",
-        mapping: "et",
-        name: "nihil",
+        attributeId: "perspiciatis",
+        description: "nulla",
+        mapping: "nihil",
+        name: "fuga",
         required: true,
         validation: {
           attributeTypes: [
-            "BOOLEAN",
-            "DATETIME",
-            "INTEGER",
+            "DECIMAL",
+            "SERIAL",
           ],
-          contains: "ut",
-          exact: "dolorem",
-          formula: "et",
-          inheritable: false,
-          inverse: true,
-          oneOf: "vitae",
+          contains: "saepe",
+          exact: "inventore",
+          formula: "sapiente",
+          inheritable: true,
+          inverse: false,
+          oneOf: "voluptatum",
           range: {
-            max: "totam",
-            min: "dolores",
+            max: "autem",
+            min: "vel",
+          },
+          required: false,
+          unique: false,
+        },
+      },
+      {
+        attributeId: "similique",
+        description: "reprehenderit",
+        mapping: "molestiae",
+        name: "quo",
+        required: true,
+        validation: {
+          attributeTypes: [
+            "TEXT",
+            "ASSET",
+          ],
+          contains: "voluptatem",
+          exact: "consequatur",
+          formula: "fugiat",
+          inheritable: true,
+          inverse: false,
+          oneOf: "eos",
+          range: {
+            max: "accusamus",
+            min: "accusamus",
           },
           required: false,
           unique: true,
         },
       },
       {
-        attributeId: "vel",
-        description: "odio",
-        mapping: "dolore",
-        name: "id",
+        attributeId: "quibusdam",
+        description: "et",
+        mapping: "praesentium",
+        name: "occaecati",
+        required: false,
+        validation: {
+          attributeTypes: [
+            "TEXT",
+            "ASSET",
+            "ASSET",
+          ],
+          contains: "culpa",
+          exact: "qui",
+          formula: "sed",
+          inheritable: false,
+          inverse: true,
+          oneOf: "occaecati",
+          range: {
+            max: "odit",
+            min: "esse",
+          },
+          required: true,
+          unique: false,
+        },
+      },
+      {
+        attributeId: "amet",
+        description: "est",
+        mapping: "id",
+        name: "blanditiis",
         required: true,
         validation: {
           attributeTypes: [
-            "INTEGER",
-            "ASSET",
-            "DATETIME",
+            "BOOLEAN",
+            "TEXT",
+            "SERIAL",
           ],
-          contains: "est",
-          exact: "aut",
-          formula: "odit",
-          inheritable: true,
-          inverse: false,
-          oneOf: "omnis",
+          contains: "et",
+          exact: "voluptatem",
+          formula: "laborum",
+          inheritable: false,
+          inverse: true,
+          oneOf: "iure",
           range: {
-            max: "aut",
-            min: "illo",
+            max: "earum",
+            min: "ut",
           },
-          required: false,
-          unique: false,
+          required: true,
+          unique: true,
         },
       },
     ],

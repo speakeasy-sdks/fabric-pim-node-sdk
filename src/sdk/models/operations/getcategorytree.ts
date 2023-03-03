@@ -1,6 +1,7 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
-
+import { AxiosResponse } from "axios";
+import { Type } from "class-transformer";
 
 
 export class GetCategoryTreeQueryParams extends SpeakeasyBase {
@@ -14,12 +15,10 @@ export class GetCategoryTreeQueryParams extends SpeakeasyBase {
   nodeId?: number;
 }
 
-
 export class GetCategoryTreeHeaders extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-site-context" })
   xSiteContext?: shared.XSiteContext;
 }
-
 
 export class GetCategoryTreeRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
@@ -28,7 +27,6 @@ export class GetCategoryTreeRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
   headers: GetCategoryTreeHeaders;
 }
-
 
 export class GetCategoryTreeResponse extends SpeakeasyBase {
   @SpeakeasyMetadata()
@@ -41,8 +39,11 @@ export class GetCategoryTreeResponse extends SpeakeasyBase {
   contentType: string;
 
   @SpeakeasyMetadata()
-  serverError?: shared.ServerError;
+  statusCode: number;
 
   @SpeakeasyMetadata()
-  statusCode: number;
+  rawResponse?: AxiosResponse;
+
+  @SpeakeasyMetadata()
+  serverError?: shared.ServerError;
 }

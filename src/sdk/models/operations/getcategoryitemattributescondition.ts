@@ -1,7 +1,17 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
+import { AxiosResponse } from "axios";
+import { Type } from "class-transformer";
 
 
+export class GetCategoryItemAttributesConditionSecurity extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  apiKey: shared.SchemeAPIKey;
+}
+export enum GetCategoryItemAttributesConditionStatusEnum {
+    Assigned = "ASSIGNED",
+    Unassigned = "UNASSIGNED"
+}
 
 export class GetCategoryItemAttributesConditionQueryParams extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id" })
@@ -17,9 +27,8 @@ export class GetCategoryItemAttributesConditionQueryParams extends SpeakeasyBase
   size: number;
 
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=status" })
-  status?: shared.XSiteContextEnum2;
+  status?: GetCategoryItemAttributesConditionStatusEnum;
 }
-
 
 export class GetCategoryItemAttributesConditionHeaders extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=authorization" })
@@ -32,13 +41,6 @@ export class GetCategoryItemAttributesConditionHeaders extends SpeakeasyBase {
   xSiteContext?: shared.XSiteContext;
 }
 
-
-export class GetCategoryItemAttributesConditionSecurity extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
-  apiKey: shared.SchemeApiKey;
-}
-
-
 export class GetCategoryItemAttributesConditionRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
   queryParams: GetCategoryItemAttributesConditionQueryParams;
@@ -49,7 +51,6 @@ export class GetCategoryItemAttributesConditionRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
   security: GetCategoryItemAttributesConditionSecurity;
 }
-
 
 export class GetCategoryItemAttributesConditionResponse extends SpeakeasyBase {
   @SpeakeasyMetadata()
@@ -62,8 +63,11 @@ export class GetCategoryItemAttributesConditionResponse extends SpeakeasyBase {
   getCategoryItemAttributeConditions?: shared.GetCategoryItemAttributeConditions;
 
   @SpeakeasyMetadata()
-  serverError?: shared.ServerError;
+  statusCode: number;
 
   @SpeakeasyMetadata()
-  statusCode: number;
+  rawResponse?: AxiosResponse;
+
+  @SpeakeasyMetadata()
+  serverError?: shared.ServerError;
 }

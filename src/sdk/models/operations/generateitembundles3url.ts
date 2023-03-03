@@ -1,6 +1,7 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
-
+import { AxiosResponse } from "axios";
+import { Type } from "class-transformer";
 
 
 export class GenerateItemBundleS3urlHeaders extends SpeakeasyBase {
@@ -11,15 +12,13 @@ export class GenerateItemBundleS3urlHeaders extends SpeakeasyBase {
   xSiteContext?: shared.XSiteContextOrAuthorization;
 }
 
-
 export class GenerateItemBundleS3urlRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
   headers: GenerateItemBundleS3urlHeaders;
 
   @SpeakeasyMetadata({ data: "request, media_type=application/json" })
-  request?: shared.GetS3UrlBundleRequest;
+  request?: shared.GetS3URLBundleRequest;
 }
-
 
 export class GenerateItemBundleS3urlResponse extends SpeakeasyBase {
   @SpeakeasyMetadata()
@@ -29,11 +28,14 @@ export class GenerateItemBundleS3urlResponse extends SpeakeasyBase {
   contentType: string;
 
   @SpeakeasyMetadata()
-  getS3URLBundleResponse?: shared.GetS3UrlBundleResponse;
-
-  @SpeakeasyMetadata()
-  serverError?: shared.ServerError;
+  getS3URLBundleResponse?: shared.GetS3URLBundleResponse;
 
   @SpeakeasyMetadata()
   statusCode: number;
+
+  @SpeakeasyMetadata()
+  rawResponse?: AxiosResponse;
+
+  @SpeakeasyMetadata()
+  serverError?: shared.ServerError;
 }

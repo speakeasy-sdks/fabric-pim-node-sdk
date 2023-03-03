@@ -1,23 +1,29 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
-
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose } from "class-transformer";
 
 
 export class BundleUpdateResponse extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=bundleId" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "bundleId" })
   bundleId?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=createdOn" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "createdOn" })
   createdOn?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=itemId" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "itemId" })
   itemId?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=modifiedOn" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "modifiedOn" })
   modifiedOn?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=quantity" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "quantity" })
   quantity?: number;
 }

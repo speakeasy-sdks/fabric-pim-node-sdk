@@ -1,6 +1,7 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
-
+import { AxiosResponse } from "axios";
+import { Type } from "class-transformer";
 
 
 export class SearchAttributeMappingsHeaders extends SpeakeasyBase {
@@ -11,7 +12,6 @@ export class SearchAttributeMappingsHeaders extends SpeakeasyBase {
   xSiteContext?: shared.XSiteContextOrAuthorization;
 }
 
-
 export class SearchAttributeMappingsRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
   headers: SearchAttributeMappingsHeaders;
@@ -19,7 +19,6 @@ export class SearchAttributeMappingsRequest extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: shared.AttributeMappingSearch;
 }
-
 
 export class SearchAttributeMappingsResponse extends SpeakeasyBase {
   @SpeakeasyMetadata()
@@ -32,8 +31,11 @@ export class SearchAttributeMappingsResponse extends SpeakeasyBase {
   contentType: string;
 
   @SpeakeasyMetadata()
-  serverError?: shared.ServerError;
+  statusCode: number;
 
   @SpeakeasyMetadata()
-  statusCode: number;
+  rawResponse?: AxiosResponse;
+
+  @SpeakeasyMetadata()
+  serverError?: shared.ServerError;
 }

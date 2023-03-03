@@ -1,6 +1,8 @@
-import { AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
-import * as operations from "./models/operations";
 import * as utils from "../internal/utils";
+import * as operations from "./models/operations";
+import * as shared from "./models/shared";
+import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import { plainToInstance } from "class-transformer";
 
 export class Product {
   _defaultClient: AxiosInstance;
@@ -46,6 +48,7 @@ export class Product {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...utils.getHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -60,21 +63,33 @@ export class Product {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.ItemAttributeFileSearchResponse = {statusCode: httpRes.status, contentType: contentType};
+        const res: operations.ItemAttributeFileSearchResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.filePaginationResponse = httpRes?.data;
+              res.filePaginationResponse = plainToInstance(
+                shared.FilePaginationResponse,
+                httpRes?.data as shared.FilePaginationResponse,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -111,6 +126,7 @@ export class Product {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...utils.getHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -125,21 +141,33 @@ export class Product {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.ItemBundleFileSearchResponse = {statusCode: httpRes.status, contentType: contentType};
+        const res: operations.ItemBundleFileSearchResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.filePaginationResponse = httpRes?.data;
+              res.filePaginationResponse = plainToInstance(
+                shared.FilePaginationResponse,
+                httpRes?.data as shared.FilePaginationResponse,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -176,6 +204,7 @@ export class Product {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...utils.getHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -190,26 +219,42 @@ export class Product {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.CreateProductsResponse = {statusCode: httpRes.status, contentType: contentType};
+        const res: operations.CreateProductsResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.productResponse = httpRes?.data;
+              res.productResponse = plainToInstance(
+                shared.ProductResponse,
+                httpRes?.data as shared.ProductResponse,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 422:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.productModifyError = httpRes?.data;
+              res.productModifyError = plainToInstance(
+                shared.ProductModifyError,
+                httpRes?.data as shared.ProductModifyError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -246,6 +291,7 @@ export class Product {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...utils.getHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -260,21 +306,33 @@ export class Product {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.FileSearchResponse = {statusCode: httpRes.status, contentType: contentType};
+        const res: operations.FileSearchResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.filePaginationResponse = httpRes?.data;
+              res.filePaginationResponse = plainToInstance(
+                shared.FilePaginationResponse,
+                httpRes?.data as shared.FilePaginationResponse,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -285,22 +343,23 @@ export class Product {
 
   
   /**
-   * generateCsVfile - Generate CSV template file for products
+   * generateCSVfile - Generate CSV template file for products
    *
    * Generates CSV template to upload products for a specific category.
   **/
-  generateCsVfile(
-    req: operations.GenerateCsVfileRequest,
+  generateCSVfile(
+    req: operations.GenerateCSVfileRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.GenerateCsVfileResponse> {
+  ): Promise<operations.GenerateCSVfileResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.GenerateCsVfileRequest(req);
+      req = new operations.GenerateCSVfileRequest(req);
     }
     
     const baseURL: string = this._serverURL;
     const url: string = utils.generateURL(baseURL, "/v1/product/bulk/template/{accountId}/{nodeId}", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...utils.getHeadersFromRequest(req.headers), ...config?.headers};
     
     const r = client.request({
@@ -314,7 +373,7 @@ export class Product {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GenerateCsVfileResponse = {statusCode: httpRes.status, contentType: contentType};
+        const res: operations.GenerateCSVfileResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/csv`)) {
@@ -326,12 +385,20 @@ export class Product {
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -342,22 +409,23 @@ export class Product {
 
   
   /**
-   * generateItemAttributeCsVfile - Generate CSV template for product attributes
+   * generateItemAttributeCSVfile - Generate CSV template for product attributes
    *
    * Generates CSV template to upload product attributes. 
   **/
-  generateItemAttributeCsVfile(
-    req: operations.GenerateItemAttributeCsVfileRequest,
+  generateItemAttributeCSVfile(
+    req: operations.GenerateItemAttributeCSVfileRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.GenerateItemAttributeCsVfileResponse> {
+  ): Promise<operations.GenerateItemAttributeCSVfileResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.GenerateItemAttributeCsVfileRequest(req);
+      req = new operations.GenerateItemAttributeCSVfileRequest(req);
     }
     
     const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/product/bulk/template/attribute";
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...utils.getHeadersFromRequest(req.headers), ...config?.headers};
     
     const r = client.request({
@@ -371,7 +439,7 @@ export class Product {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GenerateItemAttributeCsVfileResponse = {statusCode: httpRes.status, contentType: contentType};
+        const res: operations.GenerateItemAttributeCSVfileResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/csv`)) {
@@ -383,12 +451,20 @@ export class Product {
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -425,6 +501,7 @@ export class Product {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...utils.getHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -439,21 +516,33 @@ export class Product {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GenerateItemAttributeS3urlResponse = {statusCode: httpRes.status, contentType: contentType};
+        const res: operations.GenerateItemAttributeS3urlResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.getS3URLItemAttributeResponse = httpRes?.data;
+              res.getS3URLItemAttributeResponse = plainToInstance(
+                shared.GetS3URLItemAttributeResponse,
+                httpRes?.data as shared.GetS3URLItemAttributeResponse,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -464,22 +553,23 @@ export class Product {
 
   
   /**
-   * generateItemBundleCsVfile - Generate CSV template for product bundles
+   * generateItemBundleCSVfile - Generate CSV template for product bundles
    *
    * Generates CSV template to upload bundles for a specific category.
   **/
-  generateItemBundleCsVfile(
-    req: operations.GenerateItemBundleCsVfileRequest,
+  generateItemBundleCSVfile(
+    req: operations.GenerateItemBundleCSVfileRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.GenerateItemBundleCsVfileResponse> {
+  ): Promise<operations.GenerateItemBundleCSVfileResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.GenerateItemBundleCsVfileRequest(req);
+      req = new operations.GenerateItemBundleCSVfileRequest(req);
     }
     
     const baseURL: string = this._serverURL;
     const url: string = utils.generateURL(baseURL, "/v1/product/bulk/template/bundle/{accountId}/{nodeId}", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...utils.getHeadersFromRequest(req.headers), ...config?.headers};
     
     const r = client.request({
@@ -493,7 +583,7 @@ export class Product {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GenerateItemBundleCsVfileResponse = {statusCode: httpRes.status, contentType: contentType};
+        const res: operations.GenerateItemBundleCSVfileResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/csv`)) {
@@ -505,12 +595,20 @@ export class Product {
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -547,6 +645,7 @@ export class Product {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...utils.getHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -561,21 +660,33 @@ export class Product {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GenerateItemBundleS3urlResponse = {statusCode: httpRes.status, contentType: contentType};
+        const res: operations.GenerateItemBundleS3urlResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.getS3URLBundleResponse = httpRes?.data;
+              res.getS3URLBundleResponse = plainToInstance(
+                shared.GetS3URLBundleResponse,
+                httpRes?.data as shared.GetS3URLBundleResponse,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -612,6 +723,7 @@ export class Product {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...utils.getHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -626,21 +738,33 @@ export class Product {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GenerateS3urlResponse = {statusCode: httpRes.status, contentType: contentType};
+        const res: operations.GenerateS3urlResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.getS3URLResponse = httpRes?.data;
+              res.getS3URLResponse = plainToInstance(
+                shared.GetS3URLResponse,
+                httpRes?.data as shared.GetS3URLResponse,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -667,6 +791,7 @@ export class Product {
     const url: string = utils.generateURL(baseURL, "/v1/product/bulk/file/{fileId}/status", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...utils.getHeadersFromRequest(req.headers), ...config?.headers};
     
     const r = client.request({
@@ -680,21 +805,29 @@ export class Product {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GetFileStatusResponse = {statusCode: httpRes.status, contentType: contentType};
+        const res: operations.GetFileStatusResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.getFileStatus200ApplicationJSONOneOf = httpRes?.data;
+              res.getFileStatus200ApplicationJSONOneOf = httpRes?.data;
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -721,42 +854,48 @@ export class Product {
     const url: string = baseURL.replace(/\/$/, "") + "/v1/product/attribute";
     
     const client: AxiosInstance = this._defaultClient!;
-    const headers = {...utils.getHeadersFromRequest(req.headers), ...config?.headers};
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const headers = {...utils.getHeadersFromRequest(req.headers), ...config?.headers};
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "get",
       headers: headers,
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GetProductAttributeResponse = {statusCode: httpRes.status, contentType: contentType};
+        const res: operations.GetProductAttributeResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.productAttributePage = httpRes?.data;
+              res.productAttributePage = plainToInstance(
+                shared.ProductAttributePage,
+                httpRes?.data as shared.ProductAttributePage,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -783,42 +922,44 @@ export class Product {
     const url: string = baseURL.replace(/\/$/, "") + "/v1/product";
     
     const client: AxiosInstance = this._defaultClient!;
-    const headers = {...utils.getHeadersFromRequest(req.headers), ...config?.headers};
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const headers = {...utils.getHeadersFromRequest(req.headers), ...config?.headers};
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "get",
       headers: headers,
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GetProductsResponse = {statusCode: httpRes.status, contentType: contentType};
+        const res: operations.GetProductsResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.getProducts200ApplicationJSONOneOf = httpRes?.data;
+              res.getProducts200ApplicationJSONOneOf = httpRes?.data;
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -845,42 +986,44 @@ export class Product {
     const url: string = baseURL.replace(/\/$/, "") + "/v2/product";
     
     const client: AxiosInstance = this._defaultClient!;
-    const headers = {...utils.getHeadersFromRequest(req.headers), ...config?.headers};
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const headers = {...utils.getHeadersFromRequest(req.headers), ...config?.headers};
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "get",
       headers: headers,
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GetProductsV2Response = {statusCode: httpRes.status, contentType: contentType};
+        const res: operations.GetProductsV2Response = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.getProductsV2200ApplicationJSONOneOf = httpRes?.data;
+              res.getProductsV2200ApplicationJSONOneOf = httpRes?.data;
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -917,6 +1060,7 @@ export class Product {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...utils.getHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -931,21 +1075,29 @@ export class Product {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.ModifyAttributeGroupsResponse = {statusCode: httpRes.status, contentType: contentType};
+        const res: operations.ModifyAttributeGroupsResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.attributeGroupResponse = httpRes?.data;
+              res.attributeGroupResponse = httpRes?.data;
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -982,6 +1134,7 @@ export class Product {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...utils.getHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -996,21 +1149,33 @@ export class Product {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.PostProductAttributeBulkResponse = {statusCode: httpRes.status, contentType: contentType};
+        const res: operations.PostProductAttributeBulkResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.bulkAttributeResponse = httpRes?.data;
+              res.bulkAttributeResponse = plainToInstance(
+                shared.BulkAttributeResponse,
+                httpRes?.data as shared.BulkAttributeResponse,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -1037,42 +1202,44 @@ export class Product {
     const url: string = baseURL.replace(/\/$/, "") + "/v1/product/search";
     
     const client: AxiosInstance = this._defaultClient!;
-    const headers = {...utils.getHeadersFromRequest(req.headers), ...config?.headers};
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const headers = {...utils.getHeadersFromRequest(req.headers), ...config?.headers};
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "get",
       headers: headers,
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.ProductSearchResponse = {statusCode: httpRes.status, contentType: contentType};
+        const res: operations.ProductSearchResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.productSearch200ApplicationJSONOneOf = httpRes?.data;
+              res.productSearch200ApplicationJSONOneOf = httpRes?.data;
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -1109,6 +1276,7 @@ export class Product {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...utils.getHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -1123,21 +1291,33 @@ export class Product {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.SearchAttributeGroupsResponse = {statusCode: httpRes.status, contentType: contentType};
+        const res: operations.SearchAttributeGroupsResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.attributeGroupSearchResponse = httpRes?.data;
+              res.attributeGroupSearchResponse = plainToInstance(
+                shared.AttributeGroupSearchResponse,
+                httpRes?.data as shared.AttributeGroupSearchResponse,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -1174,6 +1354,7 @@ export class Product {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...utils.getHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -1188,21 +1369,29 @@ export class Product {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.UpdateBundlesResponse = {statusCode: httpRes.status, contentType: contentType};
+        const res: operations.UpdateBundlesResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.bundleUpdateResponse = httpRes?.data;
+              res.bundleUpdateResponse = httpRes?.data;
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -1239,6 +1428,7 @@ export class Product {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...utils.getHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -1253,26 +1443,42 @@ export class Product {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.UpdateProductsResponse = {statusCode: httpRes.status, contentType: contentType};
+        const res: operations.UpdateProductsResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.productResponse = httpRes?.data;
+              res.productResponse = plainToInstance(
+                shared.ProductResponse,
+                httpRes?.data as shared.ProductResponse,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 422:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.productModifyError = httpRes?.data;
+              res.productModifyError = plainToInstance(
+                shared.ProductModifyError,
+                httpRes?.data as shared.ProductModifyError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -1309,6 +1515,7 @@ export class Product {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...utils.getHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -1323,26 +1530,42 @@ export class Product {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.UpsertProductsResponse = {statusCode: httpRes.status, contentType: contentType};
+        const res: operations.UpsertProductsResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.productResponse = httpRes?.data;
+              res.productResponse = plainToInstance(
+                shared.ProductResponse,
+                httpRes?.data as shared.ProductResponse,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clientError = httpRes?.data;
+              res.clientError = plainToInstance(
+                shared.ClientError,
+                httpRes?.data as shared.ClientError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 422:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.productModifyError = httpRes?.data;
+              res.productModifyError = plainToInstance(
+                shared.ProductModifyError,
+                httpRes?.data as shared.ProductModifyError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.serverError = httpRes?.data;
+              res.serverError = plainToInstance(
+                shared.ServerError,
+                httpRes?.data as shared.ServerError,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }

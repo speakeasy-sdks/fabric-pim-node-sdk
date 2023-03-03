@@ -1,65 +1,84 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
-
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose, Type } from "class-transformer";
 
 
 export class AttributeGroupTypeResponseAttribute extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "_id" })
   id?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=attributeValidationId" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "attributeValidationId" })
   attributeValidationId?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=createdOn" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "createdOn" })
   createdOn?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=description" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "description" })
   description?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=formula" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "formula" })
   formula?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=formulaManuallyOverWritten" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "formulaManuallyOverWritten" })
   formulaManuallyOverWritten?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=modifiedBy" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "modifiedBy" })
   modifiedBy?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=modifiedOn" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "modifiedOn" })
   modifiedOn?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "name" })
   name?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=textSubType" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "textSubType" })
   textSubType?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=type" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "type" })
   type?: string;
 }
 
-
 export class AttributeGroupTypeResponse extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "_id" })
   id?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=attribute", elemType: AttributeGroupTypeResponseAttribute })
+  @SpeakeasyMetadata({ elemType: AttributeGroupTypeResponseAttribute })
+  @Expose({ name: "attribute" })
+  @Type(() => AttributeGroupTypeResponseAttribute)
   attribute?: AttributeGroupTypeResponseAttribute[];
 
-  @SpeakeasyMetadata({ data: "json, name=attributeGroupId" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "attributeGroupId" })
   attributeGroupId?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=attributeId" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "attributeId" })
   attributeId?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=createdOn" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "createdOn" })
   createdOn?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=isEditable" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "isEditable" })
   isEditable?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=modifiedOn" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "modifiedOn" })
   modifiedOn?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=order" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "order" })
   order?: number;
 }

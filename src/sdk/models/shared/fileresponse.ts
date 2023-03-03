@@ -1,41 +1,53 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { StatusResponse } from "./statusresponse";
-
+import { Expose, Transform, Type } from "class-transformer";
 
 export enum FileResponseTypeEnum {
     Import = "IMPORT",
     Export = "EXPORT"
 }
 
-
 export class FileResponse extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=createdBy" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "createdBy" })
   createdBy?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=createdOn" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "createdOn" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   createdOn?: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=modifiedBy" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "modifiedBy" })
   modifiedBy?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=modifiedOn" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "modifiedOn" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   modifiedOn?: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "name" })
   name?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=progress" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "progress" })
   progress?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=secondsTakenToImport" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "secondsTakenToImport" })
   secondsTakenToImport?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=secondsTakenToProcess" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "secondsTakenToProcess" })
   secondsTakenToProcess?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=statuses", elemType: StatusResponse })
+  @SpeakeasyMetadata({ elemType: StatusResponse })
+  @Expose({ name: "statuses" })
+  @Type(() => StatusResponse)
   statuses?: StatusResponse[];
 
-  @SpeakeasyMetadata({ data: "json, name=type" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "type" })
   type?: FileResponseTypeEnum;
 }

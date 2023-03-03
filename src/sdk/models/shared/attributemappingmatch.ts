@@ -1,5 +1,5 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
-
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose } from "class-transformer";
 
 
 // AttributeMappingMatch
@@ -7,21 +7,27 @@ import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
  * Specification for matching attribute mapping.
 **/
 export class AttributeMappingMatch extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=attributeId" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "attributeId" })
   attributeId?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=description" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "description" })
   description?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=mapping" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "mapping" })
   mapping?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "name" })
   name?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=required" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "required" })
   required?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=target" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "target" })
   target?: string;
 }

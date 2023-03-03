@@ -1,12 +1,11 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
-
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose, Type } from "class-transformer";
 
 export enum BulkAttributeRequestActionEnum {
     Create = "CREATE",
     Update = "UPDATE",
     Delete = "DELETE"
 }
-
 export enum BulkAttributeRequestOptionsTypeEnum {
     Text = "TEXT",
     Boolean = "BOOLEAN",
@@ -14,13 +13,11 @@ export enum BulkAttributeRequestOptionsTypeEnum {
     Integer = "INTEGER",
     Datetime = "DATETIME"
 }
-
 export enum BulkAttributeRequestTextSubTypeEnum {
     SmallText = "SMALL_TEXT",
     TextArea = "TEXT_AREA",
     Html = "HTML"
 }
-
 export enum BulkAttributeRequestTypeEnum {
     Text = "TEXT",
     Boolean = "BOOLEAN",
@@ -30,7 +27,6 @@ export enum BulkAttributeRequestTypeEnum {
     Datetime = "DATETIME",
     Options = "OPTIONS"
 }
-
 export enum BulkAttributeRequestValidationAttributeTypesEnum {
     Text = "TEXT",
     Boolean = "BOOLEAN",
@@ -41,84 +37,106 @@ export enum BulkAttributeRequestValidationAttributeTypesEnum {
     Datetime = "DATETIME"
 }
 
-
 // BulkAttributeRequestValidationRange
 /** 
  * Specified range of values must be between this min and/or max
 **/
 export class BulkAttributeRequestValidationRange extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=max" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "max" })
   max?: any;
 
-  @SpeakeasyMetadata({ data: "json, name=min" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "min" })
   min?: any;
 }
 
-
 export class BulkAttributeRequestValidation extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=attributeTypes" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "attributeTypes" })
   attributeTypes?: BulkAttributeRequestValidationAttributeTypesEnum[];
 
-  @SpeakeasyMetadata({ data: "json, name=contains" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "contains" })
   contains?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=exact" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "exact" })
   exact?: any;
 
-  @SpeakeasyMetadata({ data: "json, name=formula" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "formula" })
   formula?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=inheritable" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "inheritable" })
   inheritable?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=inverse" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "inverse" })
   inverse?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=oneOf" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "oneOf" })
   oneOf?: any;
 
-  @SpeakeasyMetadata({ data: "json, name=range" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "range" })
+  @Type(() => BulkAttributeRequestValidationRange)
   range?: BulkAttributeRequestValidationRange;
 
-  @SpeakeasyMetadata({ data: "json, name=required" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "required" })
   required?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=unique" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "unique" })
   unique?: boolean;
 }
 
-
 export class BulkAttributeRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=action" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "action" })
   action: BulkAttributeRequestActionEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=description" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "description" })
   description?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=format" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "format" })
   format?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=formula" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "formula" })
   formula?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "name" })
   name: string;
 
-  @SpeakeasyMetadata({ data: "json, name=optionsType" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "optionsType" })
   optionsType?: BulkAttributeRequestOptionsTypeEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=serialStart" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "serialStart" })
   serialStart?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=textSubType" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "textSubType" })
   textSubType?: BulkAttributeRequestTextSubTypeEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=type" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "type" })
   type: BulkAttributeRequestTypeEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=validation" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "validation" })
+  @Type(() => BulkAttributeRequestValidation)
   validation?: BulkAttributeRequestValidation;
 }

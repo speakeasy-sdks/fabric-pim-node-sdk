@@ -1,18 +1,23 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { CategorySingle } from "./categorysingle";
-
+import { Expose, Type } from "class-transformer";
 
 
 export class CategoryPage extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=categories", elemType: CategorySingle })
+  @SpeakeasyMetadata({ elemType: CategorySingle })
+  @Expose({ name: "categories" })
+  @Type(() => CategorySingle)
   categories?: CategorySingle[];
 
-  @SpeakeasyMetadata({ data: "json, name=pageSize" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "pageSize" })
   pageSize?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=pages" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "pages" })
   pages?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=totalSize" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "totalSize" })
   totalSize?: number;
 }

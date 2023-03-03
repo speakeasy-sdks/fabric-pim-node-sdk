@@ -1,29 +1,37 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
-
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose } from "class-transformer";
 
 
 export class ModifyCategory extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=attributes" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "attributes" })
   attributes?: Record<string, any>[];
 
-  @SpeakeasyMetadata({ data: "json, name=breadcrumbs" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "breadcrumbs" })
   breadcrumbs?: Record<string, any>[];
 
-  @SpeakeasyMetadata({ data: "json, name=children" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "children" })
   children?: Record<string, any>[];
 
-  @SpeakeasyMetadata({ data: "json, name=createdOn" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "createdOn" })
   createdOn?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=modifiedOn" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "modifiedOn" })
   modifiedOn?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "name" })
   name?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=nodeId" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "nodeId" })
   nodeId?: number;
 }

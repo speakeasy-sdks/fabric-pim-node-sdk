@@ -1,7 +1,16 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
+import { AxiosResponse } from "axios";
+import { Type } from "class-transformer";
 
-
+export enum GetProductsV2StatusEnum {
+    Active = "ACTIVE",
+    Inactive = "INACTIVE"
+}
+export enum GetProductsV2TypeEnum {
+    Item = "ITEM",
+    Bundle = "BUNDLE"
+}
 
 export class GetProductsV2QueryParams extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=createdAfter" })
@@ -32,12 +41,11 @@ export class GetProductsV2QueryParams extends SpeakeasyBase {
   skus?: string[];
 
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=status" })
-  status?: shared.XSiteContextOrAuthorizationEnum;
+  status?: GetProductsV2StatusEnum;
 
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" })
-  type?: shared.XSiteContextOrAuthorizationEnum2;
+  type?: GetProductsV2TypeEnum;
 }
-
 
 export class GetProductsV2Headers extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=authorization" })
@@ -47,7 +55,6 @@ export class GetProductsV2Headers extends SpeakeasyBase {
   xSiteContext?: shared.XSiteContextOrAuthorization;
 }
 
-
 export class GetProductsV2Request extends SpeakeasyBase {
   @SpeakeasyMetadata()
   queryParams: GetProductsV2QueryParams;
@@ -55,7 +62,6 @@ export class GetProductsV2Request extends SpeakeasyBase {
   @SpeakeasyMetadata()
   headers: GetProductsV2Headers;
 }
-
 
 export class GetProductsV2Response extends SpeakeasyBase {
   @SpeakeasyMetadata()
@@ -69,6 +75,9 @@ export class GetProductsV2Response extends SpeakeasyBase {
 
   @SpeakeasyMetadata()
   statusCode: number;
+
+  @SpeakeasyMetadata()
+  rawResponse?: AxiosResponse;
 
   @SpeakeasyMetadata()
   getProductsV2200ApplicationJSONOneOf?: any;

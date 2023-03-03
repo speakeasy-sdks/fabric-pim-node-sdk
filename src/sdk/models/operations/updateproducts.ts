@@ -1,6 +1,7 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
-
+import { AxiosResponse } from "axios";
+import { Type } from "class-transformer";
 
 
 export class UpdateProductsHeaders extends SpeakeasyBase {
@@ -11,7 +12,6 @@ export class UpdateProductsHeaders extends SpeakeasyBase {
   xSiteContext?: shared.XSiteContextOrAuthorization;
 }
 
-
 export class UpdateProductsRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
   headers: UpdateProductsHeaders;
@@ -19,7 +19,6 @@ export class UpdateProductsRequest extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: shared.ProductUpdate;
 }
-
 
 export class UpdateProductsResponse extends SpeakeasyBase {
   @SpeakeasyMetadata()
@@ -35,8 +34,11 @@ export class UpdateProductsResponse extends SpeakeasyBase {
   productResponse?: shared.ProductResponse;
 
   @SpeakeasyMetadata()
-  serverError?: shared.ServerError;
+  statusCode: number;
 
   @SpeakeasyMetadata()
-  statusCode: number;
+  rawResponse?: AxiosResponse;
+
+  @SpeakeasyMetadata()
+  serverError?: shared.ServerError;
 }

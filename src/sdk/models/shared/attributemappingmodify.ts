@@ -1,30 +1,38 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { AttributeValidation } from "./attributevalidation";
-
+import { Expose, Type } from "class-transformer";
 
 
 export class AttributeMappingModifyMappings extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=attributeId" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "attributeId" })
   attributeId?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=description" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "description" })
   description?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=mapping" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "mapping" })
   mapping?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "name" })
   name?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=required" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "required" })
   required?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=validation" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "validation" })
+  @Type(() => AttributeValidation)
   validation?: AttributeValidation;
 }
 
-
 export class AttributeMappingModify extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=mappings", elemType: AttributeMappingModifyMappings })
+  @SpeakeasyMetadata({ elemType: AttributeMappingModifyMappings })
+  @Expose({ name: "mappings" })
+  @Type(() => AttributeMappingModifyMappings)
   mappings?: AttributeMappingModifyMappings[];
 }
