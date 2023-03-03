@@ -1,4 +1,13 @@
-# Fabric PIM Node SDK
+<div align="center">
+    <picture>
+        <img src="https://user-images.githubusercontent.com/68016351/222832872-23483018-514d-4cbc-9948-939a0133a829.png" width="500">
+    </picture>
+   <p>Node SDK for Fabric PIM API.</p>
+   <a href="https://knowledgebase.fabric.inc/docs/openapi/pim/reference/"><img src="https://img.shields.io/static/v1?label=Docs&message=API Ref&color=000000&style=for-the-badge" /></a>
+   <a href="https://github.com/speakeasy-sdks/fabric-pim-node-sdk/actions"><img src="https://img.shields.io/github/actions/workflow/status/speakeasy-sdks/fabric-pim-node-sdk/speakeasy_sdk_generation.yml?style=for-the-badge" /></a>
+  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge" /></a>
+  <a href="https://github.com/speakeasy-sdks/fabric-pim-node-sdk/releases"><img src="https://img.shields.io/github/v/release/speakeasy-sdks/fabric-pim-node-sdk?sort=semver&style=for-the-badge" /></a>
+</div>
 
 As brands and retailers grow, they often expand their product catalogs, resulting in the need to enrich and manage more product data. fabric product information management (PIM) solution alleviates the burden of managing large amounts of product data by means of a central storage repository. fabric PIM helps you with improved data quality, consistent customer experience, reduced time to market, easy integration with external systems, reduced management costs and risks, faster and easier updates, and easy scaling. You can create, import, enrich, validate, distribute, and manage complex product information, centrally. As a result, you deliver product experiences that drive sales through every channel.
 
