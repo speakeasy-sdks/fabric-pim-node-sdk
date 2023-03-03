@@ -10,11 +10,8 @@ export class GetFileStatusPathParams extends SpeakeasyBase {
 }
 
 export class GetFileStatusHeaders extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=authorization" })
-  authorization?: string;
-
   @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-site-context" })
-  xSiteContext?: shared.XSiteContextOrAuthorization;
+  xSiteContext?: shared.XSiteContext;
 }
 
 export class GetFileStatusRequest extends SpeakeasyBase {

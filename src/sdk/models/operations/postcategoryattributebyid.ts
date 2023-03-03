@@ -4,11 +4,6 @@ import { AxiosResponse } from "axios";
 import { Type } from "class-transformer";
 
 
-export class PostCategoryAttributeByIDSecurity extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
-  apiKey: shared.SchemeAPIKey;
-}
-
 export class PostCategoryAttributeByIDHeaders extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-api-key" })
   xApiKey?: string;
@@ -23,9 +18,6 @@ export class PostCategoryAttributeByIDRequest extends SpeakeasyBase {
 
   @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: shared.ModifyCategoryAttributesRequest;
-
-  @SpeakeasyMetadata()
-  security: PostCategoryAttributeByIDSecurity;
 }
 
 export class PostCategoryAttributeByIDResponse extends SpeakeasyBase {

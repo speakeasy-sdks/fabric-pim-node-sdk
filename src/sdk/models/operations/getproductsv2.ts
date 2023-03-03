@@ -19,9 +19,6 @@ export class GetProductsV2QueryParams extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=createdBefore" })
   createdBefore?: string;
 
-  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=itemIds" })
-  itemIds?: number[];
-
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=modifiedAfter" })
   modifiedAfter?: string;
 
@@ -37,8 +34,8 @@ export class GetProductsV2QueryParams extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=size" })
   size?: number;
 
-  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=skus" })
-  skus?: string[];
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=skus" })
+  skus?: string;
 
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=status" })
   status?: GetProductsV2StatusEnum;
@@ -48,11 +45,8 @@ export class GetProductsV2QueryParams extends SpeakeasyBase {
 }
 
 export class GetProductsV2Headers extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=authorization" })
-  authorization?: string;
-
   @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-site-context" })
-  xSiteContext?: shared.XSiteContextOrAuthorization;
+  xSiteContext?: shared.XSiteContext;
 }
 
 export class GetProductsV2Request extends SpeakeasyBase {

@@ -5,11 +5,8 @@ import { Type } from "class-transformer";
 
 
 export class GenerateItemAttributeS3urlHeaders extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=authorization" })
-  authorization?: string;
-
   @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-site-context" })
-  xSiteContext?: shared.XSiteContextOrAuthorization;
+  xSiteContext?: shared.XSiteContext;
 }
 
 export class GenerateItemAttributeS3urlRequest extends SpeakeasyBase {

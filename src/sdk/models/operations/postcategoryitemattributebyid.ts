@@ -5,9 +5,6 @@ import { Type } from "class-transformer";
 
 
 export class PostCategoryItemAttributeByIDHeaders extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=authorization" })
-  authorization?: string;
-
   @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-api-key" })
   xApiKey?: string;
 
