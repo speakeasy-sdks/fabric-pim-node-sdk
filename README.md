@@ -19,13 +19,13 @@ More information on the [Fabric PIM API](https://knowledgebase.fabric.inc/docs/o
 ### NPM
 
 ```bash
-npm add @fabric/pim-sdk
+npm add @speakeasy-sdks/pim-sdk
 ```
 
 ### Yarn
 
 ```bash
-yarn add @fabric/pim-sdk
+yarn add @speakeasy-sdks/pim-sdk
 ```
 <!-- End SDK Installation -->
 
@@ -37,135 +37,118 @@ For more details on getting access to the Fabric API please see [here](https://k
 <!-- Start SDK Example Usage -->
 ```typescript
 import {
-  ModifyAttributeMappingsRequest,
-  ModifyAttributeMappingsResponse 
-} from "@fabric/pim-sdk/dist/sdk/models/operations";
+  ModifyAttributeGroupsRequest,
+  ModifyAttributeGroupsResponse 
+} from "@speakeasy-sdks/pim-sdk/dist/sdk/models/operations";
 
 import { AxiosError } from "axios";
-import { SDK } from "@fabric/pim-sdk";
+import { Fabric } from "@speakeasy-sdks/pim-sdk";
 
 
-const sdk = new SDK();
+const sdk = new Fabric();
     
-const req: ModifyAttributeMappingsRequest = {
+const req: ModifyAttributeGroupsRequest = {
   headers: {
-    authorization: "unde",
     xSiteContext: {
-      account: "deserunt",
-      channel: 7151.9,
-      date: "nulla",
-      stage: "id",
+      account: "unde",
+      channel: 5928.45,
+      date: "porro",
+      stage: "nulla",
     },
   },
   request: {
-    mappings: [
+    attributeGroup: [
       {
-        attributeId: "perspiciatis",
-        description: "nulla",
-        mapping: "nihil",
-        name: "fuga",
-        required: true,
-        validation: {
-          attributeTypes: [
-            "DECIMAL",
-            "SERIAL",
-          ],
-          contains: "saepe",
-          exact: "inventore",
-          formula: "sapiente",
-          inheritable: true,
-          inverse: false,
-          oneOf: "voluptatum",
-          range: {
-            max: "autem",
-            min: "vel",
+        action: "undefined",
+        description: "perspiciatis",
+        editableAttributes: [
+          {
+            action: "UPDATE",
+            id: "fuga",
+            order: 6458.94,
           },
-          required: false,
-          unique: false,
-        },
+          {
+            action: "UPDATE",
+            id: "iusto",
+            order: 2975.34,
+          },
+          {
+            action: "undefined",
+            id: "inventore",
+            order: 9636.63,
+          },
+          {
+            action: "UPDATE",
+            id: "eum",
+            order: 4776.65,
+          },
+        ],
+        id: "autem",
+        name: "vel",
+        priorityOrder: 5288.95,
+        type: "COLLECTION",
       },
       {
-        attributeId: "similique",
+        action: "DELETE",
         description: "reprehenderit",
-        mapping: "molestiae",
-        name: "quo",
-        required: true,
-        validation: {
-          attributeTypes: [
-            "TEXT",
-            "ASSET",
-          ],
-          contains: "voluptatem",
-          exact: "consequatur",
-          formula: "fugiat",
-          inheritable: true,
-          inverse: false,
-          oneOf: "eos",
-          range: {
-            max: "accusamus",
-            min: "accusamus",
+        editableAttributes: [
+          {
+            action: "undefined",
+            id: "quasi",
+            order: 3373.96,
           },
-          required: false,
-          unique: true,
-        },
+          {
+            action: "ADD",
+            id: "est",
+            order: 202.18,
+          },
+          {
+            action: "UPDATE",
+            id: "fugiat",
+            order: 9571.56,
+          },
+          {
+            action: "undefined",
+            id: "eos",
+            order: 8700.13,
+          },
+        ],
+        id: "accusamus",
+        name: "reiciendis",
+        priorityOrder: 4736.08,
+        type: "undefined",
       },
       {
-        attributeId: "quibusdam",
-        description: "et",
-        mapping: "praesentium",
+        action: "undefined",
+        description: "praesentium",
+        editableAttributes: [
+          {
+            action: "undefined",
+            id: "soluta",
+            order: 1182.74,
+          },
+          {
+            action: "DELETE",
+            id: "rerum",
+            order: 5820.2,
+          },
+          {
+            action: "ADD",
+            id: "sed",
+            order: 9446.69,
+          },
+        ],
+        id: "possimus",
         name: "occaecati",
-        required: false,
-        validation: {
-          attributeTypes: [
-            "TEXT",
-            "ASSET",
-            "ASSET",
-          ],
-          contains: "culpa",
-          exact: "qui",
-          formula: "sed",
-          inheritable: false,
-          inverse: true,
-          oneOf: "occaecati",
-          range: {
-            max: "odit",
-            min: "esse",
-          },
-          required: true,
-          unique: false,
-        },
-      },
-      {
-        attributeId: "amet",
-        description: "est",
-        mapping: "id",
-        name: "blanditiis",
-        required: true,
-        validation: {
-          attributeTypes: [
-            "BOOLEAN",
-            "TEXT",
-            "SERIAL",
-          ],
-          contains: "et",
-          exact: "voluptatem",
-          formula: "laborum",
-          inheritable: false,
-          inverse: true,
-          oneOf: "iure",
-          range: {
-            max: "earum",
-            min: "ut",
-          },
-          required: true,
-          unique: true,
-        },
+        priorityOrder: 1059.07,
+        type: "COLLECTION",
       },
     ],
+    transactional: true,
   },
 };
 
-sdk.attributes.modifyAttributeMappings(req).then((res: ModifyAttributeMappingsResponse | AxiosError) => {
+sdk.attributes.modifyAttributeGroups(req).then((res: ModifyAttributeGroupsResponse | AxiosError) => {
    // handle response
 });
 ```
@@ -177,52 +160,55 @@ sdk.attributes.modifyAttributeMappings(req).then((res: ModifyAttributeMappingsRe
 
 ### attributes
 
-* `modifyAttributeMappings` - Update attribute mappings
+* `modifyAttributeGroups` - Create, update and delete attribute groups
+* `modifyAttributeMappings` - Create and Update attribute mappings
+* `postCategoryAttributeBulk` - Create, update and delete category attributes
+* `postProductAttributeBulk` - Create update and delete item attributes
+* `searchAttributeGroups` - Find attribute groups
 * `searchAttributeMappings` - Find attribute mapping
+
+### bulkImport
+
+* `itemAttributeFileSearch` - Get imported files for item attributes
+* `itemBundleFileSearch` - Get imported files for bundles
+* `fileSearch` - Get imported files for items
+* `generateCSVfile` - Generate CSV template file for items
+* `generateItemAttributeCSVfile` - Generate CSV template for item attributes
+* `generateItemAttributeS3url` - Generate S3 bucket URL for item attribute import
+* `generateItemBundleCSVfile` - Generate CSV template for bundles
+* `generateItemBundleS3url` - Generate S3 bucket URL for bundle import
+* `generateS3url` - Generate S3 bucket URL for item import
+* `getFileStatus` - Get file upload status
 
 ### category
 
 * `categoryCreate` - Create category
 * `categoryModify` - Modify category
 * `getCategoriesById` - Get categories
-* `getCategoriesNodeSourceExclusions` - Get available category source exclusions
-* `getCategoriesNodeSources` - Get available category sources
-* `getCategoryAttributesByID` - Get category attributes
-* `getCategoryItemAttributes` - Get available product attributes
-* `getCategoryItemAttributesCondition` - Get available conditions for product attribute
+* `getCategoriesNodeSourceExclusions` - Get category source exclusions
+* `getCategoriesNodeSources` - Get category source inclusions
+* `getCategoryAttributesByID` - Get assigned category attributes
+* `getCategoryItemAttributes` - Get assigned item attributes
+* `getCategoryItemAttributesCondition` - Get item attribute conditions
 * `getCategorySKUs` - Get SKUs in a category
 * `getCategoryTree` - Get category tree
-* `modifyCategoriesNodeSourceExclusions` - Create and update category source exclusions
-* `modifyCategoriesNodeSources` - Create and update category sources
-* `postCategoryAttributeBulk` - Create, update, or delete category attributes
-* `postCategoryAttributeByID` - Create, update, and delete attributes of a category
-* `postCategoryItemAttributeByID` - Create or update product attribute conditions
-* `postCategoryItemibuteByID` - Create, update, and remove product attributes for a category
+* `modifyCategoriesNodeSourceExclusions` - Add and remove category source exclusions
+* `modifyCategoriesNodeSources` - Add and remove category source inclusions
+* `postCategoryAttributeByID` - Assign and unassign category attributes
+* `postCategoryItemAttributeByID` - Add and remove item attribute conditions
+* `postCategoryItemibuteByID` - Assign and unassign item attributes
 * `searchCategories` - Find categories
 
 ### product
 
-* `itemAttributeFileSearch` - Get imported files for product attributes
-* `itemBundleFileSearch` - Get imported files for product bundles
-* `createProducts` - Create products and bundles
-* `fileSearch` - Get imported files for products
-* `generateCSVfile` - Generate CSV template file for products
-* `generateItemAttributeCSVfile` - Generate CSV template for product attributes
-* `generateItemAttributeS3url` - Generate S3 bucket URL for product attributes
-* `generateItemBundleCSVfile` - Generate CSV template for product bundles
-* `generateItemBundleS3url` - Generate S3 bucket URL for product bundles
-* `generateS3url` - Generate S3 bucket URL for bulk upload of products
-* `getFileStatus` - Get file upload status by ID
-* `getProductAttribute` - Get product attributes
-* `getProducts` - Get products
-* `getProductsV2` - Get products by SKU, itemId or parentSku
-* `modifyAttributeGroups` - Create, update, or delete attribute groups
-* `postProductAttributeBulk` - Create and update attributes for multiple products
-* `productSearch` - Find products
-* `searchAttributeGroups` - Find attribute groups
-* `updateBundles` - Update bundles
-* `updateProducts` - Update products and bundles
-* `upsertProducts` - Upsert products or bundles
+* `createProducts` - Create items and bundles
+* `getProductAttribute` - Get item attributes
+* `getProducts` - Get items and children items
+* `getProductsV2` - Get items and limited children items
+* `productSearch` - Find items
+* `updateBundles` - Update items in bundle
+* `updateProducts` - Update items and bundles
+* `upsertProducts` - Upsert items and bundles
 <!-- End SDK Available Operations -->
 
 ### SDK Generated by [Speakeasy](https://docs.speakeasyapi.dev/docs/using-speakeasy/client-sdks)

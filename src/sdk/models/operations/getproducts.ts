@@ -38,11 +38,8 @@ export class GetProductsQueryParams extends SpeakeasyBase {
 }
 
 export class GetProductsHeaders extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=authorization" })
-  authorization?: string;
-
   @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-site-context" })
-  xSiteContext?: shared.XSiteContextOrAuthorization;
+  xSiteContext?: shared.XSiteContext;
 }
 
 export class GetProductsRequest extends SpeakeasyBase {

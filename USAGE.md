@@ -1,135 +1,118 @@
 <!-- Start SDK Example Usage -->
 ```typescript
 import {
-  ModifyAttributeMappingsRequest,
-  ModifyAttributeMappingsResponse 
-} from "@fabric/pim-sdk/dist/sdk/models/operations";
+  ModifyAttributeGroupsRequest,
+  ModifyAttributeGroupsResponse 
+} from "@speakeasy-sdks/pim-sdk/dist/sdk/models/operations";
 
 import { AxiosError } from "axios";
-import { SDK } from "@fabric/pim-sdk";
+import { Fabric } from "@speakeasy-sdks/pim-sdk";
 
 
-const sdk = new SDK();
+const sdk = new Fabric();
     
-const req: ModifyAttributeMappingsRequest = {
+const req: ModifyAttributeGroupsRequest = {
   headers: {
-    authorization: "unde",
     xSiteContext: {
-      account: "deserunt",
-      channel: 7151.9,
-      date: "nulla",
-      stage: "id",
+      account: "unde",
+      channel: 5928.45,
+      date: "porro",
+      stage: "nulla",
     },
   },
   request: {
-    mappings: [
+    attributeGroup: [
       {
-        attributeId: "perspiciatis",
-        description: "nulla",
-        mapping: "nihil",
-        name: "fuga",
-        required: true,
-        validation: {
-          attributeTypes: [
-            "DECIMAL",
-            "SERIAL",
-          ],
-          contains: "saepe",
-          exact: "inventore",
-          formula: "sapiente",
-          inheritable: true,
-          inverse: false,
-          oneOf: "voluptatum",
-          range: {
-            max: "autem",
-            min: "vel",
+        action: "undefined",
+        description: "perspiciatis",
+        editableAttributes: [
+          {
+            action: "UPDATE",
+            id: "fuga",
+            order: 6458.94,
           },
-          required: false,
-          unique: false,
-        },
+          {
+            action: "UPDATE",
+            id: "iusto",
+            order: 2975.34,
+          },
+          {
+            action: "undefined",
+            id: "inventore",
+            order: 9636.63,
+          },
+          {
+            action: "UPDATE",
+            id: "eum",
+            order: 4776.65,
+          },
+        ],
+        id: "autem",
+        name: "vel",
+        priorityOrder: 5288.95,
+        type: "COLLECTION",
       },
       {
-        attributeId: "similique",
+        action: "DELETE",
         description: "reprehenderit",
-        mapping: "molestiae",
-        name: "quo",
-        required: true,
-        validation: {
-          attributeTypes: [
-            "TEXT",
-            "ASSET",
-          ],
-          contains: "voluptatem",
-          exact: "consequatur",
-          formula: "fugiat",
-          inheritable: true,
-          inverse: false,
-          oneOf: "eos",
-          range: {
-            max: "accusamus",
-            min: "accusamus",
+        editableAttributes: [
+          {
+            action: "undefined",
+            id: "quasi",
+            order: 3373.96,
           },
-          required: false,
-          unique: true,
-        },
+          {
+            action: "ADD",
+            id: "est",
+            order: 202.18,
+          },
+          {
+            action: "UPDATE",
+            id: "fugiat",
+            order: 9571.56,
+          },
+          {
+            action: "undefined",
+            id: "eos",
+            order: 8700.13,
+          },
+        ],
+        id: "accusamus",
+        name: "reiciendis",
+        priorityOrder: 4736.08,
+        type: "undefined",
       },
       {
-        attributeId: "quibusdam",
-        description: "et",
-        mapping: "praesentium",
+        action: "undefined",
+        description: "praesentium",
+        editableAttributes: [
+          {
+            action: "undefined",
+            id: "soluta",
+            order: 1182.74,
+          },
+          {
+            action: "DELETE",
+            id: "rerum",
+            order: 5820.2,
+          },
+          {
+            action: "ADD",
+            id: "sed",
+            order: 9446.69,
+          },
+        ],
+        id: "possimus",
         name: "occaecati",
-        required: false,
-        validation: {
-          attributeTypes: [
-            "TEXT",
-            "ASSET",
-            "ASSET",
-          ],
-          contains: "culpa",
-          exact: "qui",
-          formula: "sed",
-          inheritable: false,
-          inverse: true,
-          oneOf: "occaecati",
-          range: {
-            max: "odit",
-            min: "esse",
-          },
-          required: true,
-          unique: false,
-        },
-      },
-      {
-        attributeId: "amet",
-        description: "est",
-        mapping: "id",
-        name: "blanditiis",
-        required: true,
-        validation: {
-          attributeTypes: [
-            "BOOLEAN",
-            "TEXT",
-            "SERIAL",
-          ],
-          contains: "et",
-          exact: "voluptatem",
-          formula: "laborum",
-          inheritable: false,
-          inverse: true,
-          oneOf: "iure",
-          range: {
-            max: "earum",
-            min: "ut",
-          },
-          required: true,
-          unique: true,
-        },
+        priorityOrder: 1059.07,
+        type: "COLLECTION",
       },
     ],
+    transactional: true,
   },
 };
 
-sdk.attributes.modifyAttributeMappings(req).then((res: ModifyAttributeMappingsResponse | AxiosError) => {
+sdk.attributes.modifyAttributeGroups(req).then((res: ModifyAttributeGroupsResponse | AxiosError) => {
    // handle response
 });
 ```

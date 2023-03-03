@@ -13,11 +13,8 @@ export class GenerateItemBundleCSVfilePathParams extends SpeakeasyBase {
 }
 
 export class GenerateItemBundleCSVfileHeaders extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=authorization" })
-  authorization?: string;
-
   @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-site-context" })
-  xSiteContext?: shared.XSiteContextOrAuthorization;
+  xSiteContext?: shared.XSiteContext;
 }
 
 export class GenerateItemBundleCSVfileRequest extends SpeakeasyBase {

@@ -1,7 +1,6 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { ProductAttribute } from "./productattribute";
 import { ProductCategory } from "./productcategory";
-import { ProductChild } from "./productchild";
 import { Expose, Type } from "class-transformer";
 
 
@@ -10,11 +9,6 @@ export class BundleProductSearchResponseProducts extends SpeakeasyBase {
   @Expose({ name: "attributes" })
   @Type(() => ProductAttribute)
   attributes?: ProductAttribute[];
-
-  @SpeakeasyMetadata({ elemType: ProductChild })
-  @Expose({ name: "bundleItems" })
-  @Type(() => ProductChild)
-  bundleItems?: ProductChild[];
 
   @SpeakeasyMetadata({ elemType: ProductCategory })
   @Expose({ name: "categories" })
