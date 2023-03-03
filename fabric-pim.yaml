@@ -23,8 +23,10 @@ externalDocs:
 servers:
   - url: https://sandbox.copilot.fabric.inc
     description: Sandbox
+    x-speakeasy-server-id: sandbox
   - url: https://live.copilot.fabric.inc
     description: Production
+    x-speakeasy-server-id: prod
 paths:
   /api-category/v1/category:
     post:
