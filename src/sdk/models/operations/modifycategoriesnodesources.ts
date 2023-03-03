@@ -1,7 +1,13 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
+import { AxiosResponse } from "axios";
+import { Type } from "class-transformer";
 
 
+export class ModifyCategoriesNodeSourcesSecurity extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  apiKey: shared.SchemeAPIKey;
+}
 
 export class ModifyCategoriesNodeSourcesHeaders extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-api-key" })
@@ -10,13 +16,6 @@ export class ModifyCategoriesNodeSourcesHeaders extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-site-context" })
   xSiteContext?: shared.XSiteContext;
 }
-
-
-export class ModifyCategoriesNodeSourcesSecurity extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
-  apiKey: shared.SchemeApiKey;
-}
-
 
 export class ModifyCategoriesNodeSourcesRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
@@ -29,7 +28,6 @@ export class ModifyCategoriesNodeSourcesRequest extends SpeakeasyBase {
   security: ModifyCategoriesNodeSourcesSecurity;
 }
 
-
 export class ModifyCategoriesNodeSourcesResponse extends SpeakeasyBase {
   @SpeakeasyMetadata()
   clientError?: shared.ClientError;
@@ -41,8 +39,11 @@ export class ModifyCategoriesNodeSourcesResponse extends SpeakeasyBase {
   nodeSourcesAndExclusions?: shared.NodeSourcesAndExclusions;
 
   @SpeakeasyMetadata()
-  serverError?: shared.ServerError;
+  statusCode: number;
 
   @SpeakeasyMetadata()
-  statusCode: number;
+  rawResponse?: AxiosResponse;
+
+  @SpeakeasyMetadata()
+  serverError?: shared.ServerError;
 }

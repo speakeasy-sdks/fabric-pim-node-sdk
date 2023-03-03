@@ -1,9 +1,10 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
+import { AxiosResponse } from "axios";
+import { Type } from "class-transformer";
 
 
-
-export class PostCategoryItemAttributeByIdHeaders extends SpeakeasyBase {
+export class PostCategoryItemAttributeByIDHeaders extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=authorization" })
   authorization?: string;
 
@@ -14,17 +15,15 @@ export class PostCategoryItemAttributeByIdHeaders extends SpeakeasyBase {
   xSiteContext?: shared.XSiteContext;
 }
 
-
-export class PostCategoryItemAttributeByIdRequest extends SpeakeasyBase {
+export class PostCategoryItemAttributeByIDRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
-  headers: PostCategoryItemAttributeByIdHeaders;
+  headers: PostCategoryItemAttributeByIDHeaders;
 
   @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: shared.CategoryItemAttributeConditionsRequest;
 }
 
-
-export class PostCategoryItemAttributeByIdResponse extends SpeakeasyBase {
+export class PostCategoryItemAttributeByIDResponse extends SpeakeasyBase {
   @SpeakeasyMetadata()
   categoryItemAttributeConditions?: shared.CategoryItemAttributeConditions;
 
@@ -35,8 +34,11 @@ export class PostCategoryItemAttributeByIdResponse extends SpeakeasyBase {
   contentType: string;
 
   @SpeakeasyMetadata()
-  serverError?: shared.ServerError;
+  statusCode: number;
 
   @SpeakeasyMetadata()
-  statusCode: number;
+  rawResponse?: AxiosResponse;
+
+  @SpeakeasyMetadata()
+  serverError?: shared.ServerError;
 }

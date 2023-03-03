@@ -1,7 +1,12 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
+import { AxiosResponse } from "axios";
+import { Type } from "class-transformer";
 
-
+export enum GetCategoryItemAttributesStatusEnum {
+    Assigned = "ASSIGNED",
+    Unassigned = "UNASSIGNED"
+}
 
 export class GetCategoryItemAttributesQueryParams extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id" })
@@ -17,15 +22,13 @@ export class GetCategoryItemAttributesQueryParams extends SpeakeasyBase {
   size: number;
 
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=status" })
-  status?: shared.XSiteContextEnum2;
+  status?: GetCategoryItemAttributesStatusEnum;
 }
-
 
 export class GetCategoryItemAttributesHeaders extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-site-context" })
   xSiteContext?: shared.XSiteContext;
 }
-
 
 export class GetCategoryItemAttributesRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
@@ -34,7 +37,6 @@ export class GetCategoryItemAttributesRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
   headers: GetCategoryItemAttributesHeaders;
 }
-
 
 export class GetCategoryItemAttributesResponse extends SpeakeasyBase {
   @SpeakeasyMetadata()
@@ -47,8 +49,11 @@ export class GetCategoryItemAttributesResponse extends SpeakeasyBase {
   getCategoryItemAttributes?: shared.GetCategoryItemAttributes;
 
   @SpeakeasyMetadata()
-  serverError?: shared.ServerError;
+  statusCode: number;
 
   @SpeakeasyMetadata()
-  statusCode: number;
+  rawResponse?: AxiosResponse;
+
+  @SpeakeasyMetadata()
+  serverError?: shared.ServerError;
 }

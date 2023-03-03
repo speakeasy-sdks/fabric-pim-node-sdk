@@ -1,14 +1,17 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose } from "class-transformer";
 
 
-
-export class GetS3UrlResponse extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=fileId" })
+export class GetS3URLResponse extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  @Expose({ name: "fileId" })
   fileId?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=key" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "key" })
   key?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=url" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "url" })
   url?: string;
 }

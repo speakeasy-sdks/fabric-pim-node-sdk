@@ -1,8 +1,13 @@
+configVersion: 1.0.0
 management:
-    openapi-checksum: 2ec511e1ac219634fc445e8b7bec8f89
-    openapi-version: 2.0.0
-    speakeasy-version: 0.22.1
+  docChecksum: 2ec511e1ac219634fc445e8b7bec8f89
+  docVersion: 2.0.0
+  speakeasyVersion: 1.8.2
+generation:
+  telemetryEnabled: false
+  sdkClassName: SDK
+  sdkFlattening: false
 typescript:
-    version: 2.1.1
-    packagename: '@fabric/pim-sdk'
-    author: fabric
+  version: 3.0.0
+  author: fabric
+  packageName: '@fabric/pim-sdk'

@@ -1,9 +1,10 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
+import { AxiosResponse } from "axios";
+import { Type } from "class-transformer";
 
 
-
-export class GenerateCsVfilePathParams extends SpeakeasyBase {
+export class GenerateCSVfilePathParams extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=accountId" })
   accountId: string;
 
@@ -11,8 +12,7 @@ export class GenerateCsVfilePathParams extends SpeakeasyBase {
   nodeId: string;
 }
 
-
-export class GenerateCsVfileHeaders extends SpeakeasyBase {
+export class GenerateCSVfileHeaders extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=authorization" })
   authorization?: string;
 
@@ -20,17 +20,15 @@ export class GenerateCsVfileHeaders extends SpeakeasyBase {
   xSiteContext?: shared.XSiteContextOrAuthorization;
 }
 
-
-export class GenerateCsVfileRequest extends SpeakeasyBase {
+export class GenerateCSVfileRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
-  pathParams: GenerateCsVfilePathParams;
+  pathParams: GenerateCSVfilePathParams;
 
   @SpeakeasyMetadata()
-  headers: GenerateCsVfileHeaders;
+  headers: GenerateCSVfileHeaders;
 }
 
-
-export class GenerateCsVfileResponse extends SpeakeasyBase {
+export class GenerateCSVfileResponse extends SpeakeasyBase {
   @SpeakeasyMetadata()
   clientError?: shared.ClientError;
 
@@ -42,6 +40,9 @@ export class GenerateCsVfileResponse extends SpeakeasyBase {
 
   @SpeakeasyMetadata()
   statusCode: number;
+
+  @SpeakeasyMetadata()
+  rawResponse?: AxiosResponse;
 
   @SpeakeasyMetadata()
   generateCSVfile200ApplicationCsvBinaryString?: Uint8Array;

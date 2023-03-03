@@ -1,25 +1,29 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { ProductResponse } from "./productresponse";
-
+import { Expose, Type } from "class-transformer";
 
 export enum ProductModifyErrorCodeEnum {
     StatusError = "STATUS_ERROR"
 }
 
-
 export class ProductModifyErrorMessage extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=index" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "index" })
   index?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=item" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "item" })
+  @Type(() => ProductResponse)
   item?: ProductResponse;
 }
 
-
 export class ProductModifyError extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=code" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "code" })
   code?: ProductModifyErrorCodeEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=message", elemType: ProductModifyErrorMessage })
+  @SpeakeasyMetadata({ elemType: ProductModifyErrorMessage })
+  @Expose({ name: "message" })
+  @Type(() => ProductModifyErrorMessage)
   message?: ProductModifyErrorMessage[];
 }

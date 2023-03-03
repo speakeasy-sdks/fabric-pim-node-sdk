@@ -1,26 +1,26 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
-
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose } from "class-transformer";
 
 export enum AttributeMappingSortDirectionEnum {
     Asc = "ASC",
     Desc = "DESC"
 }
-
 export enum AttributeMappingSortFieldEnum {
     CreatedOn = "createdOn",
     UpdatedOn = "updatedOn",
     Mapping = "mapping"
 }
 
-
 // AttributeMappingSort
 /** 
  * Individual fields to sort
 **/
 export class AttributeMappingSort extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=direction" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "direction" })
   direction?: AttributeMappingSortDirectionEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=field" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "field" })
   field?: AttributeMappingSortFieldEnum;
 }

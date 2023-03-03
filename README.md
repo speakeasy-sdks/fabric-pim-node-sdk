@@ -27,75 +27,129 @@ For more details on getting access to the Fabric API please see [here](https://k
 ## SDK Example Usage
 <!-- Start SDK Example Usage -->
 ```typescript
-import { SDK, withSecurity} from "@fabric/pim-sdk";
-import { ModifyAttributeMappingsRequest, ModifyAttributeMappingsResponse } from "@fabric/pim-sdk/src/sdk/models/operations";
+import {
+  ModifyAttributeMappingsRequest,
+  ModifyAttributeMappingsResponse 
+} from "@fabric/pim-sdk/dist/sdk/models/operations";
+
 import { AxiosError } from "axios";
+import { SDK } from "@fabric/pim-sdk";
 
 
 const sdk = new SDK();
     
 const req: ModifyAttributeMappingsRequest = {
   headers: {
-    authorization: "sit",
+    authorization: "unde",
     xSiteContext: {
-      account: "voluptas",
-      channel: 53.099998,
-      date: "consequuntur",
-      stage: "dolor",
+      account: "deserunt",
+      channel: 7151.9,
+      date: "nulla",
+      stage: "id",
     },
   },
   request: {
     mappings: [
       {
-        attributeId: "voluptas",
-        description: "fugit",
-        mapping: "et",
-        name: "nihil",
+        attributeId: "perspiciatis",
+        description: "nulla",
+        mapping: "nihil",
+        name: "fuga",
         required: true,
         validation: {
           attributeTypes: [
-            "BOOLEAN",
-            "DATETIME",
-            "INTEGER",
+            "DECIMAL",
+            "SERIAL",
           ],
-          contains: "ut",
-          exact: "dolorem",
-          formula: "et",
-          inheritable: false,
-          inverse: true,
-          oneOf: "vitae",
+          contains: "saepe",
+          exact: "inventore",
+          formula: "sapiente",
+          inheritable: true,
+          inverse: false,
+          oneOf: "voluptatum",
           range: {
-            max: "totam",
-            min: "dolores",
+            max: "autem",
+            min: "vel",
+          },
+          required: false,
+          unique: false,
+        },
+      },
+      {
+        attributeId: "similique",
+        description: "reprehenderit",
+        mapping: "molestiae",
+        name: "quo",
+        required: true,
+        validation: {
+          attributeTypes: [
+            "TEXT",
+            "ASSET",
+          ],
+          contains: "voluptatem",
+          exact: "consequatur",
+          formula: "fugiat",
+          inheritable: true,
+          inverse: false,
+          oneOf: "eos",
+          range: {
+            max: "accusamus",
+            min: "accusamus",
           },
           required: false,
           unique: true,
         },
       },
       {
-        attributeId: "vel",
-        description: "odio",
-        mapping: "dolore",
-        name: "id",
+        attributeId: "quibusdam",
+        description: "et",
+        mapping: "praesentium",
+        name: "occaecati",
+        required: false,
+        validation: {
+          attributeTypes: [
+            "TEXT",
+            "ASSET",
+            "ASSET",
+          ],
+          contains: "culpa",
+          exact: "qui",
+          formula: "sed",
+          inheritable: false,
+          inverse: true,
+          oneOf: "occaecati",
+          range: {
+            max: "odit",
+            min: "esse",
+          },
+          required: true,
+          unique: false,
+        },
+      },
+      {
+        attributeId: "amet",
+        description: "est",
+        mapping: "id",
+        name: "blanditiis",
         required: true,
         validation: {
           attributeTypes: [
-            "INTEGER",
-            "ASSET",
-            "DATETIME",
+            "BOOLEAN",
+            "TEXT",
+            "SERIAL",
           ],
-          contains: "est",
-          exact: "aut",
-          formula: "odit",
-          inheritable: true,
-          inverse: false,
-          oneOf: "omnis",
+          contains: "et",
+          exact: "voluptatem",
+          formula: "laborum",
+          inheritable: false,
+          inverse: true,
+          oneOf: "iure",
           range: {
-            max: "aut",
-            min: "illo",
+            max: "earum",
+            min: "ut",
           },
-          required: false,
-          unique: false,
+          required: true,
+          unique: true,
         },
       },
     ],
@@ -111,41 +165,42 @@ sdk.attributes.modifyAttributeMappings(req).then((res: ModifyAttributeMappingsRe
 <!-- Start SDK Available Operations -->
 ## SDK Available Operations
 
-### Attributes
+
+### attributes
 
 * `modifyAttributeMappings` - Update attribute mappings
 * `searchAttributeMappings` - Find attribute mapping
 
-### Category
+### category
 
 * `categoryCreate` - Create category
 * `categoryModify` - Modify category
 * `getCategoriesById` - Get categories
 * `getCategoriesNodeSourceExclusions` - Get available category source exclusions
 * `getCategoriesNodeSources` - Get available category sources
-* `getCategoryAttributesById` - Get category attributes
+* `getCategoryAttributesByID` - Get category attributes
 * `getCategoryItemAttributes` - Get available product attributes
 * `getCategoryItemAttributesCondition` - Get available conditions for product attribute
-* `getCategorySkUs` - Get SKUs in a category
+* `getCategorySKUs` - Get SKUs in a category
 * `getCategoryTree` - Get category tree
 * `modifyCategoriesNodeSourceExclusions` - Create and update category source exclusions
 * `modifyCategoriesNodeSources` - Create and update category sources
 * `postCategoryAttributeBulk` - Create, update, or delete category attributes
-* `postCategoryAttributeById` - Create, update, and delete attributes of a category
-* `postCategoryItemAttributeById` - Create or update product attribute conditions
-* `postCategoryItemibuteById` - Create, update, and remove product attributes for a category
+* `postCategoryAttributeByID` - Create, update, and delete attributes of a category
+* `postCategoryItemAttributeByID` - Create or update product attribute conditions
+* `postCategoryItemibuteByID` - Create, update, and remove product attributes for a category
 * `searchCategories` - Find categories
 
-### Product
+### product
 
 * `itemAttributeFileSearch` - Get imported files for product attributes
 * `itemBundleFileSearch` - Get imported files for product bundles
 * `createProducts` - Create products and bundles
 * `fileSearch` - Get imported files for products
-* `generateCsVfile` - Generate CSV template file for products
-* `generateItemAttributeCsVfile` - Generate CSV template for product attributes
+* `generateCSVfile` - Generate CSV template file for products
+* `generateItemAttributeCSVfile` - Generate CSV template for product attributes
 * `generateItemAttributeS3url` - Generate S3 bucket URL for product attributes
-* `generateItemBundleCsVfile` - Generate CSV template for product bundles
+* `generateItemBundleCSVfile` - Generate CSV template for product bundles
 * `generateItemBundleS3url` - Generate S3 bucket URL for product bundles
 * `generateS3url` - Generate S3 bucket URL for bulk upload of products
 * `getFileStatus` - Get file upload status by ID
@@ -159,7 +214,6 @@ sdk.attributes.modifyAttributeMappings(req).then((res: ModifyAttributeMappingsRe
 * `updateBundles` - Update bundles
 * `updateProducts` - Update products and bundles
 * `upsertProducts` - Upsert products or bundles
-
 <!-- End SDK Available Operations -->
 
 ### SDK Generated by [Speakeasy](https://docs.speakeasyapi.dev/docs/using-speakeasy/client-sdks)

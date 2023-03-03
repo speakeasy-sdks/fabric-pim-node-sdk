@@ -1,50 +1,66 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { ProductAttribute } from "./productattribute";
-import { ProductChild } from "./productchild";
 import { ProductCategory } from "./productcategory";
-
+import { ProductChild } from "./productchild";
+import { Expose, Type } from "class-transformer";
 
 
 export class BundleProductSearchResponseProducts extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=attributes", elemType: ProductAttribute })
+  @SpeakeasyMetadata({ elemType: ProductAttribute })
+  @Expose({ name: "attributes" })
+  @Type(() => ProductAttribute)
   attributes?: ProductAttribute[];
 
-  @SpeakeasyMetadata({ data: "json, name=bundleItems", elemType: ProductChild })
+  @SpeakeasyMetadata({ elemType: ProductChild })
+  @Expose({ name: "bundleItems" })
+  @Type(() => ProductChild)
   bundleItems?: ProductChild[];
 
-  @SpeakeasyMetadata({ data: "json, name=categories", elemType: ProductCategory })
+  @SpeakeasyMetadata({ elemType: ProductCategory })
+  @Expose({ name: "categories" })
+  @Type(() => ProductCategory)
   categories?: ProductCategory[];
 
-  @SpeakeasyMetadata({ data: "json, name=createdOn" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "createdOn" })
   createdOn?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=dependents" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "dependents" })
   dependents?: string[];
 
-  @SpeakeasyMetadata({ data: "json, name=itemId" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "itemId" })
   itemId?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=modifiedOn" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "modifiedOn" })
   modifiedOn?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=sku" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "sku" })
   sku?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=type" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "type" })
   type?: string;
 }
 
-
 export class BundleProductSearchResponse extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=pageSize" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "pageSize" })
   pageSize?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=pages" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "pages" })
   pages?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=products", elemType: BundleProductSearchResponseProducts })
+  @SpeakeasyMetadata({ elemType: BundleProductSearchResponseProducts })
+  @Expose({ name: "products" })
+  @Type(() => BundleProductSearchResponseProducts)
   products?: BundleProductSearchResponseProducts[];
 
-  @SpeakeasyMetadata({ data: "json, name=totalSize" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "totalSize" })
   totalSize?: number;
 }

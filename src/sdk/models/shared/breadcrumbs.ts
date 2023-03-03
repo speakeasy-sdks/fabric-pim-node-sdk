@@ -1,34 +1,41 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
-
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose } from "class-transformer";
 
 export enum BreadcrumbsHierarchyEnum {
     Primary = "PRIMARY",
     Alternate = "ALTERNATE"
 }
 
-
 export class Breadcrumbs extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=createdOn" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "createdOn" })
   createdOn?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=hierarchy" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "hierarchy" })
   hierarchy?: BreadcrumbsHierarchyEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=isActive" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "isActive" })
   isActive?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=level" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "level" })
   level?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=modifiedOn" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "modifiedOn" })
   modifiedOn?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "name" })
   name?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=nodeId" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "nodeId" })
   nodeId?: number;
 }

@@ -1,9 +1,15 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
+import { AxiosResponse } from "axios";
+import { Type } from "class-transformer";
 
 
+export class PostCategoryItemibuteByIDSecurity extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  apiKey: shared.SchemeAPIKey;
+}
 
-export class PostCategoryItemibuteByIdHeaders extends SpeakeasyBase {
+export class PostCategoryItemibuteByIDHeaders extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-api-key" })
   xApiKey?: string;
 
@@ -11,26 +17,18 @@ export class PostCategoryItemibuteByIdHeaders extends SpeakeasyBase {
   xSiteContext?: shared.XSiteContext;
 }
 
-
-export class PostCategoryItemibuteByIdSecurity extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
-  apiKey: shared.SchemeApiKey;
-}
-
-
-export class PostCategoryItemibuteByIdRequest extends SpeakeasyBase {
+export class PostCategoryItemibuteByIDRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
-  headers: PostCategoryItemibuteByIdHeaders;
+  headers: PostCategoryItemibuteByIDHeaders;
 
   @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: shared.ModifyCategoryItemAttributesRequest;
 
   @SpeakeasyMetadata()
-  security: PostCategoryItemibuteByIdSecurity;
+  security: PostCategoryItemibuteByIDSecurity;
 }
 
-
-export class PostCategoryItemibuteByIdResponse extends SpeakeasyBase {
+export class PostCategoryItemibuteByIDResponse extends SpeakeasyBase {
   @SpeakeasyMetadata()
   categoryItemAttributes?: shared.CategoryItemAttributes;
 
@@ -41,8 +39,11 @@ export class PostCategoryItemibuteByIdResponse extends SpeakeasyBase {
   contentType: string;
 
   @SpeakeasyMetadata()
-  serverError?: shared.ServerError;
+  statusCode: number;
 
   @SpeakeasyMetadata()
-  statusCode: number;
+  rawResponse?: AxiosResponse;
+
+  @SpeakeasyMetadata()
+  serverError?: shared.ServerError;
 }

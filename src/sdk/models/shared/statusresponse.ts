@@ -1,11 +1,10 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
-
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose, Transform } from "class-transformer";
 
 export enum StatusResponseSourceEnum {
     Pim = "PIM",
     Wam = "WAM"
 }
-
 export enum StatusResponseTypeEnum {
     Attribute = "ATTRIBUTE",
     AttributeValue = "ATTRIBUTE_VALUE",
@@ -15,32 +14,42 @@ export enum StatusResponseTypeEnum {
     Hierarchy = "HIERARCHY"
 }
 
-
 export class StatusResponse extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=code" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "code" })
   code?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=createdBy" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "createdBy" })
   createdBy?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=createdOn" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "createdOn" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   createdOn?: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=description" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "description" })
   description?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=modifiedBy" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "modifiedBy" })
   modifiedBy?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=modifiedOn" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "modifiedOn" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   modifiedOn?: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "name" })
   name?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=source" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "source" })
   source?: StatusResponseSourceEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=type" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "type" })
   type?: StatusResponseTypeEnum;
 }

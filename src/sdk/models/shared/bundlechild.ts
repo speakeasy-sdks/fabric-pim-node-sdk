@@ -1,15 +1,19 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { ProductAttribute } from "./productattribute";
-
+import { Expose, Type } from "class-transformer";
 
 
 export class BundleChild extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=attributes", elemType: ProductAttribute })
+  @SpeakeasyMetadata({ elemType: ProductAttribute })
+  @Expose({ name: "attributes" })
+  @Type(() => ProductAttribute)
   attributes?: ProductAttribute[];
 
-  @SpeakeasyMetadata({ data: "json, name=itemId" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "itemId" })
   itemId?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=sku" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "sku" })
   sku?: string;
 }

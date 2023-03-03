@@ -1,9 +1,10 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
+import { AxiosResponse } from "axios";
+import { Type } from "class-transformer";
 
 
-
-export class GenerateItemAttributeCsVfileHeaders extends SpeakeasyBase {
+export class GenerateItemAttributeCSVfileHeaders extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=authorization" })
   authorization?: string;
 
@@ -11,14 +12,12 @@ export class GenerateItemAttributeCsVfileHeaders extends SpeakeasyBase {
   xSiteContext?: shared.XSiteContextOrAuthorization;
 }
 
-
-export class GenerateItemAttributeCsVfileRequest extends SpeakeasyBase {
+export class GenerateItemAttributeCSVfileRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
-  headers: GenerateItemAttributeCsVfileHeaders;
+  headers: GenerateItemAttributeCSVfileHeaders;
 }
 
-
-export class GenerateItemAttributeCsVfileResponse extends SpeakeasyBase {
+export class GenerateItemAttributeCSVfileResponse extends SpeakeasyBase {
   @SpeakeasyMetadata()
   clientError?: shared.ClientError;
 
@@ -30,6 +29,9 @@ export class GenerateItemAttributeCsVfileResponse extends SpeakeasyBase {
 
   @SpeakeasyMetadata()
   statusCode: number;
+
+  @SpeakeasyMetadata()
+  rawResponse?: AxiosResponse;
 
   @SpeakeasyMetadata()
   generateItemAttributeCSVfile200ApplicationCsvBinaryString?: Uint8Array;

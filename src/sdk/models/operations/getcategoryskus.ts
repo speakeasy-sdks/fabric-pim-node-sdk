@@ -1,9 +1,10 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
+import { AxiosResponse } from "axios";
+import { Type } from "class-transformer";
 
 
-
-export class GetCategorySkUsQueryParams extends SpeakeasyBase {
+export class GetCategorySKUsQueryParams extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id" })
   id?: string;
 
@@ -17,23 +18,20 @@ export class GetCategorySkUsQueryParams extends SpeakeasyBase {
   size?: number;
 }
 
-
-export class GetCategorySkUsHeaders extends SpeakeasyBase {
+export class GetCategorySKUsHeaders extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-site-context" })
   xSiteContext?: shared.XSiteContext;
 }
 
-
-export class GetCategorySkUsRequest extends SpeakeasyBase {
+export class GetCategorySKUsRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
-  queryParams: GetCategorySkUsQueryParams;
+  queryParams: GetCategorySKUsQueryParams;
 
   @SpeakeasyMetadata()
-  headers: GetCategorySkUsHeaders;
+  headers: GetCategorySKUsHeaders;
 }
 
-
-export class GetCategorySkUsResponse extends SpeakeasyBase {
+export class GetCategorySKUsResponse extends SpeakeasyBase {
   @SpeakeasyMetadata()
   clientError?: shared.ClientError;
 
@@ -41,11 +39,14 @@ export class GetCategorySkUsResponse extends SpeakeasyBase {
   contentType: string;
 
   @SpeakeasyMetadata()
-  skuPage?: shared.SkuPage;
-
-  @SpeakeasyMetadata()
-  serverError?: shared.ServerError;
+  skuPage?: shared.SKUPage;
 
   @SpeakeasyMetadata()
   statusCode: number;
+
+  @SpeakeasyMetadata()
+  rawResponse?: AxiosResponse;
+
+  @SpeakeasyMetadata()
+  serverError?: shared.ServerError;
 }

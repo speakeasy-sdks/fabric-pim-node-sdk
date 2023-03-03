@@ -1,18 +1,23 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Product } from "./product";
-
+import { Expose, Type } from "class-transformer";
 
 
 export class ItemProductsResponse extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=pageSize" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "pageSize" })
   pageSize?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=pages" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "pages" })
   pages?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=products", elemType: Product })
+  @SpeakeasyMetadata({ elemType: Product })
+  @Expose({ name: "products" })
+  @Type(() => Product)
   products?: Product[];
 
-  @SpeakeasyMetadata({ data: "json, name=totalSize" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "totalSize" })
   totalSize?: number;
 }

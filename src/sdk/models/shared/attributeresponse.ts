@@ -1,23 +1,23 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { AttributeValidation } from "./attributevalidation";
 import { FileResponse } from "./fileresponse";
 import { StatusResponse } from "./statusresponse";
-import { AttributeValidation } from "./attributevalidation";
-
+import { Expose, Transform, Type } from "class-transformer";
 
 
 export class AttributeResponseLocales extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=locale" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "locale" })
   locale?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "name" })
   name?: string;
 }
-
 export enum AttributeResponseTargetEnum {
     Node = "NODE",
     Item = "ITEM"
 }
-
 export enum AttributeResponseTypeEnum {
     Text = "TEXT",
     Boolean = "BOOLEAN",
@@ -27,59 +27,82 @@ export enum AttributeResponseTypeEnum {
     Datetime = "DATETIME"
 }
 
-
 export class AttributeResponse extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=createdBy" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "createdBy" })
   createdBy?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=createdOn" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "createdOn" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   createdOn?: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=description" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "description" })
   description?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=files", elemType: FileResponse })
+  @SpeakeasyMetadata({ elemType: FileResponse })
+  @Expose({ name: "files" })
+  @Type(() => FileResponse)
   files?: FileResponse[];
 
-  @SpeakeasyMetadata({ data: "json, name=format" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "format" })
   format?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=formula" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "formula" })
   formula?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=locales", elemType: AttributeResponseLocales })
+  @SpeakeasyMetadata({ elemType: AttributeResponseLocales })
+  @Expose({ name: "locales" })
+  @Type(() => AttributeResponseLocales)
   locales?: AttributeResponseLocales[];
 
-  @SpeakeasyMetadata({ data: "json, name=localizable" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "localizable" })
   localizable?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=mapping" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "mapping" })
   mapping?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=modifiedBy" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "modifiedBy" })
   modifiedBy?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=modifiedOn" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "modifiedOn" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   modifiedOn?: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "name" })
   name?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=serialStart" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "serialStart" })
   serialStart?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=statuses", elemType: StatusResponse })
+  @SpeakeasyMetadata({ elemType: StatusResponse })
+  @Expose({ name: "statuses" })
+  @Type(() => StatusResponse)
   statuses?: StatusResponse[];
 
-  @SpeakeasyMetadata({ data: "json, name=target" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "target" })
   target?: AttributeResponseTargetEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=type" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "type" })
   type?: AttributeResponseTypeEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=validation" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "validation" })
+  @Type(() => AttributeValidation)
   validation?: AttributeValidation;
 }
