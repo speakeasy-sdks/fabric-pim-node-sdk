@@ -4,10 +4,13 @@ import { Category } from "./category";
 import { Product } from "./product";
 import axios, { AxiosInstance } from "axios";
 
-export const ServerList = [
-	"https://sandbox.copilot.fabric.inc",
-	"https://live.copilot.fabric.inc",
-] as const;
+export const ServerSandbox = "sandbox";
+export const ServerProd = "prod";
+
+export const ServerList: Record<string, string> = {
+	[ServerSandbox]: "https://sandbox.copilot.fabric.inc",
+	[ServerProd]: "https://live.copilot.fabric.inc",
+} as const;
 
 
 
@@ -29,11 +32,11 @@ export class Fabric {
   public _securityClient: AxiosInstance;
   public _serverURL: string;
   private _language = "typescript";
-  private _sdkVersion = "3.0.1";
+  private _sdkVersion = "3.0.2";
   private _genVersion = "1.8.2";
 
   constructor(props: SDKProps) {
-    this._serverURL = props.serverUrl ?? ServerList[0];
+    this._serverURL = props.serverUrl ?? ServerList[ServerSandbox];
 
     this._defaultClient = props.defaultClient ?? axios.create({ baseURL: this._serverURL });
     this._securityClient = this._defaultClient;
