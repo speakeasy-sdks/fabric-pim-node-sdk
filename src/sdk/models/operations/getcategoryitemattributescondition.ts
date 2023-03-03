@@ -3,11 +3,6 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 import { Type } from "class-transformer";
 
-
-export class GetCategoryItemAttributesConditionSecurity extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
-  apiKey: shared.SchemeAPIKey;
-}
 export enum GetCategoryItemAttributesConditionStatusEnum {
     Assigned = "ASSIGNED",
     Unassigned = "UNASSIGNED"
@@ -31,9 +26,6 @@ export class GetCategoryItemAttributesConditionQueryParams extends SpeakeasyBase
 }
 
 export class GetCategoryItemAttributesConditionHeaders extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=authorization" })
-  authorization?: string;
-
   @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-api-key" })
   xApiKey?: string;
 
@@ -47,9 +39,6 @@ export class GetCategoryItemAttributesConditionRequest extends SpeakeasyBase {
 
   @SpeakeasyMetadata()
   headers: GetCategoryItemAttributesConditionHeaders;
-
-  @SpeakeasyMetadata()
-  security: GetCategoryItemAttributesConditionSecurity;
 }
 
 export class GetCategoryItemAttributesConditionResponse extends SpeakeasyBase {

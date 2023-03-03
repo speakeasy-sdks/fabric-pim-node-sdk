@@ -4,11 +4,6 @@ import { AxiosResponse } from "axios";
 import { Type } from "class-transformer";
 
 
-export class ModifyCategoriesNodeSourceExclusionsSecurity extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
-  apiKey: shared.SchemeAPIKey;
-}
-
 export class ModifyCategoriesNodeSourceExclusionsHeaders extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-api-key" })
   xApiKey?: string;
@@ -23,9 +18,6 @@ export class ModifyCategoriesNodeSourceExclusionsRequest extends SpeakeasyBase {
 
   @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: shared.NodeSourcesAndExclusionsRequest;
-
-  @SpeakeasyMetadata()
-  security: ModifyCategoriesNodeSourceExclusionsSecurity;
 }
 
 export class ModifyCategoriesNodeSourceExclusionsResponse extends SpeakeasyBase {

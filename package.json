@@ -1,6 +1,6 @@
 {
-  "name": "@fabric/pim-sdk",
-  "version": "3.0.0",
+  "name": "@speakeasy-sdks/pim-sdk",
+  "version": "3.0.1",
   "author": "fabric",
   "scripts": {
     "prepare": "tsc --build"

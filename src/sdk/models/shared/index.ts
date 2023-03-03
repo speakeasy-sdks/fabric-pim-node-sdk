@@ -83,4 +83,3 @@ export * from "./statusresponse";
 export * from "./uploadfilestatusnoitemresponse";
 export * from "./uploadfilestatusresponse";
 export * from "./xsitecontext";
-export * from "./xsitecontextorauthorization";

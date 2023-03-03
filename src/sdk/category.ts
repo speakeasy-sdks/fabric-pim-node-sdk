@@ -24,7 +24,7 @@ export class Category {
   /**
    * categoryCreate - Create category
    *
-   * Creates Primary or Alternate category to organize products into logical groups. <br> **Note**: <br> 1) To add **Primary**  category, only `name` is required in the request. <br> 2) To add a **child** category, both `name` and `parentNodeId` are required. For **child** category, you can additionally specify `order` of display. <br> 3) To add an **Alternate** category, both `name` and `type` are required. <br> **Note**: Category details including category ID received in the response are required for subsequent calls. For example, it's required to *Create product* (POST /v1/product/bulk/insert).
+   * Creates Primary or Alternate category to organize items into logical groups. <br> **Note**: <br> 1) To add **Primary**  category, only `name` is required in the request. <br> 2) To add a **child** category, both `name` and `parentNodeId` are required. For **child** category, you can additionally specify `order` of display. <br> 3) To add an **Alternate** category, both `name` and `type` are required. <br> **Note**: Category details including category ID received in the response are required for subsequent calls. For example, it's required to *Create item* (POST /v1/product/bulk/insert).
   **/
   categoryCreate(
     req: operations.CategoryCreateRequest,
@@ -35,7 +35,7 @@ export class Category {
     }
     
     const baseURL: string = this._serverURL;
-    const url: string = baseURL.replace(/\/$/, "") + "/v1/category";
+    const url: string = baseURL.replace(/\/$/, "") + "/api-category/v1/category";
 
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
@@ -47,7 +47,7 @@ export class Category {
       }
     }
     
-    const client: AxiosInstance = utils.createSecurityClient(this._defaultClient!, req.security)!;
+    const client: AxiosInstance = this._defaultClient!;
     
     const headers = {...utils.getHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     
@@ -113,7 +113,7 @@ export class Category {
     }
     
     const baseURL: string = this._serverURL;
-    const url: string = utils.generateURL(baseURL, "/v1/category/{nodeId}", req.pathParams);
+    const url: string = utils.generateURL(baseURL, "/api-category/v1/category/{nodeId}", req.pathParams);
 
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
@@ -180,7 +180,7 @@ export class Category {
   /**
    * getCategoriesById - Get categories
    *
-   * Lists categories and their details including attributes, breadcrumbs, and details of child categories. <br> **Note**: <br> 1) Specify `ids` or `nodeIds` to get specific categories. <br> 2) Use `type` to get a specific category type. <br> 3) When query parameters are omitted, this endpoint returns a paginated response listing all Alternate categories in Active status. As a result, `size` and `page` becomes mandatory to support large data.
+   * Gets categories and their details including attributes, breadcrumbs, and details of children categories. <br> **Note**: <br> 1) Specify `ids` or `nodeIds` to get specific categories. <br> 2) Use `type` to get a specific category type. <br> 3) When query parameters are omitted, this endpoint returns a paginated response listing all Alternate categories in Active status. As a result, `size` and `page` becomes mandatory to support large data.
   **/
   getCategoriesById(
     req: operations.GetCategoriesByIdRequest,
@@ -191,7 +191,7 @@ export class Category {
     }
     
     const baseURL: string = this._serverURL;
-    const url: string = baseURL.replace(/\/$/, "") + "/v1/category";
+    const url: string = baseURL.replace(/\/$/, "") + "/api-category/v1/category";
     
     const client: AxiosInstance = this._defaultClient!;
     
@@ -246,7 +246,7 @@ export class Category {
 
   
   /**
-   * getCategoriesNodeSourceExclusions - Get available category source exclusions
+   * getCategoriesNodeSourceExclusions - Get category source exclusions
    *
    * Gets available exclusions applied to a category source.
   **/
@@ -259,7 +259,7 @@ export class Category {
     }
     
     const baseURL: string = this._serverURL;
-    const url: string = baseURL.replace(/\/$/, "") + "/v1/category/source/exclusion";
+    const url: string = baseURL.replace(/\/$/, "") + "/api-category/v1/category/source/exclusion";
     
     const client: AxiosInstance = this._defaultClient!;
     
@@ -314,9 +314,9 @@ export class Category {
 
   
   /**
-   * getCategoriesNodeSources - Get available category sources
+   * getCategoriesNodeSources - Get category source inclusions
    *
-   * Gets all the available category sources. <br> Products are created under the Primary category, and Alternate categories are created to export alternate organizations of the Primary category. So, the Primary category is the source of products that appear in Alternate categories. The category sources are Primary categories that can be used as product sources in Alternate categories. Sources behave similar to symlinks.
+   * Gets all the available category sources. <br> Items are created under the Primary category, and Alternate categories are created to export alternate organizations of the Primary category. So, the Primary category is the source of items that appear in Alternate categories. The category sources are Primary categories that can be used as item sources in Alternate categories. Sources behave similar to symlinks.
   **/
   getCategoriesNodeSources(
     req: operations.GetCategoriesNodeSourcesRequest,
@@ -327,7 +327,7 @@ export class Category {
     }
     
     const baseURL: string = this._serverURL;
-    const url: string = baseURL.replace(/\/$/, "") + "/v1/category/source";
+    const url: string = baseURL.replace(/\/$/, "") + "/api-category/v1/category/source";
     
     const client: AxiosInstance = this._defaultClient!;
     
@@ -382,9 +382,9 @@ export class Category {
 
   
   /**
-   * getCategoryAttributesByID - Get category attributes
+   * getCategoryAttributesByID - Get assigned category attributes
    *
-   * Gets all attributes of a category. <br> **Note**: <br> *Get category* endpoint (GET /v1/category) returns categories, their attributes, child categories, and breadcrumb details. So, this endpoint is recommended if you have a category ID and only require its attributes.
+   * Gets all attributes assigned to a category. <br> **Note**: <br> *Get category* endpoint (GET /v1/category) returns categories, their attributes, children categories, and breadcrumb details. So, this endpoint is recommended if you have a category ID and only require its attributes.
   **/
   getCategoryAttributesByID(
     req: operations.GetCategoryAttributesByIDRequest,
@@ -395,7 +395,7 @@ export class Category {
     }
     
     const baseURL: string = this._serverURL;
-    const url: string = baseURL.replace(/\/$/, "") + "/v1/category/attribute";
+    const url: string = baseURL.replace(/\/$/, "") + "/api-category/v1/category/attribute";
     
     const client: AxiosInstance = this._defaultClient!;
     
@@ -450,9 +450,9 @@ export class Category {
 
   
   /**
-   * getCategoryItemAttributes - Get available product attributes
+   * getCategoryItemAttributes - Get assigned item attributes
    *
-   * Gets all the product (aka item) attributes for the specified category. <br> **Note**: Products may also inherit product attributes from parent categories.
+   * Gets all the item attributes for the specified category. <br> **Note**: Items may also inherit item attributes from parent categories.
   **/
   getCategoryItemAttributes(
     req: operations.GetCategoryItemAttributesRequest,
@@ -463,7 +463,7 @@ export class Category {
     }
     
     const baseURL: string = this._serverURL;
-    const url: string = baseURL.replace(/\/$/, "") + "/v1/category/item-attribute";
+    const url: string = baseURL.replace(/\/$/, "") + "/api-category/v1/category/item-attribute";
     
     const client: AxiosInstance = this._defaultClient!;
     
@@ -518,9 +518,9 @@ export class Category {
 
   
   /**
-   * getCategoryItemAttributesCondition - Get available conditions for product attribute
+   * getCategoryItemAttributesCondition - Get item attribute conditions
    *
-   * You can filter products from Alternate categories based on the conditions set using the POST /v1/category/item-attribute/condition endpoint. <br> **Note**: Products may inherit conditions from parent category as well.
+   * You can filter items from Alternate categories based on the conditions set using the POST /v1/category/item-attribute/condition endpoint. <br> **Note**: Items may inherit conditions from parent category as well.
   **/
   getCategoryItemAttributesCondition(
     req: operations.GetCategoryItemAttributesConditionRequest,
@@ -531,9 +531,9 @@ export class Category {
     }
     
     const baseURL: string = this._serverURL;
-    const url: string = baseURL.replace(/\/$/, "") + "/v1/category/item-attribute/condition";
+    const url: string = baseURL.replace(/\/$/, "") + "/api-category/v1/category/item-attribute/condition";
     
-    const client: AxiosInstance = utils.createSecurityClient(this._defaultClient!, req.security)!;
+    const client: AxiosInstance = this._defaultClient!;
     
     const headers = {...utils.getHeadersFromRequest(req.headers), ...config?.headers};
     const queryParams: string = utils.serializeQueryParams(req.queryParams);
@@ -588,7 +588,7 @@ export class Category {
   /**
    * getCategorySKUs - Get SKUs in a category
    *
-   * Gets SKUs of all products belonging to a category. <br> **Note**: <br> 1) To get SKUs, Algolia search is recommended over this endpoint. <br> 2) Categories must exist in the system to get SKUs in that category. If SKUs are not created in the given category ID, this endpoint returns an empty list.
+   * Gets SKUs of all items belonging to a category. <br> **Note**: <br> 1) Categories must exist in the system to get SKUs in that category. If SKUs are not available in the given category ID, this endpoint returns an empty list.
   **/
   getCategorySKUs(
     req: operations.GetCategorySKUsRequest,
@@ -599,7 +599,7 @@ export class Category {
     }
     
     const baseURL: string = this._serverURL;
-    const url: string = baseURL.replace(/\/$/, "") + "/v1/category/sku";
+    const url: string = baseURL.replace(/\/$/, "") + "/api-category/v1/category/sku";
     
     const client: AxiosInstance = this._defaultClient!;
     
@@ -667,7 +667,7 @@ export class Category {
     }
     
     const baseURL: string = this._serverURL;
-    const url: string = baseURL.replace(/\/$/, "") + "/v1/category/tree";
+    const url: string = baseURL.replace(/\/$/, "") + "/api-category/v1/category/tree";
     
     const client: AxiosInstance = this._defaultClient!;
     
@@ -722,9 +722,9 @@ export class Category {
 
   
   /**
-   * modifyCategoriesNodeSourceExclusions - Create and update category source exclusions
+   * modifyCategoriesNodeSourceExclusions - Add and remove category source exclusions
    *
-   * Creates and updates exclusions for category source, by ID. For example, a category source 'Electronics' has Laptop, Mobile, and Tablet as child categories. It's possible to exclude Tablet using this endpoint, so that it does not appear for shoppers.
+   * Adds and removes exclusions for category source, by ID. For example, a category source `Electronics` has Laptop, Mobile, and Tablet as children categories. It's possible to exclude Tablet using this endpoint, so that it does not appear for shoppers.
   **/
   modifyCategoriesNodeSourceExclusions(
     req: operations.ModifyCategoriesNodeSourceExclusionsRequest,
@@ -735,7 +735,7 @@ export class Category {
     }
     
     const baseURL: string = this._serverURL;
-    const url: string = baseURL.replace(/\/$/, "") + "/v1/category/source/exclusion";
+    const url: string = baseURL.replace(/\/$/, "") + "/api-category/v1/category/source/exclusion";
 
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
@@ -747,7 +747,7 @@ export class Category {
       }
     }
     
-    const client: AxiosInstance = utils.createSecurityClient(this._defaultClient!, req.security)!;
+    const client: AxiosInstance = this._defaultClient!;
     
     const headers = {...utils.getHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     
@@ -800,9 +800,9 @@ export class Category {
 
   
   /**
-   * modifyCategoriesNodeSources - Create and update category sources
+   * modifyCategoriesNodeSources - Add and remove category source inclusions
    *
-   * Creates and updates category sources. <br> Primary category is the original catalog tree consisting of nested levels of child categories and is used to place products where they belong. Alternate categories are dynamic and populated from the Primary category, which is the original source of items. Source for an Alternate category points to a Primary category, and makes all products in the Primary category appear within the Alternate category; it behaves like a symlink.
+   * Adds and removes category sources. <br> Primary category is the original catalog tree consisting of nested levels of children categories and is used to place items where they belong. Alternate categories are dynamic and populated from the Primary category, which is the original source of items. Source for an Alternate category points to a Primary category, and makes all items in the Primary category appear within the Alternate category; it behaves like a symlink.
   **/
   modifyCategoriesNodeSources(
     req: operations.ModifyCategoriesNodeSourcesRequest,
@@ -813,7 +813,7 @@ export class Category {
     }
     
     const baseURL: string = this._serverURL;
-    const url: string = baseURL.replace(/\/$/, "") + "/v1/category/source";
+    const url: string = baseURL.replace(/\/$/, "") + "/api-category/v1/category/source";
 
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
@@ -825,7 +825,7 @@ export class Category {
       }
     }
     
-    const client: AxiosInstance = utils.createSecurityClient(this._defaultClient!, req.security)!;
+    const client: AxiosInstance = this._defaultClient!;
     
     const headers = {...utils.getHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     
@@ -878,87 +878,9 @@ export class Category {
 
   
   /**
-   * postCategoryAttributeBulk - Create, update, or delete category attributes
+   * postCategoryAttributeByID - Assign and unassign category attributes
    *
-   * Creates, updates, and deletes category attributes. The primary purpose is to create and edit the attributes to be assigned to categories. <br> **Note**: They are generic category attributes and not specific to a category.
-  **/
-  postCategoryAttributeBulk(
-    req: operations.PostCategoryAttributeBulkRequest,
-    config?: AxiosRequestConfig
-  ): Promise<operations.PostCategoryAttributeBulkResponse> {
-    if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.PostCategoryAttributeBulkRequest(req);
-    }
-    
-    const baseURL: string = this._serverURL;
-    const url: string = baseURL.replace(/\/$/, "") + "/v1/category/attribute/bulk";
-
-    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
-
-    try {
-      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(req);
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        throw new Error(`Error serializing request body, cause: ${e.message}`);
-      }
-    }
-    
-    const client: AxiosInstance = utils.createSecurityClient(this._defaultClient!, req.security)!;
-    
-    const headers = {...utils.getHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    const r = client.request({
-      url: url,
-      method: "post",
-      headers: headers,
-      data: reqBody, 
-      ...config,
-    });
-    
-    return r.then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.PostCategoryAttributeBulkResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
-        switch (true) {
-          case httpRes?.status == 200:
-            if (utils.matchContentType(contentType, `application/json`)) {
-              res.bulkAttributeResponse = plainToInstance(
-                shared.BulkAttributeResponse,
-                httpRes?.data as shared.BulkAttributeResponse,
-                { excludeExtraneousValues: true }
-              );
-            }
-            break;
-          case httpRes?.status == 400:
-            if (utils.matchContentType(contentType, `application/json`)) {
-              res.clientError = plainToInstance(
-                shared.ClientError,
-                httpRes?.data as shared.ClientError,
-                { excludeExtraneousValues: true }
-              );
-            }
-            break;
-          case httpRes?.status == 500:
-            if (utils.matchContentType(contentType, `application/json`)) {
-              res.serverError = plainToInstance(
-                shared.ServerError,
-                httpRes?.data as shared.ServerError,
-                { excludeExtraneousValues: true }
-              );
-            }
-            break;
-        }
-
-        return res;
-      })
-  }
-
-  
-  /**
-   * postCategoryAttributeByID - Create, update, and delete attributes of a category
-   *
-   * Category attributes let you define characteristics of categories and child categories. <br> This endpoint creates, updates, or removes attributes of a single category. The primary purpose is to assign attributes.
+   * Category attributes let you define characteristics of categories and children categories. <br> This endpoint assigns or unassigns attributes of a single category. The primary purpose is to assign attributes.
   **/
   postCategoryAttributeByID(
     req: operations.PostCategoryAttributeByIDRequest,
@@ -969,7 +891,7 @@ export class Category {
     }
     
     const baseURL: string = this._serverURL;
-    const url: string = baseURL.replace(/\/$/, "") + "/v1/category/attribute";
+    const url: string = baseURL.replace(/\/$/, "") + "/api-category/v1/category/attribute";
 
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
@@ -981,7 +903,7 @@ export class Category {
       }
     }
     
-    const client: AxiosInstance = utils.createSecurityClient(this._defaultClient!, req.security)!;
+    const client: AxiosInstance = this._defaultClient!;
     
     const headers = {...utils.getHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     
@@ -1034,9 +956,9 @@ export class Category {
 
   
   /**
-   * postCategoryItemAttributeByID - Create or update product attribute conditions
+   * postCategoryItemAttributeByID - Add and remove item attribute conditions
    *
-   * Creates or updates conditions for product attributes so that products can be filtered based on these conditions, from an Alternate category. <br> For example, a Primary category called **Chairs** has three chairs of different materials. An Alternate category called **Wooden Chairs** with Primary category **Chairs** as source will list all the three chairs. Through this endpoint you can add a 'product attribute condition' to filter chairs made of wood from **Wooden Chairs**. Another example: Using this endpoint, you can combine categories and list items on sale (where sale attribute is true).
+   * Adds conditions for item attributes so that items can be filtered based on these conditions, from an Alternate category. <br> For example, a Primary category called **Chairs** has three chairs of different materials. An Alternate category called **Wooden Chairs** with Primary category **Chairs** as source will list all the three chairs. Through this endpoint you can add a 'item attribute condition' to filter chairs made of wood from **Wooden Chairs**. Another example: Using this endpoint, you can combine categories and list items on sale (where sale attribute is true).
   **/
   postCategoryItemAttributeByID(
     req: operations.PostCategoryItemAttributeByIDRequest,
@@ -1047,7 +969,7 @@ export class Category {
     }
     
     const baseURL: string = this._serverURL;
-    const url: string = baseURL.replace(/\/$/, "") + "/v1/category/item-attribute/condition";
+    const url: string = baseURL.replace(/\/$/, "") + "/api-category/v1/category/item-attribute/condition";
 
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
@@ -1112,9 +1034,9 @@ export class Category {
 
   
   /**
-   * postCategoryItemibuteByID - Create, update, and remove product attributes for a category
+   * postCategoryItemibuteByID - Assign and unassign item attributes
    *
-   * Categories lets merchants segregate and group items. They also allow specifying 'mandatory' and 'optional' attributes that all products (aka items) within that category must have. They are used to store structured information about products. <br> This endpoint creates and updates (also deletes) product attributes for the specified category.
+   * Categories lets merchants segregate and group items. They also allow specifying `mandatory` and `optional` attributes that all items within that category must have. They are used to store structured information about items. <br> This endpoint creates and updates (also deletes) item attributes for the specified category.
   **/
   postCategoryItemibuteByID(
     req: operations.PostCategoryItemibuteByIDRequest,
@@ -1125,7 +1047,7 @@ export class Category {
     }
     
     const baseURL: string = this._serverURL;
-    const url: string = baseURL.replace(/\/$/, "") + "/v1/category/item-attribute";
+    const url: string = baseURL.replace(/\/$/, "") + "/api-category/v1/category/item-attribute";
 
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
@@ -1137,7 +1059,7 @@ export class Category {
       }
     }
     
-    const client: AxiosInstance = utils.createSecurityClient(this._defaultClient!, req.security)!;
+    const client: AxiosInstance = this._defaultClient!;
     
     const headers = {...utils.getHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     
@@ -1192,7 +1114,7 @@ export class Category {
   /**
    * searchCategories - Find categories
    *
-   * Finds categories, by keywords, category identifiers, type, or status. <br> **Note**: <br> 1) Categories and child categories must already exist in the system. <br> 2) When query parameters are omitted, this endpoint returns a paginated response with all the categories. As a result, `page` and `size` become mandatory to accommodate large data. <br> 3) GET /v1/category (Store admin context) or Algolia search (Shopper context) is strongly recommended over this endpoint.
+   * Finds categories, by keywords, category identifiers, type, or status. <br> **Note**: <br> 1) Categories and children categories must already exist in the system. <br> 2) When query parameters are omitted, this endpoint returns a paginated response with all the categories. As a result, `page` and `size` become mandatory to accommodate large data. <br> 3) GET /v1/category (Store admin context) or Algolia search (Shopper context) is strongly recommended over this endpoint.
   **/
   searchCategories(
     req: operations.SearchCategoriesRequest,
@@ -1203,7 +1125,7 @@ export class Category {
     }
     
     const baseURL: string = this._serverURL;
-    const url: string = baseURL.replace(/\/$/, "") + "/v1/category/search";
+    const url: string = baseURL.replace(/\/$/, "") + "/api-category/v1/category/search";
     
     const client: AxiosInstance = this._defaultClient!;
     
