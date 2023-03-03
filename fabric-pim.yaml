@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: Product Information Management
-  description: 'As brands and retailers grow, they often expand their product catalogs, resulting in the need to enrich and manage more product data. fabric product information management (PIM) solution alleviates the burden of managing large amounts of product data by means of a central storage repository. fabric PIM helps you with improved data quality, consistent customer experience, reduced time to market, easy integration with external systems, reduced management costs and risks, faster and easier updates, and easy scaling. You can create, import, enrich, validate, distribute, and manage complex product information, centrally. As a result, you deliver product experiences that drive sales through every channel. <br> <br> During onboarding, you are given the necessary credentials to access PIM - Copilot UI, APIs, or both. As a prerequisite, you create a list of products to be sold, identify their unique as well as common properties, and envision their organization into categories and sub categories. A basic workflow is: <br> 1) **Create product attributes** using POST /v1/product/attribute/bulk. <br> 2) Map your product attributes to attributes available in PIM, via Copilot UI. <br> 3) **Create Primary category** using the POST /v1/category to create the original organizational structure. <br> 4) **Assign product attributes** to Primary category using POST /v1/category/item-attribute. <br> 5) **Create products** using POST /v1/product/bulk/insert. <br> 6) **Create Alternate category**, for distribution management and fulfilling various merchandising objectives.'
+  description: 'As brands and retailers grow, they often expand their item catalogs, resulting in the need to enrich and manage more product (commonly referred to as item in fabric) data. fabric Product Information Management (PIM) solution alleviates the burden of managing large amounts of item data by means of a central storage repository. fabric PIM helps you with improved data quality, consistent customer experience, reduced time to market, easy integration with external systems, reduced management costs and risks, faster and easier updates, and easy scaling. You can create, import, enrich, validate, distribute, and manage complex item information, centrally. As a result, you deliver product experiences that drive sales through every channel. <br> <br> During onboarding, you are given the necessary credentials to access PIM - Copilot UI, APIs, or both. As a prerequisite, you create a list of items to be sold, identify their unique as well as common properties, and envision their organization into categories and sub categories. A basic workflow is: <br> 1) **Create item attributes** using POST /api-product/v1/product/attribute/bulk. <br> 2) **Update attribute mapping** using POST /api-product/v1/product/attribute/mapping <br> 3) **Create Primary category** using the POST /api-category/v1/category to create the original organizational structure. <br> 4) **Assign item attributes** to Primary category using POST /api-category/v1/category/item-attribute. <br> 5) **Create items** using POST /api-product/v1/product/bulk/insert. <br> 6) **Create Alternate category**, for distribution management and fulfilling various merchandising objectives.'
   version: 2.0.0
   contact:
     email: support@fabric.inc
@@ -10,36 +10,28 @@ info:
     url: https://fabric.inc/privacy-policy
 tags:
   - name: Category
-    description: Categories (also called hierarchies or nodes) are hierarchical structures to organize products and services into intuitive groups. Organizing products in this way simplifies product discovery and lifecycle management. There are two types of categories - **Primary** and **Alternate**. They enable you to create, organize, and distribute product data. <br> <br> - Primary category is the original catalog tree with nested levels of categories that place each product where it belongs, within a category. For example, `Computers` is a parent category with `Laptops` and `Desktops` as child categories, and `MacBbook Pro` is a product within `Laptops`. This organization can be represented as Computers > Laptops > MacBook Pro. <br> <br> - Alternate categories serve as alternate organizations of the Primary category. Their main purpose is distribution management by displaying products on your website based on separate browsing structure configurations you set to help you achieve various merchandizing objectives, such as organizational requirements, multi-regional assortments, multi-channel assortments, and collections. For example, a company that sells, repairs, and supports computers and related products and services will have a Primary category containing a full list of their SKUs. However, this Primary category is not granular enough to use on their storefront. Hence, multiple Alternate hierarchies are created to target specific shopper segment experiences. For laptop consumers they'll have one Alternate category, which lists all the laptops and PCs. For large businesses they'll have  another Alternate category, which lists all commercial laptops, PCs, printers, and servers. Both of the Alternate categories act as filters of the Primary category, tailored to the purpose of that merchandising strategy. <br> <br> **Category**, a subset of PIM endpoints, aims to simplify catalog management by letting you create, update, and get one or more categories, category attributes, and product attributes. In addition, you can add and update category sources, source exclusions, and product attribute conditions.
+    description: Categories (also called hierarchies or nodes) are hierarchical structures to organize items and services into intuitive groups. Organizing items in this way simplifies item discovery and lifecycle management. There are two types of categories - **Primary** and **Alternate**. They enable you to create, organize, and distribute item data. <br> <br> - Primary category is the original catalog tree with nested levels of categories that place each item where it belongs, within a category. For example, `Computers` is a parent category with `Laptops` and `Desktops` as children categories, and `MacBbook Pro` is an item within `Laptops`. This organization can be represented as Computers > Laptops > MacBook Pro. <br> <br> - Alternate categories serve as alternate organizations of the Primary category. Their main purpose is distribution management by displaying items on your website based on separate browsing structure configurations you set to help you achieve various merchandizing objectives, such as organizational requirements, multi-regional assortments, multi-channel assortments, and collections. For example, a company that sells, repairs, and supports computers and related items and services will have a Primary category containing a full list of their SKUs. However, this Primary category is not granular enough to use on their storefront. Hence, multiple Alternate hierarchies are created to target specific shopper segment experiences. For laptop consumers they'll have one Alternate category, which lists all the laptops and PCs. For large businesses they'll have  another Alternate category, which lists all commercial laptops, PCs, printers, and servers. Both of the Alternate categories act as filters of the Primary category, tailored to the purpose of that merchandising strategy. <br> <br> **Category**, a subset of PIM endpoints, aims to simplify catalog management by letting you create, update, and get one or more categories, category attributes, and item attributes. In addition, you can add and update category sources, source exclusions, and item attribute conditions.
   - name: Product
-    description: '**Product**, a subset of PIM endpoints, aims at making product management more efficient. They create, update, and get products, which may be individual products or collection of products (called bundles). Each product has title, product ID, description, category, and assigned attributes. Multiple options of a given product become variants of that product. For example, a t-shirt with three sizes may have small, medium, and large variants. Each variant has its own product ID, attributes, and other data points. Each variant is nested under its parent product, allowing the different options to appear on the same product page. You can also create or update one or more product attributes and attribute groups.'
+    description: '**Product**, a subset of PIM endpoints, aims at making item management more efficient. They create, update, and get items, which may be individual items or collection of items (called bundles). Each item has a title, item ID, description, category, and assigned attributes. Multiple options of a given item become variants of that item. For example, a t-shirt with three sizes may have small, medium, and large variants. Each variant has its own item ID, attributes, and other data points. Each variant is nested under its parent item, allowing the different options to appear on the same product page. You can also create or update one or more item attributes and attribute groups.'
   - name: Attributes
-    description: Product attributes are the objective and factual descriptions of products that shoppers see when they browse through your site. Attributes may be technical specifications like size, weight, etc., design specifications like color, material, etc., or basic specifications like name, description, and ID. Product attributes are crucial as they directly influence purchasing decisions. Complete and correct product information help shoppers narrow down their search and filter products with minimal cognitive load.
+    description: Item attributes are the objective and factual descriptions of items that shoppers see when they browse through your site. Attributes may be technical specifications like size, weight, etc., design specifications like color, material, etc., or basic specifications like name, description, and ID. Ites attributes are crucial as they directly influence purchasing decisions. Complete and correct item information help shoppers narrow down their search and filter items with minimal cognitive load.
+  - name: Bulk Import
+    description: Set of APIs to help bulk import of items, bundles and attributes through CSV files
 externalDocs:
   description: Find out more about PIM
   url: https://knowledgebase.fabric.inc/knowledgebase/pim
 servers:
-  - url: https://{customerDomain}/api-category
-    description: Capio category server
-    variables:
-      customerDomain:
-        default: democommerce.com/api
-        description: Domain name hosting the single-tenant fabric commerce APIs
-  - url: https://{customerDomain}/api-product
-    description: Capio product server
-    variables:
-      customerDomain:
-        default: demo
-        description: Domain name hosting the single-tenant fabric commerce APIs
+  - url: https://sandbox.copilot.fabric.inc
+    description: Sandbox
+  - url: https://live.copilot.fabric.inc
+    description: Production
 paths:
-  /v1/category:
+  /api-category/v1/category:
     post:
-      security:
-        - api_key: []
       tags:
         - Category
       summary: Create category
-      description: 'Creates Primary or Alternate category to organize products into logical groups. <br> **Note**: <br> 1) To add **Primary**  category, only `name` is required in the request. <br> 2) To add a **child** category, both `name` and `parentNodeId` are required. For **child** category, you can additionally specify `order` of display. <br> 3) To add an **Alternate** category, both `name` and `type` are required. <br> **Note**: Category details including category ID received in the response are required for subsequent calls. For example, it''s required to *Create product* (POST /v1/product/bulk/insert).'
+      description: 'Creates Primary or Alternate category to organize items into logical groups. <br> **Note**: <br> 1) To add **Primary**  category, only `name` is required in the request. <br> 2) To add a **child** category, both `name` and `parentNodeId` are required. For **child** category, you can additionally specify `order` of display. <br> 3) To add an **Alternate** category, both `name` and `type` are required. <br> **Note**: Category details including category ID received in the response are required for subsequent calls. For example, it''s required to *Create item* (POST /v1/product/bulk/insert).'
       operationId: categoryCreate
       parameters:
         - $ref: '#/components/parameters/XApiKey'
@@ -72,7 +64,7 @@ paths:
       tags:
         - Category
       summary: Get categories
-      description: 'Lists categories and their details including attributes, breadcrumbs, and details of child categories. <br> **Note**: <br> 1) Specify `ids` or `nodeIds` to get specific categories. <br> 2) Use `type` to get a specific category type. <br> 3) When query parameters are omitted, this endpoint returns a paginated response listing all Alternate categories in Active status. As a result, `size` and `page` becomes mandatory to support large data.'
+      description: 'Gets categories and their details including attributes, breadcrumbs, and details of children categories. <br> **Note**: <br> 1) Specify `ids` or `nodeIds` to get specific categories. <br> 2) Use `type` to get a specific category type. <br> 3) When query parameters are omitted, this endpoint returns a paginated response listing all Alternate categories in Active status. As a result, `size` and `page` becomes mandatory to support large data.'
       operationId: getCategoriesById
       parameters:
         - $ref: '#/components/parameters/XSiteContext'
@@ -145,7 +137,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError'
-  /v1/category/{nodeId}:
+  /api-category/v1/category/{nodeId}:
     put:
       security:
         - api_key: []
@@ -188,12 +180,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError'
-  /v1/category/search:
+  /api-category/v1/category/search:
     get:
       tags:
         - Category
       summary: Find categories
-      description: 'Finds categories, by keywords, category identifiers, type, or status. <br> **Note**: <br> 1) Categories and child categories must already exist in the system. <br> 2) When query parameters are omitted, this endpoint returns a paginated response with all the categories. As a result, `page` and `size` become mandatory to accommodate large data. <br> 3) GET /v1/category (Store admin context) or Algolia search (Shopper context) is strongly recommended over this endpoint.'
+      description: 'Finds categories, by keywords, category identifiers, type, or status. <br> **Note**: <br> 1) Categories and children categories must already exist in the system. <br> 2) When query parameters are omitted, this endpoint returns a paginated response with all the categories. As a result, `page` and `size` become mandatory to accommodate large data. <br> 3) GET /v1/category (Store admin context) or Algolia search (Shopper context) is strongly recommended over this endpoint.'
       operationId: searchCategories
       parameters:
         - $ref: '#/components/parameters/XSiteContext'
@@ -266,7 +258,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError'
-  /v1/category/tree:
+  /api-category/v1/category/tree:
     get:
       tags:
         - Category
@@ -289,7 +281,7 @@ paths:
             type: integer
         - in: query
           name: depth
-          description: Limits the size of the hierarchical category tree returned in the response. Depth of 0 means no child categories, attributes, or breadcrumbs, are included in the response. Unless depth is specified, entire category is returned up to the last set of child categories (that have no more child categories).
+          description: Limits the size of the hierarchical category tree returned in the response. Depth of 0 means no children categories, attributes, or breadcrumbs, are included in the response. Unless depth is specified, entire category is returned up to the last set of categories (that have no more children categories).
           example: 1
           schema:
             type: number
@@ -312,12 +304,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError'
-  /v1/category/sku:
+  /api-category/v1/category/sku:
     get:
       tags:
         - Category
       summary: Get SKUs in a category
-      description: 'Gets SKUs of all products belonging to a category. <br> **Note**: <br> 1) To get SKUs, Algolia search is recommended over this endpoint. <br> 2) Categories must exist in the system to get SKUs in that category. If SKUs are not created in the given category ID, this endpoint returns an empty list.'
+      description: 'Gets SKUs of all items belonging to a category. <br> **Note**: <br> 1) Categories must exist in the system to get SKUs in that category. If SKUs are not available in the given category ID, this endpoint returns an empty list.'
       operationId: getCategorySKUs
       parameters:
         - $ref: '#/components/parameters/XSiteContext'
@@ -354,14 +346,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError'
-  /v1/category/attribute:
+  /api-category/v1/category/attribute:
     post:
-      security:
-        - api_key: []
       tags:
         - Category
-      summary: Create, update, and delete attributes of a category
-      description: Category attributes let you define characteristics of categories and child categories. <br> This endpoint creates, updates, or removes attributes of a single category. The primary purpose is to assign attributes.
+      summary: Assign and unassign category attributes
+      description: Category attributes let you define characteristics of categories and children categories. <br> This endpoint assigns or unassigns attributes of a single category. The primary purpose is to assign attributes.
       operationId: postCategoryAttributeByID
       parameters:
         - $ref: '#/components/parameters/XApiKey'
@@ -393,8 +383,8 @@ paths:
     get:
       tags:
         - Category
-      summary: Get category attributes
-      description: 'Gets all attributes of a category. <br> **Note**: <br> *Get category* endpoint (GET /v1/category) returns categories, their attributes, child categories, and breadcrumb details. So, this endpoint is recommended if you have a category ID and only require its attributes.'
+      summary: Get assigned category attributes
+      description: 'Gets all attributes assigned to a category. <br> **Note**: <br> *Get category* endpoint (GET /v1/category) returns categories, their attributes, children categories, and breadcrumb details. So, this endpoint is recommended if you have a category ID and only require its attributes.'
       operationId: getCategoryAttributesByID
       parameters:
         - $ref: '#/components/parameters/XSiteContext'
@@ -440,50 +430,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError'
-  /v1/category/attribute/bulk:
+  /api-category/v1/category/item-attribute:
     post:
-      security:
-        - api_key: []
       tags:
         - Category
-      summary: Create, update, or delete category attributes
-      description: 'Creates, updates, and deletes category attributes. The primary purpose is to create and edit the attributes to be assigned to categories. <br> **Note**: They are generic category attributes and not specific to a category.'
-      operationId: postCategoryAttributeBulk
-      parameters:
-        - $ref: '#/components/parameters/XApiKey'
-        - $ref: '#/components/parameters/XSiteContext'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/BulkAttributeRequest'
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BulkAttributeResponse'
-        '400':
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ClientError'
-        '500':
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ServerError'
-  /v1/category/item-attribute:
-    post:
-      security:
-        - api_key: []
-      tags:
-        - Category
-      summary: Create, update, and remove product attributes for a category
-      description: Categories lets merchants segregate and group items. They also allow specifying 'mandatory' and 'optional' attributes that all products (aka items) within that category must have. They are used to store structured information about products. <br> This endpoint creates and updates (also deletes) product attributes for the specified category.
+      summary: Assign and unassign item attributes
+      description: Categories lets merchants segregate and group items. They also allow specifying `mandatory` and `optional` attributes that all items within that category must have. They are used to store structured information about items. <br> This endpoint creates and updates (also deletes) item attributes for the specified category.
       operationId: postCategoryItemibuteByID
       parameters:
         - $ref: '#/components/parameters/XApiKey'
@@ -515,8 +467,8 @@ paths:
     get:
       tags:
         - Category
-      summary: Get available product attributes
-      description: 'Gets all the product (aka item) attributes for the specified category. <br> **Note**: Products may also inherit product attributes from parent categories.'
+      summary: Get assigned item attributes
+      description: 'Gets all the item attributes for the specified category. <br> **Note**: Items may also inherit item attributes from parent categories.'
       operationId: getCategoryItemAttributes
       parameters:
         - $ref: '#/components/parameters/XSiteContext'
@@ -534,7 +486,7 @@ paths:
             type: number
         - in: query
           name: status
-          description: Status of product attributes. `Assigned` indicates the product attributes are already assigned to categories and `unassigned` indicates otherwise. Applicable only when `id` or `nodeId` is specified.
+          description: Status of item attributes. `Assigned` indicates item attributes are already assigned to categories and `unassigned` indicates otherwise. Applicable only when `id` or `nodeId` is specified.
           schema:
             type: string
             enum:
@@ -561,14 +513,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError'
-  /v1/category/source:
+  /api-category/v1/category/source:
     post:
-      security:
-        - api_key: []
       tags:
         - Category
-      summary: Create and update category sources
-      description: Creates and updates category sources. <br> Primary category is the original catalog tree consisting of nested levels of child categories and is used to place products where they belong. Alternate categories are dynamic and populated from the Primary category, which is the original source of items. Source for an Alternate category points to a Primary category, and makes all products in the Primary category appear within the Alternate category; it behaves like a symlink.
+      summary: Add and remove category source inclusions
+      description: Adds and removes category sources. <br> Primary category is the original catalog tree consisting of nested levels of children categories and is used to place items where they belong. Alternate categories are dynamic and populated from the Primary category, which is the original source of items. Source for an Alternate category points to a Primary category, and makes all items in the Primary category appear within the Alternate category; it behaves like a symlink.
       operationId: modifyCategoriesNodeSources
       parameters:
         - $ref: '#/components/parameters/XApiKey'
@@ -600,8 +550,8 @@ paths:
     get:
       tags:
         - Category
-      summary: Get available category sources
-      description: Gets all the available category sources. <br> Products are created under the Primary category, and Alternate categories are created to export alternate organizations of the Primary category. So, the Primary category is the source of products that appear in Alternate categories. The category sources are Primary categories that can be used as product sources in Alternate categories. Sources behave similar to symlinks.
+      summary: Get category source inclusions
+      description: Gets all the available category sources. <br> Items are created under the Primary category, and Alternate categories are created to export alternate organizations of the Primary category. So, the Primary category is the source of items that appear in Alternate categories. The category sources are Primary categories that can be used as item sources in Alternate categories. Sources behave similar to symlinks.
       operationId: getCategoriesNodeSources
       parameters:
         - $ref: '#/components/parameters/XSiteContext'
@@ -647,14 +597,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError'
-  /v1/category/source/exclusion:
+  /api-category/v1/category/source/exclusion:
     post:
-      security:
-        - api_key: []
       tags:
         - Category
-      summary: Create and update category source exclusions
-      description: Creates and updates exclusions for category source, by ID. For example, a category source 'Electronics' has Laptop, Mobile, and Tablet as child categories. It's possible to exclude Tablet using this endpoint, so that it does not appear for shoppers.
+      summary: Add and remove category source exclusions
+      description: Adds and removes exclusions for category source, by ID. For example, a category source `Electronics` has Laptop, Mobile, and Tablet as children categories. It's possible to exclude Tablet using this endpoint, so that it does not appear for shoppers.
       operationId: modifyCategoriesNodeSourceExclusions
       parameters:
         - $ref: '#/components/parameters/XApiKey'
@@ -686,7 +634,7 @@ paths:
     get:
       tags:
         - Category
-      summary: Get available category source exclusions
+      summary: Get category source exclusions
       description: Gets available exclusions applied to a category source.
       operationId: getCategoriesNodeSourceExclusions
       parameters:
@@ -731,15 +679,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError'
-  /v1/category/item-attribute/condition:
+  /api-category/v1/category/item-attribute/condition:
     post:
       tags:
         - Category
-      summary: Create or update product attribute conditions
-      description: 'Creates or updates conditions for product attributes so that products can be filtered based on these conditions, from an Alternate category. <br> For example, a Primary category called **Chairs** has three chairs of different materials. An Alternate category called **Wooden Chairs** with Primary category **Chairs** as source will list all the three chairs. Through this endpoint you can add a ''product attribute condition'' to filter chairs made of wood from **Wooden Chairs**. Another example: Using this endpoint, you can combine categories and list items on sale (where sale attribute is true).'
+      summary: Add and remove item attribute conditions
+      description: 'Adds conditions for item attributes so that items can be filtered based on these conditions, from an Alternate category. <br> For example, a Primary category called **Chairs** has three chairs of different materials. An Alternate category called **Wooden Chairs** with Primary category **Chairs** as source will list all the three chairs. Through this endpoint you can add a ''item attribute condition'' to filter chairs made of wood from **Wooden Chairs**. Another example: Using this endpoint, you can combine categories and list items on sale (where sale attribute is true).'
       operationId: postCategoryItemAttributeByID
       parameters:
-        - $ref: '#/components/parameters/Authorization'
         - $ref: '#/components/parameters/XApiKey'
         - $ref: '#/components/parameters/XSiteContext'
       requestBody:
@@ -767,15 +714,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServerError'
     get:
-      security:
-        - api_key: []
       tags:
         - Category
-      summary: Get available conditions for product attribute
-      description: 'You can filter products from Alternate categories based on the conditions set using the POST /v1/category/item-attribute/condition endpoint. <br> **Note**: Products may inherit conditions from parent category as well.'
+      summary: Get item attribute conditions
+      description: 'You can filter items from Alternate categories based on the conditions set using the POST /v1/category/item-attribute/condition endpoint. <br> **Note**: Items may inherit conditions from parent category as well.'
       operationId: getCategoryItemAttributesCondition
       parameters:
-        - $ref: '#/components/parameters/Authorization'
         - $ref: '#/components/parameters/XApiKey'
         - $ref: '#/components/parameters/XSiteContext'
         - in: query
@@ -792,7 +736,7 @@ paths:
             type: number
         - in: query
           name: status
-          description: Status of product attribute
+          description: Status of item attribute
           schema:
             type: string
             enum:
@@ -820,16 +764,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError'
-  /v1/product/bulk/insert:
+  /api-product/v1/product/bulk/insert:
     post:
       tags:
         - Product
-      summary: Create products and bundles
-      description: 'Creates multiple products or bundles along with their attributes. In addition, this endpoint supports data validation to ensure accuracy and consistency. <br> **Note**: <br> 1) As a prerequisite category and attributes must be created beforehand. <br> 2) To add a product variant, parentSku must be additionally specified. <br> 3) A product is assigned to only one category but it can be fetched from alternate categories. <br> 4) Up to 50 products or bundles can be added.'
+      summary: Create items and bundles
+      description: 'Creates multiple items or bundles along with their attributes. In addition, this endpoint supports data validation to ensure accuracy and consistency. <br> **Note**: <br> 1) As a prerequisite category and attributes must be created beforehand. <br> 2) To add an item variant, parentSku must be additionally specified. <br> 3) An item is assigned to only one category but it can be fetched from Alternate categories. <br> 4) Up to 50 items or bundles can be added.'
       operationId: createProducts
       parameters:
-        - $ref: '#/components/parameters/Authorization'
-        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
+        - $ref: '#/components/parameters/XSiteContext'
       requestBody:
         content:
           application/json:
@@ -860,16 +803,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError'
-  /v1/product/bulk/update:
+  /api-product/v1/product/bulk/update:
     post:
       tags:
         - Product
-      summary: Update products and bundles
-      description: 'Updates multiple products or bundles, along with their attributes. <br> **Note**: Up to 50 products or bundles can be updated.'
+      summary: Update items and bundles
+      description: 'Updates multiple items or bundles, along with their attributes. <br> **Note**: Up to 50 items or bundles can be updated.'
       operationId: updateProducts
       parameters:
-        - $ref: '#/components/parameters/Authorization'
-        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
+        - $ref: '#/components/parameters/XSiteContext'
       requestBody:
         content:
           application/json:
@@ -900,16 +842,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError'
-  /v1/product/bulk/upsert:
+  /api-product/v1/product/bulk/upsert:
     post:
       tags:
         - Product
-      summary: Upsert products or bundles
-      description: 'Creates or updates products or bundles along with their attributes. <br> **Note**: <br> 1) If the SKU already exists, this endpoint updates a product. Otherwise, creates a new product with that SKU. <br> 2) Up to 50 products or bundles can be added or updated.'
+      summary: Upsert items and bundles
+      description: 'Creates or updates items or bundles along with their attributes. <br> **Note**: <br> 1) If the SKU already exists, this endpoint updates an item. Otherwise, creates a new item with that SKU. <br> 2) Up to 50 items or bundles can be added or updated.'
       operationId: upsertProducts
       parameters:
-        - $ref: '#/components/parameters/Authorization'
-        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
+        - $ref: '#/components/parameters/XSiteContext'
       requestBody:
         content:
           application/json:
@@ -940,16 +881,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError'
-  /v1/product/bundle/update:
+  /api-product/v1/product/bundle/update:
     post:
       tags:
         - Product
-      summary: Update bundles
-      description: Adds and removes items, and also changes quantities within a bundle.
+      summary: Update items in bundle
+      description: Updates bundle by adding or removing items and adjusting quantities.
       operationId: updateBundles
       parameters:
-        - $ref: '#/components/parameters/Authorization'
-        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
+        - $ref: '#/components/parameters/XSiteContext'
       requestBody:
         content:
           application/json:
@@ -974,121 +914,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError'
-  /v1/product/attribute/bulk:
-    post:
-      tags:
-        - Product
-      summary: Create and update attributes for multiple products
-      description: 'Product attributes allow you to define specific characteristics for your items. Common examples of attributes include size, color, and material. Well-defined attributes are important because they enable product discovery and make catalog management easier. <br> This endpoint creates and updates product attributes to be assigned later. <br> **Note**: <br> 1) You can add and manage unlimited attributes for your products. Once they are created, they appear as a selectable option on product pages. <br> 2) In addition, you can assign attributes to products on an individual level or in bulk.'
-      operationId: postProductAttributeBulk
-      parameters:
-        - $ref: '#/components/parameters/Authorization'
-        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/BulkProductAttributeRequest'
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BulkAttributeResponse'
-        '400':
-          description: Client error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ClientError'
-        '500':
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ServerError'
-  /v1/product/attribute-group:
-    post:
-      tags:
-        - Product
-      summary: Create, update, or delete attribute groups
-      description: 'Attribute groups enables merchants to collect various attributes together to make it easier to manage large volume of product information. <br> This endpoint creates, updates, or deletes attribute groups. <br> **Note**: Attribute group is optional. If created, must have at least one attribute.'
-      operationId: modifyAttributeGroups
-      parameters:
-        - $ref: '#/components/parameters/Authorization'
-        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AttributeGroupRequest'
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AttributeGroupResponse'
-        '400':
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ClientError'
-        '500':
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ServerError'
-  /v1/product/attribute-group/search:
-    post:
-      tags:
-        - Product
-      summary: Find attribute groups
-      description: Finds attribute groups
-      operationId: searchAttributeGroups
-      parameters:
-        - $ref: '#/components/parameters/Authorization'
-        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AttributeGroupSearchRequest'
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AttributeGroupSearchResponse'
-        '400':
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ClientError'
-        '500':
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ServerError'
-  /v1/product:
+  /api-product/v1/product:
     get:
       tags:
         - Product
-      summary: Get products
-      description: 'Products can be individual products or a bundle of products. This endpoints allows you to get a list of products - individual products and product bundles, along with their attributes, child products and their details. <br> **Note**: Optional filter parameters can be passed in as query to narrow down the search results.'
+      summary: Get items and children items
+      description: 'Items can be individual items or a bundle of items. This endpoints allows you to get a list of items - individual items and bundles, along with their attributes, children items and their details. <br> **Note**: <br> 1) Optional filter parameters can be passed in as query to narrow down the search results. <br> 2) This API will only return the count and details of Parent SKU and not its variants'
       operationId: getProducts
       parameters:
-        - $ref: '#/components/parameters/Authorization'
-        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
+        - $ref: '#/components/parameters/XSiteContext'
         - in: query
           name: skus
-          description: 'List of Stock Keeping Units (SKUs). <br> **Note**: Either `skus` or `itemIds` can be used to get specific products. If they are omitted, all products are returned in a paginated response. As a result, `page` and `size` become mandatory to accommodate large data.'
+          description: 'List of Stock Keeping Units (SKUs). <br> **Note**: Either `skus` or `itemIds` can be used to get specific items. If they are omitted, all items are returned in a paginated response. As a result, `page` and `size` become mandatory to accommodate large data.'
           schema:
             type: array
             items:
@@ -1099,7 +936,7 @@ paths:
           explode: false
         - in: query
           name: itemIds
-          description: 'List of item IDs. Applicable only when `skus` are omitted. <br> **Note**: Either `skus` or `itemIds` can be used to get specific products. If they are omitted, all products are returned in a paginated response. As a result, `page` and `size` become mandatory to accommodate large data.'
+          description: 'List of item IDs. Applicable only when `skus` are omitted. <br> **Note**: Either `skus` or `itemIds` can be used to get specific items. If they are omitted, all items are returned in a paginated response. As a result, `page` and `size` become mandatory to accommodate large data.'
           schema:
             type: array
             items:
@@ -1122,7 +959,7 @@ paths:
             example: 10
         - in: query
           name: status
-          description: 'Product status. <br> **Note**: <br> 1) Returns a paginated response. <br> 2) When used as the only criteria, must be paired with `size` and `page` to accommodate large data.'
+          description: 'Item status. <br> **Note**: <br> 1) Returns a paginated response. <br> 2) When used as the only criteria, must be paired with `size` and `page` to accommodate large data.'
           schema:
             type: string
             enum:
@@ -1175,38 +1012,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError'
-  /v2/product:
+  /api-product/v2/product:
     get:
       tags:
         - Product
-      summary: Get products by SKU, itemId or parentSku
-      description: 'Gets products (individual product or bundle of products) by SKUs, itemIds or parentSkus. Optionally, `page` and `size` can be used query parameters. **Note**: `status` and `date` query parameters works only with pagination when parentSku is omitted. Separate responses are added for bundle and product, use the dropdown to view the corresponding response.'
+      summary: Get items and limited children items
+      description: 'Gets items (single item or bundles) by `skus` or parent `skus`. When a parent SKU is sent as query parameter, you''ll get children items of those SKUs. When `parentSKU` is not specified, children items are not retrieved. Optionally, `page` and `size` can be used as query parameters. **Note**: <br> 1) `status` and `date` query parameters works only with pagination when parentSku is omitted. Separate responses are added for bundle and product, use the dropdown to view the corresponding response.<br> 2) when `parentSku` is passed as request parameter, it will only return the paginated response of children for the SKU given as `parentSKU`'
       operationId: getProductsV2
       parameters:
-        - $ref: '#/components/parameters/Authorization'
-        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
+        - $ref: '#/components/parameters/XSiteContext'
         - in: query
           name: skus
-          description: 'List of Stock Keeping Units (SKUs). <br> **Note**: Either `skus` or `itemIds` can be used to get specific products. If they are omitted, all products are returned in a paginated response. As a result, `page` and `size` become mandatory to accommodate large data.'
+          description: 'Stock Keeping Units (SKUs). <br> **Note**: Either `skus` or `itemIds` can be used to get specific items. If they are omitted, all items are returned in a paginated response. As a result, `page` and `size` become mandatory to accommodate large data.'
           schema:
-            type: array
-            items:
-              type: string
-          example:
-            - BUNDLE-01
-            - BUNDLE-02
-          explode: false
-        - in: query
-          name: itemIds
-          description: 'List of item IDs. Applicable only when `skus` are omitted. <br> **Note**: Either `skus` or `itemIds` can be used to get specific products. If they are omitted, all products are returned in a paginated response. As a result, `page` and `size` become mandatory to accommodate large data.'
-          schema:
-            type: array
-            items:
-              type: number
-          example:
-            - 4
-            - 5
-          explode: false
+            type: string
+          example: BUNDLE-01
         - in: query
           name: page
           description: Page number to be retrieved. Applicable only in a paginated response and always paired with `size`.
@@ -1221,7 +1041,7 @@ paths:
             example: 10
         - in: query
           name: status
-          description: 'Product status. <br> **Note**: <br> 1) Returns a paginated response. <br> 2) When used as the only criteria, must be paired with `size` and `page` to accommodate large data.'
+          description: 'Item status. <br> **Note**: <br> 1) Returns a paginated response. <br> 2) When used as the only criteria, must be paired with `size` and `page` to accommodate large data.'
           schema:
             type: string
             enum:
@@ -1238,31 +1058,31 @@ paths:
               - BUNDLE
         - in: query
           name: createdAfter
-          description: 'List of products created after a specific date. Valid date formats are ''YYYY/MM/DD'', ''YYYY-MM-DDTHH:mm:ss.SSSZ''. <br> **Note**: <br> 1) Applicable only when `skus` and `itemIds` are omitted <br> 2) Returns paginated response <br> 3) Must be paired with `size` and `page` to accommodate large data'
+          description: 'List of items created after a specific date. Valid date formats are ''YYYY/MM/DD'', ''YYYY-MM-DDTHH:mm:ss.SSSZ''. <br> **Note**: <br> 1) Applicable only when `skus` and `itemIds` are omitted <br> 2) Returns paginated response <br> 3) Must be paired with `size` and `page` to accommodate large data'
           schema:
             type: string
             example: '2021-05-28T16:36:50.055Z'
         - in: query
           name: createdBefore
-          description: 'List of products created before a specific date. Valid date formats are ''YYYY/MM/DD'', ''YYYY-MM-DDTHH:mm:ss.SSSZ''. <br> **Note**: <br> 1) Applicable only when `skus` and `itemIds` are omitted <br> 2) Returns paginated response <br> 3) Must be paired with `size` and `page` to accommodate large data'
+          description: 'List of items created before a specific date. Valid date formats are ''YYYY/MM/DD'', ''YYYY-MM-DDTHH:mm:ss.SSSZ''. <br> **Note**: <br> 1) Applicable only when `skus` and `itemIds` are omitted <br> 2) Returns paginated response <br> 3) Must be paired with `size` and `page` to accommodate large data'
           schema:
             type: string
             example: '2021-05-28T16:36:50.055Z'
         - in: query
           name: modifiedAfter
-          description: 'List of products modified after a specific date. Valid date formats are ''YYYY/MM/DD'', ''YYYY-MM-DDTHH:mm:ss.SSSZ''. <br> **Note**: <br> 1) Applicable only when `skus` or `itemIds` are omitted <br> 2) Returns paginated response <br> 3) Must be paired with `size` and `page` to accommodate large data'
+          description: 'List of items modified after a specific date. Valid date formats are ''YYYY/MM/DD'', ''YYYY-MM-DDTHH:mm:ss.SSSZ''. <br> **Note**: <br> 1) Applicable only when `skus` or `itemIds` are omitted <br> 2) Returns paginated response <br> 3) Must be paired with `size` and `page` to accommodate large data'
           schema:
             type: string
             example: '2021-05-28T16:36:50.055Z'
         - in: query
           name: modifiedBefore
-          description: 'List of products modified before a specific date. Valid date formats are ''YYYY/MM/DD'', ''YYYY-MM-DDTHH:mm:ss.SSSZ''. <br> **Note**: <br> 1) Applicable only when `skus` and `itemIds` are omitted <br> 2) Returns paginated response <br> 3) Must be paired with `size` and `page` to accommodate large data'
+          description: 'List of items modified before a specific date. Valid date formats are ''YYYY/MM/DD'', ''YYYY-MM-DDTHH:mm:ss.SSSZ''. <br> **Note**: <br> 1) Applicable only when `skus` and `itemIds` are omitted <br> 2) Returns paginated response <br> 3) Must be paired with `size` and `page` to accommodate large data'
           schema:
             type: string
             example: '2021-05-28T16:36:50.055Z'
         - in: query
           name: parentSku
-          description: Parent SKU to get its children products. <br> **Note** <br> 1) To get a p paginates response, optionally, `size` and `page` can be used as query parameters. When they are omitted, this endpoint returns all children. <br> 2) Only `page` and `size` are supported with this query parameter.
+          description: Parent SKU to get its children items. <br> **Note** <br> 1) To get a p paginates response, optionally, `size` and `page` can be used as query parameters. When they are omitted, this endpoint returns all children. <br> 2) Only `page` and `size` are supported with this query parameter.
           schema:
             type: string
             example: parent123
@@ -1288,16 +1108,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError'
-  /v1/product/search:
+  /api-product/v1/product/search:
     get:
       tags:
         - Product
-      summary: Find products
-      description: Finds products - both individually and in bundles. Optional filter parameters help narrow down the search results. When the response is large, `page` and `size` becomes mandatory to support pagination.
+      summary: Find items
+      description: Finds items - both individual items and bundles. Optional filter parameters help narrow down the search results. When the response is large, `page` and `size` becomes mandatory to support pagination.
       operationId: productSearch
       parameters:
-        - $ref: '#/components/parameters/Authorization'
-        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
+        - $ref: '#/components/parameters/XSiteContext'
         - in: query
           name: keyword
           description: Keywords related to SKU or title
@@ -1306,7 +1125,7 @@ paths:
             example: MOBO-1024
         - in: query
           name: skus
-          description: 'Searches for items based on SKU. <br> **Note**: If omitted, all products are retrieved. <br> Applicable only when `keyword` is omitted.'
+          description: 'Searches for items based on SKU. <br> **Note**: If omitted, all items are retrieved. <br> Applicable only when `keyword` is omitted.'
           schema:
             type: array
             items:
@@ -1317,7 +1136,7 @@ paths:
           explode: false
         - in: query
           name: itemIds
-          description: 'Item IDs. <br> **Note**: If omitted, all products are retrieved <br> Applicable only when `keyword` and `skus` are omitted.'
+          description: 'Item IDs. <br> **Note**: If omitted, all items are retrieved <br> Applicable only when `keyword` and `skus` are omitted.'
           schema:
             type: array
             items:
@@ -1340,7 +1159,7 @@ paths:
           example: 10
         - in: query
           name: type
-          description: Product type
+          description: Item type
           schema:
             type: string
             enum:
@@ -1350,19 +1169,19 @@ paths:
             example: ITEM
         - in: query
           name: allAttributes
-          description: 'true: Returns all attributes. false: Returns only the mapped attributes. <br> **Note**: Always clubbed with `page` and `size`. If values are not specified, the default values are page = 1 and size = 10. As a result, endpoint returns the first 10 items with all their attributes.'
+          description: 'true: Gets all attributes. false: Gets only the mapped attributes. <br> **Note**: Always clubbed with `page` and `size`. If values are not specified, the default values are page = 1 and size = 10. As a result, endpoint returns the first 10 items with all their attributes.'
           schema:
             type: boolean
             example: true
         - in: query
           name: excludeChildren
-          description: 'true: Excludes child products <br> false: Includes child products'
+          description: 'true: Excludes children items <br> false: Includes children items'
           schema:
             type: boolean
             example: false
         - in: query
           name: onlyChildren
-          description: 'true: Excludes parent products <br> false: Includes parent products'
+          description: 'true: Excludes parent items <br> false: Includes parent items'
           schema:
             type: boolean
             example: true
@@ -1388,19 +1207,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError'
-  /v1/product/attribute:
+  /api-product/v1/product/attribute:
     get:
       tags:
         - Product
-      summary: Get product attributes
-      description: 'Product attributes define characteristics of a product. For example, product name, its identifiers, and description are the common attributes of any product. Attributes are key-value pairs (color: red) that hold information for each property of a product. <br> This endpoint gets all attributes of a product, by SKU or itemId. <br> **Note**: The *Get product* (GET /v1/product) gets product details and their attribute. So, this endpoint is recommended when you have the product SKU or item ID, and only require its attributes.'
+      summary: Get item attributes
+      description: 'Item attributes define characteristics of an item. For example, item name, its identifiers, and description are the common attributes of any item. Attributes are key-value pairs (color: red) that hold information for each property of an item. <br> This endpoint gets all attributes of an item, by SKU or itemId. <br> **Note**: The *Get item* (GET /v1/product) gets item details and their attribute. So, this endpoint is recommended when you have the item SKU or item ID, and only require its attributes.'
       operationId: getProductAttribute
       parameters:
-        - $ref: '#/components/parameters/Authorization'
-        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
+        - $ref: '#/components/parameters/XSiteContext'
         - in: query
           name: sku
-          description: 'Stock Keeping Unit (SKU) of product. <br> **Note**: If omitted `itemId` becomes mandatory.'
+          description: 'Stock Keeping Unit (SKU) of item. <br> **Note**: If omitted `itemId` becomes mandatory.'
           schema:
             type: string
             example: MOBO-1024
@@ -1429,16 +1247,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError'
-  /v1/product/bulk/template/{accountId}/{nodeId}:
+  /api-product/v1/product/bulk/template/{accountId}/{nodeId}:
     get:
       tags:
-        - Product
-      summary: Generate CSV template file for products
-      description: Generates CSV template to upload products for a specific category.
+        - Bulk Import
+      summary: Generate CSV template file for items
+      description: Generates CSV template to upload items for a specific category.
       operationId: generateCSVfile
       parameters:
-        - $ref: '#/components/parameters/Authorization'
-        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
+        - $ref: '#/components/parameters/XSiteContext'
         - in: path
           name: accountId
           description: Account ID
@@ -1472,89 +1289,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError'
-  /v1/product/bulk/template/bundle/{accountId}/{nodeId}:
-    get:
-      tags:
-        - Product
-      summary: Generate CSV template for product bundles
-      description: Generates CSV template to upload bundles for a specific category.
-      operationId: generateItemBundleCSVfile
-      parameters:
-        - $ref: '#/components/parameters/Authorization'
-        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
-        - in: path
-          name: accountId
-          description: Account ID
-          schema:
-            type: string
-          required: true
-        - in: path
-          name: nodeId
-          description: 24-character system-generated category ID
-          schema:
-            type: string
-          required: true
-          example: 6131f771d4a7fa4314e45ebd
-      responses:
-        '200':
-          description: OK
-          content:
-            application/csv:
-              schema:
-                type: string
-                format: binary
-        '400':
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ClientError'
-        '500':
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ServerError'
-  /v1/product/bulk/template/attribute:
-    get:
-      tags:
-        - Product
-      summary: Generate CSV template for product attributes
-      description: 'Generates CSV template to upload product attributes. '
-      operationId: generateItemAttributeCSVfile
-      parameters:
-        - $ref: '#/components/parameters/Authorization'
-        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
-      responses:
-        '200':
-          description: OK
-          content:
-            application/csv:
-              schema:
-                type: string
-                format: binary
-        '400':
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ClientError'
-        '500':
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ServerError'
-  /v1/upload-url:
+  /api-product/v1/upload-url:
     post:
       tags:
-        - Product
-      summary: Generate S3 bucket URL for bulk upload of products
-      description: 'Generates S3 bucket URL to upload products using CSV file. Follow these steps for bulk upload usign CSV: <br> 1) Download the template using *GET /api-product/v1/product/bulk/template/:accountid/:nodeId* <br> 2) Upload the url using *POST /api-product/v1/upload-url*<br> 3) Open the URL from the response of the above endpoint (*POST /api-product/v1/upload-url*), change the method to PUT, update **binary** in the requestBody type to view the select file option and upload a CSV from local system <br> 4) You may check the status using this endpoint *GET /api-product/v1/product/bulk/file/:fileId/status*'
+        - Bulk Import
+      summary: Generate S3 bucket URL for item import
+      description: 'Generates S3 bucket URL to upload items using CSV file. Follow these steps for bulk upload using CSV: <br> 1) Download the template using *GET /api-product/v1/product/bulk/template/:accountid/:nodeId* <br> 2) Upload the url using *POST /api-product/v1/upload-url*<br> 3) Open the URL from the response of the above endpoint (*POST /api-product/v1/upload-url*), change the method to PUT, update **binary** in the requestBody type to view the select file option and upload a CSV from local system <br> 4) You may check the status using this endpoint *GET /api-product/v1/product/bulk/file/:fileId/status*'
       operationId: generateS3url
       parameters:
-        - $ref: '#/components/parameters/Authorization'
-        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
+        - $ref: '#/components/parameters/XSiteContext'
       requestBody:
         content:
           application/json:
@@ -1579,16 +1322,90 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError'
-  /v1/upload-url/bundle:
+  /api-product/v1/product/file/search:
     post:
       tags:
-        - Product
-      summary: Generate S3 bucket URL for product bundles
-      description: Generates S3 bucket URL to upload product bundles using CSV file
+        - Bulk Import
+      summary: Get imported files for items
+      description: Gets a list of files used to import items, along with their current statuses
+      operationId: fileSearch
+      parameters:
+        - $ref: '#/components/parameters/XSiteContext'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FileSearchRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FilePaginationResponse'
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /api-product/v1/product/bulk/template/bundle/{accountId}/{nodeId}:
+    get:
+      tags:
+        - Bulk Import
+      summary: Generate CSV template for bundles
+      description: Generates CSV template to upload bundles for a specific category.
+      operationId: generateItemBundleCSVfile
+      parameters:
+        - $ref: '#/components/parameters/XSiteContext'
+        - in: path
+          name: accountId
+          description: Account ID
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: nodeId
+          description: 24-character system-generated category ID
+          schema:
+            type: string
+          required: true
+          example: 6131f771d4a7fa4314e45ebd
+      responses:
+        '200':
+          description: OK
+          content:
+            application/csv:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /api-product/v1/upload-url/bundle:
+    post:
+      tags:
+        - Bulk Import
+      summary: Generate S3 bucket URL for bundle import
+      description: Generates S3 bucket URL to upload item bundles using CSV file
       operationId: generateItemBundleS3url
       parameters:
-        - $ref: '#/components/parameters/Authorization'
-        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
+        - $ref: '#/components/parameters/XSiteContext'
       requestBody:
         content:
           application/json:
@@ -1613,16 +1430,77 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError'
-  /v1/upload-url/attribute:
+  /api-product/v1/product/file/bundle/search:
     post:
       tags:
-        - Product
-      summary: Generate S3 bucket URL for product attributes
-      description: Generates S3 bucket URL to upload product attribute using CSV file
+        - Bulk Import
+      summary: Get imported files for bundles
+      description: Gets a list of files used to import bundles, along with their current statuses.
+      operationId: ItemBundleFileSearch
+      parameters:
+        - $ref: '#/components/parameters/XSiteContext'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FileSearchRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FilePaginationResponse'
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /api-product/v1/product/bulk/template/attribute:
+    get:
+      tags:
+        - Bulk Import
+      summary: Generate CSV template for item attributes
+      description: 'Generates CSV template to upload item attributes. '
+      operationId: generateItemAttributeCSVfile
+      parameters:
+        - $ref: '#/components/parameters/XSiteContext'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/csv:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /api-product/v1/upload-url/attribute:
+    post:
+      tags:
+        - Bulk Import
+      summary: Generate S3 bucket URL for item attribute import
+      description: Generates S3 bucket URL to upload item attribute using CSV file
       operationId: generateItemAttributeS3url
       parameters:
-        - $ref: '#/components/parameters/Authorization'
-        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
+        - $ref: '#/components/parameters/XSiteContext'
       requestBody:
         content:
           application/json:
@@ -1647,84 +1525,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError'
-  /v1/product/file/search:
+  /api-product/v1/product/file/attribute/search:
     post:
       tags:
-        - Product
-      summary: Get imported files for products
-      description: Gets a list of files used to import products, along with their current statuses
-      operationId: fileSearch
-      parameters:
-        - $ref: '#/components/parameters/Authorization'
-        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/FileSearchRequest'
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FilePaginationResponse'
-        '400':
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ClientError'
-        '500':
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ServerError'
-  /v1/product/file/bundle/search:
-    post:
-      tags:
-        - Product
-      summary: Get imported files for product bundles
-      description: Gets a list of files used to import product bundles, along with their current statuses.
-      operationId: ItemBundleFileSearch
-      parameters:
-        - $ref: '#/components/parameters/Authorization'
-        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/FileSearchRequest'
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FilePaginationResponse'
-        '400':
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ClientError'
-        '500':
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ServerError'
-  /v1/product/file/attribute/search:
-    post:
-      tags:
-        - Product
-      summary: Get imported files for product attributes
-      description: Gets a list of files used to import product attributes, along with their current statuses.
+        - Bulk Import
+      summary: Get imported files for item attributes
+      description: Gets a list of files used to import item attributes, along with their current statuses.
       operationId: ItemAttributeFileSearch
       parameters:
-        - $ref: '#/components/parameters/Authorization'
-        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
+        - $ref: '#/components/parameters/XSiteContext'
       requestBody:
         content:
           application/json:
@@ -1749,16 +1558,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError'
-  /v1/product/bulk/file/{fileId}/status:
+  /api-product/v1/product/bulk/file/{fileId}/status:
     get:
       tags:
-        - Product
-      summary: Get file upload status by ID
-      description: Gets file upload status by ID
+        - Bulk Import
+      summary: Get file upload status
+      description: Gets file upload status by using file ID
       operationId: getFileStatus
       parameters:
-        - $ref: '#/components/parameters/Authorization'
-        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
+        - $ref: '#/components/parameters/XSiteContext'
         - in: path
           name: fileId
           description: 24-character system-generated file ID
@@ -1787,7 +1595,140 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError'
-  /v1/product/attribute/mapping/search:
+  /api-category/v1/category/attribute/bulk:
+    post:
+      tags:
+        - Attributes
+      summary: Create, update and delete category attributes
+      description: 'Creates, updates and deletes category attributes. The primary purpose is to create and edit the attributes to be assigned to categories. <br> **Note**: They are generic category attributes and not specific to a category.'
+      operationId: postCategoryAttributeBulk
+      parameters:
+        - $ref: '#/components/parameters/XApiKey'
+        - $ref: '#/components/parameters/XSiteContext'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkAttributeRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkAttributeResponse'
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /api-product/v1/product/attribute/bulk:
+    post:
+      tags:
+        - Attributes
+      summary: Create update and delete item attributes
+      description: 'Item attributes allow you to define specific characteristics for items. Common examples of attributes include size, color, and material. Well-defined attributes are important because they enable item discovery and make catalog management easier. <br> This endpoint creates and updates item attributes to be assigned later. <br> **Note**: <br> 1) You can add and manage unlimited attributes for your items. Once they are created, they appear as a selectable option on product pages. <br> 2) In addition, you can assign attributes to items on an individual level or in bulk.'
+      operationId: postProductAttributeBulk
+      parameters:
+        - $ref: '#/components/parameters/XSiteContext'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkProductAttributeRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkAttributeResponse'
+        '400':
+          description: Client error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /api-product/v1/product/attribute-group:
+    post:
+      tags:
+        - Attributes
+      summary: Create, update and delete attribute groups
+      description: 'Attribute groups enables merchants to collect various attributes together to make it easier to manage large volume of item information. <br> This endpoint creates, updates, or deletes attribute groups. <br> **Note**: Attribute group is optional. If created, must have at least one attribute.'
+      operationId: modifyAttributeGroups
+      parameters:
+        - $ref: '#/components/parameters/XSiteContext'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AttributeGroupRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttributeGroupResponse'
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /api-product/v1/product/attribute-group/search:
+    post:
+      tags:
+        - Attributes
+      summary: Find attribute groups
+      description: Finds attribute groups
+      operationId: searchAttributeGroups
+      parameters:
+        - $ref: '#/components/parameters/XSiteContext'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AttributeGroupSearchRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttributeGroupSearchResponse'
+        '400':
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /api-product/v1/product/attribute/mapping/search:
     post:
       tags:
         - Attributes
@@ -1795,8 +1736,7 @@ paths:
       description: Searches for attribute mappings
       operationId: searchAttributeMappings
       parameters:
-        - $ref: '#/components/parameters/Authorization'
-        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
+        - $ref: '#/components/parameters/XSiteContext'
       requestBody:
         content:
           application/json:
@@ -1821,15 +1761,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError'
-  /v1/product/attribute/mapping:
+  /api-product/v1/product/attribute/mapping:
     post:
       tags:
         - Attributes
-      summary: Update attribute mappings
-      description: Updates attribute mappings
+      summary: Create and Update attribute mappings
+      description: Set your attribute mapping to begin configuring your catalog. You can update the mappings only if there are no SKUs present in the catalog.
       parameters:
-        - $ref: '#/components/parameters/Authorization'
-        - $ref: '#/components/parameters/XSiteContextOrAuthorization'
+        - $ref: '#/components/parameters/XSiteContext'
       operationId: modifyAttributeMappings
       requestBody:
         content:
@@ -1889,7 +1828,7 @@ components:
             type: string
           description:
             description: Accurate description of the attribute and what it represents
-            example: Weight of the product, in KG
+            example: Item weight, in KG
             type: string
           type:
             description: Supported attribute types for the attribute
@@ -1940,7 +1879,7 @@ components:
                 description: 'true: Attribute is mandatory <br> false: Attribute is optional'
                 type: boolean
               inheritable:
-                description: 'true: Parent attributes inherited to child products <br> false: Parent attributes not inherited to child products'
+                description: 'true: Parent attributes inherited to children items <br> false: Parent attributes not inherited to children items'
                 type: boolean
                 example: true
               inverse:
@@ -2074,10 +2013,10 @@ components:
                   - COLLECTION
               description:
                 description: Accurate description of attribute and what it represents
-                example: Weight of product, in KG
+                example: Item weight, in KG
                 type: string
               name:
-                description: Name of the attribute group
+                description: Attribute group nam
                 example: weight
                 type: string
               priorityOrder:
@@ -2103,17 +2042,17 @@ components:
             type: string
           description:
             description: Accurate description of attribute group and what it represents
-            example: Weight of the product, in KG
+            example: Item weight, in KG
             type: string
           type:
-            description: Type of attribute group
+            description: Attribute group type
             example: COLLECTION
             type: string
             enum:
               - WORKFLOW
               - COLLECTION
           name:
-            description: Name of attribute group
+            description: Attribute group name
             example: weight
             type: string
           priorityOrder:
@@ -2121,11 +2060,11 @@ components:
             example: 1
             type: number
           createdOn:
-            description: Timestamp of attribute group creation (UTC format).
+            description: Time of attribute group creation (UTC format).
             example: '2022-04-15T22:07:09.921Z'
             type: string
           modifiedOn:
-            description: Timestamp of when the attribute group was last modified (UTC format).
+            description: Time when attribute group was last modified (UTC format).
             example: '2022-04-15T22:10:05.427Z'
             type: string
           attributes:
@@ -2147,17 +2086,17 @@ components:
                   type: string
                 isEditable:
                   type: boolean
-                  description: 'true: attribute is editable <br> false: attribute is non-editable'
+                  description: 'true: Attribute is editable <br> false: Attribute is non-editable'
                 createdOn:
-                  description: Timestamp of attribute creation (UTC format)
+                  description: Time of attribute creation (UTC format)
                   example: '2022-04-15T22:07:09.932Z'
                   type: string
                 modifiedOn:
-                  description: Timestamp of when attribute was last modified (UTC format).
+                  description: Time of when attribute was last modified (UTC format).
                   example: '2022-04-15T22:10:05.444Z'
                   type: string
                 order:
-                  description: Order of product within the attribute group
+                  description: Order of item within the attribute group
                   example: 0
                   type: number
     AttributeGroupSearchRequest:
@@ -2176,7 +2115,7 @@ components:
           properties:
             attributes:
               type: boolean
-              description: 'true: include attributes <br> false: exclude attributes'
+              description: 'true: Includes attributes <br> false: Excludes attributes'
         match:
           type: object
           properties:
@@ -2235,29 +2174,29 @@ components:
                 type: string
               description:
                 description: Accurate description of the attribute and what it represents
-                example: Weight of the product, in KG
+                example: Item weight, in KG
                 type: string
               type:
-                description: Type of the attribute group
+                description: Attribute group type
                 example: COLLECTION
                 type: string
                 enum:
                   - WORKFLOW
                   - COLLECTION
               name:
-                description: Name of the attribute group
+                description: Attribute group name
                 example: weight
                 type: string
               priorityOrder:
-                description: Priority order of the attribute group
+                description: Priority order of attribute group
                 example: 1
                 type: number
               createdOn:
-                description: Timestamp of attribute group creation (UTC format)
+                description: Time of attribute group creation (UTC format)
                 example: '2022-04-15T22:07:09.921Z'
                 type: string
               modifiedOn:
-                description: Timestamp of when attribute group was last modified (UTC format)
+                description: Time when attribute group was last modified (UTC format)
                 example: '2022-04-15T22:10:05.427Z'
                 type: string
               totalAttributes:
@@ -2298,11 +2237,11 @@ components:
             - DELETE
           example: UPDATE
         id:
-          description: 24-character system-generated ID of product attribute
+          description: 24-character system-generated ID of item attribute
           example: 6245f16d11ae770009f19292
           type: string
         order:
-          description: Order of product attributes within the attribute group. Relevant for sorting in the UI.
+          description: Order of item attributes within the attribute group. Relevant for sorting in the UI.
           example: 0
           type: number
     AttributeGroupTypeResponse:
@@ -2322,17 +2261,17 @@ components:
           type: string
         isEditable:
           type: boolean
-          description: 'true: attribute is editable <br> false: attribute is non-editable'
+          description: 'true: Attribute is editable <br> false: Attribute is non-editable'
         createdOn:
-          description: Timestamp of attribute creation (UTC format)
+          description: Time of attribute creation (UTC format)
           example: '2022-04-15T22:07:09.932Z'
           type: string
         modifiedOn:
-          description: Timestamp of when attribute was last updated (UTC format)
+          description: Time when attribute was last updated (UTC format)
           example: '2022-04-15T22:10:05.444Z'
           type: string
         order:
-          description: Order of product within the attribute group
+          description: Order of items within the attribute group
           example: 0
           type: number
         attribute:
@@ -2346,14 +2285,14 @@ components:
                 type: string
               description:
                 description: Accurate description of attribute and what it represents
-                example: Weight of the product, in KG.
+                example: Item weight, in KG.
                 type: string
               formulaManuallyOverWritten:
                 type: boolean
                 example: false
-                description: 'true: formula can be manually overwritten <br> false: formula cannot be manually overwritten'
+                description: 'true: Formula can be manually overwritten <br> false: Formula cannot be manually overwritten'
               formula:
-                description: Formula for the product attribute
+                description: Formula for the item attribute
                 example: null
                 type: string
               type:
@@ -2373,15 +2312,15 @@ components:
                 type: string
                 description: Attribute validation ID
               modifiedBy:
-                description: User ID that modified the product attribute
+                description: User ID that modified item attribute
                 example: 60aad2c835c5fb000885f679
                 type: string
               createdOn:
-                description: Timestamp of attribute creation (UTC format)
+                description: Time of attribute creation (UTC format)
                 example: '2022-04-15T22:07:09.932Z'
                 type: string
               modifiedOn:
-                description: Timestamp of when the attribute was last modified (UTC format)
+                description: Time when the attribute was last modified (UTC format)
                 example: '2022-04-15T22:10:05.444Z'
                 type: string
     CreateCategoryRequest:
@@ -2402,7 +2341,7 @@ components:
           type: number
           example: 1
         order:
-          description: 'The order in which this child category appears among the sibling categories (of the same parent). <br> **Note**: <br> 1) Applicable only for child categories. <br> 2) Order 0 means this child category appears at the beginning of other sibling categories. <br> 3) Unless order is specified, the child category appears at the end.'
+          description: 'The order in which this child category appears among the sibling categories (of the same parent). <br> **Note**: <br> 1) Applicable only for children categories. <br> 2) Order 0 means this child category appears at the beginning of other sibling categories. <br> 3) Unless order is specified, the child category appears at the end.'
           type: number
           example: 3
         type:
@@ -2467,17 +2406,17 @@ components:
           items:
             $ref: '#/components/schemas/Attribute'
         children:
-          description: Child categories of this category
+          description: Children categories of this category
           type: array
           items:
             $ref: '#/components/schemas/CategoryChild'
         createdOn:
           type: string
           example: '2022-03-09T23:37:54.086Z'
-          description: Timestamp of category creation (UTC format)
+          description: Time of category creation (UTC format)
         modifiedOn:
           type: string
-          description: Timestamp of when category was last updated (UTC format)
+          description: Time when category was last updated (UTC format)
           example: '2022-03-09T23:37:54.086Z'
     CategoryTree:
       type: object
@@ -2511,18 +2450,18 @@ components:
           items:
             $ref: '#/components/schemas/Attribute'
         children:
-          description: Child categories of this category
+          description: Children categories of this category
           type: array
           items:
             $ref: '#/components/schemas/CategoryChild'
         createdOn:
           type: string
           example: '2022-03-09T23:37:54.086Z'
-          description: Timestamp of category creation (UTC format)
+          description: Time of category creation (UTC format)
         modifiedOn:
           type: string
           example: '2022-03-09T23:37:54.086Z'
-          description: Timestamp of when the category was last updated (UTC format)
+          description: Time when category was last updated (UTC format)
     CategoryChild:
       type: object
       properties:
@@ -2545,7 +2484,7 @@ components:
           items:
             $ref: '#/components/schemas/Attribute'
         children:
-          description: Details of child categories
+          description: Details of children categories
           type: array
           items:
             $ref: '#/components/schemas/CategoryChild'
@@ -2577,7 +2516,7 @@ components:
           example: electronics
           description: Human-readable numeric category ID
         skus:
-          description: SKUs of products belonging to this category.
+          description: SKUs of items belonging to this category.
           type: array
           example:
             - mobo12001
@@ -2675,7 +2614,7 @@ components:
           type: number
           example: 25
         itemAttributes:
-          description: Product attributes within a category
+          description: Item attributes within a category
           type: array
           items:
             type: object
@@ -2912,11 +2851,11 @@ components:
         createdOn:
           type: string
           example: '2022-03-09T23:37:54.086Z'
-          description: Timestamp of category creation (UTC format)
+          description: Time of category creation (UTC format)
         modifiedOn:
           type: string
           example: '2022-03-09T23:37:54.086Z'
-          description: Timestamp of when category was last updated (UTC format)
+          description: Time when category was last updated (UTC format)
     GetCategoryItemAttributeConditions:
       type: object
       properties:
@@ -3025,11 +2964,11 @@ components:
           type: string
           example: Furniture
         createdOn:
-          description: Timestamp of category creation (UTC format)
+          description: Time of category creation (UTC format)
           type: string
           example: '2021-12-01T00:00:00.000Z'
         modifiedOn:
-          description: Timestamp of when category was last updated (UTC format)
+          description: Time when category was last updated (UTC format)
           type: string
           example: '2021-12-01T00:00:00.000Z'
         attributes:
@@ -3281,11 +3220,11 @@ components:
         totalSize:
           type: number
           example: 100
-          description: Total number of records (products)
+          description: Total number of records (items)
         pageSize:
           type: number
           example: 10
-          description: Number of records (products) in a page
+          description: Number of records (items) in a page
         pages:
           type: number
           example: 10
@@ -3300,11 +3239,11 @@ components:
         totalSize:
           type: number
           example: 100
-          description: Total number of records (products)
+          description: Total number of records (items)
         pageSize:
           type: number
           example: 10
-          description: Number of records (products) in a page
+          description: Number of records (items) in a page
         pages:
           type: number
           example: 10
@@ -3319,7 +3258,7 @@ components:
         sku:
           type: string
           example: MOBO-X570
-          description: Stock Keeping Unit (SKU), a unique identifier of product
+          description: Stock Keeping Unit (SKU) of item
         itemId:
           type: number
           example: 4
@@ -3329,14 +3268,14 @@ components:
           items:
             $ref: '#/components/schemas/ProductChild'
         type:
-          description: Product type - ITEM or BUNDLE
+          description: Item type - ITEM or BUNDLE
           type: string
           example: ITEM
           default: ITEM
         status:
           type: boolean
           example: true
-          description: 'true: Product is Active <br> false: Product is Inactive'
+          description: 'true: Item is Active <br> false: Item is Inactive'
         categories:
           type: array
           items:
@@ -3348,35 +3287,35 @@ components:
         createdOn:
           type: string
           example: '2022-03-07T22:50:10.668Z'
-          description: Timestamp of product creation (UTC format)
+          description: Time of item creation (UTC format)
         modifiedOn:
           type: string
           example: '2022-03-07T22:52:01.720Z'
-          description: Timestamp of when product was last updated (UTC format)
+          description: Time when item was last updated (UTC format)
     ProductV2:
       type: object
       properties:
         sku:
           type: string
           example: MOBO-X570
-          description: Stock Keeping Unit (SKU), a unique identifier of product
+          description: Stock Keeping Unit (SKU) of item
         itemId:
           type: number
           example: 4
           description: Item ID
         childrenSize:
-          description: Total number of children/variants for the product
+          description: Number of children or variants of the item
           type: number
           default: 0
         type:
-          description: Product type - ITEM or BUNDLE
+          description: Item type - ITEM or BUNDLE
           type: string
           example: ITEM
           default: ITEM
         status:
           type: boolean
           example: true
-          description: 'true: Product is Active <br> false: Product is Inactive'
+          description: 'true: Item is Active <br> false: Item is Inactive'
         categories:
           type: array
           items:
@@ -3390,7 +3329,7 @@ components:
       properties:
         sku:
           type: string
-          description: Stock Keeping Unit (SKU), a unique identifier of product
+          description: Stock Keeping Unit (SKU) of item
         attributes:
           type: array
           items:
@@ -3413,11 +3352,11 @@ components:
       properties:
         totalSize:
           type: number
-          description: Total number of records (product attributes)
+          description: Total number of records (item attributes)
           example: 100
         pageSize:
           type: number
-          description: Number of records (product attributes) in a page
+          description: Number of records (item attributes) in a page
           example: 10
         pages:
           type: number
@@ -3495,7 +3434,7 @@ components:
           example: 4
           description: Item ID
         type:
-          description: Product type - Bundle (default) or Item
+          description: Item type - Bundle (default) or Item
           type: string
           example: BUNDLE
         status:
@@ -3517,18 +3456,18 @@ components:
         createdOn:
           type: string
           example: '2022-03-07T22:50:10.668Z'
-          description: Timestamp of bundle creation (UTC format)
+          description: Time of bundle creation (UTC format)
         modifiedOn:
           type: string
           example: '2022-03-07T22:52:01.720Z'
-          description: Timestamp of when bundle was last updated (UTC format)
+          description: Time when bundle was last updated (UTC format)
     GetBundleItems:
       type: object
       properties:
         sku:
           type: string
           example: MOBO-1023
-          description: Stock Keeping Unit (SKU), a unique identifier of product
+          description: Stock Keeping Unit (SKU) of item
         itemId:
           type: number
           example: 1
@@ -3538,7 +3477,7 @@ components:
           items:
             $ref: '#/components/schemas/ProductAttribute'
         quantity:
-          description: Item quantity, which is added to the product of a bundle.
+          description: Item quantity
           type: number
           example: 6
         children:
@@ -3550,7 +3489,7 @@ components:
       properties:
         sku:
           type: string
-          description: Stock Keeping Unit (SKU), a unique identifier of product
+          description: Stock Keeping Unit (SKU) of item
         itemId:
           type: number
           description: Item ID
@@ -3574,7 +3513,7 @@ components:
           example: 0
           description: Number of pages for the given `pageSize`
         products:
-          description: Product details
+          description: Item details
           type: array
           items:
             type: string
@@ -3604,13 +3543,13 @@ components:
         sku:
           type: string
           example: MSI-Z490
-          description: Stock Keeping Unit (SKU), a unique identifier of product
+          description: Stock Keeping Unit (SKU) of item
         itemId:
           type: number
           example: 2
           description: Item ID
         type:
-          description: Product type - either ITEM or BUNDLE
+          description: Item type - either ITEM or BUNDLE
           type: string
           example: ITEM
           default: ITEM
@@ -3633,9 +3572,9 @@ components:
         createdOn:
           type: string
           example: '2021-05-28T16:36:50.055Z'
-          description: Timestamp of when the product was added to PIM (UTC format)
+          description: Time when the item was added to PIM (UTC format)
         modifiedOn:
-          description: Timestamp of when the product was last updated (UTC format)
+          description: Time when item was last updated (UTC format)
           type: string
           example: '2021-05-28T16:36:50.055Z'
     ProductSearch:
@@ -3648,9 +3587,8 @@ components:
               items:
                 $ref: '#/components/schemas/ProductChild'
     BundleSearch:
-      allOf:
-        # removed for circular reference
-        # - $ref: '#/components/schemas/SearchResponse'
+      # allOf:
+      #   - $ref: '#/components/schemas/SearchResponse'
         - type: object
           properties:
             bundleItems:
@@ -3684,22 +3622,22 @@ components:
       items:
         properties:
           sku:
-            description: Stock Keeping Unit (SKU), a unique identifier of a product
+            description: Stock Keeping Unit (SKU) of item
             type: string
             example: sku_abc
           type:
-            description: Product type
+            description: Item type
             type: string
             enum:
               - ITEM
               - BUNDLE
             example: ITEM
           nodeName:
-            description: Category name (along with parent category names) for which the product must be created.
+            description: Category name (along with parent category names) for which item is being created.
             type: string
             example: PRIMARY>electronics
           parentSku:
-            description: Stock Keeping Unit (SKU), a unique identifier of parent product
+            description: Stock Keeping Unit (SKU) parent item
             type: string
             example: sku123
           attributeValues:
@@ -3710,10 +3648,10 @@ components:
                 - $ref: '#/components/schemas/AttributeValue'
                 - $ref: '#/components/schemas/AttributeValueFrenchLocale'
           inheritedAttributes:
-            description: Category product attributes to be inherited from parent product to children products
+            description: Category item attributes to be inherited from parent item to children items
             $ref: '#/components/schemas/InheritItemAttributesInsert'
           bundleItems:
-            description: List of products to be added to a bundle. Includes SKU and product quantity.
+            description: List of items to be added to a bundle. Includes SKU and item quantity.
             type: array
             items:
               $ref: '#/components/schemas/BundleItems'
@@ -3728,11 +3666,11 @@ components:
         - quantity
       properties:
         sku:
-          description: Stock Keeping Unit (SKU) of the product that must be added to the bundle
+          description: Stock Keeping Unit (SKU) of item that must be added to bundle
           type: string
           example: sku123
         quantity:
-          description: Product quantity, which needs to be added to the product in a bundle
+          description: Item quantity to be added to bundle
           type: number
           example: 6
     ProductUpdate:
@@ -3748,7 +3686,7 @@ components:
             - sku12
             - sku13
         type:
-          description: Product type - Bundle or Item
+          description: Item type - Bundle or Item
           type: string
           example: ITEM
         action:
@@ -3756,7 +3694,7 @@ components:
           type: string
           example: UPDATE
         parentSku:
-          description: Stock Keeping Unit (SKU) of parent product
+          description: Stock Keeping Unit (SKU) of parent item
           type: string
           example: sku234
         attributeValues:
@@ -3766,7 +3704,7 @@ components:
               - $ref: '#/components/schemas/AttributeValue'
               - $ref: '#/components/schemas/AttributeValueFrenchLocale'
         inheritedAttributes:
-          description: Node item attributes to inherit from parent product to children products
+          description: Category item attributes to inherit from parent item to children items
           $ref: '#/components/schemas/InheritItemAttributesUpdate'
     BundleUpdateRequest:
       type: object
@@ -3796,15 +3734,15 @@ components:
               bundleSku:
                 type: string
                 example: iPhoneBundle
-                description: Stock Keeping Unit (SKU), a unique identifier of bundle
+                description: Stock Keeping Unit (SKU) of bundle
               itemSku:
                 type: string
                 example: iPhone12
-                description: Stock Keeping Unit (SKU), a unique identifier of the product
+                description: 'Stock Keeping Unit (SKU) of item '
               quantity:
                 type: number
                 example: 1
-                description: Product quantity
+                description: Item quantity
     BundleUpdateResponse:
       type: array
       items:
@@ -3817,7 +3755,7 @@ components:
           itemId:
             type: string
             example: 624d94fb27c894222534b260
-            description: 24-character system-generated product ID
+            description: 24-character system-generated item ID
           bundleId:
             type: string
             example: 624d939227c894222534b247
@@ -3829,11 +3767,11 @@ components:
           createdOn:
             type: string
             example: '2022-04-08T23:25:27.753Z'
-            description: Timestamp of bundle creation (UTC format)
+            description: Time of bundle creation (UTC format)
           modifiedOn:
             type: string
             example: '2022-04-08T23:25:27.753Z'
-            description: Timestamp of when bundle was last updated (UTC format)
+            description: Time when bundle was last updated (UTC format)
     ProductResponse:
       type: object
       properties:
@@ -3845,15 +3783,15 @@ components:
               sku:
                 type: string
                 example: sku1
-                description: Stock Keeping Unit (SKU), a unique identifier of product
+                description: Stock Keeping Unit (SKU) of item
               itemId:
                 type: string
                 example: 611686da50fb7e0c5df78c2e
-                description: Product ID
+                description: Item ID
               itemIdSeq:
                 type: number
                 example: 12
-                description: Product ID, which increments sequentially
+                description: Item ID, which increments sequentially
               message:
                 type: string
                 example: SKU created successfully.
@@ -3890,13 +3828,13 @@ components:
               sku:
                 type: string
                 example: sku1
-                description: Stock Keeping Unit (SKU), a unique identifier of product
+                description: Stock Keeping Unit (SKU), a unique identifier of item
               message:
                 type: string
                 example: Failed because of validation
                 description: Failure message
         itemIds:
-          description: List of product IDs
+          description: List of item IDs
           example:
             - 611686da50fb7e0c5df78c2e
             - 711686da50fb7e0c5df78c22
@@ -3935,13 +3873,13 @@ components:
           description: Error code for backend mapping
         message:
           type: array
-          description: Error details for invalid products
+          description: Error details for invalid items
           items:
             type: object
             properties:
               index:
                 type: number
-                description: Index of the product update request to which this error corresponds
+                description: Index of the item update request
               item:
                 $ref: '#/components/schemas/ProductResponse'
     ItemExport:
@@ -3956,7 +3894,7 @@ components:
           properties:
             children:
               type: boolean
-              description: 'true: Include children; false: Exclude children'
+              description: 'true: Includes children; false: Excludes children'
               default: false
               example: false
             type:
@@ -3966,10 +3904,10 @@ components:
                 - BUNDLE
               default: ITEM
               example: ITEM
-              description: Product type
+              description: Item type
             ids:
               type: array
-              description: List of product IDs
+              description: List of item IDs
               minItems: 1
               items:
                 type: string
@@ -3998,7 +3936,7 @@ components:
         properties:
           action:
             type: string
-            description: 'Action to perform. `id` is required only for `UPDATE`, or `DELETE` (not for CREATE). <br> **Note**: `CREATE` action replaces any existing product attribute with the same name, if one already exists.'
+            description: 'Action to perform. `id` is required only for `UPDATE`, or `DELETE` (not for CREATE). <br> **Note**: `CREATE` action replaces any existing item attribute with the same name, if one already exists.'
             enum:
               - CREATE
               - UPDATE
@@ -4032,7 +3970,7 @@ components:
             type: string
             example: Example description.
           mapping:
-            description: 'Attribute mapping of product. This corresponds to the `Attribute Mapping` settings of PIM: `sku`, `title`, `image`, `active`, `isVariant`. <br> **Note**: Most attributes do not have a mapping, in which case this will be null. <br> **Warning**: Exercise caution while adding or removing mappings of attributes, as it could lead to bad data.'
+            description: 'Attribute mapping of item. This corresponds to the `Attribute Mapping` settings of PIM: `sku`, `title`, `image`, `active`, `isVariant`. <br> **Note**: Most attributes do not have a mapping, in which case this will be null. <br> **Warning**: Exercise caution while adding or removing mappings of attributes, as it could lead to bad data.'
             type: string
             example: title
           type:
@@ -4081,7 +4019,7 @@ components:
                 description: 'true: Attribute is mandatory <br> false: Attribute is optional'
                 type: boolean
               inheritable:
-                description: 'true: Parent attributes inherited to child products <br> false: Parent attributes not inherited to child products'
+                description: 'true: Parent attributes inherited to children items <br> false: Parent attributes not inherited to children items'
                 type: boolean
               inverse:
                 description: 'true: Inverts existing validation (example - requires that the validation does not pass) <br> false: Follows existing validation'
@@ -4263,31 +4201,31 @@ components:
         name:
           description: Name of attribute mapping
           type: string
-          example: Product SKU
+          example: Item SKU
         description:
           description: Description for attribute mapping
           type: string
-          example: Product SKU
+          example: Item SKU
         required:
           description: 'true: Mapping is mandatory; <br> false: mapping is optional'
           type: boolean
         validation:
           $ref: '#/components/schemas/AttributeValidation'
         createdOn:
-          description: Timestamp of attribute creation (UTC format)
+          description: Time of attribute creation (UTC format)
           type: string
           format: date-time
           example: '2021-09-23T17:47:04.231Z'
         createdBy:
-          description: User ID that created the product attribute
+          description: User ID that created item attribute
           type: string
           example: broma0
         modifiedOn:
-          description: Timestamp of when the attribute was last modified
+          description: Time of when the attribute was last modified
           type: string
           format: date-time
         modifiedBy:
-          description: User ID that last modified the product attribute
+          description: User ID that last modified item attribute
           type: string
           example: broma0
     AttributeMappingModifyError:
@@ -4331,11 +4269,11 @@ components:
               description:
                 description: Description of the attribute mapping
                 type: string
-                example: Product SKU
+                example: Item SKU
               validation:
                 $ref: '#/components/schemas/AttributeValidation'
               required:
-                description: 'true: mapping is mandatory <br> false: mapping is optional'
+                description: 'true: Mapping is mandatory <br> false: Mapping is optional'
                 type: boolean
     AttributeResponse:
       type: object
@@ -4349,7 +4287,7 @@ components:
           items:
             $ref: '#/components/schemas/StatusResponse'
         files:
-          description: Array of file's associated with the product
+          description: Array of file's associated with an item
           type: array
           items:
             $ref: '#/components/schemas/FileResponse'
@@ -4393,7 +4331,7 @@ components:
           description: Conditionally required to indicate the starting value of `SERIAL` attribute type. When enabled, the subsequent attribute values increment by 1.
           type: number
         target:
-          description: Indicates whether the attribute is for categories or products.
+          description: Indicates whether the attribute is for categories or items.
           type: string
           enum:
             - NODE
@@ -4409,7 +4347,7 @@ components:
         validation:
           $ref: '#/components/schemas/AttributeValidation'
         createdOn:
-          description: Timestamp of attribute creation
+          description: Time of attribute creation
           type: string
           format: date-time
         createdBy:
@@ -4417,7 +4355,7 @@ components:
           type: string
           example: broma0
         modifiedOn:
-          description: Timestamp of when the attribute was last modified
+          description: Time when the attribute was last modified
           type: string
           format: date-time
         modifiedBy:
@@ -4431,7 +4369,7 @@ components:
           description: Indicates mandatory attribute
           type: boolean
         inheritable:
-          description: 'true: Parent attributes are inherited to child products <br> false: Parent attributes are not inherited to child products'
+          description: 'true: Parent attributes are inherited to children items <br> false: Parent attributes are not inherited to children items.'
           type: boolean
           example: true
         inverse:
@@ -4515,7 +4453,7 @@ components:
           type: number
           example: 100
         createdOn:
-          description: Timestamp of file creation
+          description: Time of file creation
           type: string
           format: date-time
         createdBy:
@@ -4523,7 +4461,7 @@ components:
           type: string
           example: broma0
         modifiedOn:
-          description: Timestamp of when the file was last modified
+          description: Time when file was last modified
           type: string
           format: date-time
         modifiedBy:
@@ -4565,7 +4503,7 @@ components:
           description: Status description
           type: string
         createdOn:
-          description: Timestamp of file creation
+          description: Time of file creation
           type: string
           format: date-time
         createdBy:
@@ -4575,7 +4513,7 @@ components:
         modifiedOn:
           type: string
           format: date-time
-          description: Timestamp of when the file was last modified
+          description: Time when file was last modified
         modifiedBy:
           type: string
           example: broma0
@@ -4601,7 +4539,7 @@ components:
         url:
           description: S3 bucket URL, to upload the template file.
           type: string
-          example: https://greatwall-dev02-bulk-import-pim.s3.amazonaws.com/item/609ac75051f11a0007cf38b3/dev02/1651260453554-men-shoes.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIA26KLJWUACLU2AF6F%2F20220429%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220429T192736Z&X-Amz-Expires=300&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDsaCXVzLWVhc3QtMSJGMEQCIGW476Ala9Go95rgQ3gVPwSvCbcZPrm4WgLs186q0R6GAiBqqVo4yuAkTKZTMl2qBF8hJOySqicG42ObKpyPtBmGWir4Awj0%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAIaDDc1MjMxNDA3MDI3MiIMSeKQqQmLFWlfgsfVKswDvUDycKtqRnlcHaiuM56ZPrzPio9ylmxLaqjgUDCdF73ZqtkL41jqTf0kI%2FOnkXegoOks5dRbnprCbDwJxQFiwyOgQ9w8VC8ZCVzG6s6V7vnQDMQZ2mAVDk30KjL9BXShFNqBqY6r6COCJtyi5kMHpUjA8HM6Q7N19XOg7kH1VVnm4UZpWU%2F9blF8EMjiqIvWfjmRdv%2BnmBdx3RztZ0jEuJ9g4YeEmOZUUCaZoNLl78nE5vPoTQLNW%2F5YzKMO8ECTJ3Vr8nY%2BCVl5bTrAMK4TdCK%2BVaZjEpw7DQrSKmaR1JhQlYxD%2F%2F3WxPc%2FECeYD7eTLmWOYXh3LELhOYyy49%2Bx0MhdUaYQTlSsuU4NKnWcYcyeIh5J7%2Bef4Q9PgkBZqdE7gCN5m%2BqmfDLzu4W1SjR47MbdXYIiShDdvvM2DDrmwfMuTMS14fEWiMP4zhuehc12gA%2BGTwmuHjqYQCuRswGncP9574CXT1mzu%2BcW5bqMNKg80paslu2ipNJL4vScEjV%2FFYcYGCoXskYgBQr5IZJ4xdtv%2BYGrEMiCbob8UZ1oT5QtJSyLVqOqGt%2FvomDHdHqMved8fQbyddZo28DC%2BwB1DEI3XsLEp3rZFCeLzTCt3bCTBjqmAe%2F4uuvRSexVKYd%2F4XCVdbKrZG%2Fl7JoTsJv%2FI4k8nqezmqPAgpErsqCyvqyUXTx8jgrxi70EuiH6n1F5QEhMfge4C41jFKqYsY%2FxWEkwZw89koTrbzGs2z64i4eCzDU5u3OItYGVaEctdbHnpx%2FA3xnOgdPoGP%2FDQPVgCdsMWvjCkRDbNcBoSLXuXSRBgbOXy2RgkHY5YQ%2Fxys257mGLb3FZhjqvScs%3D&X-Amz-Signature=24c29de90587424ffdb21a7d970ef08c0a68ebaccd562f95b766dd01faad9d56&X-Amz-SignedHeaders=host%3Bx-amz-meta-account%3Bx-amz-meta-channel%3Bx-amz-meta-fileid%3Bx-amz-meta-filename%3Bx-amz-meta-nodeid%3Bx-amz-meta-prefix%3Bx-amz-meta-stage&x-amz-meta-account=609ac75051f11a0007cf38b3&x-amz-meta-channel=12&x-amz-meta-fileid=626c3c28e041b10009810b21&x-amz-meta-filename=men-shoes-bundle-local.csv&x-amz-meta-nodeid=611eef8b81f92b882d4f9741&x-amz-meta-prefix=item&x-amz-meta-stage=dev02
+          example: https://demo-dev02-bulk-import-pim.s3.amazonaws.com/item/609ac75051f11a0007cf38b3/dev02/1651260453554-men-shoes.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIA26KLJWUACLU2AF6F%2F20220429%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220429T192736Z&X-Amz-Expires=300&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDsaCXVzLWVhc3QtMSJGMEQCIGW476Ala9Go95rgQ3gVPwSvCbcZPrm4WgLs186q0R6GAiBqqVo4yuAkTKZTMl2qBF8hJOySqicG42ObKpyPtBmGWir4Awj0%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAIaDDc1MjMxNDA3MDI3MiIMSeKQqQmLFWlfgsfVKswDvUDycKtqRnlcHaiuM56ZPrzPio9ylmxLaqjgUDCdF73ZqtkL41jqTf0kI%2FOnkXegoOks5dRbnprCbDwJxQFiwyOgQ9w8VC8ZCVzG6s6V7vnQDMQZ2mAVDk30KjL9BXShFNqBqY6r6COCJtyi5kMHpUjA8HM6Q7N19XOg7kH1VVnm4UZpWU%2F9blF8EMjiqIvWfjmRdv%2BnmBdx3RztZ0jEuJ9g4YeEmOZUUCaZoNLl78nE5vPoTQLNW%2F5YzKMO8ECTJ3Vr8nY%2BCVl5bTrAMK4TdCK%2BVaZjEpw7DQrSKmaR1JhQlYxD%2F%2F3WxPc%2FECeYD7eTLmWOYXh3LELhOYyy49%2Bx0MhdUaYQTlSsuU4NKnWcYcyeIh5J7%2Bef4Q9PgkBZqdE7gCN5m%2BqmfDLzu4W1SjR47MbdXYIiShDdvvM2DDrmwfMuTMS14fEWiMP4zhuehc12gA%2BGTwmuHjqYQCuRswGncP9574CXT1mzu%2BcW5bqMNKg80paslu2ipNJL4vScEjV%2FFYcYGCoXskYgBQr5IZJ4xdtv%2BYGrEMiCbob8UZ1oT5QtJSyLVqOqGt%2FvomDHdHqMved8fQbyddZo28DC%2BwB1DEI3XsLEp3rZFCeLzTCt3bCTBjqmAe%2F4uuvRSexVKYd%2F4XCVdbKrZG%2Fl7JoTsJv%2FI4k8nqezmqPAgpErsqCyvqyUXTx8jgrxi70EuiH6n1F5QEhMfge4C41jFKqYsY%2FxWEkwZw89koTrbzGs2z64i4eCzDU5u3OItYGVaEctdbHnpx%2FA3xnOgdPoGP%2FDQPVgCdsMWvjCkRDbNcBoSLXuXSRBgbOXy2RgkHY5YQ%2Fxys257mGLb3FZhjqvScs%3D&X-Amz-Signature=24c29de90587424ffdb21a7d970ef08c0a68ebaccd562f95b766dd01faad9d56&X-Amz-SignedHeaders=host%3Bx-amz-meta-account%3Bx-amz-meta-channel%3Bx-amz-meta-fileid%3Bx-amz-meta-filename%3Bx-amz-meta-nodeid%3Bx-amz-meta-prefix%3Bx-amz-meta-stage&x-amz-meta-account=609ac75051f11a0007cf38b3&x-amz-meta-channel=12&x-amz-meta-fileid=626c3c28e041b10009810b21&x-amz-meta-filename=men-shoes-bundle-local.csv&x-amz-meta-nodeid=611eef8b81f92b882d4f9741&x-amz-meta-prefix=item&x-amz-meta-stage=dev02
         key:
           description: S3 key of the file
           type: string
@@ -4623,7 +4561,7 @@ components:
         url:
           description: S3 bucket url, to upload the template file.
           type: string
-          example: https://greatwall-dev02-bulk-import-pim.s3.amazonaws.com/attribute/60ac19ef893ab1000864b771/dev02/1651261780352-item-attributes.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIA26KLJWUAC474VT4E%2F20220429%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220429T194940Z&X-Amz-Expires=300&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDwaCXVzLWVhc3QtMSJHMEUCIQCesp8JqH%2F%2F3QZP%2BcybG392bRrSI2d%2BHbBfYknEgqDuXAIgStf8iZndc9fOzokQimbgivAGx1hum81ZVqKbxFuigaMqsAII9f%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARACGgw3NTIzMTQwNzAyNzIiDE7VWWdAw%2BMtShgibSqEAtJrxQ%2B0h7Bu9DE3FcCGCi4fyAoLxtkAFRUWQ28ciZDvS5PC%2BU4%2FOvjuXSttg%2Bz%2F8E3Ff0QqI8%2BWOOG02O4DQSpUEc9aDBqXFVB2nezNz6CCyoIhlxRhHJXrjboktovlKAHnRpB0KRgHo7B05v2%2BM9z49w%2FzFrB%2FrW5XF0bFMyYGsm3aK0%2B4C8kS9oJ0dDxaKYxe%2BaKrn0XmcBLBduu3fL2h6WRhv29%2FDQxmwDO9O%2FNXfYAxnB2iQYAo2ZuL8ujcyDQPp2zNLFYiwQpQYE4DhVCT2CDw1SJU7xTi3ZHYDmt7xfe2vgwKxPolZumOIVIhBa7%2Fj7tma%2FbuX%2BAjKHUFnBfMnE5oMPuBsZMGOpoBWHVtEmbAx%2FsCaUu9jpSJoHgNkIDwxVGvV2XPPoNJIhLg9aCC2cMnAkRbbLOplmV4fnWmsY15Hdjd6CIhX5fCKGv2gLJCs6XpanNOm89KI8Ro9q4Gh5MvytJlSIEXuYgBI%2B2%2FWF5iNF0%2BUZX7cNtZjLK7yXHytJP94f0vF%2BqbAIpG%2FT9yyn1Z9KKWyMeIpCYsAsEY%2F1seiB6slA%3D%3D&X-Amz-Signature=b029ce0c5158f33fc4867d6a40f59d133d15d34fb300615e6c74b7414f8fe668&X-Amz-SignedHeaders=host%3Bx-amz-meta-account%3Bx-amz-meta-channel%3Bx-amz-meta-fileid%3Bx-amz-meta-filename%3Bx-amz-meta-prefix%3Bx-amz-meta-stage%3Bx-amz-meta-user&x-amz-meta-account=60ac19ef893ab1000864b771&x-amz-meta-channel=&x-amz-meta-fileid=626c415430548500093811f1&x-amz-meta-filename=item-attributes.csv&x-amz-meta-prefix=attribute&x-amz-meta-stage=dev02
+          example: https://demo-dev02-bulk-import-pim.s3.amazonaws.com/attribute/60ac19ef893ab1000864b771/dev02/1651261780352-item-attributes.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIA26KLJWUAC474VT4E%2F20220429%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220429T194940Z&X-Amz-Expires=300&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDwaCXVzLWVhc3QtMSJHMEUCIQCesp8JqH%2F%2F3QZP%2BcybG392bRrSI2d%2BHbBfYknEgqDuXAIgStf8iZndc9fOzokQimbgivAGx1hum81ZVqKbxFuigaMqsAII9f%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARACGgw3NTIzMTQwNzAyNzIiDE7VWWdAw%2BMtShgibSqEAtJrxQ%2B0h7Bu9DE3FcCGCi4fyAoLxtkAFRUWQ28ciZDvS5PC%2BU4%2FOvjuXSttg%2Bz%2F8E3Ff0QqI8%2BWOOG02O4DQSpUEc9aDBqXFVB2nezNz6CCyoIhlxRhHJXrjboktovlKAHnRpB0KRgHo7B05v2%2BM9z49w%2FzFrB%2FrW5XF0bFMyYGsm3aK0%2B4C8kS9oJ0dDxaKYxe%2BaKrn0XmcBLBduu3fL2h6WRhv29%2FDQxmwDO9O%2FNXfYAxnB2iQYAo2ZuL8ujcyDQPp2zNLFYiwQpQYE4DhVCT2CDw1SJU7xTi3ZHYDmt7xfe2vgwKxPolZumOIVIhBa7%2Fj7tma%2FbuX%2BAjKHUFnBfMnE5oMPuBsZMGOpoBWHVtEmbAx%2FsCaUu9jpSJoHgNkIDwxVGvV2XPPoNJIhLg9aCC2cMnAkRbbLOplmV4fnWmsY15Hdjd6CIhX5fCKGv2gLJCs6XpanNOm89KI8Ro9q4Gh5MvytJlSIEXuYgBI%2B2%2FWF5iNF0%2BUZX7cNtZjLK7yXHytJP94f0vF%2BqbAIpG%2FT9yyn1Z9KKWyMeIpCYsAsEY%2F1seiB6slA%3D%3D&X-Amz-Signature=b029ce0c5158f33fc4867d6a40f59d133d15d34fb300615e6c74b7414f8fe668&X-Amz-SignedHeaders=host%3Bx-amz-meta-account%3Bx-amz-meta-channel%3Bx-amz-meta-fileid%3Bx-amz-meta-filename%3Bx-amz-meta-prefix%3Bx-amz-meta-stage%3Bx-amz-meta-user&x-amz-meta-account=60ac19ef893ab1000864b771&x-amz-meta-channel=&x-amz-meta-fileid=626c415430548500093811f1&x-amz-meta-filename=item-attributes.csv&x-amz-meta-prefix=attribute&x-amz-meta-stage=dev02
         key:
           description: S3 key of the file
           type: string
@@ -4649,7 +4587,7 @@ components:
         url:
           description: S3 bucket URL, to upload the template file
           type: string
-          example: https://greatwall-dev02-bulk-import-pim.s3.amazonaws.com/item-bundles/609ac75051f11a0007cf38b3/dev02/1651266490891-men-shoes-bundle-local.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIA26KLJWUAMB3F4HM7%2F20220429%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220429T210813Z&X-Amz-Expires=300&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDsaCXVzLWVhc3QtMSJGMEQCIGW476Ala9Go95rgQ3gVPwSvCbcZPrm4WgLs186q0R6GAiBqqVo4yuAkTKZTMl2qBF8hJOySqicG42ObKpyPtBmGWir4Awj0%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAIaDDc1MjMxNDA3MDI3MiIMSeKQqQmLFWlfgsfVKswDvUDycKtqRnlcHaiuM56ZPrzPio9ylmxLaqjgUDCdF73ZqtkL41jqTf0kI%2FOnkXegoOks5dRbnprCbDwJxQFiwyOgQ9w8VC8ZCVzG6s6V7vnQDMQZ2mAVDk30KjL9BXShFNqBqY6r6COCJtyi5kMHpUjA8HM6Q7N19XOg7kH1VVnm4UZpWU%2F9blF8EMjiqIvWfjmRdv%2BnmBdx3RztZ0jEuJ9g4YeEmOZUUCaZoNLl78nE5vPoTQLNW%2F5YzKMO8ECTJ3Vr8nY%2BCVl5bTrAMK4TdCK%2BVaZjEpw7DQrSKmaR1JhQlYxD%2F%2F3WxPc%2FECeYD7eTLmWOYXh3LELhOYyy49%2Bx0MhdUaYQTlSsuU4NKnWcYcyeIh5J7%2Bef4Q9PgkBZqdE7gCN5m%2BqmfDLzu4W1SjR47MbdXYIiShDdvvM2DDrmwfMuTMS14fEWiMP4zhuehc12gA%2BGTwmuHjqYQCuRswGncP9574CXT1mzu%2BcW5bqMNKg80paslu2ipNJL4vScEjV%2FFYcYGCoXskYgBQr5IZJ4xdtv%2BYGrEMiCbob8UZ1oT5QtJSyLVqOqGt%2FvomDHdHqMved8fQbyddZo28DC%2BwB1DEI3XsLEp3rZFCeLzTCt3bCTBjqmAe%2F4uuvRSexVKYd%2F4XCVdbKrZG%2Fl7JoTsJv%2FI4k8nqezmqPAgpErsqCyvqyUXTx8jgrxi70EuiH6n1F5QEhMfge4C41jFKqYsY%2FxWEkwZw89koTrbzGs2z64i4eCzDU5u3OItYGVaEctdbHnpx%2FA3xnOgdPoGP%2FDQPVgCdsMWvjCkRDbNcBoSLXuXSRBgbOXy2RgkHY5YQ%2Fxys257mGLb3FZhjqvScs%3D&X-Amz-Signature=24c29de90587424ffdb21a7d970ef08c0a68ebaccd562f95b766dd01faad9d56&X-Amz-SignedHeaders=host%3Bx-amz-meta-account%3Bx-amz-meta-channel%3Bx-amz-meta-fileid%3Bx-amz-meta-filename%3Bx-amz-meta-nodeid%3Bx-amz-meta-prefix%3Bx-amz-meta-stage&x-amz-meta-account=609ac75051f11a0007cf38b3&x-amz-meta-channel=12&x-amz-meta-fileid=626c3c28e041b10009810b21&x-amz-meta-filename=men-shoes-bundle-local.csv&x-amz-meta-nodeid=626a31a2d877f5e49efad330&x-amz-meta-prefix=item&x-amz-meta-stage=dev02
+          example: https://demo-dev02-bulk-import-pim.s3.amazonaws.com/item-bundles/609ac75051f11a0007cf38b3/dev02/1651266490891-men-shoes-bundle-local.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIA26KLJWUAMB3F4HM7%2F20220429%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220429T210813Z&X-Amz-Expires=300&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDsaCXVzLWVhc3QtMSJGMEQCIGW476Ala9Go95rgQ3gVPwSvCbcZPrm4WgLs186q0R6GAiBqqVo4yuAkTKZTMl2qBF8hJOySqicG42ObKpyPtBmGWir4Awj0%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAIaDDc1MjMxNDA3MDI3MiIMSeKQqQmLFWlfgsfVKswDvUDycKtqRnlcHaiuM56ZPrzPio9ylmxLaqjgUDCdF73ZqtkL41jqTf0kI%2FOnkXegoOks5dRbnprCbDwJxQFiwyOgQ9w8VC8ZCVzG6s6V7vnQDMQZ2mAVDk30KjL9BXShFNqBqY6r6COCJtyi5kMHpUjA8HM6Q7N19XOg7kH1VVnm4UZpWU%2F9blF8EMjiqIvWfjmRdv%2BnmBdx3RztZ0jEuJ9g4YeEmOZUUCaZoNLl78nE5vPoTQLNW%2F5YzKMO8ECTJ3Vr8nY%2BCVl5bTrAMK4TdCK%2BVaZjEpw7DQrSKmaR1JhQlYxD%2F%2F3WxPc%2FECeYD7eTLmWOYXh3LELhOYyy49%2Bx0MhdUaYQTlSsuU4NKnWcYcyeIh5J7%2Bef4Q9PgkBZqdE7gCN5m%2BqmfDLzu4W1SjR47MbdXYIiShDdvvM2DDrmwfMuTMS14fEWiMP4zhuehc12gA%2BGTwmuHjqYQCuRswGncP9574CXT1mzu%2BcW5bqMNKg80paslu2ipNJL4vScEjV%2FFYcYGCoXskYgBQr5IZJ4xdtv%2BYGrEMiCbob8UZ1oT5QtJSyLVqOqGt%2FvomDHdHqMved8fQbyddZo28DC%2BwB1DEI3XsLEp3rZFCeLzTCt3bCTBjqmAe%2F4uuvRSexVKYd%2F4XCVdbKrZG%2Fl7JoTsJv%2FI4k8nqezmqPAgpErsqCyvqyUXTx8jgrxi70EuiH6n1F5QEhMfge4C41jFKqYsY%2FxWEkwZw89koTrbzGs2z64i4eCzDU5u3OItYGVaEctdbHnpx%2FA3xnOgdPoGP%2FDQPVgCdsMWvjCkRDbNcBoSLXuXSRBgbOXy2RgkHY5YQ%2Fxys257mGLb3FZhjqvScs%3D&X-Amz-Signature=24c29de90587424ffdb21a7d970ef08c0a68ebaccd562f95b766dd01faad9d56&X-Amz-SignedHeaders=host%3Bx-amz-meta-account%3Bx-amz-meta-channel%3Bx-amz-meta-fileid%3Bx-amz-meta-filename%3Bx-amz-meta-nodeid%3Bx-amz-meta-prefix%3Bx-amz-meta-stage&x-amz-meta-account=609ac75051f11a0007cf38b3&x-amz-meta-channel=12&x-amz-meta-fileid=626c3c28e041b10009810b21&x-amz-meta-filename=men-shoes-bundle-local.csv&x-amz-meta-nodeid=626a31a2d877f5e49efad330&x-amz-meta-prefix=item&x-amz-meta-stage=dev02
         key:
           description: S3 key of the file
           type: string
@@ -4685,33 +4623,31 @@ components:
           items:
             $ref: '#/components/schemas/FileResponse'
     UploadFileStatusResponse:
-      type: array
-      items:
-        type: object
-        properties:
-          createdOn:
-            type: string
-            description: Timestamp of file upload (UTC format)
-            example: '2021-09-14T22:10:30.618Z'
-          name:
-            type: string
-            description: Name of CSV file
-            example: Duplicate+New+Dup.csv
-          csvLink:
-            type: string
-            description: URL to download uploaded CSV file.
-            example: https://greatwall-dev02-bulk-import-pim.s3.amazonaws.com/item-bundles/609ac75051f11a0007cf38b3/dev02/1651266490891-men-shoes-bundle-local.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIA26KLJWUAMB3F4HM7%2F20220429%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220429T210813Z&X-Amz-Expires=300&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDsaCXVzLWVhc3QtMSJGMEQCIGW476Ala9Go95rgQ3gVPwSvCbcZPrm4WgLs186q0R6GAiBqqVo4yuAkTKZTMl2qBF8hJOySqicG42ObKpyPtBmGWir4Awj0%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAIaDDc1MjMxNDA3MDI3MiIMSeKQqQmLFWlfgsfVKswDvUDycKtqRnlcHaiuM56ZPrzPio9ylmxLaqjgUDCdF73ZqtkL41jqTf0kI%2FOnkXegoOks5dRbnprCbDwJxQFiwyOgQ9w8VC8ZCVzG6s6V7vnQDMQZ2mAVDk30KjL9BXShFNqBqY6r6COCJtyi5kMHpUjA8HM6Q7N19XOg7kH1VVnm4UZpWU%2F9blF8EMjiqIvWfjmRdv%2BnmBdx3RztZ0jEuJ9g4YeEmOZUUCaZoNLl78nE5vPoTQLNW%2F5YzKMO8ECTJ3Vr8nY%2BCVl5bTrAMK4TdCK%2BVaZjEpw7DQrSKmaR1JhQlYxD%2F%2F3WxPc%2FECeYD7eTLmWOYXh3LELhOYyy49%2Bx0MhdUaYQTlSsuU4NKnWcYcyeIh5J7%2Bef4Q9PgkBZqdE7gCN5m%2BqmfDLzu4W1SjR47MbdXYIiShDdvvM2DDrmwfMuTMS14fEWiMP4zhuehc12gA%2BGTwmuHjqYQCuRswGncP9574CXT1mzu%2BcW5bqMNKg80paslu2ipNJL4vScEjV%2FFYcYGCoXskYgBQr5IZJ4xdtv%2BYGrEMiCbob8UZ1oT5QtJSyLVqOqGt%2FvomDHdHqMved8fQbyddZo28DC%2BwB1DEI3XsLEp3rZFCeLzTCt3bCTBjqmAe%2F4uuvRSexVKYd%2F4XCVdbKrZG%2Fl7JoTsJv%2FI4k8nqezmqPAgpErsqCyvqyUXTx8jgrxi70EuiH6n1F5QEhMfge4C41jFKqYsY%2FxWEkwZw89koTrbzGs2z64i4eCzDU5u3OItYGVaEctdbHnpx%2FA3xnOgdPoGP%2FDQPVgCdsMWvjCkRDbNcBoSLXuXSRBgbOXy2RgkHY5YQ%2Fxys257mGLb3FZhjqvScs%3D&X-Amz-Signature=24c29de90587424ffdb21a7d970ef08c0a68ebaccd562f95b766dd01faad9d56&X-Amz-SignedHeaders=host%3Bx-amz-meta-account%3Bx-amz-meta-channel%3Bx-amz-meta-fileid%3Bx-amz-meta-filename%3Bx-amz-meta-nodeid%3Bx-amz-meta-prefix%3Bx-amz-meta-stage&x-amz-meta-account=609ac75051f11a0007cf38b3&x-amz-meta-channel=12&x-amz-meta-fileid=626c3c28e041b10009810b21&x-amz-meta-filename=men-shoes-bundle-local.csv&x-amz-meta-nodeid=626a31a2d877f5e49efad330&x-amz-meta-prefix=item&x-amz-meta-stage=dev02
-          errorCsv:
-            type: string
-            description: URL to download import error file.
-            example: https://greatwall-dev02-bulk-import-pim.s3.amazonaws.com/item-bundles/609ac75051f11a0007cf38b3/dev02/1651266490891-error.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIA26KLJWUAMB3F4HM7%2F20220429%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220429T210813Z&X-Amz-Expires=300&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDsaCXVzLWVhc3QtMSJGMEQCIGW476Ala9Go95rgQ3gVPwSvCbcZPrm4WgLs186q0R6GAiBqqVo4yuAkTKZTMl2qBF8hJOySqicG42ObKpyPtBmGWir4Awj0%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAIaDDc1MjMxNDA3MDI3MiIMSeKQqQmLFWlfgsfVKswDvUDycKtqRnlcHaiuM56ZPrzPio9ylmxLaqjgUDCdF73ZqtkL41jqTf0kI%2FOnkXegoOks5dRbnprCbDwJxQFiwyOgQ9w8VC8ZCVzG6s6V7vnQDMQZ2mAVDk30KjL9BXShFNqBqY6r6COCJtyi5kMHpUjA8HM6Q7N19XOg7kH1VVnm4UZpWU%2F9blF8EMjiqIvWfjmRdv%2BnmBdx3RztZ0jEuJ9g4YeEmOZUUCaZoNLl78nE5vPoTQLNW%2F5YzKMO8ECTJ3Vr8nY%2BCVl5bTrAMK4TdCK%2BVaZjEpw7DQrSKmaR1JhQlYxD%2F%2F3WxPc%2FECeYD7eTLmWOYXh3LELhOYyy49%2Bx0MhdUaYQTlSsuU4NKnWcYcyeIh5J7%2Bef4Q9PgkBZqdE7gCN5m%2BqmfDLzu4W1SjR47MbdXYIiShDdvvM2DDrmwfMuTMS14fEWiMP4zhuehc12gA%2BGTwmuHjqYQCuRswGncP9574CXT1mzu%2BcW5bqMNKg80paslu2ipNJL4vScEjV%2FFYcYGCoXskYgBQr5IZJ4xdtv%2BYGrEMiCbob8UZ1oT5QtJSyLVqOqGt%2FvomDHdHqMved8fQbyddZo28DC%2BwB1DEI3XsLEp3rZFCeLzTCt3bCTBjqmAe%2F4uuvRSexVKYd%2F4XCVdbKrZG%2Fl7JoTsJv%2FI4k8nqezmqPAgpErsqCyvqyUXTx8jgrxi70EuiH6n1F5QEhMfge4C41jFKqYsY%2FxWEkwZw89koTrbzGs2z64i4eCzDU5u3OItYGVaEctdbHnpx%2FA3xnOgdPoGP%2FDQPVgCdsMWvjCkRDbNcBoSLXuXSRBgbOXy2RgkHY5YQ%2Fxys257mGLb3FZhjqvScs%3D&X-Amz-Signature=24c29de90587424ffdb21a7d970ef08c0a68ebaccd562f95b766dd01faad9d56&X-Amz-SignedHeaders=host%3Bx-amz-meta-account%3Bx-amz-meta-channel%3Bx-amz-meta-fileid%3Bx-amz-meta-filename%3Bx-amz-meta-nodeid%3Bx-amz-meta-prefix%3Bx-amz-meta-stage&x-amz-meta-account=609ac75051f11a0007cf38b3&x-amz-meta-channel=12&x-amz-meta-fileid=626c3c28e041b10009810b21&x-amz-meta-filename=men-shoes-bundle-local.csv&x-amz-meta-nodeid=626a31a2d877f5e49efad330&x-amz-meta-prefix=item&x-amz-meta-stage=dev02
-          statuses:
-            type: array
-            description: Upload status
-            items:
-              oneOf:
-                - $ref: '#/components/schemas/objectUploadFileStatus'
-                - $ref: '#/components/schemas/objectUploadFileStatusNotFound'
+      type: object
+      properties:
+        createdOn:
+          type: string
+          description: Time of file upload (UTC format)
+          example: '2021-09-14T22:10:30.618Z'
+        name:
+          type: string
+          description: Name of CSV file
+          example: Duplicate+New+Dup.csv
+        csvLink:
+          type: string
+          description: URL to download uploaded CSV file.
+          example: https://demo-dev02-bulk-import-pim.s3.amazonaws.com/item-bundles/609ac75051f11a0007cf38b3/dev02/1651266490891-men-shoes-bundle-local.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIA26KLJWUAMB3F4HM7%2F20220429%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220429T210813Z&X-Amz-Expires=300&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDsaCXVzLWVhc3QtMSJGMEQCIGW476Ala9Go95rgQ3gVPwSvCbcZPrm4WgLs186q0R6GAiBqqVo4yuAkTKZTMl2qBF8hJOySqicG42ObKpyPtBmGWir4Awj0%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAIaDDc1MjMxNDA3MDI3MiIMSeKQqQmLFWlfgsfVKswDvUDycKtqRnlcHaiuM56ZPrzPio9ylmxLaqjgUDCdF73ZqtkL41jqTf0kI%2FOnkXegoOks5dRbnprCbDwJxQFiwyOgQ9w8VC8ZCVzG6s6V7vnQDMQZ2mAVDk30KjL9BXShFNqBqY6r6COCJtyi5kMHpUjA8HM6Q7N19XOg7kH1VVnm4UZpWU%2F9blF8EMjiqIvWfjmRdv%2BnmBdx3RztZ0jEuJ9g4YeEmOZUUCaZoNLl78nE5vPoTQLNW%2F5YzKMO8ECTJ3Vr8nY%2BCVl5bTrAMK4TdCK%2BVaZjEpw7DQrSKmaR1JhQlYxD%2F%2F3WxPc%2FECeYD7eTLmWOYXh3LELhOYyy49%2Bx0MhdUaYQTlSsuU4NKnWcYcyeIh5J7%2Bef4Q9PgkBZqdE7gCN5m%2BqmfDLzu4W1SjR47MbdXYIiShDdvvM2DDrmwfMuTMS14fEWiMP4zhuehc12gA%2BGTwmuHjqYQCuRswGncP9574CXT1mzu%2BcW5bqMNKg80paslu2ipNJL4vScEjV%2FFYcYGCoXskYgBQr5IZJ4xdtv%2BYGrEMiCbob8UZ1oT5QtJSyLVqOqGt%2FvomDHdHqMved8fQbyddZo28DC%2BwB1DEI3XsLEp3rZFCeLzTCt3bCTBjqmAe%2F4uuvRSexVKYd%2F4XCVdbKrZG%2Fl7JoTsJv%2FI4k8nqezmqPAgpErsqCyvqyUXTx8jgrxi70EuiH6n1F5QEhMfge4C41jFKqYsY%2FxWEkwZw89koTrbzGs2z64i4eCzDU5u3OItYGVaEctdbHnpx%2FA3xnOgdPoGP%2FDQPVgCdsMWvjCkRDbNcBoSLXuXSRBgbOXy2RgkHY5YQ%2Fxys257mGLb3FZhjqvScs%3D&X-Amz-Signature=24c29de90587424ffdb21a7d970ef08c0a68ebaccd562f95b766dd01faad9d56&X-Amz-SignedHeaders=host%3Bx-amz-meta-account%3Bx-amz-meta-channel%3Bx-amz-meta-fileid%3Bx-amz-meta-filename%3Bx-amz-meta-nodeid%3Bx-amz-meta-prefix%3Bx-amz-meta-stage&x-amz-meta-account=609ac75051f11a0007cf38b3&x-amz-meta-channel=12&x-amz-meta-fileid=626c3c28e041b10009810b21&x-amz-meta-filename=men-shoes-bundle-local.csv&x-amz-meta-nodeid=626a31a2d877f5e49efad330&x-amz-meta-prefix=item&x-amz-meta-stage=dev02
+        errorCsv:
+          type: string
+          description: URL to download import error file.
+          example: https://demo-dev02-bulk-import-pim.s3.amazonaws.com/item-bundles/609ac75051f11a0007cf38b3/dev02/1651266490891-error.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIA26KLJWUAMB3F4HM7%2F20220429%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220429T210813Z&X-Amz-Expires=300&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDsaCXVzLWVhc3QtMSJGMEQCIGW476Ala9Go95rgQ3gVPwSvCbcZPrm4WgLs186q0R6GAiBqqVo4yuAkTKZTMl2qBF8hJOySqicG42ObKpyPtBmGWir4Awj0%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAIaDDc1MjMxNDA3MDI3MiIMSeKQqQmLFWlfgsfVKswDvUDycKtqRnlcHaiuM56ZPrzPio9ylmxLaqjgUDCdF73ZqtkL41jqTf0kI%2FOnkXegoOks5dRbnprCbDwJxQFiwyOgQ9w8VC8ZCVzG6s6V7vnQDMQZ2mAVDk30KjL9BXShFNqBqY6r6COCJtyi5kMHpUjA8HM6Q7N19XOg7kH1VVnm4UZpWU%2F9blF8EMjiqIvWfjmRdv%2BnmBdx3RztZ0jEuJ9g4YeEmOZUUCaZoNLl78nE5vPoTQLNW%2F5YzKMO8ECTJ3Vr8nY%2BCVl5bTrAMK4TdCK%2BVaZjEpw7DQrSKmaR1JhQlYxD%2F%2F3WxPc%2FECeYD7eTLmWOYXh3LELhOYyy49%2Bx0MhdUaYQTlSsuU4NKnWcYcyeIh5J7%2Bef4Q9PgkBZqdE7gCN5m%2BqmfDLzu4W1SjR47MbdXYIiShDdvvM2DDrmwfMuTMS14fEWiMP4zhuehc12gA%2BGTwmuHjqYQCuRswGncP9574CXT1mzu%2BcW5bqMNKg80paslu2ipNJL4vScEjV%2FFYcYGCoXskYgBQr5IZJ4xdtv%2BYGrEMiCbob8UZ1oT5QtJSyLVqOqGt%2FvomDHdHqMved8fQbyddZo28DC%2BwB1DEI3XsLEp3rZFCeLzTCt3bCTBjqmAe%2F4uuvRSexVKYd%2F4XCVdbKrZG%2Fl7JoTsJv%2FI4k8nqezmqPAgpErsqCyvqyUXTx8jgrxi70EuiH6n1F5QEhMfge4C41jFKqYsY%2FxWEkwZw89koTrbzGs2z64i4eCzDU5u3OItYGVaEctdbHnpx%2FA3xnOgdPoGP%2FDQPVgCdsMWvjCkRDbNcBoSLXuXSRBgbOXy2RgkHY5YQ%2Fxys257mGLb3FZhjqvScs%3D&X-Amz-Signature=24c29de90587424ffdb21a7d970ef08c0a68ebaccd562f95b766dd01faad9d56&X-Amz-SignedHeaders=host%3Bx-amz-meta-account%3Bx-amz-meta-channel%3Bx-amz-meta-fileid%3Bx-amz-meta-filename%3Bx-amz-meta-nodeid%3Bx-amz-meta-prefix%3Bx-amz-meta-stage&x-amz-meta-account=609ac75051f11a0007cf38b3&x-amz-meta-channel=12&x-amz-meta-fileid=626c3c28e041b10009810b21&x-amz-meta-filename=men-shoes-bundle-local.csv&x-amz-meta-nodeid=626a31a2d877f5e49efad330&x-amz-meta-prefix=item&x-amz-meta-stage=dev02
+        statuses:
+          type: array
+          description: Upload status
+          items:
+            oneOf:
+              - $ref: '#/components/schemas/objectUploadFileStatus'
+              - $ref: '#/components/schemas/objectUploadFileStatusNotFound'
     objectUploadFileStatus:
       type: object
       properties:
@@ -4800,14 +4736,15 @@ components:
     Authorization:
       in: header
       name: authorization
-      description: 'JWT Authorization token from *Login* endpoint. If omitted, `x-site-context` becomes mandatory. <br> **Note**: Some calls require `Authorization` along with `x-site-context`.'
+      description: JWT Authorization token from *Login* endpoint.
       example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMDk1YjE2Y2E4MDZjMDAwOGYyNjA4NSIsInJvbGVzIjpbIkFkbWluIl0sInBlcm1pc3Npb25zIjpbInJlYWQ6Y29sbGVjdGlvbiIsIndyaXRlOnVzZXIiLCJ3cml0ZTpza3VzZXQiLCJ3cml0ZTpyb2xlIiwicmVhZDpwZXJtaXNzaW9uIiwid3JpdGU6YXR0cmlidXRlLWdyb3VwIiwicmVhZDp1c2VyIiwicmVhZDpza3VzZXQiLCJ3cml0ZTphdHRyaWJ1dGUiLCJyZWFkOmF0dHJpYnV0ZSIsInJlYWQ6cm9sZSIsIndyaXRlOmNvbGxlY3Rpb24iLCJyZWFkOmF0dHJpYnV0ZS1ncm91cCJdLCJhY2NvdW50IjoiNjA5YWM3NTA1MWYxMWEwMDA3Y2YzOGIzIiwiYWNjb3VudElkIjoxNDAzNTUyMTE1LCJ1c2VyVHlwZSI6eyJraW5kIjoiUkVHSVNURVJFRCJ9LCJpYXQiOjE2Mzc1MzYzNjIsImV4cCI6MTYzNzUzODE2Mn0.aUrXJ8e5TsADHdlP61Zg21dgJFoFxe5jsASHDxTj1h-WtodEpMR150vTpIA0pfpy1-3rKXlcjoOi6xidADhqZw
       schema:
         type: string
     XSiteContext:
       in: header
       name: x-site-context
-      description: Represents single or multi-tenancy. If omitted, `Authorization` becomes mandatory.
+      description: JSON object containing `channel`, `account`, `stage`, `date`, and `site` <br> .
+      example: '{"date":"2022-08-09T14:53:17.711Z","channel":12,"account":"{account ID}","stage":"sandbox"}'
       schema:
         type: object
         properties:
@@ -4827,33 +4764,10 @@ components:
             type: number
             example: 12
             description: Sales channel. Mandatary for single and multi-tenant clients.
-    XSiteContextOrAuthorization:
-      in: header
-      name: x-site-context
-      description: Represents single or multi-tenancy. If omitted, `Authorization` becomes mandatory.
-      schema:
-        type: object
-        properties:
-          account:
-            type: string
-            example: 609ac75051f11a0007cf38b3
-            description: 24-character client's co-pilot account ID. Mandatary only for multi-tenant clients (not for single tenant clients).
-          stage:
-            type: string
-            example: sandbox
-            description: Environment shared with the client during onboarding. Mandatary only for multi-tenant clients (not for single tenant clients).
-          date:
-            type: string
-            example: '2021-12-28T16:36:50.055Z'
-            description: Localized timestamp of endpoint execution (UTC format). Mandatary for single and multi-tenant clients
-          channel:
-            type: number
-            example: 12
-            description: Sales channel. Mandatary for single and multi-tenant clients.
     XApiKey:
       in: header
       name: x-api-key
-      description: Allows access to the endpoint without the need for `Authorization`. This key can be provided to you only by fabric Inc, upon request.
+      description: Provided by fabric support after a tenant is created
       schema:
         type: string
     Page:
