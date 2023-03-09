@@ -63,32 +63,34 @@ export class Category {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.CategoryCreateResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.CategoryCreateResponse =
+            new operations.CategoryCreateResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.modifyCategory = plainToInstance(
+              res.modifyCategory = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ModifyCategory,
-                httpRes?.data as shared.ModifyCategory,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.clientError = plainToInstance(
+              res.clientError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ClientError,
-                httpRes?.data as shared.ClientError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.serverError = plainToInstance(
+              res.serverError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ServerError,
-                httpRes?.data as shared.ServerError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -141,32 +143,34 @@ export class Category {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.CategoryModifyResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.CategoryModifyResponse =
+            new operations.CategoryModifyResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.modifyCategory = plainToInstance(
+              res.modifyCategory = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ModifyCategory,
-                httpRes?.data as shared.ModifyCategory,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.clientError = plainToInstance(
+              res.clientError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ClientError,
-                httpRes?.data as shared.ClientError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.serverError = plainToInstance(
+              res.serverError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ServerError,
-                httpRes?.data as shared.ServerError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -209,32 +213,34 @@ export class Category {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GetCategoriesByIdResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.GetCategoriesByIdResponse =
+            new operations.GetCategoriesByIdResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.categoryPage = plainToInstance(
+              res.categoryPage = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.CategoryPage,
-                httpRes?.data as shared.CategoryPage,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.clientError = plainToInstance(
+              res.clientError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ClientError,
-                httpRes?.data as shared.ClientError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.serverError = plainToInstance(
+              res.serverError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ServerError,
-                httpRes?.data as shared.ServerError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -277,32 +283,34 @@ export class Category {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GetCategoriesNodeSourceExclusionsResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.GetCategoriesNodeSourceExclusionsResponse =
+            new operations.GetCategoriesNodeSourceExclusionsResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.nodeSourceExclusions = plainToInstance(
+              res.nodeSourceExclusions = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.NodeSourceExclusions,
-                httpRes?.data as shared.NodeSourceExclusions,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.clientError = plainToInstance(
+              res.clientError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ClientError,
-                httpRes?.data as shared.ClientError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.serverError = plainToInstance(
+              res.serverError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ServerError,
-                httpRes?.data as shared.ServerError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -345,32 +353,34 @@ export class Category {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GetCategoriesNodeSourcesResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.GetCategoriesNodeSourcesResponse =
+            new operations.GetCategoriesNodeSourcesResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.nodeSources = plainToInstance(
+              res.nodeSources = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.NodeSources,
-                httpRes?.data as shared.NodeSources,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.clientError = plainToInstance(
+              res.clientError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ClientError,
-                httpRes?.data as shared.ClientError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.serverError = plainToInstance(
+              res.serverError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ServerError,
-                httpRes?.data as shared.ServerError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -413,32 +423,34 @@ export class Category {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GetCategoryAttributesByIDResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.GetCategoryAttributesByIDResponse =
+            new operations.GetCategoryAttributesByIDResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.attributePage = plainToInstance(
+              res.attributePage = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.AttributePage,
-                httpRes?.data as shared.AttributePage,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.clientError = plainToInstance(
+              res.clientError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ClientError,
-                httpRes?.data as shared.ClientError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.serverError = plainToInstance(
+              res.serverError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ServerError,
-                httpRes?.data as shared.ServerError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -481,32 +493,34 @@ export class Category {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GetCategoryItemAttributesResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.GetCategoryItemAttributesResponse =
+            new operations.GetCategoryItemAttributesResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.getCategoryItemAttributes = plainToInstance(
+              res.getCategoryItemAttributes = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.GetCategoryItemAttributes,
-                httpRes?.data as shared.GetCategoryItemAttributes,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.clientError = plainToInstance(
+              res.clientError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ClientError,
-                httpRes?.data as shared.ClientError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.serverError = plainToInstance(
+              res.serverError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ServerError,
-                httpRes?.data as shared.ServerError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -549,32 +563,34 @@ export class Category {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GetCategoryItemAttributesConditionResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.GetCategoryItemAttributesConditionResponse =
+            new operations.GetCategoryItemAttributesConditionResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.getCategoryItemAttributeConditions = plainToInstance(
+              res.getCategoryItemAttributeConditions = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.GetCategoryItemAttributeConditions,
-                httpRes?.data as shared.GetCategoryItemAttributeConditions,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.clientError = plainToInstance(
+              res.clientError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ClientError,
-                httpRes?.data as shared.ClientError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.serverError = plainToInstance(
+              res.serverError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ServerError,
-                httpRes?.data as shared.ServerError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -617,32 +633,34 @@ export class Category {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GetCategorySKUsResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.GetCategorySKUsResponse =
+            new operations.GetCategorySKUsResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.skuPage = plainToInstance(
+              res.skuPage = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.SKUPage,
-                httpRes?.data as shared.SKUPage,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.clientError = plainToInstance(
+              res.clientError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ClientError,
-                httpRes?.data as shared.ClientError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.serverError = plainToInstance(
+              res.serverError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ServerError,
-                httpRes?.data as shared.ServerError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -685,32 +703,34 @@ export class Category {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GetCategoryTreeResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.GetCategoryTreeResponse =
+            new operations.GetCategoryTreeResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.categoryTree = plainToInstance(
+              res.categoryTree = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.CategoryTree,
-                httpRes?.data as shared.CategoryTree,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.clientError = plainToInstance(
+              res.clientError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ClientError,
-                httpRes?.data as shared.ClientError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.serverError = plainToInstance(
+              res.serverError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ServerError,
-                httpRes?.data as shared.ServerError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -763,32 +783,34 @@ export class Category {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.ModifyCategoriesNodeSourceExclusionsResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.ModifyCategoriesNodeSourceExclusionsResponse =
+            new operations.ModifyCategoriesNodeSourceExclusionsResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.nodeSourcesAndExclusions = plainToInstance(
+              res.nodeSourcesAndExclusions = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.NodeSourcesAndExclusions,
-                httpRes?.data as shared.NodeSourcesAndExclusions,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.clientError = plainToInstance(
+              res.clientError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ClientError,
-                httpRes?.data as shared.ClientError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.serverError = plainToInstance(
+              res.serverError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ServerError,
-                httpRes?.data as shared.ServerError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -841,32 +863,34 @@ export class Category {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.ModifyCategoriesNodeSourcesResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.ModifyCategoriesNodeSourcesResponse =
+            new operations.ModifyCategoriesNodeSourcesResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.nodeSourcesAndExclusions = plainToInstance(
+              res.nodeSourcesAndExclusions = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.NodeSourcesAndExclusions,
-                httpRes?.data as shared.NodeSourcesAndExclusions,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.clientError = plainToInstance(
+              res.clientError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ClientError,
-                httpRes?.data as shared.ClientError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.serverError = plainToInstance(
+              res.serverError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ServerError,
-                httpRes?.data as shared.ServerError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -919,32 +943,34 @@ export class Category {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.PostCategoryAttributeByIDResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.PostCategoryAttributeByIDResponse =
+            new operations.PostCategoryAttributeByIDResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.categoryAttributes = plainToInstance(
+              res.categoryAttributes = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.CategoryAttributes,
-                httpRes?.data as shared.CategoryAttributes,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.clientError = plainToInstance(
+              res.clientError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ClientError,
-                httpRes?.data as shared.ClientError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.serverError = plainToInstance(
+              res.serverError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ServerError,
-                httpRes?.data as shared.ServerError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -997,32 +1023,34 @@ export class Category {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.PostCategoryItemAttributeByIDResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.PostCategoryItemAttributeByIDResponse =
+            new operations.PostCategoryItemAttributeByIDResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.categoryItemAttributeConditions = plainToInstance(
+              res.categoryItemAttributeConditions = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.CategoryItemAttributeConditions,
-                httpRes?.data as shared.CategoryItemAttributeConditions,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.clientError = plainToInstance(
+              res.clientError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ClientError,
-                httpRes?.data as shared.ClientError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.serverError = plainToInstance(
+              res.serverError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ServerError,
-                httpRes?.data as shared.ServerError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -1075,32 +1103,34 @@ export class Category {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.PostCategoryItemibuteByIDResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.PostCategoryItemibuteByIDResponse =
+            new operations.PostCategoryItemibuteByIDResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.categoryItemAttributes = plainToInstance(
+              res.categoryItemAttributes = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.CategoryItemAttributes,
-                httpRes?.data as shared.CategoryItemAttributes,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.clientError = plainToInstance(
+              res.clientError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ClientError,
-                httpRes?.data as shared.ClientError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.serverError = plainToInstance(
+              res.serverError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ServerError,
-                httpRes?.data as shared.ServerError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -1143,32 +1173,34 @@ export class Category {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.SearchCategoriesResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.SearchCategoriesResponse =
+            new operations.SearchCategoriesResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.categoryPage = plainToInstance(
+              res.categoryPage = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.CategoryPage,
-                httpRes?.data as shared.CategoryPage,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.clientError = plainToInstance(
+              res.clientError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ClientError,
-                httpRes?.data as shared.ClientError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.serverError = plainToInstance(
+              res.serverError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ServerError,
-                httpRes?.data as shared.ServerError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
