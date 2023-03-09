@@ -32,8 +32,8 @@ export class Fabric {
   public _securityClient: AxiosInstance;
   public _serverURL: string;
   private _language = "typescript";
-  private _sdkVersion = "3.0.3";
-  private _genVersion = "1.8.4";
+  private _sdkVersion = "3.0.5";
+  private _genVersion = "1.8.6";
 
   constructor(props: SDKProps) {
     this._serverURL = props.serverUrl ?? ServerList[ServerSandbox];
