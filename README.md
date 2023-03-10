@@ -38,12 +38,16 @@ For more details on getting access to the Fabric API please see [here](https://k
 ```typescript
 import {
   ModifyAttributeGroupsRequest,
-  ModifyAttributeGroupsResponse 
+  ModifyAttributeGroupsResponse
 } from "@speakeasy-sdks/pim-sdk/dist/sdk/models/operations";
+import {
+  AttributeGroupRequestAttributeGroupActionEnum,
+  AttributeGroupRequestAttributeGroupTypeEnum,
+  AttributeGroupTypeRequestActionEnum,
+} from "@speakeasy-sdks/pim-sdk/dist/sdk/models/shared";
 
 import { AxiosError } from "axios";
 import { Fabric } from "@speakeasy-sdks/pim-sdk";
-
 
 const sdk = new Fabric();
     
@@ -59,26 +63,26 @@ const req: ModifyAttributeGroupsRequest = {
   request: {
     attributeGroup: [
       {
-        action: "undefined",
+        action: AttributeGroupRequestAttributeGroupActionEnum.Delete,
         description: "perspiciatis",
         editableAttributes: [
           {
-            action: "UPDATE",
+            action: AttributeGroupTypeRequestActionEnum.Update,
             id: "fuga",
             order: 6458.94,
           },
           {
-            action: "UPDATE",
+            action: AttributeGroupTypeRequestActionEnum.Update,
             id: "iusto",
             order: 2975.34,
           },
           {
-            action: "undefined",
+            action: AttributeGroupTypeRequestActionEnum.Delete,
             id: "inventore",
             order: 9636.63,
           },
           {
-            action: "UPDATE",
+            action: AttributeGroupTypeRequestActionEnum.Add,
             id: "eum",
             order: 4776.65,
           },
@@ -86,29 +90,29 @@ const req: ModifyAttributeGroupsRequest = {
         id: "autem",
         name: "vel",
         priorityOrder: 5288.95,
-        type: "COLLECTION",
+        type: AttributeGroupRequestAttributeGroupTypeEnum.Workflow,
       },
       {
-        action: "DELETE",
+        action: AttributeGroupRequestAttributeGroupActionEnum.Update,
         description: "reprehenderit",
         editableAttributes: [
           {
-            action: "undefined",
+            action: AttributeGroupTypeRequestActionEnum.Delete,
             id: "quasi",
             order: 3373.96,
           },
           {
-            action: "ADD",
+            action: AttributeGroupTypeRequestActionEnum.Add,
             id: "est",
             order: 202.18,
           },
           {
-            action: "UPDATE",
+            action: AttributeGroupTypeRequestActionEnum.Update,
             id: "fugiat",
             order: 9571.56,
           },
           {
-            action: "undefined",
+            action: AttributeGroupTypeRequestActionEnum.Delete,
             id: "eos",
             order: 8700.13,
           },
@@ -116,24 +120,24 @@ const req: ModifyAttributeGroupsRequest = {
         id: "accusamus",
         name: "reiciendis",
         priorityOrder: 4736.08,
-        type: "undefined",
+        type: AttributeGroupRequestAttributeGroupTypeEnum.Collection,
       },
       {
-        action: "undefined",
+        action: AttributeGroupRequestAttributeGroupActionEnum.Delete,
         description: "praesentium",
         editableAttributes: [
           {
-            action: "undefined",
+            action: AttributeGroupTypeRequestActionEnum.Delete,
             id: "soluta",
             order: 1182.74,
           },
           {
-            action: "DELETE",
+            action: AttributeGroupTypeRequestActionEnum.Delete,
             id: "rerum",
             order: 5820.2,
           },
           {
-            action: "ADD",
+            action: AttributeGroupTypeRequestActionEnum.Add,
             id: "sed",
             order: 9446.69,
           },
@@ -141,7 +145,7 @@ const req: ModifyAttributeGroupsRequest = {
         id: "possimus",
         name: "occaecati",
         priorityOrder: 1059.07,
-        type: "COLLECTION",
+        type: AttributeGroupRequestAttributeGroupTypeEnum.Workflow,
       },
     ],
     transactional: true,
