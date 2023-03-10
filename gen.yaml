@@ -6,7 +6,7 @@ management:
 generation:
   telemetryEnabled: false
   sdkClassName: fabric
-  sdkFlattening: false
+  sdkFlattening: true
 typescript:
   version: 3.0.5
   author: fabric
