@@ -8,6 +8,6 @@ generation:
   sdkClassName: fabric
   sdkFlattening: true
 typescript:
-  version: 3.1.0
+  version: 3.1.1
   author: fabric
   packageName: '@speakeasy-sdks/pim-sdk'
