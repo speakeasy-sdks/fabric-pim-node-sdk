@@ -63,41 +63,42 @@ export class Product {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.CreateProductsResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.CreateProductsResponse =
+            new operations.CreateProductsResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.productResponse = plainToInstance(
+              res.productResponse = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ProductResponse,
-                httpRes?.data as shared.ProductResponse,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.clientError = plainToInstance(
+              res.clientError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ClientError,
-                httpRes?.data as shared.ClientError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 422:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.productModifyError = plainToInstance(
+              res.productModifyError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ProductModifyError,
-                httpRes?.data as shared.ProductModifyError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.serverError = plainToInstance(
+              res.serverError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ServerError,
-                httpRes?.data as shared.ServerError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -140,32 +141,34 @@ export class Product {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GetProductAttributeResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.GetProductAttributeResponse =
+            new operations.GetProductAttributeResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.productAttributePage = plainToInstance(
+              res.productAttributePage = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ProductAttributePage,
-                httpRes?.data as shared.ProductAttributePage,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.clientError = plainToInstance(
+              res.clientError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ClientError,
-                httpRes?.data as shared.ClientError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.serverError = plainToInstance(
+              res.serverError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ServerError,
-                httpRes?.data as shared.ServerError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -208,7 +211,12 @@ export class Product {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GetProductsResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.GetProductsResponse =
+            new operations.GetProductsResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
@@ -217,19 +225,17 @@ export class Product {
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.clientError = plainToInstance(
+              res.clientError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ClientError,
-                httpRes?.data as shared.ClientError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.serverError = plainToInstance(
+              res.serverError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ServerError,
-                httpRes?.data as shared.ServerError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -272,7 +278,12 @@ export class Product {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GetProductsV2Response = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.GetProductsV2Response =
+            new operations.GetProductsV2Response({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
@@ -281,19 +292,17 @@ export class Product {
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.clientError = plainToInstance(
+              res.clientError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ClientError,
-                httpRes?.data as shared.ClientError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.serverError = plainToInstance(
+              res.serverError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ServerError,
-                httpRes?.data as shared.ServerError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -336,7 +345,12 @@ export class Product {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.ProductSearchResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.ProductSearchResponse =
+            new operations.ProductSearchResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
@@ -345,19 +359,17 @@ export class Product {
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.clientError = plainToInstance(
+              res.clientError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ClientError,
-                httpRes?.data as shared.ClientError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.serverError = plainToInstance(
+              res.serverError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ServerError,
-                httpRes?.data as shared.ServerError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -410,28 +422,37 @@ export class Product {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.UpdateBundlesResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.UpdateBundlesResponse =
+            new operations.UpdateBundlesResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.bundleUpdateResponse = httpRes?.data;
+              res.bundleUpdateResponse = [];
+              const resFieldDepth: number = utils.getResFieldDepth(res);
+              res.bundleUpdateResponse = utils.deserializeJSONResponse(
+                httpRes?.data,
+                shared.BundleUpdateResponse,
+                resFieldDepth
+              );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.clientError = plainToInstance(
+              res.clientError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ClientError,
-                httpRes?.data as shared.ClientError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.serverError = plainToInstance(
+              res.serverError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ServerError,
-                httpRes?.data as shared.ServerError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -484,41 +505,42 @@ export class Product {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.UpdateProductsResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.UpdateProductsResponse =
+            new operations.UpdateProductsResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.productResponse = plainToInstance(
+              res.productResponse = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ProductResponse,
-                httpRes?.data as shared.ProductResponse,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.clientError = plainToInstance(
+              res.clientError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ClientError,
-                httpRes?.data as shared.ClientError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 422:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.productModifyError = plainToInstance(
+              res.productModifyError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ProductModifyError,
-                httpRes?.data as shared.ProductModifyError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.serverError = plainToInstance(
+              res.serverError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ServerError,
-                httpRes?.data as shared.ServerError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -571,41 +593,42 @@ export class Product {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.UpsertProductsResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.UpsertProductsResponse =
+            new operations.UpsertProductsResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.productResponse = plainToInstance(
+              res.productResponse = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ProductResponse,
-                httpRes?.data as shared.ProductResponse,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.clientError = plainToInstance(
+              res.clientError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ClientError,
-                httpRes?.data as shared.ClientError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 422:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.productModifyError = plainToInstance(
+              res.productModifyError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ProductModifyError,
-                httpRes?.data as shared.ProductModifyError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.serverError = plainToInstance(
+              res.serverError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ServerError,
-                httpRes?.data as shared.ServerError,
-                { excludeExtraneousValues: true }
               );
             }
             break;

@@ -63,32 +63,34 @@ export class BulkImport {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.ItemAttributeFileSearchResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.ItemAttributeFileSearchResponse =
+            new operations.ItemAttributeFileSearchResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.filePaginationResponse = plainToInstance(
+              res.filePaginationResponse = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.FilePaginationResponse,
-                httpRes?.data as shared.FilePaginationResponse,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.clientError = plainToInstance(
+              res.clientError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ClientError,
-                httpRes?.data as shared.ClientError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.serverError = plainToInstance(
+              res.serverError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ServerError,
-                httpRes?.data as shared.ServerError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -141,32 +143,34 @@ export class BulkImport {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.ItemBundleFileSearchResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.ItemBundleFileSearchResponse =
+            new operations.ItemBundleFileSearchResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.filePaginationResponse = plainToInstance(
+              res.filePaginationResponse = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.FilePaginationResponse,
-                httpRes?.data as shared.FilePaginationResponse,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.clientError = plainToInstance(
+              res.clientError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ClientError,
-                httpRes?.data as shared.ClientError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.serverError = plainToInstance(
+              res.serverError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ServerError,
-                httpRes?.data as shared.ServerError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -219,32 +223,34 @@ export class BulkImport {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.FileSearchResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.FileSearchResponse =
+            new operations.FileSearchResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.filePaginationResponse = plainToInstance(
+              res.filePaginationResponse = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.FilePaginationResponse,
-                httpRes?.data as shared.FilePaginationResponse,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.clientError = plainToInstance(
+              res.clientError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ClientError,
-                httpRes?.data as shared.ClientError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.serverError = plainToInstance(
+              res.serverError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ServerError,
-                httpRes?.data as shared.ServerError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -286,7 +292,12 @@ export class BulkImport {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GenerateCSVfileResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.GenerateCSVfileResponse =
+            new operations.GenerateCSVfileResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/csv`)) {
@@ -298,19 +309,17 @@ export class BulkImport {
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.clientError = plainToInstance(
+              res.clientError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ClientError,
-                httpRes?.data as shared.ClientError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.serverError = plainToInstance(
+              res.serverError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ServerError,
-                httpRes?.data as shared.ServerError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -352,7 +361,12 @@ export class BulkImport {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GenerateItemAttributeCSVfileResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.GenerateItemAttributeCSVfileResponse =
+            new operations.GenerateItemAttributeCSVfileResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/csv`)) {
@@ -364,19 +378,17 @@ export class BulkImport {
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.clientError = plainToInstance(
+              res.clientError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ClientError,
-                httpRes?.data as shared.ClientError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.serverError = plainToInstance(
+              res.serverError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ServerError,
-                httpRes?.data as shared.ServerError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -429,32 +441,34 @@ export class BulkImport {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GenerateItemAttributeS3urlResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.GenerateItemAttributeS3urlResponse =
+            new operations.GenerateItemAttributeS3urlResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.getS3URLItemAttributeResponse = plainToInstance(
+              res.getS3URLItemAttributeResponse = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.GetS3URLItemAttributeResponse,
-                httpRes?.data as shared.GetS3URLItemAttributeResponse,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.clientError = plainToInstance(
+              res.clientError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ClientError,
-                httpRes?.data as shared.ClientError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.serverError = plainToInstance(
+              res.serverError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ServerError,
-                httpRes?.data as shared.ServerError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -496,7 +510,12 @@ export class BulkImport {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GenerateItemBundleCSVfileResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.GenerateItemBundleCSVfileResponse =
+            new operations.GenerateItemBundleCSVfileResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/csv`)) {
@@ -508,19 +527,17 @@ export class BulkImport {
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.clientError = plainToInstance(
+              res.clientError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ClientError,
-                httpRes?.data as shared.ClientError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.serverError = plainToInstance(
+              res.serverError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ServerError,
-                httpRes?.data as shared.ServerError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -573,32 +590,34 @@ export class BulkImport {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GenerateItemBundleS3urlResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.GenerateItemBundleS3urlResponse =
+            new operations.GenerateItemBundleS3urlResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.getS3URLBundleResponse = plainToInstance(
+              res.getS3URLBundleResponse = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.GetS3URLBundleResponse,
-                httpRes?.data as shared.GetS3URLBundleResponse,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.clientError = plainToInstance(
+              res.clientError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ClientError,
-                httpRes?.data as shared.ClientError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.serverError = plainToInstance(
+              res.serverError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ServerError,
-                httpRes?.data as shared.ServerError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -651,32 +670,34 @@ export class BulkImport {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GenerateS3urlResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.GenerateS3urlResponse =
+            new operations.GenerateS3urlResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.getS3URLResponse = plainToInstance(
+              res.getS3URLResponse = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.GetS3URLResponse,
-                httpRes?.data as shared.GetS3URLResponse,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.clientError = plainToInstance(
+              res.clientError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ClientError,
-                httpRes?.data as shared.ClientError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.serverError = plainToInstance(
+              res.serverError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ServerError,
-                httpRes?.data as shared.ServerError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -718,7 +739,12 @@ export class BulkImport {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GetFileStatusResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.GetFileStatusResponse =
+            new operations.GetFileStatusResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
@@ -727,19 +753,17 @@ export class BulkImport {
             break;
           case httpRes?.status == 400:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.clientError = plainToInstance(
+              res.clientError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ClientError,
-                httpRes?.data as shared.ClientError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           case httpRes?.status == 500:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.serverError = plainToInstance(
+              res.serverError = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ServerError,
-                httpRes?.data as shared.ServerError,
-                { excludeExtraneousValues: true }
               );
             }
             break;
