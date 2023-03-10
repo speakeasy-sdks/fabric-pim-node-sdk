@@ -76,7 +76,6 @@ export * from "./productresponse";
 export * from "./productsearch";
 export * from "./productupdate";
 export * from "./productv2";
-export * from "./security";
 export * from "./servererror";
 export * from "./skupage";
 export * from "./statusresponse";

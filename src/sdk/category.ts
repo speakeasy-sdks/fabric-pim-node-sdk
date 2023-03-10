@@ -108,6 +108,7 @@ export class Category {
   **/
   categoryModify(
     req: operations.CategoryModifyRequest,
+    security: operations.CategoryModifySecurity,
     config?: AxiosRequestConfig
   ): Promise<operations.CategoryModifyResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
@@ -126,8 +127,10 @@ export class Category {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
-    
-    const client: AxiosInstance = utils.createSecurityClient(this._defaultClient!, req.security)!;
+    if (!(security instanceof utils.SpeakeasyBase)) {
+      security = new operations.CategoryModifySecurity(security);
+    }
+    const client: AxiosInstance = utils.createSecurityClient(this._defaultClient!, security)!;
     
     const headers = {...utils.getHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     

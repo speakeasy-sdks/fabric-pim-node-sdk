@@ -96,7 +96,6 @@ src/sdk/models/shared/uploadfilestatusnoitemresponse.ts
 src/sdk/models/shared/modifycategory.ts
 src/sdk/models/shared/createcategoryrequest.ts
 src/sdk/models/shared/modifycategoryrequest.ts
-src/sdk/models/shared/security.ts
 src/sdk/models/shared/categorypage.ts
 src/sdk/models/shared/categorysingle.ts
 src/sdk/models/shared/categorychild.ts

@@ -5,8 +5,8 @@ import { Type } from "class-transformer";
 
 
 export class CategoryModifySecurity extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
-  apiKey: shared.SchemeAPIKey;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header;name=x-api-key" })
+  apiKey: string;
 }
 
 export class CategoryModifyPathParams extends SpeakeasyBase {
@@ -31,9 +31,6 @@ export class CategoryModifyRequest extends SpeakeasyBase {
 
   @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: shared.ModifyCategoryRequest;
-
-  @SpeakeasyMetadata()
-  security: CategoryModifySecurity;
 }
 
 export class CategoryModifyResponse extends SpeakeasyBase {
