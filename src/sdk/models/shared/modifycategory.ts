@@ -1,7 +1,6 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose } from "class-transformer";
 
-
 export class ModifyCategory extends SpeakeasyBase {
   @SpeakeasyMetadata()
   @Expose({ name: "attributes" })

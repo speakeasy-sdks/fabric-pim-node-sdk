@@ -3,7 +3,6 @@ import { BundleChild } from "./bundlechild";
 import { ProductAttribute } from "./productattribute";
 import { Expose, Type } from "class-transformer";
 
-
 export class GetBundleItems extends SpeakeasyBase {
   @SpeakeasyMetadata({ elemType: ProductAttribute })
   @Expose({ name: "attributes" })

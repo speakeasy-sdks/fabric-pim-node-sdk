@@ -2,8 +2,8 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Type } from "class-transformer";
 
 export enum NodeSourcesAndExclusionsRequestSourceExclusionsActionEnum {
-    Set = "SET",
-    Unset = "UNSET"
+  Set = "SET",
+  Unset = "UNSET",
 }
 
 export class NodeSourcesAndExclusionsRequestSourceExclusions extends SpeakeasyBase {
@@ -29,7 +29,9 @@ export class NodeSourcesAndExclusionsRequest extends SpeakeasyBase {
   @Expose({ name: "nodeId" })
   nodeId?: number;
 
-  @SpeakeasyMetadata({ elemType: NodeSourcesAndExclusionsRequestSourceExclusions })
+  @SpeakeasyMetadata({
+    elemType: NodeSourcesAndExclusionsRequestSourceExclusions,
+  })
   @Expose({ name: "sourceExclusions" })
   @Type(() => NodeSourcesAndExclusionsRequestSourceExclusions)
   sourceExclusions?: NodeSourcesAndExclusionsRequestSourceExclusions[];

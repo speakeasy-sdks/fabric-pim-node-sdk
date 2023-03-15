@@ -3,7 +3,6 @@ import { Attribute } from "./attribute";
 import { Breadcrumbs } from "./breadcrumbs";
 import { Expose, Type } from "class-transformer";
 
-
 export class CategoryChild extends SpeakeasyBase {
   @SpeakeasyMetadata({ elemType: Attribute })
   @Expose({ name: "attributes" })

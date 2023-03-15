@@ -3,9 +3,10 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 import { Type } from "class-transformer";
 
-
 export class GetProductAttributeQueryParams extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=itemId" })
+  @SpeakeasyMetadata({
+    data: "queryParam, style=form;explode=true;name=itemId",
+  })
   itemId?: number;
 
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sku" })
@@ -13,7 +14,9 @@ export class GetProductAttributeQueryParams extends SpeakeasyBase {
 }
 
 export class GetProductAttributeHeaders extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-site-context" })
+  @SpeakeasyMetadata({
+    data: "header, style=simple;explode=false;name=x-site-context",
+  })
   xSiteContext?: shared.XSiteContext;
 }
 

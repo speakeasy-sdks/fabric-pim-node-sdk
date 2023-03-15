@@ -2,7 +2,6 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { ProductSearch } from "./productsearch";
 import { Expose, Type } from "class-transformer";
 
-
 export class ItemProductSearchResponse extends SpeakeasyBase {
   @SpeakeasyMetadata()
   @Expose({ name: "pageSize" })

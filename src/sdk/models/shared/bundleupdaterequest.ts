@@ -2,11 +2,11 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Type } from "class-transformer";
 
 export enum BundleUpdateRequestActionEnum {
-    Update = "UPDATE"
+  Update = "UPDATE",
 }
 export enum BundleUpdateRequestBundlesActionEnum {
-    Set = "SET",
-    Unset = "UNSET"
+  Set = "SET",
+  Unset = "UNSET",
 }
 
 export class BundleUpdateRequestBundles extends SpeakeasyBase {

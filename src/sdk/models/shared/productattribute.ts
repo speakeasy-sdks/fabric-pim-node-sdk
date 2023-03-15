@@ -2,12 +2,12 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose } from "class-transformer";
 
 export enum ProductAttributeTypeEnum {
-    Text = "TEXT",
-    Boolean = "BOOLEAN",
-    Serial = "SERIAL",
-    Decimal = "DECIMAL",
-    Integer = "INTEGER",
-    Datetime = "DATETIME"
+  Text = "TEXT",
+  Boolean = "BOOLEAN",
+  Serial = "SERIAL",
+  Decimal = "DECIMAL",
+  Integer = "INTEGER",
+  Datetime = "DATETIME",
 }
 
 export class ProductAttribute extends SpeakeasyBase {

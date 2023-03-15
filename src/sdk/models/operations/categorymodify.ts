@@ -3,22 +3,29 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 import { Type } from "class-transformer";
 
-
 export class CategoryModifySecurity extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header;name=x-api-key" })
+  @SpeakeasyMetadata({
+    data: "security, scheme=true;type=apiKey;subtype=header;name=x-api-key",
+  })
   apiKey: string;
 }
 
 export class CategoryModifyPathParams extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=nodeId" })
+  @SpeakeasyMetadata({
+    data: "pathParam, style=simple;explode=false;name=nodeId",
+  })
   nodeId: number;
 }
 
 export class CategoryModifyHeaders extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-api-key" })
+  @SpeakeasyMetadata({
+    data: "header, style=simple;explode=false;name=x-api-key",
+  })
   xApiKey?: string;
 
-  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-site-context" })
+  @SpeakeasyMetadata({
+    data: "header, style=simple;explode=false;name=x-site-context",
+  })
   xSiteContext?: shared.XSiteContext;
 }
 

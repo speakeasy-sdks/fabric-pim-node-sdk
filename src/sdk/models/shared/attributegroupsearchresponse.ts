@@ -3,8 +3,8 @@ import { AttributeGroupTypeResponse } from "./attributegrouptyperesponse";
 import { Expose, Type } from "class-transformer";
 
 export enum AttributeGroupSearchResponseAttributeGroupsTypeEnum {
-    Workflow = "WORKFLOW",
-    Collection = "COLLECTION"
+  Workflow = "WORKFLOW",
+  Collection = "COLLECTION",
 }
 
 export class AttributeGroupSearchResponseAttributeGroups extends SpeakeasyBase {

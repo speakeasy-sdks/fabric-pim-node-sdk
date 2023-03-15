@@ -2,7 +2,6 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { CategorySingle } from "./categorysingle";
 import { Expose, Type } from "class-transformer";
 
-
 export class CategoryPage extends SpeakeasyBase {
   @SpeakeasyMetadata({ elemType: CategorySingle })
   @Expose({ name: "categories" })

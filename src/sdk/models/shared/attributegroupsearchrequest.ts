@@ -1,7 +1,6 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Type } from "class-transformer";
 
-
 export class AttributeGroupSearchRequestInclude extends SpeakeasyBase {
   @SpeakeasyMetadata()
   @Expose({ name: "attributes" })
@@ -25,8 +24,8 @@ export class AttributeGroupSearchRequestMatch extends SpeakeasyBase {
   target?: string;
 }
 export enum AttributeGroupSearchRequestSortDirectionEnum {
-    Asc = "ASC",
-    Desc = "DESC"
+  Asc = "ASC",
+  Desc = "DESC",
 }
 
 export class AttributeGroupSearchRequestSort extends SpeakeasyBase {

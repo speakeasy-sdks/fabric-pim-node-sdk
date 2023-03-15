@@ -2,7 +2,6 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { CategoryItemAttribute } from "./categoryitemattribute";
 import { Expose, Type } from "class-transformer";
 
-
 export class CategoryItemAttributes extends SpeakeasyBase {
   @SpeakeasyMetadata()
   @Expose({ name: "id" })

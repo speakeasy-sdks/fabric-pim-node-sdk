@@ -2,9 +2,9 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Type } from "class-transformer";
 
 export enum BulkProductAttributeRequestActionEnum {
-    Create = "CREATE",
-    Update = "UPDATE",
-    Delete = "DELETE"
+  Create = "CREATE",
+  Update = "UPDATE",
+  Delete = "DELETE",
 }
 
 export class BulkProductAttributeRequestLocales extends SpeakeasyBase {
@@ -17,42 +17,42 @@ export class BulkProductAttributeRequestLocales extends SpeakeasyBase {
   name?: string;
 }
 export enum BulkProductAttributeRequestOptionsTypeEnum {
-    Text = "TEXT",
-    Boolean = "BOOLEAN",
-    Decimal = "DECIMAL",
-    Integer = "INTEGER",
-    Datetime = "DATETIME"
+  Text = "TEXT",
+  Boolean = "BOOLEAN",
+  Decimal = "DECIMAL",
+  Integer = "INTEGER",
+  Datetime = "DATETIME",
 }
 export enum BulkProductAttributeRequestTextSubTypeEnum {
-    SmallText = "SMALL_TEXT",
-    TextArea = "TEXT_AREA",
-    Html = "HTML"
+  SmallText = "SMALL_TEXT",
+  TextArea = "TEXT_AREA",
+  Html = "HTML",
 }
 export enum BulkProductAttributeRequestTypeEnum {
-    Text = "TEXT",
-    Boolean = "BOOLEAN",
-    Serial = "SERIAL",
-    Decimal = "DECIMAL",
-    Integer = "INTEGER",
-    Datetime = "DATETIME",
-    Options = "OPTIONS"
+  Text = "TEXT",
+  Boolean = "BOOLEAN",
+  Serial = "SERIAL",
+  Decimal = "DECIMAL",
+  Integer = "INTEGER",
+  Datetime = "DATETIME",
+  Options = "OPTIONS",
 }
 export enum BulkProductAttributeRequestValidationAttributeTypesEnum {
-    Text = "TEXT",
-    Boolean = "BOOLEAN",
-    Serial = "SERIAL",
-    Decimal = "DECIMAL",
-    Integer = "INTEGER",
-    Asset = "ASSET",
-    Datetime = "DATETIME",
-    Resource = "RESOURCE",
-    DynamicLov = "DYNAMIC_LOV"
+  Text = "TEXT",
+  Boolean = "BOOLEAN",
+  Serial = "SERIAL",
+  Decimal = "DECIMAL",
+  Integer = "INTEGER",
+  Asset = "ASSET",
+  Datetime = "DATETIME",
+  Resource = "RESOURCE",
+  DynamicLov = "DYNAMIC_LOV",
 }
 
 // BulkProductAttributeRequestValidationRange
-/** 
+/**
  * Specified range of values must be between this min and/or max
-**/
+ **/
 export class BulkProductAttributeRequestValidationRange extends SpeakeasyBase {
   @SpeakeasyMetadata()
   @Expose({ name: "max" })

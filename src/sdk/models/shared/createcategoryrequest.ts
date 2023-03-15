@@ -2,8 +2,8 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose } from "class-transformer";
 
 export enum CreateCategoryRequestTypeEnum {
-    Alternate = "ALTERNATE",
-    Primary = "PRIMARY"
+  Alternate = "ALTERNATE",
+  Primary = "PRIMARY",
 }
 
 export class CreateCategoryRequest extends SpeakeasyBase {

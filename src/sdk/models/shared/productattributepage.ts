@@ -2,11 +2,10 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { ProductAttribute } from "./productattribute";
 import { Expose, Type } from "class-transformer";
 
-
 // ProductAttributePage
-/** 
+/**
  * Attribute page object
-**/
+ **/
 export class ProductAttributePage extends SpeakeasyBase {
   @SpeakeasyMetadata({ elemType: ProductAttribute })
   @Expose({ name: "attributes" })

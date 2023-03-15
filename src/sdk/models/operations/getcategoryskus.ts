@@ -3,12 +3,13 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 import { Type } from "class-transformer";
 
-
 export class GetCategorySKUsQueryParams extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id" })
   id?: string;
 
-  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nodeId" })
+  @SpeakeasyMetadata({
+    data: "queryParam, style=form;explode=true;name=nodeId",
+  })
   nodeId?: number;
 
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
@@ -19,7 +20,9 @@ export class GetCategorySKUsQueryParams extends SpeakeasyBase {
 }
 
 export class GetCategorySKUsHeaders extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-site-context" })
+  @SpeakeasyMetadata({
+    data: "header, style=simple;explode=false;name=x-site-context",
+  })
   xSiteContext?: shared.XSiteContext;
 }
 

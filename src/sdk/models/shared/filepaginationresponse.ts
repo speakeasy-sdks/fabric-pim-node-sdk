@@ -2,7 +2,6 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { FileResponse } from "./fileresponse";
 import { Expose, Type } from "class-transformer";
 
-
 export class FilePaginationResponse extends SpeakeasyBase {
   @SpeakeasyMetadata({ elemType: FileResponse })
   @Expose({ name: "files" })

@@ -2,45 +2,45 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Type } from "class-transformer";
 
 export enum BulkAttributeRequestActionEnum {
-    Create = "CREATE",
-    Update = "UPDATE",
-    Delete = "DELETE"
+  Create = "CREATE",
+  Update = "UPDATE",
+  Delete = "DELETE",
 }
 export enum BulkAttributeRequestOptionsTypeEnum {
-    Text = "TEXT",
-    Boolean = "BOOLEAN",
-    Decimal = "DECIMAL",
-    Integer = "INTEGER",
-    Datetime = "DATETIME"
+  Text = "TEXT",
+  Boolean = "BOOLEAN",
+  Decimal = "DECIMAL",
+  Integer = "INTEGER",
+  Datetime = "DATETIME",
 }
 export enum BulkAttributeRequestTextSubTypeEnum {
-    SmallText = "SMALL_TEXT",
-    TextArea = "TEXT_AREA",
-    Html = "HTML"
+  SmallText = "SMALL_TEXT",
+  TextArea = "TEXT_AREA",
+  Html = "HTML",
 }
 export enum BulkAttributeRequestTypeEnum {
-    Text = "TEXT",
-    Boolean = "BOOLEAN",
-    Serial = "SERIAL",
-    Decimal = "DECIMAL",
-    Integer = "INTEGER",
-    Datetime = "DATETIME",
-    Options = "OPTIONS"
+  Text = "TEXT",
+  Boolean = "BOOLEAN",
+  Serial = "SERIAL",
+  Decimal = "DECIMAL",
+  Integer = "INTEGER",
+  Datetime = "DATETIME",
+  Options = "OPTIONS",
 }
 export enum BulkAttributeRequestValidationAttributeTypesEnum {
-    Text = "TEXT",
-    Boolean = "BOOLEAN",
-    Serial = "SERIAL",
-    Decimal = "DECIMAL",
-    Integer = "INTEGER",
-    Asset = "ASSET",
-    Datetime = "DATETIME"
+  Text = "TEXT",
+  Boolean = "BOOLEAN",
+  Serial = "SERIAL",
+  Decimal = "DECIMAL",
+  Integer = "INTEGER",
+  Asset = "ASSET",
+  Datetime = "DATETIME",
 }
 
 // BulkAttributeRequestValidationRange
-/** 
+/**
  * Specified range of values must be between this min and/or max
-**/
+ **/
 export class BulkAttributeRequestValidationRange extends SpeakeasyBase {
   @SpeakeasyMetadata()
   @Expose({ name: "max" })

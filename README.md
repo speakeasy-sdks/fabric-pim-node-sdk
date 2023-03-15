@@ -48,7 +48,6 @@ import {
 
 import { AxiosError } from "axios";
 import { Fabric } from "@speakeasy-sdks/pim-sdk";
-
 const sdk = new Fabric();
     
 const req: ModifyAttributeGroupsRequest = {

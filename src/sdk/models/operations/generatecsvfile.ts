@@ -3,17 +3,22 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 import { Type } from "class-transformer";
 
-
 export class GenerateCSVfilePathParams extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=accountId" })
+  @SpeakeasyMetadata({
+    data: "pathParam, style=simple;explode=false;name=accountId",
+  })
   accountId: string;
 
-  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=nodeId" })
+  @SpeakeasyMetadata({
+    data: "pathParam, style=simple;explode=false;name=nodeId",
+  })
   nodeId: string;
 }
 
 export class GenerateCSVfileHeaders extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-site-context" })
+  @SpeakeasyMetadata({
+    data: "header, style=simple;explode=false;name=x-site-context",
+  })
   xSiteContext?: shared.XSiteContext;
 }
 

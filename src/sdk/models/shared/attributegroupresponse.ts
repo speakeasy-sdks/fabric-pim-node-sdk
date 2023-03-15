@@ -1,7 +1,6 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Type } from "class-transformer";
 
-
 export class AttributeGroupResponseAttributes extends SpeakeasyBase {
   @SpeakeasyMetadata()
   @Expose({ name: "_id" })
@@ -32,8 +31,8 @@ export class AttributeGroupResponseAttributes extends SpeakeasyBase {
   order?: number;
 }
 export enum AttributeGroupResponseTypeEnum {
-    Workflow = "WORKFLOW",
-    Collection = "COLLECTION"
+  Workflow = "WORKFLOW",
+  Collection = "COLLECTION",
 }
 
 export class AttributeGroupResponse extends SpeakeasyBase {

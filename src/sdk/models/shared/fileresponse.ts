@@ -3,8 +3,8 @@ import { StatusResponse } from "./statusresponse";
 import { Expose, Transform, Type } from "class-transformer";
 
 export enum FileResponseTypeEnum {
-    Import = "IMPORT",
-    Export = "EXPORT"
+  Import = "IMPORT",
+  Export = "EXPORT",
 }
 
 export class FileResponse extends SpeakeasyBase {

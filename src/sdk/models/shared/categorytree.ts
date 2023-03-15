@@ -4,8 +4,8 @@ import { CategoryChild } from "./categorychild";
 import { Expose, Type } from "class-transformer";
 
 export enum CategoryTreeHierarchyEnum {
-    Primary = "PRIMARY",
-    Alternate = "ALTERNATE"
+  Primary = "PRIMARY",
+  Alternate = "ALTERNATE",
 }
 
 export class CategoryTree extends SpeakeasyBase {

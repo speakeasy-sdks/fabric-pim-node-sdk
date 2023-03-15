@@ -2,7 +2,6 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Bundle } from "./bundle";
 import { Expose, Type } from "class-transformer";
 
-
 export class BundleProductsResponse extends SpeakeasyBase {
   @SpeakeasyMetadata()
   @Expose({ name: "pageSize" })

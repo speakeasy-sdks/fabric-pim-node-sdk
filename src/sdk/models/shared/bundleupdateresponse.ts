@@ -1,7 +1,6 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose } from "class-transformer";
 
-
 export class BundleUpdateResponse extends SpeakeasyBase {
   @SpeakeasyMetadata()
   @Expose({ name: "bundleId" })

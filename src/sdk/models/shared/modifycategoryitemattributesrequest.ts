@@ -2,8 +2,8 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Type } from "class-transformer";
 
 export enum ModifyCategoryItemAttributesRequestItemAttributesActionEnum {
-    Set = "SET",
-    Unset = "UNSET"
+  Set = "SET",
+  Unset = "UNSET",
 }
 
 export class ModifyCategoryItemAttributesRequestItemAttributes extends SpeakeasyBase {
@@ -25,7 +25,9 @@ export class ModifyCategoryItemAttributesRequest extends SpeakeasyBase {
   @Expose({ name: "id" })
   id?: string;
 
-  @SpeakeasyMetadata({ elemType: ModifyCategoryItemAttributesRequestItemAttributes })
+  @SpeakeasyMetadata({
+    elemType: ModifyCategoryItemAttributesRequestItemAttributes,
+  })
   @Expose({ name: "itemAttributes" })
   @Type(() => ModifyCategoryItemAttributesRequestItemAttributes)
   itemAttributes: ModifyCategoryItemAttributesRequestItemAttributes[];

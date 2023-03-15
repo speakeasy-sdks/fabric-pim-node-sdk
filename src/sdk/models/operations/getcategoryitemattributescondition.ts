@@ -4,15 +4,17 @@ import { AxiosResponse } from "axios";
 import { Type } from "class-transformer";
 
 export enum GetCategoryItemAttributesConditionStatusEnum {
-    Assigned = "ASSIGNED",
-    Unassigned = "UNASSIGNED"
+  Assigned = "ASSIGNED",
+  Unassigned = "UNASSIGNED",
 }
 
 export class GetCategoryItemAttributesConditionQueryParams extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id" })
   id?: string;
 
-  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nodeId" })
+  @SpeakeasyMetadata({
+    data: "queryParam, style=form;explode=true;name=nodeId",
+  })
   nodeId?: number;
 
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
@@ -21,15 +23,21 @@ export class GetCategoryItemAttributesConditionQueryParams extends SpeakeasyBase
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=size" })
   size: number;
 
-  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=status" })
+  @SpeakeasyMetadata({
+    data: "queryParam, style=form;explode=true;name=status",
+  })
   status?: GetCategoryItemAttributesConditionStatusEnum;
 }
 
 export class GetCategoryItemAttributesConditionHeaders extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-api-key" })
+  @SpeakeasyMetadata({
+    data: "header, style=simple;explode=false;name=x-api-key",
+  })
   xApiKey?: string;
 
-  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-site-context" })
+  @SpeakeasyMetadata({
+    data: "header, style=simple;explode=false;name=x-site-context",
+  })
   xSiteContext?: shared.XSiteContext;
 }
 

@@ -3,7 +3,6 @@ import { AttributeResponse } from "./attributeresponse";
 import { AttributeValidation } from "./attributevalidation";
 import { Expose, Transform, Type } from "class-transformer";
 
-
 export class AttributeMappingResponse extends SpeakeasyBase {
   @SpeakeasyMetadata()
   @Expose({ name: "attribute" })
