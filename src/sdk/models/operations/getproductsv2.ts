@@ -12,7 +12,7 @@ export enum GetProductsV2TypeEnum {
   Bundle = "BUNDLE",
 }
 
-export class GetProductsV2QueryParams extends SpeakeasyBase {
+export class GetProductsV2Request extends SpeakeasyBase {
   @SpeakeasyMetadata({
     data: "queryParam, style=form;explode=true;name=createdAfter",
   })
@@ -54,21 +54,11 @@ export class GetProductsV2QueryParams extends SpeakeasyBase {
 
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" })
   type?: GetProductsV2TypeEnum;
-}
 
-export class GetProductsV2Headers extends SpeakeasyBase {
   @SpeakeasyMetadata({
     data: "header, style=simple;explode=false;name=x-site-context",
   })
   xSiteContext?: shared.XSiteContext;
-}
-
-export class GetProductsV2Request extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  queryParams: GetProductsV2QueryParams;
-
-  @SpeakeasyMetadata()
-  headers: GetProductsV2Headers;
 }
 
 export class GetProductsV2Response extends SpeakeasyBase {

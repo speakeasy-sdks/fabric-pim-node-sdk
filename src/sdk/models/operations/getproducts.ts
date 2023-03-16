@@ -8,7 +8,7 @@ export enum GetProductsStatusEnum {
   Inactive = "INACTIVE",
 }
 
-export class GetProductsQueryParams extends SpeakeasyBase {
+export class GetProductsRequest extends SpeakeasyBase {
   @SpeakeasyMetadata({
     data: "queryParam, style=form;explode=true;name=createdAfter",
   })
@@ -47,21 +47,11 @@ export class GetProductsQueryParams extends SpeakeasyBase {
     data: "queryParam, style=form;explode=true;name=status",
   })
   status?: GetProductsStatusEnum;
-}
 
-export class GetProductsHeaders extends SpeakeasyBase {
   @SpeakeasyMetadata({
     data: "header, style=simple;explode=false;name=x-site-context",
   })
   xSiteContext?: shared.XSiteContext;
-}
-
-export class GetProductsRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  queryParams: GetProductsQueryParams;
-
-  @SpeakeasyMetadata()
-  headers: GetProductsHeaders;
 }
 
 export class GetProductsResponse extends SpeakeasyBase {

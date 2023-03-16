@@ -10,14 +10,15 @@ export class CategoryModifySecurity extends SpeakeasyBase {
   apiKey: string;
 }
 
-export class CategoryModifyPathParams extends SpeakeasyBase {
+export class CategoryModifyRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  modifyCategoryRequest?: shared.ModifyCategoryRequest;
+
   @SpeakeasyMetadata({
     data: "pathParam, style=simple;explode=false;name=nodeId",
   })
   nodeId: number;
-}
 
-export class CategoryModifyHeaders extends SpeakeasyBase {
   @SpeakeasyMetadata({
     data: "header, style=simple;explode=false;name=x-api-key",
   })
@@ -27,17 +28,6 @@ export class CategoryModifyHeaders extends SpeakeasyBase {
     data: "header, style=simple;explode=false;name=x-site-context",
   })
   xSiteContext?: shared.XSiteContext;
-}
-
-export class CategoryModifyRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  pathParams: CategoryModifyPathParams;
-
-  @SpeakeasyMetadata()
-  headers: CategoryModifyHeaders;
-
-  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
-  request?: shared.ModifyCategoryRequest;
 }
 
 export class CategoryModifyResponse extends SpeakeasyBase {

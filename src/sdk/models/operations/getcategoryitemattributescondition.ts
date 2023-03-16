@@ -8,7 +8,7 @@ export enum GetCategoryItemAttributesConditionStatusEnum {
   Unassigned = "UNASSIGNED",
 }
 
-export class GetCategoryItemAttributesConditionQueryParams extends SpeakeasyBase {
+export class GetCategoryItemAttributesConditionRequest extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id" })
   id?: string;
 
@@ -27,9 +27,7 @@ export class GetCategoryItemAttributesConditionQueryParams extends SpeakeasyBase
     data: "queryParam, style=form;explode=true;name=status",
   })
   status?: GetCategoryItemAttributesConditionStatusEnum;
-}
 
-export class GetCategoryItemAttributesConditionHeaders extends SpeakeasyBase {
   @SpeakeasyMetadata({
     data: "header, style=simple;explode=false;name=x-api-key",
   })
@@ -39,14 +37,6 @@ export class GetCategoryItemAttributesConditionHeaders extends SpeakeasyBase {
     data: "header, style=simple;explode=false;name=x-site-context",
   })
   xSiteContext?: shared.XSiteContext;
-}
-
-export class GetCategoryItemAttributesConditionRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  queryParams: GetCategoryItemAttributesConditionQueryParams;
-
-  @SpeakeasyMetadata()
-  headers: GetCategoryItemAttributesConditionHeaders;
 }
 
 export class GetCategoryItemAttributesConditionResponse extends SpeakeasyBase {

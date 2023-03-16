@@ -48,7 +48,11 @@ export class Category {
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
+        req,
+        "createCategoryRequest",
+        "json"
+      );
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
@@ -58,7 +62,7 @@ export class Category {
     const client: AxiosInstance = this._defaultClient!;
 
     const headers = {
-      ...utils.getHeadersFromRequest(req.headers),
+      ...utils.getHeadersFromRequest(req),
       ...reqBodyHeaders,
       ...config?.headers,
     };
@@ -131,13 +135,17 @@ export class Category {
     const url: string = utils.generateURL(
       baseURL,
       "/api-category/v1/category/{nodeId}",
-      req.pathParams
+      req
     );
 
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
+        req,
+        "modifyCategoryRequest",
+        "json"
+      );
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
@@ -152,7 +160,7 @@ export class Category {
     )!;
 
     const headers = {
-      ...utils.getHeadersFromRequest(req.headers),
+      ...utils.getHeadersFromRequest(req),
       ...reqBodyHeaders,
       ...config?.headers,
     };
@@ -226,11 +234,8 @@ export class Category {
 
     const client: AxiosInstance = this._defaultClient!;
 
-    const headers = {
-      ...utils.getHeadersFromRequest(req.headers),
-      ...config?.headers,
-    };
-    const queryParams: string = utils.serializeQueryParams(req.queryParams);
+    const headers = { ...utils.getHeadersFromRequest(req), ...config?.headers };
+    const queryParams: string = utils.serializeQueryParams(req);
 
     const r = client.request({
       url: url + queryParams,
@@ -300,11 +305,8 @@ export class Category {
 
     const client: AxiosInstance = this._defaultClient!;
 
-    const headers = {
-      ...utils.getHeadersFromRequest(req.headers),
-      ...config?.headers,
-    };
-    const queryParams: string = utils.serializeQueryParams(req.queryParams);
+    const headers = { ...utils.getHeadersFromRequest(req), ...config?.headers };
+    const queryParams: string = utils.serializeQueryParams(req);
 
     const r = client.request({
       url: url + queryParams,
@@ -374,11 +376,8 @@ export class Category {
 
     const client: AxiosInstance = this._defaultClient!;
 
-    const headers = {
-      ...utils.getHeadersFromRequest(req.headers),
-      ...config?.headers,
-    };
-    const queryParams: string = utils.serializeQueryParams(req.queryParams);
+    const headers = { ...utils.getHeadersFromRequest(req), ...config?.headers };
+    const queryParams: string = utils.serializeQueryParams(req);
 
     const r = client.request({
       url: url + queryParams,
@@ -448,11 +447,8 @@ export class Category {
 
     const client: AxiosInstance = this._defaultClient!;
 
-    const headers = {
-      ...utils.getHeadersFromRequest(req.headers),
-      ...config?.headers,
-    };
-    const queryParams: string = utils.serializeQueryParams(req.queryParams);
+    const headers = { ...utils.getHeadersFromRequest(req), ...config?.headers };
+    const queryParams: string = utils.serializeQueryParams(req);
 
     const r = client.request({
       url: url + queryParams,
@@ -522,11 +518,8 @@ export class Category {
 
     const client: AxiosInstance = this._defaultClient!;
 
-    const headers = {
-      ...utils.getHeadersFromRequest(req.headers),
-      ...config?.headers,
-    };
-    const queryParams: string = utils.serializeQueryParams(req.queryParams);
+    const headers = { ...utils.getHeadersFromRequest(req), ...config?.headers };
+    const queryParams: string = utils.serializeQueryParams(req);
 
     const r = client.request({
       url: url + queryParams,
@@ -597,11 +590,8 @@ export class Category {
 
     const client: AxiosInstance = this._defaultClient!;
 
-    const headers = {
-      ...utils.getHeadersFromRequest(req.headers),
-      ...config?.headers,
-    };
-    const queryParams: string = utils.serializeQueryParams(req.queryParams);
+    const headers = { ...utils.getHeadersFromRequest(req), ...config?.headers };
+    const queryParams: string = utils.serializeQueryParams(req);
 
     const r = client.request({
       url: url + queryParams,
@@ -672,11 +662,8 @@ export class Category {
 
     const client: AxiosInstance = this._defaultClient!;
 
-    const headers = {
-      ...utils.getHeadersFromRequest(req.headers),
-      ...config?.headers,
-    };
-    const queryParams: string = utils.serializeQueryParams(req.queryParams);
+    const headers = { ...utils.getHeadersFromRequest(req), ...config?.headers };
+    const queryParams: string = utils.serializeQueryParams(req);
 
     const r = client.request({
       url: url + queryParams,
@@ -746,11 +733,8 @@ export class Category {
 
     const client: AxiosInstance = this._defaultClient!;
 
-    const headers = {
-      ...utils.getHeadersFromRequest(req.headers),
-      ...config?.headers,
-    };
-    const queryParams: string = utils.serializeQueryParams(req.queryParams);
+    const headers = { ...utils.getHeadersFromRequest(req), ...config?.headers };
+    const queryParams: string = utils.serializeQueryParams(req);
 
     const r = client.request({
       url: url + queryParams,
@@ -821,7 +805,11 @@ export class Category {
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
+        req,
+        "nodeSourcesAndExclusionsRequest",
+        "json"
+      );
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
@@ -831,7 +819,7 @@ export class Category {
     const client: AxiosInstance = this._defaultClient!;
 
     const headers = {
-      ...utils.getHeadersFromRequest(req.headers),
+      ...utils.getHeadersFromRequest(req),
       ...reqBodyHeaders,
       ...config?.headers,
     };
@@ -906,7 +894,11 @@ export class Category {
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
+        req,
+        "modifyNodeSourcesRequest",
+        "json"
+      );
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
@@ -916,7 +908,7 @@ export class Category {
     const client: AxiosInstance = this._defaultClient!;
 
     const headers = {
-      ...utils.getHeadersFromRequest(req.headers),
+      ...utils.getHeadersFromRequest(req),
       ...reqBodyHeaders,
       ...config?.headers,
     };
@@ -991,7 +983,11 @@ export class Category {
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
+        req,
+        "modifyCategoryAttributesRequest",
+        "json"
+      );
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
@@ -1001,7 +997,7 @@ export class Category {
     const client: AxiosInstance = this._defaultClient!;
 
     const headers = {
-      ...utils.getHeadersFromRequest(req.headers),
+      ...utils.getHeadersFromRequest(req),
       ...reqBodyHeaders,
       ...config?.headers,
     };
@@ -1077,7 +1073,11 @@ export class Category {
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
+        req,
+        "categoryItemAttributeConditionsRequest",
+        "json"
+      );
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
@@ -1087,7 +1087,7 @@ export class Category {
     const client: AxiosInstance = this._defaultClient!;
 
     const headers = {
-      ...utils.getHeadersFromRequest(req.headers),
+      ...utils.getHeadersFromRequest(req),
       ...reqBodyHeaders,
       ...config?.headers,
     };
@@ -1162,7 +1162,11 @@ export class Category {
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
+        req,
+        "modifyCategoryItemAttributesRequest",
+        "json"
+      );
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
@@ -1172,7 +1176,7 @@ export class Category {
     const client: AxiosInstance = this._defaultClient!;
 
     const headers = {
-      ...utils.getHeadersFromRequest(req.headers),
+      ...utils.getHeadersFromRequest(req),
       ...reqBodyHeaders,
       ...config?.headers,
     };
@@ -1246,11 +1250,8 @@ export class Category {
 
     const client: AxiosInstance = this._defaultClient!;
 
-    const headers = {
-      ...utils.getHeadersFromRequest(req.headers),
-      ...config?.headers,
-    };
-    const queryParams: string = utils.serializeQueryParams(req.queryParams);
+    const headers = { ...utils.getHeadersFromRequest(req), ...config?.headers };
+    const queryParams: string = utils.serializeQueryParams(req);
 
     const r = client.request({
       url: url + queryParams,

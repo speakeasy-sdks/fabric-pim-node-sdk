@@ -8,7 +8,7 @@ export enum GetCategoriesNodeSourceExclusionsStatusEnum {
   Unassigned = "UNASSIGNED",
 }
 
-export class GetCategoriesNodeSourceExclusionsQueryParams extends SpeakeasyBase {
+export class GetCategoriesNodeSourceExclusionsRequest extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id" })
   id?: string;
 
@@ -27,21 +27,11 @@ export class GetCategoriesNodeSourceExclusionsQueryParams extends SpeakeasyBase 
     data: "queryParam, style=form;explode=true;name=status",
   })
   status?: GetCategoriesNodeSourceExclusionsStatusEnum;
-}
 
-export class GetCategoriesNodeSourceExclusionsHeaders extends SpeakeasyBase {
   @SpeakeasyMetadata({
     data: "header, style=simple;explode=false;name=x-site-context",
   })
   xSiteContext?: shared.XSiteContext;
-}
-
-export class GetCategoriesNodeSourceExclusionsRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  queryParams: GetCategoriesNodeSourceExclusionsQueryParams;
-
-  @SpeakeasyMetadata()
-  headers: GetCategoriesNodeSourceExclusionsHeaders;
 }
 
 export class GetCategoriesNodeSourceExclusionsResponse extends SpeakeasyBase {

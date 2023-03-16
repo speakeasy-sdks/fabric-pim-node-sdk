@@ -3,7 +3,10 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 import { Type } from "class-transformer";
 
-export class PostCategoryAttributeByIDHeaders extends SpeakeasyBase {
+export class PostCategoryAttributeByIDRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  modifyCategoryAttributesRequest?: shared.ModifyCategoryAttributesRequest;
+
   @SpeakeasyMetadata({
     data: "header, style=simple;explode=false;name=x-api-key",
   })
@@ -13,14 +16,6 @@ export class PostCategoryAttributeByIDHeaders extends SpeakeasyBase {
     data: "header, style=simple;explode=false;name=x-site-context",
   })
   xSiteContext?: shared.XSiteContext;
-}
-
-export class PostCategoryAttributeByIDRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  headers: PostCategoryAttributeByIDHeaders;
-
-  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
-  request?: shared.ModifyCategoryAttributesRequest;
 }
 
 export class PostCategoryAttributeByIDResponse extends SpeakeasyBase {

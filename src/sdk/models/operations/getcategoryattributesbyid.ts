@@ -8,7 +8,7 @@ export enum GetCategoryAttributesByIDStatusEnum {
   Unassigned = "UNASSIGNED",
 }
 
-export class GetCategoryAttributesByIDQueryParams extends SpeakeasyBase {
+export class GetCategoryAttributesByIDRequest extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id" })
   id?: string;
 
@@ -27,21 +27,11 @@ export class GetCategoryAttributesByIDQueryParams extends SpeakeasyBase {
     data: "queryParam, style=form;explode=true;name=status",
   })
   status?: GetCategoryAttributesByIDStatusEnum;
-}
 
-export class GetCategoryAttributesByIDHeaders extends SpeakeasyBase {
   @SpeakeasyMetadata({
     data: "header, style=simple;explode=false;name=x-site-context",
   })
   xSiteContext?: shared.XSiteContext;
-}
-
-export class GetCategoryAttributesByIDRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  queryParams: GetCategoryAttributesByIDQueryParams;
-
-  @SpeakeasyMetadata()
-  headers: GetCategoryAttributesByIDHeaders;
 }
 
 export class GetCategoryAttributesByIDResponse extends SpeakeasyBase {

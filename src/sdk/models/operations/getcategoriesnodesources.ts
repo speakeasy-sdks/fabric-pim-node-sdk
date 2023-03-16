@@ -8,7 +8,7 @@ export enum GetCategoriesNodeSourcesStatusEnum {
   Unassigned = "UNASSIGNED",
 }
 
-export class GetCategoriesNodeSourcesQueryParams extends SpeakeasyBase {
+export class GetCategoriesNodeSourcesRequest extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id" })
   id?: string;
 
@@ -27,21 +27,11 @@ export class GetCategoriesNodeSourcesQueryParams extends SpeakeasyBase {
     data: "queryParam, style=form;explode=true;name=status",
   })
   status?: GetCategoriesNodeSourcesStatusEnum;
-}
 
-export class GetCategoriesNodeSourcesHeaders extends SpeakeasyBase {
   @SpeakeasyMetadata({
     data: "header, style=simple;explode=false;name=x-site-context",
   })
   xSiteContext?: shared.XSiteContext;
-}
-
-export class GetCategoriesNodeSourcesRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  queryParams: GetCategoriesNodeSourcesQueryParams;
-
-  @SpeakeasyMetadata()
-  headers: GetCategoriesNodeSourcesHeaders;
 }
 
 export class GetCategoriesNodeSourcesResponse extends SpeakeasyBase {

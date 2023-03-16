@@ -48,7 +48,11 @@ export class Product {
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
+        req,
+        "requestBody",
+        "json"
+      );
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
@@ -58,7 +62,7 @@ export class Product {
     const client: AxiosInstance = this._defaultClient!;
 
     const headers = {
-      ...utils.getHeadersFromRequest(req.headers),
+      ...utils.getHeadersFromRequest(req),
       ...reqBodyHeaders,
       ...config?.headers,
     };
@@ -140,11 +144,8 @@ export class Product {
 
     const client: AxiosInstance = this._defaultClient!;
 
-    const headers = {
-      ...utils.getHeadersFromRequest(req.headers),
-      ...config?.headers,
-    };
-    const queryParams: string = utils.serializeQueryParams(req.queryParams);
+    const headers = { ...utils.getHeadersFromRequest(req), ...config?.headers };
+    const queryParams: string = utils.serializeQueryParams(req);
 
     const r = client.request({
       url: url + queryParams,
@@ -213,11 +214,8 @@ export class Product {
 
     const client: AxiosInstance = this._defaultClient!;
 
-    const headers = {
-      ...utils.getHeadersFromRequest(req.headers),
-      ...config?.headers,
-    };
-    const queryParams: string = utils.serializeQueryParams(req.queryParams);
+    const headers = { ...utils.getHeadersFromRequest(req), ...config?.headers };
+    const queryParams: string = utils.serializeQueryParams(req);
 
     const r = client.request({
       url: url + queryParams,
@@ -283,11 +281,8 @@ export class Product {
 
     const client: AxiosInstance = this._defaultClient!;
 
-    const headers = {
-      ...utils.getHeadersFromRequest(req.headers),
-      ...config?.headers,
-    };
-    const queryParams: string = utils.serializeQueryParams(req.queryParams);
+    const headers = { ...utils.getHeadersFromRequest(req), ...config?.headers };
+    const queryParams: string = utils.serializeQueryParams(req);
 
     const r = client.request({
       url: url + queryParams,
@@ -354,11 +349,8 @@ export class Product {
 
     const client: AxiosInstance = this._defaultClient!;
 
-    const headers = {
-      ...utils.getHeadersFromRequest(req.headers),
-      ...config?.headers,
-    };
-    const queryParams: string = utils.serializeQueryParams(req.queryParams);
+    const headers = { ...utils.getHeadersFromRequest(req), ...config?.headers };
+    const queryParams: string = utils.serializeQueryParams(req);
 
     const r = client.request({
       url: url + queryParams,
@@ -426,7 +418,11 @@ export class Product {
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
+        req,
+        "bundleUpdateRequest",
+        "json"
+      );
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
@@ -436,7 +432,7 @@ export class Product {
     const client: AxiosInstance = this._defaultClient!;
 
     const headers = {
-      ...utils.getHeadersFromRequest(req.headers),
+      ...utils.getHeadersFromRequest(req),
       ...reqBodyHeaders,
       ...config?.headers,
     };
@@ -514,7 +510,11 @@ export class Product {
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
+        req,
+        "productUpdate",
+        "json"
+      );
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
@@ -524,7 +524,7 @@ export class Product {
     const client: AxiosInstance = this._defaultClient!;
 
     const headers = {
-      ...utils.getHeadersFromRequest(req.headers),
+      ...utils.getHeadersFromRequest(req),
       ...reqBodyHeaders,
       ...config?.headers,
     };
@@ -607,7 +607,11 @@ export class Product {
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
+        req,
+        "requestBody",
+        "json"
+      );
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
@@ -617,7 +621,7 @@ export class Product {
     const client: AxiosInstance = this._defaultClient!;
 
     const headers = {
-      ...utils.getHeadersFromRequest(req.headers),
+      ...utils.getHeadersFromRequest(req),
       ...reqBodyHeaders,
       ...config?.headers,
     };

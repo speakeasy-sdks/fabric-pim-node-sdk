@@ -14,7 +14,7 @@ export enum SearchCategoriesTypeEnum {
   All = "ALL",
 }
 
-export class SearchCategoriesQueryParams extends SpeakeasyBase {
+export class SearchCategoriesRequest extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=ids" })
   ids?: string[];
 
@@ -41,21 +41,11 @@ export class SearchCategoriesQueryParams extends SpeakeasyBase {
 
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" })
   type?: SearchCategoriesTypeEnum;
-}
 
-export class SearchCategoriesHeaders extends SpeakeasyBase {
   @SpeakeasyMetadata({
     data: "header, style=simple;explode=false;name=x-site-context",
   })
   xSiteContext?: shared.XSiteContext;
-}
-
-export class SearchCategoriesRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  queryParams: SearchCategoriesQueryParams;
-
-  @SpeakeasyMetadata()
-  headers: SearchCategoriesHeaders;
 }
 
 export class SearchCategoriesResponse extends SpeakeasyBase {

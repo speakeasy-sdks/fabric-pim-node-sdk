@@ -62,9 +62,9 @@ src/sdk/models/operations/index.ts
 src/sdk/models/shared/servererror.ts
 src/sdk/models/shared/clienterror.ts
 src/sdk/models/shared/attributegroupresponse.ts
+src/sdk/models/shared/xsitecontext.ts
 src/sdk/models/shared/attributegrouprequest.ts
 src/sdk/models/shared/attributegrouptyperequest.ts
-src/sdk/models/shared/xsitecontext.ts
 src/sdk/models/shared/attributemappingresponse.ts
 src/sdk/models/shared/attributevalidation.ts
 src/sdk/models/shared/attributeresponse.ts

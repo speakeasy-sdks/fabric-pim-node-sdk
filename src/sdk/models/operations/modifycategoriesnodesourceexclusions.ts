@@ -3,7 +3,10 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 import { Type } from "class-transformer";
 
-export class ModifyCategoriesNodeSourceExclusionsHeaders extends SpeakeasyBase {
+export class ModifyCategoriesNodeSourceExclusionsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  nodeSourcesAndExclusionsRequest?: shared.NodeSourcesAndExclusionsRequest;
+
   @SpeakeasyMetadata({
     data: "header, style=simple;explode=false;name=x-api-key",
   })
@@ -13,14 +16,6 @@ export class ModifyCategoriesNodeSourceExclusionsHeaders extends SpeakeasyBase {
     data: "header, style=simple;explode=false;name=x-site-context",
   })
   xSiteContext?: shared.XSiteContext;
-}
-
-export class ModifyCategoriesNodeSourceExclusionsRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  headers: ModifyCategoriesNodeSourceExclusionsHeaders;
-
-  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
-  request?: shared.NodeSourcesAndExclusionsRequest;
 }
 
 export class ModifyCategoriesNodeSourceExclusionsResponse extends SpeakeasyBase {

@@ -3,16 +3,11 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 import { Type } from "class-transformer";
 
-export class GenerateItemAttributeCSVfileHeaders extends SpeakeasyBase {
+export class GenerateItemAttributeCSVfileRequest extends SpeakeasyBase {
   @SpeakeasyMetadata({
     data: "header, style=simple;explode=false;name=x-site-context",
   })
   xSiteContext?: shared.XSiteContext;
-}
-
-export class GenerateItemAttributeCSVfileRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  headers: GenerateItemAttributeCSVfileHeaders;
 }
 
 export class GenerateItemAttributeCSVfileResponse extends SpeakeasyBase {

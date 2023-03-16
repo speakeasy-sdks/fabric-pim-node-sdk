@@ -9,7 +9,7 @@ export enum ProductSearchTypeEnum {
   All = "ALL",
 }
 
-export class ProductSearchQueryParams extends SpeakeasyBase {
+export class ProductSearchRequest extends SpeakeasyBase {
   @SpeakeasyMetadata({
     data: "queryParam, style=form;explode=true;name=allAttributes",
   })
@@ -46,21 +46,11 @@ export class ProductSearchQueryParams extends SpeakeasyBase {
 
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" })
   type?: ProductSearchTypeEnum;
-}
 
-export class ProductSearchHeaders extends SpeakeasyBase {
   @SpeakeasyMetadata({
     data: "header, style=simple;explode=false;name=x-site-context",
   })
   xSiteContext?: shared.XSiteContext;
-}
-
-export class ProductSearchRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  queryParams: ProductSearchQueryParams;
-
-  @SpeakeasyMetadata()
-  headers: ProductSearchHeaders;
 }
 
 export class ProductSearchResponse extends SpeakeasyBase {

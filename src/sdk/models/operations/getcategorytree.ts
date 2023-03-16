@@ -3,7 +3,7 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 import { Type } from "class-transformer";
 
-export class GetCategoryTreeQueryParams extends SpeakeasyBase {
+export class GetCategoryTreeRequest extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=depth" })
   depth?: number;
 
@@ -14,21 +14,11 @@ export class GetCategoryTreeQueryParams extends SpeakeasyBase {
     data: "queryParam, style=form;explode=true;name=nodeId",
   })
   nodeId?: number;
-}
 
-export class GetCategoryTreeHeaders extends SpeakeasyBase {
   @SpeakeasyMetadata({
     data: "header, style=simple;explode=false;name=x-site-context",
   })
   xSiteContext?: shared.XSiteContext;
-}
-
-export class GetCategoryTreeRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  queryParams: GetCategoryTreeQueryParams;
-
-  @SpeakeasyMetadata()
-  headers: GetCategoryTreeHeaders;
 }
 
 export class GetCategoryTreeResponse extends SpeakeasyBase {

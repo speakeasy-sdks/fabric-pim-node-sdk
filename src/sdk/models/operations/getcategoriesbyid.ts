@@ -14,7 +14,7 @@ export enum GetCategoriesByIdTypeEnum {
   All = "ALL",
 }
 
-export class GetCategoriesByIdQueryParams extends SpeakeasyBase {
+export class GetCategoriesByIdRequest extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=ids" })
   ids?: string[];
 
@@ -41,21 +41,11 @@ export class GetCategoriesByIdQueryParams extends SpeakeasyBase {
 
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" })
   type?: GetCategoriesByIdTypeEnum;
-}
 
-export class GetCategoriesByIdHeaders extends SpeakeasyBase {
   @SpeakeasyMetadata({
     data: "header, style=simple;explode=false;name=x-site-context",
   })
   xSiteContext?: shared.XSiteContext;
-}
-
-export class GetCategoriesByIdRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  queryParams: GetCategoriesByIdQueryParams;
-
-  @SpeakeasyMetadata()
-  headers: GetCategoriesByIdHeaders;
 }
 
 export class GetCategoriesByIdResponse extends SpeakeasyBase {

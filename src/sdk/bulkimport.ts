@@ -49,7 +49,11 @@ export class BulkImport {
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
+        req,
+        "fileSearchRequest",
+        "json"
+      );
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
@@ -59,7 +63,7 @@ export class BulkImport {
     const client: AxiosInstance = this._defaultClient!;
 
     const headers = {
-      ...utils.getHeadersFromRequest(req.headers),
+      ...utils.getHeadersFromRequest(req),
       ...reqBodyHeaders,
       ...config?.headers,
     };
@@ -134,7 +138,11 @@ export class BulkImport {
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
+        req,
+        "fileSearchRequest",
+        "json"
+      );
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
@@ -144,7 +152,7 @@ export class BulkImport {
     const client: AxiosInstance = this._defaultClient!;
 
     const headers = {
-      ...utils.getHeadersFromRequest(req.headers),
+      ...utils.getHeadersFromRequest(req),
       ...reqBodyHeaders,
       ...config?.headers,
     };
@@ -219,7 +227,11 @@ export class BulkImport {
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
+        req,
+        "fileSearchRequest",
+        "json"
+      );
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
@@ -229,7 +241,7 @@ export class BulkImport {
     const client: AxiosInstance = this._defaultClient!;
 
     const headers = {
-      ...utils.getHeadersFromRequest(req.headers),
+      ...utils.getHeadersFromRequest(req),
       ...reqBodyHeaders,
       ...config?.headers,
     };
@@ -301,15 +313,12 @@ export class BulkImport {
     const url: string = utils.generateURL(
       baseURL,
       "/api-product/v1/product/bulk/template/{accountId}/{nodeId}",
-      req.pathParams
+      req
     );
 
     const client: AxiosInstance = this._defaultClient!;
 
-    const headers = {
-      ...utils.getHeadersFromRequest(req.headers),
-      ...config?.headers,
-    };
+    const headers = { ...utils.getHeadersFromRequest(req), ...config?.headers };
 
     const r = client.request({
       url: url,
@@ -381,10 +390,7 @@ export class BulkImport {
 
     const client: AxiosInstance = this._defaultClient!;
 
-    const headers = {
-      ...utils.getHeadersFromRequest(req.headers),
-      ...config?.headers,
-    };
+    const headers = { ...utils.getHeadersFromRequest(req), ...config?.headers };
 
     const r = client.request({
       url: url,
@@ -456,7 +462,11 @@ export class BulkImport {
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
+        req,
+        "getS3URLItemAttributeRequest",
+        "json"
+      );
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
@@ -466,7 +476,7 @@ export class BulkImport {
     const client: AxiosInstance = this._defaultClient!;
 
     const headers = {
-      ...utils.getHeadersFromRequest(req.headers),
+      ...utils.getHeadersFromRequest(req),
       ...reqBodyHeaders,
       ...config?.headers,
     };
@@ -538,15 +548,12 @@ export class BulkImport {
     const url: string = utils.generateURL(
       baseURL,
       "/api-product/v1/product/bulk/template/bundle/{accountId}/{nodeId}",
-      req.pathParams
+      req
     );
 
     const client: AxiosInstance = this._defaultClient!;
 
-    const headers = {
-      ...utils.getHeadersFromRequest(req.headers),
-      ...config?.headers,
-    };
+    const headers = { ...utils.getHeadersFromRequest(req), ...config?.headers };
 
     const r = client.request({
       url: url,
@@ -618,7 +625,11 @@ export class BulkImport {
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
+        req,
+        "getS3URLBundleRequest",
+        "json"
+      );
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
@@ -628,7 +639,7 @@ export class BulkImport {
     const client: AxiosInstance = this._defaultClient!;
 
     const headers = {
-      ...utils.getHeadersFromRequest(req.headers),
+      ...utils.getHeadersFromRequest(req),
       ...reqBodyHeaders,
       ...config?.headers,
     };
@@ -703,7 +714,11 @@ export class BulkImport {
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
+        req,
+        "getS3URLRequest",
+        "json"
+      );
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
@@ -713,7 +728,7 @@ export class BulkImport {
     const client: AxiosInstance = this._defaultClient!;
 
     const headers = {
-      ...utils.getHeadersFromRequest(req.headers),
+      ...utils.getHeadersFromRequest(req),
       ...reqBodyHeaders,
       ...config?.headers,
     };
@@ -785,15 +800,12 @@ export class BulkImport {
     const url: string = utils.generateURL(
       baseURL,
       "/api-product/v1/product/bulk/file/{fileId}/status",
-      req.pathParams
+      req
     );
 
     const client: AxiosInstance = this._defaultClient!;
 
-    const headers = {
-      ...utils.getHeadersFromRequest(req.headers),
-      ...config?.headers,
-    };
+    const headers = { ...utils.getHeadersFromRequest(req), ...config?.headers };
 
     const r = client.request({
       url: url,
