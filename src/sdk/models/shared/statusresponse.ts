@@ -2,16 +2,16 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Transform } from "class-transformer";
 
 export enum StatusResponseSourceEnum {
-    Pim = "PIM",
-    Wam = "WAM"
+  Pim = "PIM",
+  Wam = "WAM",
 }
 export enum StatusResponseTypeEnum {
-    Attribute = "ATTRIBUTE",
-    AttributeValue = "ATTRIBUTE_VALUE",
-    Item = "ITEM",
-    Bundle = "BUNDLE",
-    Node = "NODE",
-    Hierarchy = "HIERARCHY"
+  Attribute = "ATTRIBUTE",
+  AttributeValue = "ATTRIBUTE_VALUE",
+  Item = "ITEM",
+  Bundle = "BUNDLE",
+  Node = "NODE",
+  Hierarchy = "HIERARCHY",
 }
 
 export class StatusResponse extends SpeakeasyBase {

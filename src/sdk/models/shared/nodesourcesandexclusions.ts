@@ -1,7 +1,6 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Type } from "class-transformer";
 
-
 export class NodeSourcesAndExclusionsSourceExclusions extends SpeakeasyBase {
   @SpeakeasyMetadata()
   @Expose({ name: "breadcrumbString" })

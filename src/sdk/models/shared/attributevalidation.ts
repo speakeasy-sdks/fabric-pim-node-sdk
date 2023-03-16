@@ -2,19 +2,19 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Type } from "class-transformer";
 
 export enum AttributeValidationAttributeTypesEnum {
-    Text = "TEXT",
-    Boolean = "BOOLEAN",
-    Serial = "SERIAL",
-    Decimal = "DECIMAL",
-    Integer = "INTEGER",
-    Asset = "ASSET",
-    Datetime = "DATETIME"
+  Text = "TEXT",
+  Boolean = "BOOLEAN",
+  Serial = "SERIAL",
+  Decimal = "DECIMAL",
+  Integer = "INTEGER",
+  Asset = "ASSET",
+  Datetime = "DATETIME",
 }
 
 // AttributeValidationRange
-/** 
+/**
  * Specified range of values must be between this min and/or max
-**/
+ **/
 export class AttributeValidationRange extends SpeakeasyBase {
   @SpeakeasyMetadata()
   @Expose({ name: "max" })

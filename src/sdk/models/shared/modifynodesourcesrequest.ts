@@ -2,8 +2,8 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Type } from "class-transformer";
 
 export enum ModifyNodeSourcesRequestSourcesActionEnum {
-    Set = "SET",
-    Unset = "UNSET"
+  Set = "SET",
+  Unset = "UNSET",
 }
 
 export class ModifyNodeSourcesRequestSources extends SpeakeasyBase {

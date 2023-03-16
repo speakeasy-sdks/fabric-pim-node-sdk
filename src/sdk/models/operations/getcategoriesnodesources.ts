@@ -4,15 +4,17 @@ import { AxiosResponse } from "axios";
 import { Type } from "class-transformer";
 
 export enum GetCategoriesNodeSourcesStatusEnum {
-    Assigned = "ASSIGNED",
-    Unassigned = "UNASSIGNED"
+  Assigned = "ASSIGNED",
+  Unassigned = "UNASSIGNED",
 }
 
-export class GetCategoriesNodeSourcesQueryParams extends SpeakeasyBase {
+export class GetCategoriesNodeSourcesRequest extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id" })
   id?: string;
 
-  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nodeId" })
+  @SpeakeasyMetadata({
+    data: "queryParam, style=form;explode=true;name=nodeId",
+  })
   nodeId?: number;
 
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
@@ -21,21 +23,15 @@ export class GetCategoriesNodeSourcesQueryParams extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=size" })
   size: number;
 
-  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=status" })
+  @SpeakeasyMetadata({
+    data: "queryParam, style=form;explode=true;name=status",
+  })
   status?: GetCategoriesNodeSourcesStatusEnum;
-}
 
-export class GetCategoriesNodeSourcesHeaders extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-site-context" })
+  @SpeakeasyMetadata({
+    data: "header, style=simple;explode=false;name=x-site-context",
+  })
   xSiteContext?: shared.XSiteContext;
-}
-
-export class GetCategoriesNodeSourcesRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  queryParams: GetCategoriesNodeSourcesQueryParams;
-
-  @SpeakeasyMetadata()
-  headers: GetCategoriesNodeSourcesHeaders;
 }
 
 export class GetCategoriesNodeSourcesResponse extends SpeakeasyBase {

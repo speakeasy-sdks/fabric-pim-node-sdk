@@ -3,7 +3,7 @@ import { ProductResponse } from "./productresponse";
 import { Expose, Type } from "class-transformer";
 
 export enum ProductModifyErrorCodeEnum {
-    StatusError = "STATUS_ERROR"
+  StatusError = "STATUS_ERROR",
 }
 
 export class ProductModifyErrorMessage extends SpeakeasyBase {

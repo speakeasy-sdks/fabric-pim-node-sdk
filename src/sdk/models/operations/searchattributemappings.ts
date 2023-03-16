@@ -3,18 +3,14 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 import { Type } from "class-transformer";
 
-
-export class SearchAttributeMappingsHeaders extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-site-context" })
-  xSiteContext?: shared.XSiteContext;
-}
-
 export class SearchAttributeMappingsRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  headers: SearchAttributeMappingsHeaders;
-
   @SpeakeasyMetadata({ data: "request, media_type=application/json" })
-  request?: shared.AttributeMappingSearch;
+  attributeMappingSearch?: shared.AttributeMappingSearch;
+
+  @SpeakeasyMetadata({
+    data: "header, style=simple;explode=false;name=x-site-context",
+  })
+  xSiteContext?: shared.XSiteContext;
 }
 
 export class SearchAttributeMappingsResponse extends SpeakeasyBase {

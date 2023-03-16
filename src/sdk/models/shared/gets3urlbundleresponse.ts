@@ -1,7 +1,6 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose } from "class-transformer";
 
-
 export class GetS3URLBundleResponse extends SpeakeasyBase {
   @SpeakeasyMetadata()
   @Expose({ name: "fileId" })

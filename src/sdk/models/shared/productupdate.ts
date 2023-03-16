@@ -2,7 +2,6 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { InheritItemAttributesUpdate } from "./inherititemattributesupdate";
 import { Expose, Type } from "class-transformer";
 
-
 export class ProductUpdate extends SpeakeasyBase {
   @SpeakeasyMetadata()
   @Expose({ name: "action" })

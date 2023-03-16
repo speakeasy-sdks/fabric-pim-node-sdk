@@ -3,7 +3,6 @@ import { AttributeMappingMatch } from "./attributemappingmatch";
 import { AttributeMappingSort } from "./attributemappingsort";
 import { Expose, Type } from "class-transformer";
 
-
 export class AttributeMappingSearchInclude extends SpeakeasyBase {
   @SpeakeasyMetadata()
   @Expose({ name: "attribute" })

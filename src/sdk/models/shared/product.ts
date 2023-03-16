@@ -4,7 +4,6 @@ import { ProductCategory } from "./productcategory";
 import { ProductChild } from "./productchild";
 import { Expose, Type } from "class-transformer";
 
-
 export class Product extends SpeakeasyBase {
   @SpeakeasyMetadata({ elemType: ProductAttribute })
   @Expose({ name: "attributes" })

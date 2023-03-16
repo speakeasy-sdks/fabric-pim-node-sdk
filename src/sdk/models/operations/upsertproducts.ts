@@ -3,18 +3,14 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 import { Type } from "class-transformer";
 
-
-export class UpsertProductsHeaders extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-site-context" })
-  xSiteContext?: shared.XSiteContext;
-}
-
 export class UpsertProductsRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  headers: UpsertProductsHeaders;
-
   @SpeakeasyMetadata({ data: "request, media_type=application/json" })
-  request?: any[];
+  requestBody?: any[];
+
+  @SpeakeasyMetadata({
+    data: "header, style=simple;explode=false;name=x-site-context",
+  })
+  xSiteContext?: shared.XSiteContext;
 }
 
 export class UpsertProductsResponse extends SpeakeasyBase {

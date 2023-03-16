@@ -4,7 +4,6 @@ import { FileResponse } from "./fileresponse";
 import { StatusResponse } from "./statusresponse";
 import { Expose, Transform, Type } from "class-transformer";
 
-
 export class AttributeResponseLocales extends SpeakeasyBase {
   @SpeakeasyMetadata()
   @Expose({ name: "locale" })
@@ -15,16 +14,16 @@ export class AttributeResponseLocales extends SpeakeasyBase {
   name?: string;
 }
 export enum AttributeResponseTargetEnum {
-    Node = "NODE",
-    Item = "ITEM"
+  Node = "NODE",
+  Item = "ITEM",
 }
 export enum AttributeResponseTypeEnum {
-    Text = "TEXT",
-    Boolean = "BOOLEAN",
-    Serial = "SERIAL",
-    Decimal = "DECIMAL",
-    Integer = "INTEGER",
-    Datetime = "DATETIME"
+  Text = "TEXT",
+  Boolean = "BOOLEAN",
+  Serial = "SERIAL",
+  Decimal = "DECIMAL",
+  Integer = "INTEGER",
+  Datetime = "DATETIME",
 }
 
 export class AttributeResponse extends SpeakeasyBase {

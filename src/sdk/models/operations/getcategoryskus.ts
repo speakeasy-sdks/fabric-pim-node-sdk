@@ -3,12 +3,13 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 import { Type } from "class-transformer";
 
-
-export class GetCategorySKUsQueryParams extends SpeakeasyBase {
+export class GetCategorySKUsRequest extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id" })
   id?: string;
 
-  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nodeId" })
+  @SpeakeasyMetadata({
+    data: "queryParam, style=form;explode=true;name=nodeId",
+  })
   nodeId?: number;
 
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
@@ -16,19 +17,11 @@ export class GetCategorySKUsQueryParams extends SpeakeasyBase {
 
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=size" })
   size?: number;
-}
 
-export class GetCategorySKUsHeaders extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-site-context" })
+  @SpeakeasyMetadata({
+    data: "header, style=simple;explode=false;name=x-site-context",
+  })
   xSiteContext?: shared.XSiteContext;
-}
-
-export class GetCategorySKUsRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  queryParams: GetCategorySKUsQueryParams;
-
-  @SpeakeasyMetadata()
-  headers: GetCategorySKUsHeaders;
 }
 
 export class GetCategorySKUsResponse extends SpeakeasyBase {

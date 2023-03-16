@@ -1,11 +1,10 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose } from "class-transformer";
 
-
 // AttributeMappingMatch
-/** 
+/**
  * Specification for matching attribute mapping.
-**/
+ **/
 export class AttributeMappingMatch extends SpeakeasyBase {
   @SpeakeasyMetadata()
   @Expose({ name: "attributeId" })

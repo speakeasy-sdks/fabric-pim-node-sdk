@@ -4,25 +4,35 @@ import { AxiosResponse } from "axios";
 import { Type } from "class-transformer";
 
 export enum ProductSearchTypeEnum {
-    Item = "ITEM",
-    Bundle = "BUNDLE",
-    All = "ALL"
+  Item = "ITEM",
+  Bundle = "BUNDLE",
+  All = "ALL",
 }
 
-export class ProductSearchQueryParams extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=allAttributes" })
+export class ProductSearchRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({
+    data: "queryParam, style=form;explode=true;name=allAttributes",
+  })
   allAttributes?: boolean;
 
-  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=excludeChildren" })
+  @SpeakeasyMetadata({
+    data: "queryParam, style=form;explode=true;name=excludeChildren",
+  })
   excludeChildren?: boolean;
 
-  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=itemIds" })
+  @SpeakeasyMetadata({
+    data: "queryParam, style=form;explode=false;name=itemIds",
+  })
   itemIds?: string[];
 
-  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=keyword" })
+  @SpeakeasyMetadata({
+    data: "queryParam, style=form;explode=true;name=keyword",
+  })
   keyword?: string;
 
-  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=onlyChildren" })
+  @SpeakeasyMetadata({
+    data: "queryParam, style=form;explode=true;name=onlyChildren",
+  })
   onlyChildren?: boolean;
 
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
@@ -36,19 +46,11 @@ export class ProductSearchQueryParams extends SpeakeasyBase {
 
   @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" })
   type?: ProductSearchTypeEnum;
-}
 
-export class ProductSearchHeaders extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-site-context" })
+  @SpeakeasyMetadata({
+    data: "header, style=simple;explode=false;name=x-site-context",
+  })
   xSiteContext?: shared.XSiteContext;
-}
-
-export class ProductSearchRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  queryParams: ProductSearchQueryParams;
-
-  @SpeakeasyMetadata()
-  headers: ProductSearchHeaders;
 }
 
 export class ProductSearchResponse extends SpeakeasyBase {

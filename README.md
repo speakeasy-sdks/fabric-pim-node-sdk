@@ -48,107 +48,104 @@ import {
 
 import { AxiosError } from "axios";
 import { Fabric } from "@speakeasy-sdks/pim-sdk";
-
 const sdk = new Fabric();
-    
+
 const req: ModifyAttributeGroupsRequest = {
-  headers: {
-    xSiteContext: {
-      account: "unde",
-      channel: 5928.45,
-      date: "porro",
-      stage: "nulla",
-    },
-  },
-  request: {
+  attributeGroupRequest: {
     attributeGroup: [
       {
-        action: AttributeGroupRequestAttributeGroupActionEnum.Delete,
-        description: "perspiciatis",
+        action: AttributeGroupRequestAttributeGroupActionEnum.Update,
+        description: "porro",
         editableAttributes: [
           {
             action: AttributeGroupTypeRequestActionEnum.Update,
-            id: "fuga",
-            order: 6458.94,
-          },
-          {
-            action: AttributeGroupTypeRequestActionEnum.Update,
-            id: "iusto",
-            order: 2975.34,
+            id: "vero",
+            order: 5448.83,
           },
           {
             action: AttributeGroupTypeRequestActionEnum.Delete,
-            id: "inventore",
-            order: 9636.63,
+            id: "nihil",
+            order: 6235.64,
+          },
+          {
+            action: AttributeGroupTypeRequestActionEnum.Update,
+            id: "eum",
+            order: 4375.87,
           },
           {
             action: AttributeGroupTypeRequestActionEnum.Add,
-            id: "eum",
-            order: 4776.65,
+            id: "saepe",
+            order: 567.13,
           },
         ],
-        id: "autem",
-        name: "vel",
-        priorityOrder: 5288.95,
+        id: "sapiente",
+        name: "enim",
+        priorityOrder: 3834.41,
         type: AttributeGroupRequestAttributeGroupTypeEnum.Workflow,
       },
       {
-        action: AttributeGroupRequestAttributeGroupActionEnum.Update,
-        description: "reprehenderit",
+        action: AttributeGroupRequestAttributeGroupActionEnum.Delete,
+        description: "vel",
         editableAttributes: [
           {
-            action: AttributeGroupTypeRequestActionEnum.Delete,
-            id: "quasi",
-            order: 3373.96,
+            action: AttributeGroupTypeRequestActionEnum.Update,
+            id: "similique",
+            order: 3927.85,
           },
           {
-            action: AttributeGroupTypeRequestActionEnum.Add,
-            id: "est",
-            order: 202.18,
+            action: AttributeGroupTypeRequestActionEnum.Delete,
+            id: "quo",
+            order: 710.36,
           },
           {
             action: AttributeGroupTypeRequestActionEnum.Update,
-            id: "fugiat",
-            order: 9571.56,
-          },
-          {
-            action: AttributeGroupTypeRequestActionEnum.Delete,
-            id: "eos",
-            order: 8700.13,
+            id: "dicta",
+            order: 6481.72,
           },
         ],
-        id: "accusamus",
-        name: "reiciendis",
-        priorityOrder: 4736.08,
+        id: "voluptatem",
+        name: "consequatur",
+        priorityOrder: 8326.2,
         type: AttributeGroupRequestAttributeGroupTypeEnum.Collection,
       },
       {
         action: AttributeGroupRequestAttributeGroupActionEnum.Delete,
-        description: "praesentium",
+        description: "eos",
         editableAttributes: [
           {
             action: AttributeGroupTypeRequestActionEnum.Delete,
-            id: "soluta",
-            order: 1182.74,
+            id: "reiciendis",
+            order: 4736.08,
           },
           {
             action: AttributeGroupTypeRequestActionEnum.Delete,
-            id: "rerum",
-            order: 5820.2,
+            id: "et",
+            order: 4614.79,
+          },
+          {
+            action: AttributeGroupTypeRequestActionEnum.Update,
+            id: "dolor",
+            order: 6788.8,
           },
           {
             action: AttributeGroupTypeRequestActionEnum.Add,
-            id: "sed",
-            order: 9446.69,
+            id: "quisquam",
+            order: 6399.21,
           },
         ],
-        id: "possimus",
-        name: "occaecati",
-        priorityOrder: 1059.07,
-        type: AttributeGroupRequestAttributeGroupTypeEnum.Workflow,
+        id: "culpa",
+        name: "qui",
+        priorityOrder: 5373.73,
+        type: AttributeGroupRequestAttributeGroupTypeEnum.Collection,
       },
     ],
     transactional: true,
+  },
+  xSiteContext: {
+    account: "occaecati",
+    channel: 1059.07,
+    date: "esse",
+    stage: "rem",
   },
 };
 

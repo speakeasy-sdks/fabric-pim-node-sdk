@@ -3,13 +3,13 @@ import { AttributeGroupTypeRequest } from "./attributegrouptyperequest";
 import { Expose, Type } from "class-transformer";
 
 export enum AttributeGroupRequestAttributeGroupActionEnum {
-    Create = "CREATE",
-    Update = "UPDATE",
-    Delete = "DELETE"
+  Create = "CREATE",
+  Update = "UPDATE",
+  Delete = "DELETE",
 }
 export enum AttributeGroupRequestAttributeGroupTypeEnum {
-    Workflow = "WORKFLOW",
-    Collection = "COLLECTION"
+  Workflow = "WORKFLOW",
+  Collection = "COLLECTION",
 }
 
 export class AttributeGroupRequestAttributeGroup extends SpeakeasyBase {

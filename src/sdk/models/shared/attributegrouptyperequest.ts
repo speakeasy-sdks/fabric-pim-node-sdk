@@ -2,9 +2,9 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose } from "class-transformer";
 
 export enum AttributeGroupTypeRequestActionEnum {
-    Add = "ADD",
-    Update = "UPDATE",
-    Delete = "DELETE"
+  Add = "ADD",
+  Update = "UPDATE",
+  Delete = "DELETE",
 }
 
 export class AttributeGroupTypeRequest extends SpeakeasyBase {
