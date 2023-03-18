@@ -1,5 +1,9 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 
+// XSiteContext
+/**
+ * JSON object containing `channel`, `account`, `stage`, `date`, and `site` <br> .
+ **/
 export class XSiteContext extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "header, name=account" })
   account?: string;
