@@ -19,13 +19,13 @@ More information on the [Fabric PIM API](https://knowledgebase.fabric.inc/docs/o
 ### NPM
 
 ```bash
-npm add @speakeasy-sdks/pim-sdk
+npm add https://github.com/speakeasy-sdks/fabric-pim-node-sdk
 ```
 
 ### Yarn
 
 ```bash
-yarn add @speakeasy-sdks/pim-sdk
+yarn add https://github.com/speakeasy-sdks/fabric-pim-node-sdk
 ```
 <!-- End SDK Installation -->
 
