@@ -66,7 +66,7 @@ export class Product {
       }
     }
 
-    const client: AxiosInstance = this._defaultClient!;
+    const client: AxiosInstance = this._defaultClient;
 
     const headers = {
       ...utils.getHeadersFromRequest(req),
@@ -150,7 +150,7 @@ export class Product {
     const url: string =
       baseURL.replace(/\/$/, "") + "/api-product/v1/product/attribute";
 
-    const client: AxiosInstance = this._defaultClient!;
+    const client: AxiosInstance = this._defaultClient;
 
     const headers = { ...utils.getHeadersFromRequest(req), ...config?.headers };
     const queryParams: string = utils.serializeQueryParams(req);
@@ -221,7 +221,7 @@ export class Product {
     const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api-product/v1/product";
 
-    const client: AxiosInstance = this._defaultClient!;
+    const client: AxiosInstance = this._defaultClient;
 
     const headers = { ...utils.getHeadersFromRequest(req), ...config?.headers };
     const queryParams: string = utils.serializeQueryParams(req);
@@ -289,7 +289,7 @@ export class Product {
     const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api-product/v2/product";
 
-    const client: AxiosInstance = this._defaultClient!;
+    const client: AxiosInstance = this._defaultClient;
 
     const headers = { ...utils.getHeadersFromRequest(req), ...config?.headers };
     const queryParams: string = utils.serializeQueryParams(req);
@@ -358,7 +358,7 @@ export class Product {
     const url: string =
       baseURL.replace(/\/$/, "") + "/api-product/v1/product/search";
 
-    const client: AxiosInstance = this._defaultClient!;
+    const client: AxiosInstance = this._defaultClient;
 
     const headers = { ...utils.getHeadersFromRequest(req), ...config?.headers };
     const queryParams: string = utils.serializeQueryParams(req);
@@ -441,7 +441,7 @@ export class Product {
       }
     }
 
-    const client: AxiosInstance = this._defaultClient!;
+    const client: AxiosInstance = this._defaultClient;
 
     const headers = {
       ...utils.getHeadersFromRequest(req),
@@ -534,7 +534,7 @@ export class Product {
       }
     }
 
-    const client: AxiosInstance = this._defaultClient!;
+    const client: AxiosInstance = this._defaultClient;
 
     const headers = {
       ...utils.getHeadersFromRequest(req),
@@ -632,7 +632,7 @@ export class Product {
       }
     }
 
-    const client: AxiosInstance = this._defaultClient!;
+    const client: AxiosInstance = this._defaultClient;
 
     const headers = {
       ...utils.getHeadersFromRequest(req),

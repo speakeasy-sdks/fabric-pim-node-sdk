@@ -5,7 +5,6 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
 import { AxiosResponse } from "axios";
-import { Type } from "class-transformer";
 
 /**
  * Item status. <br> **Note**: <br> 1) Returns a paginated response. <br> 2) When used as the only criteria, must be paired with `size` and `page` to accommodate large data.

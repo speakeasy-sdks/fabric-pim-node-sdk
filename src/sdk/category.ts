@@ -66,7 +66,7 @@ export class Category {
       }
     }
 
-    const client: AxiosInstance = this._defaultClient!;
+    const client: AxiosInstance = this._defaultClient;
 
     const headers = {
       ...utils.getHeadersFromRequest(req),
@@ -163,9 +163,9 @@ export class Category {
       security = new operations.CategoryModifySecurity(security);
     }
     const client: AxiosInstance = utils.createSecurityClient(
-      this._defaultClient!,
+      this._defaultClient,
       security
-    )!;
+    );
 
     const headers = {
       ...utils.getHeadersFromRequest(req),
@@ -241,7 +241,7 @@ export class Category {
     const url: string =
       baseURL.replace(/\/$/, "") + "/api-category/v1/category";
 
-    const client: AxiosInstance = this._defaultClient!;
+    const client: AxiosInstance = this._defaultClient;
 
     const headers = { ...utils.getHeadersFromRequest(req), ...config?.headers };
     const queryParams: string = utils.serializeQueryParams(req);
@@ -313,7 +313,7 @@ export class Category {
     const url: string =
       baseURL.replace(/\/$/, "") + "/api-category/v1/category/source/exclusion";
 
-    const client: AxiosInstance = this._defaultClient!;
+    const client: AxiosInstance = this._defaultClient;
 
     const headers = { ...utils.getHeadersFromRequest(req), ...config?.headers };
     const queryParams: string = utils.serializeQueryParams(req);
@@ -385,7 +385,7 @@ export class Category {
     const url: string =
       baseURL.replace(/\/$/, "") + "/api-category/v1/category/source";
 
-    const client: AxiosInstance = this._defaultClient!;
+    const client: AxiosInstance = this._defaultClient;
 
     const headers = { ...utils.getHeadersFromRequest(req), ...config?.headers };
     const queryParams: string = utils.serializeQueryParams(req);
@@ -457,7 +457,7 @@ export class Category {
     const url: string =
       baseURL.replace(/\/$/, "") + "/api-category/v1/category/attribute";
 
-    const client: AxiosInstance = this._defaultClient!;
+    const client: AxiosInstance = this._defaultClient;
 
     const headers = { ...utils.getHeadersFromRequest(req), ...config?.headers };
     const queryParams: string = utils.serializeQueryParams(req);
@@ -529,7 +529,7 @@ export class Category {
     const url: string =
       baseURL.replace(/\/$/, "") + "/api-category/v1/category/item-attribute";
 
-    const client: AxiosInstance = this._defaultClient!;
+    const client: AxiosInstance = this._defaultClient;
 
     const headers = { ...utils.getHeadersFromRequest(req), ...config?.headers };
     const queryParams: string = utils.serializeQueryParams(req);
@@ -602,7 +602,7 @@ export class Category {
       baseURL.replace(/\/$/, "") +
       "/api-category/v1/category/item-attribute/condition";
 
-    const client: AxiosInstance = this._defaultClient!;
+    const client: AxiosInstance = this._defaultClient;
 
     const headers = { ...utils.getHeadersFromRequest(req), ...config?.headers };
     const queryParams: string = utils.serializeQueryParams(req);
@@ -675,7 +675,7 @@ export class Category {
     const url: string =
       baseURL.replace(/\/$/, "") + "/api-category/v1/category/sku";
 
-    const client: AxiosInstance = this._defaultClient!;
+    const client: AxiosInstance = this._defaultClient;
 
     const headers = { ...utils.getHeadersFromRequest(req), ...config?.headers };
     const queryParams: string = utils.serializeQueryParams(req);
@@ -747,7 +747,7 @@ export class Category {
     const url: string =
       baseURL.replace(/\/$/, "") + "/api-category/v1/category/tree";
 
-    const client: AxiosInstance = this._defaultClient!;
+    const client: AxiosInstance = this._defaultClient;
 
     const headers = { ...utils.getHeadersFromRequest(req), ...config?.headers };
     const queryParams: string = utils.serializeQueryParams(req);
@@ -833,7 +833,7 @@ export class Category {
       }
     }
 
-    const client: AxiosInstance = this._defaultClient!;
+    const client: AxiosInstance = this._defaultClient;
 
     const headers = {
       ...utils.getHeadersFromRequest(req),
@@ -923,7 +923,7 @@ export class Category {
       }
     }
 
-    const client: AxiosInstance = this._defaultClient!;
+    const client: AxiosInstance = this._defaultClient;
 
     const headers = {
       ...utils.getHeadersFromRequest(req),
@@ -1013,7 +1013,7 @@ export class Category {
       }
     }
 
-    const client: AxiosInstance = this._defaultClient!;
+    const client: AxiosInstance = this._defaultClient;
 
     const headers = {
       ...utils.getHeadersFromRequest(req),
@@ -1104,7 +1104,7 @@ export class Category {
       }
     }
 
-    const client: AxiosInstance = this._defaultClient!;
+    const client: AxiosInstance = this._defaultClient;
 
     const headers = {
       ...utils.getHeadersFromRequest(req),
@@ -1194,7 +1194,7 @@ export class Category {
       }
     }
 
-    const client: AxiosInstance = this._defaultClient!;
+    const client: AxiosInstance = this._defaultClient;
 
     const headers = {
       ...utils.getHeadersFromRequest(req),
@@ -1270,7 +1270,7 @@ export class Category {
     const url: string =
       baseURL.replace(/\/$/, "") + "/api-category/v1/category/search";
 
-    const client: AxiosInstance = this._defaultClient!;
+    const client: AxiosInstance = this._defaultClient;
 
     const headers = { ...utils.getHeadersFromRequest(req), ...config?.headers };
     const queryParams: string = utils.serializeQueryParams(req);

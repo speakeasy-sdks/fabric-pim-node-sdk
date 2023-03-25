@@ -5,7 +5,6 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
 import { AxiosResponse } from "axios";
-import { Type } from "class-transformer";
 
 /**
  * Status of item attributes. `Assigned` indicates item attributes are already assigned to categories and `unassigned` indicates otherwise. Applicable only when `id` or `nodeId` is specified.

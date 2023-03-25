@@ -66,7 +66,7 @@ export class Attributes {
       }
     }
 
-    const client: AxiosInstance = this._defaultClient!;
+    const client: AxiosInstance = this._defaultClient;
 
     const headers = {
       ...utils.getHeadersFromRequest(req),
@@ -159,7 +159,7 @@ export class Attributes {
       }
     }
 
-    const client: AxiosInstance = this._defaultClient!;
+    const client: AxiosInstance = this._defaultClient;
 
     const headers = {
       ...utils.getHeadersFromRequest(req),
@@ -249,7 +249,7 @@ export class Attributes {
       }
     }
 
-    const client: AxiosInstance = this._defaultClient!;
+    const client: AxiosInstance = this._defaultClient;
 
     const headers = {
       ...utils.getHeadersFromRequest(req),
@@ -339,7 +339,7 @@ export class Attributes {
       }
     }
 
-    const client: AxiosInstance = this._defaultClient!;
+    const client: AxiosInstance = this._defaultClient;
 
     const headers = {
       ...utils.getHeadersFromRequest(req),
@@ -430,7 +430,7 @@ export class Attributes {
       }
     }
 
-    const client: AxiosInstance = this._defaultClient!;
+    const client: AxiosInstance = this._defaultClient;
 
     const headers = {
       ...utils.getHeadersFromRequest(req),
@@ -521,7 +521,7 @@ export class Attributes {
       }
     }
 
-    const client: AxiosInstance = this._defaultClient!;
+    const client: AxiosInstance = this._defaultClient;
 
     const headers = {
       ...utils.getHeadersFromRequest(req),

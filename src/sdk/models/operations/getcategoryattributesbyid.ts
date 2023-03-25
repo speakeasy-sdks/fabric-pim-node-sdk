@@ -5,7 +5,6 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
 import { AxiosResponse } from "axios";
-import { Type } from "class-transformer";
 
 /**
  * Attribute status. When `id` or `nodeId` is specified along with `status` = `Assigned`, the response is faster because the data is fetched from cache. When the `status` is `Unassigned`, the data is fetched from the DB and the response could take longer.

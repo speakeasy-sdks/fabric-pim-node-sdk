@@ -5,7 +5,6 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
 import { AxiosResponse } from "axios";
-import { Type } from "class-transformer";
 
 /**
  * Category status. If omitted, returns a paginated response of categories in `ACTIVE` status. As a result, `page` and `size` becomes mandatory to support large data. <br> **Note**: When `type` is Primary, `status` must be Active. Inactive status is not applicable for Primary category.

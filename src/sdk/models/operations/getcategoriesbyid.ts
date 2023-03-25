@@ -5,7 +5,6 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
 import { AxiosResponse } from "axios";
-import { Type } from "class-transformer";
 
 /**
  * Category status. <br> **Note**: If omitted, returns Alternate categories in Active status by default. <br> **Note**: When `type` is Primary, `status` must be Active. Inactive status is not applicable for Primary category.

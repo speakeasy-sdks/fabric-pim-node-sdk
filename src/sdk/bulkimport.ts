@@ -67,7 +67,7 @@ export class BulkImport {
       }
     }
 
-    const client: AxiosInstance = this._defaultClient!;
+    const client: AxiosInstance = this._defaultClient;
 
     const headers = {
       ...utils.getHeadersFromRequest(req),
@@ -157,7 +157,7 @@ export class BulkImport {
       }
     }
 
-    const client: AxiosInstance = this._defaultClient!;
+    const client: AxiosInstance = this._defaultClient;
 
     const headers = {
       ...utils.getHeadersFromRequest(req),
@@ -247,7 +247,7 @@ export class BulkImport {
       }
     }
 
-    const client: AxiosInstance = this._defaultClient!;
+    const client: AxiosInstance = this._defaultClient;
 
     const headers = {
       ...utils.getHeadersFromRequest(req),
@@ -326,7 +326,7 @@ export class BulkImport {
       req
     );
 
-    const client: AxiosInstance = this._defaultClient!;
+    const client: AxiosInstance = this._defaultClient;
 
     const headers = { ...utils.getHeadersFromRequest(req), ...config?.headers };
 
@@ -352,8 +352,8 @@ export class BulkImport {
         case httpRes?.status == 200:
           if (utils.matchContentType(contentType, `application/csv`)) {
             const resBody: string = JSON.stringify(httpRes?.data, null, 0);
-            let out: Uint8Array = new Uint8Array(resBody.length);
-            for (let i: number = 0; i < resBody.length; i++)
+            const out: Uint8Array = new Uint8Array(resBody.length);
+            for (let i = 0; i < resBody.length; i++)
               out[i] = resBody.charCodeAt(i);
             res.generateCSVfile200ApplicationCsvBinaryString = out;
           }
@@ -399,7 +399,7 @@ export class BulkImport {
       baseURL.replace(/\/$/, "") +
       "/api-product/v1/product/bulk/template/attribute";
 
-    const client: AxiosInstance = this._defaultClient!;
+    const client: AxiosInstance = this._defaultClient;
 
     const headers = { ...utils.getHeadersFromRequest(req), ...config?.headers };
 
@@ -425,8 +425,8 @@ export class BulkImport {
         case httpRes?.status == 200:
           if (utils.matchContentType(contentType, `application/csv`)) {
             const resBody: string = JSON.stringify(httpRes?.data, null, 0);
-            let out: Uint8Array = new Uint8Array(resBody.length);
-            for (let i: number = 0; i < resBody.length; i++)
+            const out: Uint8Array = new Uint8Array(resBody.length);
+            for (let i = 0; i < resBody.length; i++)
               out[i] = resBody.charCodeAt(i);
             res.generateItemAttributeCSVfile200ApplicationCsvBinaryString = out;
           }
@@ -485,7 +485,7 @@ export class BulkImport {
       }
     }
 
-    const client: AxiosInstance = this._defaultClient!;
+    const client: AxiosInstance = this._defaultClient;
 
     const headers = {
       ...utils.getHeadersFromRequest(req),
@@ -564,7 +564,7 @@ export class BulkImport {
       req
     );
 
-    const client: AxiosInstance = this._defaultClient!;
+    const client: AxiosInstance = this._defaultClient;
 
     const headers = { ...utils.getHeadersFromRequest(req), ...config?.headers };
 
@@ -590,8 +590,8 @@ export class BulkImport {
         case httpRes?.status == 200:
           if (utils.matchContentType(contentType, `application/csv`)) {
             const resBody: string = JSON.stringify(httpRes?.data, null, 0);
-            let out: Uint8Array = new Uint8Array(resBody.length);
-            for (let i: number = 0; i < resBody.length; i++)
+            const out: Uint8Array = new Uint8Array(resBody.length);
+            for (let i = 0; i < resBody.length; i++)
               out[i] = resBody.charCodeAt(i);
             res.generateItemBundleCSVfile200ApplicationCsvBinaryString = out;
           }
@@ -650,7 +650,7 @@ export class BulkImport {
       }
     }
 
-    const client: AxiosInstance = this._defaultClient!;
+    const client: AxiosInstance = this._defaultClient;
 
     const headers = {
       ...utils.getHeadersFromRequest(req),
@@ -740,7 +740,7 @@ export class BulkImport {
       }
     }
 
-    const client: AxiosInstance = this._defaultClient!;
+    const client: AxiosInstance = this._defaultClient;
 
     const headers = {
       ...utils.getHeadersFromRequest(req),
@@ -819,7 +819,7 @@ export class BulkImport {
       req
     );
 
-    const client: AxiosInstance = this._defaultClient!;
+    const client: AxiosInstance = this._defaultClient;
 
     const headers = { ...utils.getHeadersFromRequest(req), ...config?.headers };
 
