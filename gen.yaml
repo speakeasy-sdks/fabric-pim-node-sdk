@@ -2,14 +2,14 @@ configVersion: 1.0.0
 management:
   docChecksum: a9f591cb3c93757631116dddee3f2ad6
   docVersion: 2.0.0
-  speakeasyVersion: 1.18.7
-  generationVersion: 2.16.1
+  speakeasyVersion: 1.18.9
+  generationVersion: 2.16.4
 generation:
   telemetryEnabled: false
   sdkClassName: fabric
   sdkFlattening: true
   singleTagPerOp: false
 typescript:
-  version: 3.6.0
+  version: 3.6.1
   author: fabric
   packageName: '@speakeasy-sdks/pim-sdk'
