@@ -22,7 +22,7 @@ export class AttributeGroupSearchResponseAttributeGroups extends SpeakeasyBase {
 
   @SpeakeasyMetadata()
   @Expose({ name: "ImpactedAttributes" })
-  impactedAttributes?: any;
+  impactedAttributes?: Record<string, any>[];
 
   @SpeakeasyMetadata({ elemType: AttributeGroupTypeResponse })
   @Expose({ name: "ReadOnlyAttributes" })
@@ -31,7 +31,7 @@ export class AttributeGroupSearchResponseAttributeGroups extends SpeakeasyBase {
 
   @SpeakeasyMetadata()
   @Expose({ name: "WorkflowAttributes" })
-  workflowAttributes?: any;
+  workflowAttributes?: Record<string, any>[];
 
   /**
    * 24-character system-generated ID of the attribute group

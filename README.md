@@ -151,7 +151,7 @@ sdk.attributes.modifyAttributeGroups(req).then((res: ModifyAttributeGroupsRespon
 <!-- End SDK Example Usage -->
 
 <!-- Start SDK Available Operations -->
-## SDK Available Operations
+## Available Resources and Operations
 
 
 ### attributes

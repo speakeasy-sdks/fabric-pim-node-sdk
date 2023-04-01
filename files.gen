@@ -122,6 +122,11 @@ src/sdk/models/shared/categoryitemattribute.ts
 src/sdk/models/shared/modifycategoryitemattributesrequest.ts
 src/sdk/models/shared/productresponse.ts
 src/sdk/models/shared/productmodifyerror.ts
+src/sdk/models/shared/productcreate.ts
+src/sdk/models/shared/inherititemattributesinsert.ts
+src/sdk/models/shared/bundleitems.ts
+src/sdk/models/shared/attributevalue.ts
+src/sdk/models/shared/attributevaluefrenchlocale.ts
 src/sdk/models/shared/productattributepage.ts
 src/sdk/models/shared/productattribute.ts
 src/sdk/models/shared/itemproductsresponse.ts
@@ -142,7 +147,5 @@ src/sdk/models/shared/bundleupdateresponse.ts
 src/sdk/models/shared/bundleupdaterequest.ts
 src/sdk/models/shared/productupdate.ts
 src/sdk/models/shared/inherititemattributesupdate.ts
-src/sdk/models/shared/attributevalue.ts
-src/sdk/models/shared/attributevaluefrenchlocale.ts
 src/sdk/models/shared/index.ts
 USAGE.md

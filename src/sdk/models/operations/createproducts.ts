@@ -7,8 +7,11 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 
 export class CreateProductsRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
-  requestBody?: any[];
+  @SpeakeasyMetadata({
+    data: "request, media_type=application/json",
+    elemType: shared.ProductCreate,
+  })
+  requestBody?: shared.ProductCreate[];
 
   /**
    * JSON object containing `channel`, `account`, `stage`, `date`, and `site` <br> .
