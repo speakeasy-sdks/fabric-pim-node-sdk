@@ -153,3 +153,9 @@ Based on:
 Based on:
 - OpenAPI Doc 2.0.0 ./fabric-pim.yaml
 - Speakeasy CLI 1.19.6 (2.17.8) https://github.com/speakeasy-api/speakeasy
+
+## 2023-04-12 01:26:18
+### Changes
+Based on:
+- OpenAPI Doc 2.0.0 ./fabric-pim.yaml
+- Speakeasy CLI 1.19.7 (2.17.9) https://github.com/speakeasy-api/speakeasy

@@ -97,7 +97,7 @@ export class BulkImport {
       switch (true) {
         case httpRes?.status == 200:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.filePaginationResponse = utils.deserializeJSONResponse(
+            res.filePaginationResponse = utils.objectToClass(
               httpRes?.data,
               shared.FilePaginationResponse
             );
@@ -105,7 +105,7 @@ export class BulkImport {
           break;
         case httpRes?.status == 400:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.clientError = utils.deserializeJSONResponse(
+            res.clientError = utils.objectToClass(
               httpRes?.data,
               shared.ClientError
             );
@@ -113,7 +113,7 @@ export class BulkImport {
           break;
         case httpRes?.status == 500:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.serverError = utils.deserializeJSONResponse(
+            res.serverError = utils.objectToClass(
               httpRes?.data,
               shared.ServerError
             );
@@ -187,7 +187,7 @@ export class BulkImport {
       switch (true) {
         case httpRes?.status == 200:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.filePaginationResponse = utils.deserializeJSONResponse(
+            res.filePaginationResponse = utils.objectToClass(
               httpRes?.data,
               shared.FilePaginationResponse
             );
@@ -195,7 +195,7 @@ export class BulkImport {
           break;
         case httpRes?.status == 400:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.clientError = utils.deserializeJSONResponse(
+            res.clientError = utils.objectToClass(
               httpRes?.data,
               shared.ClientError
             );
@@ -203,7 +203,7 @@ export class BulkImport {
           break;
         case httpRes?.status == 500:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.serverError = utils.deserializeJSONResponse(
+            res.serverError = utils.objectToClass(
               httpRes?.data,
               shared.ServerError
             );
@@ -277,7 +277,7 @@ export class BulkImport {
       switch (true) {
         case httpRes?.status == 200:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.filePaginationResponse = utils.deserializeJSONResponse(
+            res.filePaginationResponse = utils.objectToClass(
               httpRes?.data,
               shared.FilePaginationResponse
             );
@@ -285,7 +285,7 @@ export class BulkImport {
           break;
         case httpRes?.status == 400:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.clientError = utils.deserializeJSONResponse(
+            res.clientError = utils.objectToClass(
               httpRes?.data,
               shared.ClientError
             );
@@ -293,7 +293,7 @@ export class BulkImport {
           break;
         case httpRes?.status == 500:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.serverError = utils.deserializeJSONResponse(
+            res.serverError = utils.objectToClass(
               httpRes?.data,
               shared.ServerError
             );
@@ -360,7 +360,7 @@ export class BulkImport {
           break;
         case httpRes?.status == 400:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.clientError = utils.deserializeJSONResponse(
+            res.clientError = utils.objectToClass(
               httpRes?.data,
               shared.ClientError
             );
@@ -368,7 +368,7 @@ export class BulkImport {
           break;
         case httpRes?.status == 500:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.serverError = utils.deserializeJSONResponse(
+            res.serverError = utils.objectToClass(
               httpRes?.data,
               shared.ServerError
             );
@@ -433,7 +433,7 @@ export class BulkImport {
           break;
         case httpRes?.status == 400:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.clientError = utils.deserializeJSONResponse(
+            res.clientError = utils.objectToClass(
               httpRes?.data,
               shared.ClientError
             );
@@ -441,7 +441,7 @@ export class BulkImport {
           break;
         case httpRes?.status == 500:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.serverError = utils.deserializeJSONResponse(
+            res.serverError = utils.objectToClass(
               httpRes?.data,
               shared.ServerError
             );
@@ -515,7 +515,7 @@ export class BulkImport {
       switch (true) {
         case httpRes?.status == 200:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.getS3URLItemAttributeResponse = utils.deserializeJSONResponse(
+            res.getS3URLItemAttributeResponse = utils.objectToClass(
               httpRes?.data,
               shared.GetS3URLItemAttributeResponse
             );
@@ -523,7 +523,7 @@ export class BulkImport {
           break;
         case httpRes?.status == 400:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.clientError = utils.deserializeJSONResponse(
+            res.clientError = utils.objectToClass(
               httpRes?.data,
               shared.ClientError
             );
@@ -531,7 +531,7 @@ export class BulkImport {
           break;
         case httpRes?.status == 500:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.serverError = utils.deserializeJSONResponse(
+            res.serverError = utils.objectToClass(
               httpRes?.data,
               shared.ServerError
             );
@@ -598,7 +598,7 @@ export class BulkImport {
           break;
         case httpRes?.status == 400:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.clientError = utils.deserializeJSONResponse(
+            res.clientError = utils.objectToClass(
               httpRes?.data,
               shared.ClientError
             );
@@ -606,7 +606,7 @@ export class BulkImport {
           break;
         case httpRes?.status == 500:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.serverError = utils.deserializeJSONResponse(
+            res.serverError = utils.objectToClass(
               httpRes?.data,
               shared.ServerError
             );
@@ -680,7 +680,7 @@ export class BulkImport {
       switch (true) {
         case httpRes?.status == 200:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.getS3URLBundleResponse = utils.deserializeJSONResponse(
+            res.getS3URLBundleResponse = utils.objectToClass(
               httpRes?.data,
               shared.GetS3URLBundleResponse
             );
@@ -688,7 +688,7 @@ export class BulkImport {
           break;
         case httpRes?.status == 400:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.clientError = utils.deserializeJSONResponse(
+            res.clientError = utils.objectToClass(
               httpRes?.data,
               shared.ClientError
             );
@@ -696,7 +696,7 @@ export class BulkImport {
           break;
         case httpRes?.status == 500:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.serverError = utils.deserializeJSONResponse(
+            res.serverError = utils.objectToClass(
               httpRes?.data,
               shared.ServerError
             );
@@ -770,7 +770,7 @@ export class BulkImport {
       switch (true) {
         case httpRes?.status == 200:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.getS3URLResponse = utils.deserializeJSONResponse(
+            res.getS3URLResponse = utils.objectToClass(
               httpRes?.data,
               shared.GetS3URLResponse
             );
@@ -778,7 +778,7 @@ export class BulkImport {
           break;
         case httpRes?.status == 400:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.clientError = utils.deserializeJSONResponse(
+            res.clientError = utils.objectToClass(
               httpRes?.data,
               shared.ClientError
             );
@@ -786,7 +786,7 @@ export class BulkImport {
           break;
         case httpRes?.status == 500:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.serverError = utils.deserializeJSONResponse(
+            res.serverError = utils.objectToClass(
               httpRes?.data,
               shared.ServerError
             );
@@ -849,7 +849,7 @@ export class BulkImport {
           break;
         case httpRes?.status == 400:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.clientError = utils.deserializeJSONResponse(
+            res.clientError = utils.objectToClass(
               httpRes?.data,
               shared.ClientError
             );
@@ -857,7 +857,7 @@ export class BulkImport {
           break;
         case httpRes?.status == 500:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.serverError = utils.deserializeJSONResponse(
+            res.serverError = utils.objectToClass(
               httpRes?.data,
               shared.ServerError
             );

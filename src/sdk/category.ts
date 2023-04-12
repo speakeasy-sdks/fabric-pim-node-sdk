@@ -96,7 +96,7 @@ export class Category {
       switch (true) {
         case httpRes?.status == 200:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.modifyCategory = utils.deserializeJSONResponse(
+            res.modifyCategory = utils.objectToClass(
               httpRes?.data,
               shared.ModifyCategory
             );
@@ -104,7 +104,7 @@ export class Category {
           break;
         case httpRes?.status == 400:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.clientError = utils.deserializeJSONResponse(
+            res.clientError = utils.objectToClass(
               httpRes?.data,
               shared.ClientError
             );
@@ -112,7 +112,7 @@ export class Category {
           break;
         case httpRes?.status == 500:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.serverError = utils.deserializeJSONResponse(
+            res.serverError = utils.objectToClass(
               httpRes?.data,
               shared.ServerError
             );
@@ -159,6 +159,7 @@ export class Category {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
+
     if (!(security instanceof utils.SpeakeasyBase)) {
       security = new operations.CategoryModifySecurity(security);
     }
@@ -195,7 +196,7 @@ export class Category {
       switch (true) {
         case httpRes?.status == 200:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.modifyCategory = utils.deserializeJSONResponse(
+            res.modifyCategory = utils.objectToClass(
               httpRes?.data,
               shared.ModifyCategory
             );
@@ -203,7 +204,7 @@ export class Category {
           break;
         case httpRes?.status == 400:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.clientError = utils.deserializeJSONResponse(
+            res.clientError = utils.objectToClass(
               httpRes?.data,
               shared.ClientError
             );
@@ -211,7 +212,7 @@ export class Category {
           break;
         case httpRes?.status == 500:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.serverError = utils.deserializeJSONResponse(
+            res.serverError = utils.objectToClass(
               httpRes?.data,
               shared.ServerError
             );
@@ -267,7 +268,7 @@ export class Category {
       switch (true) {
         case httpRes?.status == 200:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.categoryPage = utils.deserializeJSONResponse(
+            res.categoryPage = utils.objectToClass(
               httpRes?.data,
               shared.CategoryPage
             );
@@ -275,7 +276,7 @@ export class Category {
           break;
         case httpRes?.status == 400:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.clientError = utils.deserializeJSONResponse(
+            res.clientError = utils.objectToClass(
               httpRes?.data,
               shared.ClientError
             );
@@ -283,7 +284,7 @@ export class Category {
           break;
         case httpRes?.status == 500:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.serverError = utils.deserializeJSONResponse(
+            res.serverError = utils.objectToClass(
               httpRes?.data,
               shared.ServerError
             );
@@ -339,7 +340,7 @@ export class Category {
       switch (true) {
         case httpRes?.status == 200:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.nodeSourceExclusions = utils.deserializeJSONResponse(
+            res.nodeSourceExclusions = utils.objectToClass(
               httpRes?.data,
               shared.NodeSourceExclusions
             );
@@ -347,7 +348,7 @@ export class Category {
           break;
         case httpRes?.status == 400:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.clientError = utils.deserializeJSONResponse(
+            res.clientError = utils.objectToClass(
               httpRes?.data,
               shared.ClientError
             );
@@ -355,7 +356,7 @@ export class Category {
           break;
         case httpRes?.status == 500:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.serverError = utils.deserializeJSONResponse(
+            res.serverError = utils.objectToClass(
               httpRes?.data,
               shared.ServerError
             );
@@ -411,7 +412,7 @@ export class Category {
       switch (true) {
         case httpRes?.status == 200:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.nodeSources = utils.deserializeJSONResponse(
+            res.nodeSources = utils.objectToClass(
               httpRes?.data,
               shared.NodeSources
             );
@@ -419,7 +420,7 @@ export class Category {
           break;
         case httpRes?.status == 400:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.clientError = utils.deserializeJSONResponse(
+            res.clientError = utils.objectToClass(
               httpRes?.data,
               shared.ClientError
             );
@@ -427,7 +428,7 @@ export class Category {
           break;
         case httpRes?.status == 500:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.serverError = utils.deserializeJSONResponse(
+            res.serverError = utils.objectToClass(
               httpRes?.data,
               shared.ServerError
             );
@@ -483,7 +484,7 @@ export class Category {
       switch (true) {
         case httpRes?.status == 200:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.attributePage = utils.deserializeJSONResponse(
+            res.attributePage = utils.objectToClass(
               httpRes?.data,
               shared.AttributePage
             );
@@ -491,7 +492,7 @@ export class Category {
           break;
         case httpRes?.status == 400:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.clientError = utils.deserializeJSONResponse(
+            res.clientError = utils.objectToClass(
               httpRes?.data,
               shared.ClientError
             );
@@ -499,7 +500,7 @@ export class Category {
           break;
         case httpRes?.status == 500:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.serverError = utils.deserializeJSONResponse(
+            res.serverError = utils.objectToClass(
               httpRes?.data,
               shared.ServerError
             );
@@ -555,7 +556,7 @@ export class Category {
       switch (true) {
         case httpRes?.status == 200:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.getCategoryItemAttributes = utils.deserializeJSONResponse(
+            res.getCategoryItemAttributes = utils.objectToClass(
               httpRes?.data,
               shared.GetCategoryItemAttributes
             );
@@ -563,7 +564,7 @@ export class Category {
           break;
         case httpRes?.status == 400:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.clientError = utils.deserializeJSONResponse(
+            res.clientError = utils.objectToClass(
               httpRes?.data,
               shared.ClientError
             );
@@ -571,7 +572,7 @@ export class Category {
           break;
         case httpRes?.status == 500:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.serverError = utils.deserializeJSONResponse(
+            res.serverError = utils.objectToClass(
               httpRes?.data,
               shared.ServerError
             );
@@ -628,16 +629,15 @@ export class Category {
       switch (true) {
         case httpRes?.status == 200:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.getCategoryItemAttributeConditions =
-              utils.deserializeJSONResponse(
-                httpRes?.data,
-                shared.GetCategoryItemAttributeConditions
-              );
+            res.getCategoryItemAttributeConditions = utils.objectToClass(
+              httpRes?.data,
+              shared.GetCategoryItemAttributeConditions
+            );
           }
           break;
         case httpRes?.status == 400:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.clientError = utils.deserializeJSONResponse(
+            res.clientError = utils.objectToClass(
               httpRes?.data,
               shared.ClientError
             );
@@ -645,7 +645,7 @@ export class Category {
           break;
         case httpRes?.status == 500:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.serverError = utils.deserializeJSONResponse(
+            res.serverError = utils.objectToClass(
               httpRes?.data,
               shared.ServerError
             );
@@ -701,15 +701,12 @@ export class Category {
       switch (true) {
         case httpRes?.status == 200:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.skuPage = utils.deserializeJSONResponse(
-              httpRes?.data,
-              shared.SKUPage
-            );
+            res.skuPage = utils.objectToClass(httpRes?.data, shared.SKUPage);
           }
           break;
         case httpRes?.status == 400:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.clientError = utils.deserializeJSONResponse(
+            res.clientError = utils.objectToClass(
               httpRes?.data,
               shared.ClientError
             );
@@ -717,7 +714,7 @@ export class Category {
           break;
         case httpRes?.status == 500:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.serverError = utils.deserializeJSONResponse(
+            res.serverError = utils.objectToClass(
               httpRes?.data,
               shared.ServerError
             );
@@ -773,7 +770,7 @@ export class Category {
       switch (true) {
         case httpRes?.status == 200:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.categoryTree = utils.deserializeJSONResponse(
+            res.categoryTree = utils.objectToClass(
               httpRes?.data,
               shared.CategoryTree
             );
@@ -781,7 +778,7 @@ export class Category {
           break;
         case httpRes?.status == 400:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.clientError = utils.deserializeJSONResponse(
+            res.clientError = utils.objectToClass(
               httpRes?.data,
               shared.ClientError
             );
@@ -789,7 +786,7 @@ export class Category {
           break;
         case httpRes?.status == 500:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.serverError = utils.deserializeJSONResponse(
+            res.serverError = utils.objectToClass(
               httpRes?.data,
               shared.ServerError
             );
@@ -863,7 +860,7 @@ export class Category {
       switch (true) {
         case httpRes?.status == 200:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.nodeSourcesAndExclusions = utils.deserializeJSONResponse(
+            res.nodeSourcesAndExclusions = utils.objectToClass(
               httpRes?.data,
               shared.NodeSourcesAndExclusions
             );
@@ -871,7 +868,7 @@ export class Category {
           break;
         case httpRes?.status == 400:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.clientError = utils.deserializeJSONResponse(
+            res.clientError = utils.objectToClass(
               httpRes?.data,
               shared.ClientError
             );
@@ -879,7 +876,7 @@ export class Category {
           break;
         case httpRes?.status == 500:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.serverError = utils.deserializeJSONResponse(
+            res.serverError = utils.objectToClass(
               httpRes?.data,
               shared.ServerError
             );
@@ -953,7 +950,7 @@ export class Category {
       switch (true) {
         case httpRes?.status == 200:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.nodeSourcesAndExclusions = utils.deserializeJSONResponse(
+            res.nodeSourcesAndExclusions = utils.objectToClass(
               httpRes?.data,
               shared.NodeSourcesAndExclusions
             );
@@ -961,7 +958,7 @@ export class Category {
           break;
         case httpRes?.status == 400:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.clientError = utils.deserializeJSONResponse(
+            res.clientError = utils.objectToClass(
               httpRes?.data,
               shared.ClientError
             );
@@ -969,7 +966,7 @@ export class Category {
           break;
         case httpRes?.status == 500:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.serverError = utils.deserializeJSONResponse(
+            res.serverError = utils.objectToClass(
               httpRes?.data,
               shared.ServerError
             );
@@ -1043,7 +1040,7 @@ export class Category {
       switch (true) {
         case httpRes?.status == 200:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.categoryAttributes = utils.deserializeJSONResponse(
+            res.categoryAttributes = utils.objectToClass(
               httpRes?.data,
               shared.CategoryAttributes
             );
@@ -1051,7 +1048,7 @@ export class Category {
           break;
         case httpRes?.status == 400:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.clientError = utils.deserializeJSONResponse(
+            res.clientError = utils.objectToClass(
               httpRes?.data,
               shared.ClientError
             );
@@ -1059,7 +1056,7 @@ export class Category {
           break;
         case httpRes?.status == 500:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.serverError = utils.deserializeJSONResponse(
+            res.serverError = utils.objectToClass(
               httpRes?.data,
               shared.ServerError
             );
@@ -1134,7 +1131,7 @@ export class Category {
       switch (true) {
         case httpRes?.status == 200:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.categoryItemAttributeConditions = utils.deserializeJSONResponse(
+            res.categoryItemAttributeConditions = utils.objectToClass(
               httpRes?.data,
               shared.CategoryItemAttributeConditions
             );
@@ -1142,7 +1139,7 @@ export class Category {
           break;
         case httpRes?.status == 400:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.clientError = utils.deserializeJSONResponse(
+            res.clientError = utils.objectToClass(
               httpRes?.data,
               shared.ClientError
             );
@@ -1150,7 +1147,7 @@ export class Category {
           break;
         case httpRes?.status == 500:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.serverError = utils.deserializeJSONResponse(
+            res.serverError = utils.objectToClass(
               httpRes?.data,
               shared.ServerError
             );
@@ -1224,7 +1221,7 @@ export class Category {
       switch (true) {
         case httpRes?.status == 200:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.categoryItemAttributes = utils.deserializeJSONResponse(
+            res.categoryItemAttributes = utils.objectToClass(
               httpRes?.data,
               shared.CategoryItemAttributes
             );
@@ -1232,7 +1229,7 @@ export class Category {
           break;
         case httpRes?.status == 400:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.clientError = utils.deserializeJSONResponse(
+            res.clientError = utils.objectToClass(
               httpRes?.data,
               shared.ClientError
             );
@@ -1240,7 +1237,7 @@ export class Category {
           break;
         case httpRes?.status == 500:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.serverError = utils.deserializeJSONResponse(
+            res.serverError = utils.objectToClass(
               httpRes?.data,
               shared.ServerError
             );
@@ -1296,7 +1293,7 @@ export class Category {
       switch (true) {
         case httpRes?.status == 200:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.categoryPage = utils.deserializeJSONResponse(
+            res.categoryPage = utils.objectToClass(
               httpRes?.data,
               shared.CategoryPage
             );
@@ -1304,7 +1301,7 @@ export class Category {
           break;
         case httpRes?.status == 400:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.clientError = utils.deserializeJSONResponse(
+            res.clientError = utils.objectToClass(
               httpRes?.data,
               shared.ClientError
             );
@@ -1312,7 +1309,7 @@ export class Category {
           break;
         case httpRes?.status == 500:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.serverError = utils.deserializeJSONResponse(
+            res.serverError = utils.objectToClass(
               httpRes?.data,
               shared.ServerError
             );

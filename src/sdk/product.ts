@@ -96,7 +96,7 @@ export class Product {
       switch (true) {
         case httpRes?.status == 200:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.productResponse = utils.deserializeJSONResponse(
+            res.productResponse = utils.objectToClass(
               httpRes?.data,
               shared.ProductResponse
             );
@@ -104,7 +104,7 @@ export class Product {
           break;
         case httpRes?.status == 400:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.clientError = utils.deserializeJSONResponse(
+            res.clientError = utils.objectToClass(
               httpRes?.data,
               shared.ClientError
             );
@@ -112,7 +112,7 @@ export class Product {
           break;
         case httpRes?.status == 422:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.productModifyError = utils.deserializeJSONResponse(
+            res.productModifyError = utils.objectToClass(
               httpRes?.data,
               shared.ProductModifyError
             );
@@ -120,7 +120,7 @@ export class Product {
           break;
         case httpRes?.status == 500:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.serverError = utils.deserializeJSONResponse(
+            res.serverError = utils.objectToClass(
               httpRes?.data,
               shared.ServerError
             );
@@ -176,7 +176,7 @@ export class Product {
       switch (true) {
         case httpRes?.status == 200:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.productAttributePage = utils.deserializeJSONResponse(
+            res.productAttributePage = utils.objectToClass(
               httpRes?.data,
               shared.ProductAttributePage
             );
@@ -184,7 +184,7 @@ export class Product {
           break;
         case httpRes?.status == 400:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.clientError = utils.deserializeJSONResponse(
+            res.clientError = utils.objectToClass(
               httpRes?.data,
               shared.ClientError
             );
@@ -192,7 +192,7 @@ export class Product {
           break;
         case httpRes?.status == 500:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.serverError = utils.deserializeJSONResponse(
+            res.serverError = utils.objectToClass(
               httpRes?.data,
               shared.ServerError
             );
@@ -252,7 +252,7 @@ export class Product {
           break;
         case httpRes?.status == 400:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.clientError = utils.deserializeJSONResponse(
+            res.clientError = utils.objectToClass(
               httpRes?.data,
               shared.ClientError
             );
@@ -260,7 +260,7 @@ export class Product {
           break;
         case httpRes?.status == 500:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.serverError = utils.deserializeJSONResponse(
+            res.serverError = utils.objectToClass(
               httpRes?.data,
               shared.ServerError
             );
@@ -320,7 +320,7 @@ export class Product {
           break;
         case httpRes?.status == 400:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.clientError = utils.deserializeJSONResponse(
+            res.clientError = utils.objectToClass(
               httpRes?.data,
               shared.ClientError
             );
@@ -328,7 +328,7 @@ export class Product {
           break;
         case httpRes?.status == 500:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.serverError = utils.deserializeJSONResponse(
+            res.serverError = utils.objectToClass(
               httpRes?.data,
               shared.ServerError
             );
@@ -389,7 +389,7 @@ export class Product {
           break;
         case httpRes?.status == 400:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.clientError = utils.deserializeJSONResponse(
+            res.clientError = utils.objectToClass(
               httpRes?.data,
               shared.ClientError
             );
@@ -397,7 +397,7 @@ export class Product {
           break;
         case httpRes?.status == 500:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.serverError = utils.deserializeJSONResponse(
+            res.serverError = utils.objectToClass(
               httpRes?.data,
               shared.ServerError
             );
@@ -473,7 +473,7 @@ export class Product {
           if (utils.matchContentType(contentType, `application/json`)) {
             res.bundleUpdateResponse = [];
             const resFieldDepth: number = utils.getResFieldDepth(res);
-            res.bundleUpdateResponse = utils.deserializeJSONResponse(
+            res.bundleUpdateResponse = utils.objectToClass(
               httpRes?.data,
               shared.BundleUpdateResponse,
               resFieldDepth
@@ -482,7 +482,7 @@ export class Product {
           break;
         case httpRes?.status == 400:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.clientError = utils.deserializeJSONResponse(
+            res.clientError = utils.objectToClass(
               httpRes?.data,
               shared.ClientError
             );
@@ -490,7 +490,7 @@ export class Product {
           break;
         case httpRes?.status == 500:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.serverError = utils.deserializeJSONResponse(
+            res.serverError = utils.objectToClass(
               httpRes?.data,
               shared.ServerError
             );
@@ -564,7 +564,7 @@ export class Product {
       switch (true) {
         case httpRes?.status == 200:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.productResponse = utils.deserializeJSONResponse(
+            res.productResponse = utils.objectToClass(
               httpRes?.data,
               shared.ProductResponse
             );
@@ -572,7 +572,7 @@ export class Product {
           break;
         case httpRes?.status == 400:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.clientError = utils.deserializeJSONResponse(
+            res.clientError = utils.objectToClass(
               httpRes?.data,
               shared.ClientError
             );
@@ -580,7 +580,7 @@ export class Product {
           break;
         case httpRes?.status == 422:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.productModifyError = utils.deserializeJSONResponse(
+            res.productModifyError = utils.objectToClass(
               httpRes?.data,
               shared.ProductModifyError
             );
@@ -588,7 +588,7 @@ export class Product {
           break;
         case httpRes?.status == 500:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.serverError = utils.deserializeJSONResponse(
+            res.serverError = utils.objectToClass(
               httpRes?.data,
               shared.ServerError
             );
@@ -662,7 +662,7 @@ export class Product {
       switch (true) {
         case httpRes?.status == 200:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.productResponse = utils.deserializeJSONResponse(
+            res.productResponse = utils.objectToClass(
               httpRes?.data,
               shared.ProductResponse
             );
@@ -670,7 +670,7 @@ export class Product {
           break;
         case httpRes?.status == 400:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.clientError = utils.deserializeJSONResponse(
+            res.clientError = utils.objectToClass(
               httpRes?.data,
               shared.ClientError
             );
@@ -678,7 +678,7 @@ export class Product {
           break;
         case httpRes?.status == 422:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.productModifyError = utils.deserializeJSONResponse(
+            res.productModifyError = utils.objectToClass(
               httpRes?.data,
               shared.ProductModifyError
             );
@@ -686,7 +686,7 @@ export class Product {
           break;
         case httpRes?.status == 500:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.serverError = utils.deserializeJSONResponse(
+            res.serverError = utils.objectToClass(
               httpRes?.data,
               shared.ServerError
             );

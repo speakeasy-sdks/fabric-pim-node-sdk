@@ -6,7 +6,8 @@ import { Attributes } from "./attributes";
 import { BulkImport } from "./bulkimport";
 import { Category } from "./category";
 import { Product } from "./product";
-import axios, { AxiosInstance } from "axios";
+import axios from "axios";
+import { AxiosInstance } from "axios";
 
 /**
  * Sandbox
@@ -66,8 +67,8 @@ export class Fabric {
   public _securityClient: AxiosInstance;
   public _serverURL: string;
   private _language = "typescript";
-  private _sdkVersion = "3.7.0";
-  private _genVersion = "2.17.8";
+  private _sdkVersion = "3.7.1";
+  private _genVersion = "2.17.9";
   private _globals: any;
 
   constructor(props?: SDKProps) {
