@@ -67,8 +67,8 @@ export class Fabric {
   public _securityClient: AxiosInstance;
   public _serverURL: string;
   private _language = "typescript";
-  private _sdkVersion = "3.8.0";
-  private _genVersion = "2.18.0";
+  private _sdkVersion = "3.8.1";
+  private _genVersion = "2.18.1";
   private _globals: any;
 
   constructor(props?: SDKProps) {
