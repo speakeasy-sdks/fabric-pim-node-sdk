@@ -3,6 +3,7 @@ src/sdk/bulkimport.ts
 src/sdk/category.ts
 src/sdk/product.ts
 src/sdk/sdk.ts
+.eslintrc.yml
 jest.config.js
 package-lock.json
 package.json
@@ -17,6 +18,8 @@ src/internal/utils/retries.ts
 src/internal/utils/security.ts
 src/internal/utils/utils.ts
 src/sdk/index.ts
+src/sdk/types/index.ts
+src/sdk/types/rfcdate.ts
 tsconfig.json
 src/sdk/models/operations/modifyattributegroups.ts
 src/sdk/models/operations/modifyattributemappings.ts
@@ -121,6 +124,11 @@ src/sdk/models/shared/categoryitemattribute.ts
 src/sdk/models/shared/modifycategoryitemattributesrequest.ts
 src/sdk/models/shared/productresponse.ts
 src/sdk/models/shared/productmodifyerror.ts
+src/sdk/models/shared/productcreate.ts
+src/sdk/models/shared/inherititemattributesinsert.ts
+src/sdk/models/shared/bundleitems.ts
+src/sdk/models/shared/attributevalue.ts
+src/sdk/models/shared/attributevaluefrenchlocale.ts
 src/sdk/models/shared/productattributepage.ts
 src/sdk/models/shared/productattribute.ts
 src/sdk/models/shared/itemproductsresponse.ts
@@ -141,7 +149,5 @@ src/sdk/models/shared/bundleupdateresponse.ts
 src/sdk/models/shared/bundleupdaterequest.ts
 src/sdk/models/shared/productupdate.ts
 src/sdk/models/shared/inherititemattributesupdate.ts
-src/sdk/models/shared/attributevalue.ts
-src/sdk/models/shared/attributevaluefrenchlocale.ts
 src/sdk/models/shared/index.ts
 USAGE.md
